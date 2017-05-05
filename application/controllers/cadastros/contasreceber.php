@@ -56,9 +56,9 @@ class Contasreceber extends BaseController {
     function excluir($financeiro_contasreceber_id) {
         $valida = $this->contasreceber->excluir($financeiro_contasreceber_id);
         if ($valida == 0) {
-            $data['mensagem'] = 'Sucesso ao excluir a Contasreceber';
+            $data['mensagem'] = array('Sucesso ao excluir a conta', 'success');
         } else {
-            $data['mensagem'] = 'Erro ao excluir a contasreceber. Opera&ccedil;&atilde;o cancelada.';
+            $data['mensagem'] = array('Erro ao excluir a conta. Operação cancelada', 'error');
         }
         $this->session->set_flashdata('message', $data['mensagem']);
         redirect(base_url() . "cadastros/contasreceber");

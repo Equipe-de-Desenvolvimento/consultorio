@@ -43,9 +43,9 @@ class Forma extends BaseController {
     function excluir($forma_entradas_saida_id) {
         $valida = $this->forma->excluir($forma_entradas_saida_id);
         if ($valida == 0) {
-            $data['mensagem'] = 'Sucesso ao excluir a Forma';
+            $data['mensagem'] = array('Sucesso ao excluir a conta' ,'success');
         } else {
-            $data['mensagem'] = 'Erro ao excluir a forma. Opera&ccedil;&atilde;o cancelada.';
+            $data['mensagem'] = array('Erro ao excluir a conta. Operação Cancelada.', 'error');
         }
         $this->session->set_flashdata('message', $data['mensagem']);
         redirect(base_url() . "cadastros/forma");

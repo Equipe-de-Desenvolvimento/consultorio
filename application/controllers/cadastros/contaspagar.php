@@ -204,9 +204,9 @@ class Contaspagar extends BaseController {
     function excluir($financeiro_contaspagar_id) {
         $valida = $this->contaspagar->excluir($financeiro_contaspagar_id);
         if ($valida == 0) {
-            $data['mensagem'] = 'Sucesso ao excluir a Contaspagar';
+            $data['mensagem'] = array('Sucesso ao excluir a conta', 'success');
         } else {
-            $data['mensagem'] = 'Erro ao excluir a contaspagar. Opera&ccedil;&atilde;o cancelada.';
+            $data['mensagem'] = array('Erro ao excluir a contaspagar. Operação cancelada', 'error');
         }
         $this->session->set_flashdata('message', $data['mensagem']);
         redirect(base_url() . "cadastros/contaspagar");

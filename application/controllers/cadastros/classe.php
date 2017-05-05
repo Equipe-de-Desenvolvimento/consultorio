@@ -45,9 +45,9 @@ class Classe extends BaseController {
     function excluir($financeiro_classe_id) {
         $valida = $this->classe->excluir($financeiro_classe_id);
         if ($valida == 0) {
-            $data['mensagem'] = 'Sucesso ao excluir a Classe';
+            $data['mensagem'] = array('Sucesso ao excluir a Classe' ,'success');
         } else {
-            $data['mensagem'] = 'Erro ao excluir a classe. Opera&ccedil;&atilde;o cancelada.';
+            $data['mensagem'] = array('Erro ao excluir a classe. Operação Cancelada.', 'error');
         }
         $this->session->set_flashdata('message', $data['mensagem']);
         redirect(base_url() . "cadastros/classe");

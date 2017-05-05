@@ -159,7 +159,7 @@
                                             <a class="btn btn-outline btn-primary btn-sm" href="<?= base_url() ?>cadastros/contaspagar/carregar/<?= $item->financeiro_contaspagar_id ?>">Editar</a>
                                         
                                         
-                                            <a class="btn btn-outline btn-danger btn-sm" onclick="javascript: return confirm('Deseja realmente excluir a conta <?= $item->razao_social; ?>');" href="<?= base_url() ?>cadastros/contaspagar/excluir/<?= $item->financeiro_contaspagar_id ?>">Excluir</a>
+                                            <a class="btn btn-outline btn-danger btn-sm" onclick="confirmacaoexcluir(<?= $item->financeiro_contaspagar_id ?>);">Excluir</a>
                                         
                                         
                                             <a class="btn btn-outline btn-info btn-sm" href="<?= base_url() ?>cadastros/contaspagar/carregarconfirmacao/<?= $item->financeiro_contaspagar_id ?>">Confirmar</a>
@@ -278,5 +278,28 @@
                                                         }
                                                     });
                                                 });
+                                                
+                                                
+                                                function confirmacaoexcluir(idexcluir) {
+                                            swal({
+                                                title: "Tem certeza?",
+                                                text: "Você está prestes a excluir uma conta!",
+                                                type: "warning",
+                                                showCancelButton: true,
+                                                confirmButtonColor: "#337ab7",
+                                                confirmButtonText: "Sim, quero deletar!",
+                                                cancelButtonText: "Não, cancele!",
+                                                closeOnConfirm: false,
+                                                closeOnCancel: false
+                                            },
+                                                    function (isConfirm) {
+                                                        if (isConfirm) {
+                                                            window.open('<?= base_url() ?>cadastros/contaspagar/excluir/' + idexcluir, '_self');
+                                                        } else {
+                                                            swal("Cancelado", "Você desistiu de excluir uma conta", "error");
+                                                        }
+                                                    });
+
+                                        }
 
 </script>

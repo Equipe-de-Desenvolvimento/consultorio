@@ -45,9 +45,9 @@ class Fornecedor extends BaseController {
     function excluir($financeiro_credor_devedor_id) {
         $valida = $this->fornecedor->excluir($financeiro_credor_devedor_id);
         if ($valida == 0) {
-            $data['mensagem'] = 'Sucesso ao excluir a Fornecedor';
+            $data['mensagem'] = array('Sucesso ao excluir a Fornecedor', 'success');
         } else {
-            $data['mensagem'] = 'Erro ao excluir a fornecedor. Opera&ccedil;&atilde;o cancelada.';
+            $data['mensagem'] =  array('Erro ao excluir a fornecedor. Opera&ccedil;&atilde;o cancelada.', 'error');
         }
         $this->session->set_flashdata('message', $data['mensagem']);
         redirect(base_url() . "cadastros/fornecedor");
@@ -56,9 +56,9 @@ class Fornecedor extends BaseController {
     function gravar() {
         $exame_fornecedor_id = $this->fornecedor->gravar();
         if ($exame_fornecedor_id == "-1") {
-            $data['mensagem'] = 'Erro ao gravar a Fornecedor. Opera&ccedil;&atilde;o cancelada.';
+            $data['mensagem'] = array('Erro ao gravar a Fornecedor. Opera&ccedil;&atilde;o cancelada.', 'error');
         } else {
-            $data['mensagem'] = 'Sucesso ao gravar a Fornecedor.';
+            $data['mensagem'] = array('Sucesso ao gravar a Fornecedor.', 'success');
         }
         $this->session->set_flashdata('message', $data['mensagem']);
         redirect(base_url() . "cadastros/fornecedor");

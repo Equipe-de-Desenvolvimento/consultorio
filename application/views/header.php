@@ -236,6 +236,30 @@ function debug($object) {
                                   </li>
                                   
                               </ul>
+                              <ul class="nav nav-second-level">
+                                  <li>
+                                      <a href="#"><i class="fa fa-money fa-fw"></i> Financeiro <span class="fa arrow"></span></a>
+                                      <ul class="nav nav-third-level">
+                                          <li>
+                                              <a href="<?= base_url() ?>cadastros/tipo">Manter Tipo</a>
+                                          </li>
+                                          
+                                          <li>
+                                              <a href="<?= base_url() ?>cadastros/classe">Manter Classe</a>
+                                          </li>
+
+                                          <li>
+                                              <a href="<?= base_url() ?>cadastros/forma">Manter Conta</a>
+                                          </li>
+                                          <li>
+                                              <a href="<?= base_url() ?>cadastros/formapagamento">Manter Forma de Pagamento</a>
+                                          </li>
+
+                                      </ul>
+
+                                  </li>
+                                  
+                              </ul>
                           </li>
 
 
@@ -258,6 +282,9 @@ function debug($object) {
           $('#txtCpf').mask('999.999.999-99');
           $('.data').mask('99/99/9999');
           $('.cnpj').mask('99.999.999/9999-99');
+          $('.cpf').mask('999.999.999-99');
+          $('.celular').mask('(99) 99999-9999');
+          $('.telefone').mask('(99) 9999-9999');
           $(".integer").maskMoney({allowNegative: false, decimal:'.', affixesStay: false, precision:2});
           $(".percentual").maskMoney({allowNegative: true, decimal:'.', affixesStay: false, precision:3});
           $(".dinheiro").maskMoney({allowNegative: false, thousands: '.', decimal:',', affixesStay: false, precision:2});

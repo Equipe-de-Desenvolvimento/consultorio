@@ -43,9 +43,9 @@ class Tipo extends BaseController {
     function excluir($tipo_entradas_saida_id) {
         $valida = $this->tipo->excluir($tipo_entradas_saida_id);
         if ($valida == 0) {
-            $data['mensagem'] = 'Sucesso ao excluir a Tipo';
+            $data['mensagem'] = array('Sucesso ao excluir o tipo' ,'success');
         } else {
-            $data['mensagem'] = 'Erro ao excluir a tipo. Opera&ccedil;&atilde;o cancelada.';
+            $data['mensagem'] = array('Erro ao excluir o tipo. Operação Cancelada.', 'error');
         }
         $this->session->set_flashdata('message', $data['mensagem']);
         redirect(base_url() . "cadastros/tipo");

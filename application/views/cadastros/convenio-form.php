@@ -414,7 +414,7 @@ foreach ($forma as $item) {
                 time: 200,
                 callback: function () {}
             },
-            maxNumberOfElements: 20,
+            maxNumberOfElements: 20
         },
         theme: "bootstrap"
     };

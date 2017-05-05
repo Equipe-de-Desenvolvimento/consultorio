@@ -20,7 +20,7 @@
                                 <td>
                                     <input type="text" name="nome" class="form-control" value="<?php echo @$_GET['nome']; ?>" />
                                 </td>
-                                
+
 
                                 <td style="text-align: center;"><button type="submit" class="btn btn-default btn-outline btn-danger" name="enviar"><i class="fa fa-search fa-1x"></i></button></td>
                             </tr> 
@@ -53,30 +53,30 @@
 
                             if ($total > 0) {
                                 ?>
-                                
-                                    <?php
-                                    if ($limit != "todos") {
-                                        $lista = $this->fornecedor->listar($_GET)->orderby('razao_social')->limit($limit, $pagina)->get()->result();
-                                    } else {
-                                        $lista = $this->fornecedor->listar($_GET)->get()->result();
-                                    }
-                                    $estilo_linha = "tabela_content01";
-                                    foreach ($lista as $item) {
-                                        ($estilo_linha == "tabela_content01") ? $estilo_linha = "tabela_content02" : $estilo_linha = "tabela_content01";
-                                        ?>
-                                        <tr>
-                                            <td><?= $item->razao_social; ?></td>
-                                            <td><?= $item->cnpj; ?></td>
-                                            <td><?= $item->cpf; ?></td>
-                                            <td><?= $item->telefone; ?></td>
-                                            <td class="tabela_acoes">                                  
-                                                <a  class="btn btn-outline btn-primary btn-sm" href="<?= base_url() ?>cadastros/fornecedor/carregarfornecedor/<?= $item->financeiro_credor_devedor_id ?>" target="_blank">Editar</a>
-                                                                            
-                                                <a  class="btn btn-outline btn-danger btn-sm" onclick="javascript: return confirm('Deseja realmente exlcuir esse Fornecedor?');" href="<?= base_url() ?>cadastros/fornecedor/excluir/<?= $item->financeiro_credor_devedor_id ?>">Excluir</a>
-                                            </td>
-                                        </tr>
 
-                                    
+                                <?php
+                                if ($limit != "todos") {
+                                    $lista = $this->fornecedor->listar($_GET)->orderby('razao_social')->limit($limit, $pagina)->get()->result();
+                                } else {
+                                    $lista = $this->fornecedor->listar($_GET)->get()->result();
+                                }
+                                $estilo_linha = "tabela_content01";
+                                foreach ($lista as $item) {
+                                    ($estilo_linha == "tabela_content01") ? $estilo_linha = "tabela_content02" : $estilo_linha = "tabela_content01";
+                                    ?>
+                                    <tr>
+                                        <td><?= $item->razao_social; ?></td>
+                                        <td><?= $item->cnpj; ?></td>
+                                        <td><?= $item->cpf; ?></td>
+                                        <td><?= $item->telefone; ?></td>
+                                        <td class="tabela_acoes">                                  
+                                            <a  class="btn btn-outline btn-primary btn-sm" href="<?= base_url() ?>cadastros/fornecedor/carregarfornecedor/<?= $item->financeiro_credor_devedor_id ?>" target="_blank">Editar</a>
+
+                                            <a  class="btn btn-outline btn-danger btn-sm" onclick="confirmacaoexcluir(<?= $item->financeiro_credor_devedor_id ?>);">Excluir</a>
+                                        </td>
+                                    </tr>
+
+
                                     <?php
                                 }
                             }
@@ -106,11 +106,29 @@
 
 
 </div>
- <!-- Final da DIV content -->
+<!-- Final da DIV content -->
 <script type="text/javascript">
 
-    $(function () {
-        $("#accordion").accordion();
-    });
+    function confirmacaoexcluir(idexcluir) {
+        swal({
+            title: "Tem certeza?",
+            text: "Você está prestes a excluir um credor/devedor!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#337ab7",
+            confirmButtonText: "Sim, quero deletar!",
+            cancelButtonText: "Não, cancele!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        window.open('<?= base_url() ?>cadastros/fornecedor/excluir/' + idexcluir, '_self');
+                    } else {
+                        swal("Cancelado", "Você desistiu de excluir um credor/devedor", "error");
+                    }
+                });
+
+    }
 
 </script>

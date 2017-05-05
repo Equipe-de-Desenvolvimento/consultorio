@@ -20,7 +20,7 @@
                         <div class="form-group">
                             <label>Valor *</label>
                             <input type="text" name="valor"  id="valor" alt="decimal" class="form-control dinheiro" readonly="true" value="<?= number_format(@$obj->_valor, 2, ',', '.'); ?>"/>
-                            <input type="hidden" id="saida_id" class="texto_id" name="saida_id" value="<?= @$obj->_saida_id; ?>" />
+                            <input type="hidden" id="financeiro_contaspagar_id" class="texto_id" name="financeiro_contaspagar_id" value="<?= @$obj->_financeiro_contaspagar_id; ?>" />
                         </div>
 
 
@@ -139,8 +139,7 @@
 
 </div>
  <!-- Final da DIV content -->
-<link rel="stylesheet" href="<?= base_url() ?>css/jquery-ui-1.8.5.custom.css">
-<script type="text/javascript" src="<?= base_url() ?>js/jquery.validate.js"></script>
+
 <script type="text/javascript">
 
     $(function () {
@@ -148,21 +147,21 @@
     });
 
 
-    $(function () {
-        $("#credorlabel").autocomplete({
-            source: "<?= base_url() ?>index.php?c=autocomplete&m=credordevedor",
-            minLength: 1,
-            focus: function (event, ui) {
-                $("#credorlabel").val(ui.item.label);
-                return false;
-            },
-            select: function (event, ui) {
-                $("#credorlabel").val(ui.item.value);
-                $("#credor").val(ui.item.id);
-                return false;
-            }
-        });
-    });
+//    $(function () {
+//        $("#credorlabel").autocomplete({
+//            source: "<?= base_url() ?>index.php?c=autocomplete&m=credordevedor",
+//            minLength: 1,
+//            focus: function (event, ui) {
+//                $("#credorlabel").val(ui.item.label);
+//                return false;
+//            },
+//            select: function (event, ui) {
+//                $("#credorlabel").val(ui.item.value);
+//                $("#credor").val(ui.item.id);
+//                return false;
+//            }
+//        });
+//    });
 
 
     $(function () {

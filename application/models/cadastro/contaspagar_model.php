@@ -172,6 +172,7 @@ class contaspagar_model extends Model {
     }
 
     function gravarconfirmacao() {
+//        var_dump($_POST); die;
         try {
            $_POST['inicio']= date("Y-m-d", strtotime ( str_replace('/','-', $_POST['inicio'])));
             /* inicia o mapeamento no banco */

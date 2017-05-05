@@ -138,10 +138,11 @@ class Caixa extends BaseController {
     function gravartransferencia() {
         $caixa_id = $this->caixa->gravartransferencia();
         if ($caixa_id == "-1") {
-            $data['mensagem'] = 'Erro ao gravar a Transferencia. Opera&ccedil;&atilde;o cancelada.';
+            $data['mensagem'] =  array('Erro ao gravar a Transferencia. Operação Cancelada', 'error');
         } else {
-            $data['mensagem'] = 'Sucesso ao gravar a Transferencia.';
+            $data['mensagem'] = array('Sucesso ao gravar a Transferencia.', 'success');
         }
+        $this->session->set_flashdata('message', $data['mensagem']);
         redirect(base_url() . "cadastros/caixa/pesquisar2", $data);
     }
 
@@ -184,6 +185,8 @@ class Caixa extends BaseController {
 
     function excluirsaida($saida) {
         $this->caixa->excluirsaida($saida);
+        $mensagem = array('Sucesso ao excluir a saida', 'success');
+        $this->session->set_flashdata('message', $mensagem);
         redirect(base_url() . "cadastros/caixa/pesquisar2");
     }
 
