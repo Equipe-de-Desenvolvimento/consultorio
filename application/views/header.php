@@ -42,9 +42,7 @@ function debug($object) {
 <!--CSS DO ALERTA BONITINHO-->
   <link href="<?= base_url() ?>bootstrap/vendor/alert/dist/sweetalert.css" rel="stylesheet" type="text/css" />
   
-<!--CSS DO CHOSEN--> 
-<!--  <link href="<?= base_url() ?>bootstrap/vendor/chosen/chosen.css" rel="stylesheet" type="text/css" />
-  <link href="<?= base_url() ?>bootstrap/vendor/chosen/docsupport/prism.css" rel="stylesheet" type="text/css" />-->
+
 
 
 
@@ -164,6 +162,38 @@ function debug($object) {
                               </ul>
                           </li>
                           <li>
+                              <a href="index.html"><i class="fa fa-user-md fa-fw"></i> Atendimento <span class="fa arrow"></span></a>
+                              <ul class="nav nav-second-level">
+                                  <li>
+                                      <a href="#"><i class="fa fa-edit fa-fw"></i> Rotinas <span class="fa arrow"></span></a>
+                                      <ul class="nav nav-third-level">
+                                          <li>
+                                              <a href="<?= base_url() ?>ambulatorio/exame/listarmultifuncaomedicoconsulta">Atendimento Médico</a>
+                                          </li>
+
+                                      </ul>
+
+                                  </li>
+                                  <li>
+                                      <a href="flot.html"><i class="fa fa-bar-chart-o fa-fw"></i> Relatorios <span class="fa arrow"></span></a>
+                                      <ul class="nav nav-third-level">
+                                          <li>
+                                              <a href="#">Third Level Item</a>
+                                          </li>
+                                          <li>
+                                              <a href="#">Third Level Item</a>
+                                          </li>
+                                          <li>
+                                              <a href="#">Third Level Item</a>
+                                          </li>
+                                          <li>
+                                              <a href="#">Third Level Item</a>
+                                          </li>
+                                      </ul>
+                                  </li>
+                              </ul>
+                          </li>
+                          <li>
                               <a href="index.html"><i class="fa fa-university fa-fw"></i> Financeiro <span class="fa arrow"></span></a>
                               <ul class="nav nav-second-level">
                                   <li>
@@ -235,8 +265,7 @@ function debug($object) {
 
                                   </li>
                                   
-                              </ul>
-                              <ul class="nav nav-second-level">
+                              
                                   <li>
                                       <a href="#"><i class="fa fa-money fa-fw"></i> Financeiro <span class="fa arrow"></span></a>
                                       <ul class="nav nav-third-level">

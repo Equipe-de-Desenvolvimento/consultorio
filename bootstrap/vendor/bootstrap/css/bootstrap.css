@@ -2376,6 +2376,28 @@ table th[class*="col-"] {
 .table-hover > tbody > tr.success:hover > th {
   background-color: #d0e9c6;
 }
+
+.table > thead > tr > td.success2,
+.table > tbody > tr > td.success2,
+.table > tfoot > tr > td.success2,
+.table > thead > tr > th.success2,
+.table > tbody > tr > th.success2,
+.table > tfoot > tr > th.success2,
+.table > thead > tr.success2 > td,
+.table > tbody > tr.success2 > td,
+.table > tfoot > tr.success2 > td,
+.table > thead > tr.success2 > th,
+.table > tbody > tr.success2 > th,
+.table > tfoot > tr.success2 > th {
+  background-color: #aaffc0;
+}
+.table-hover > tbody > tr > td.success2:hover,
+.table-hover > tbody > tr > th.success2:hover,
+.table-hover > tbody > tr.success2:hover > td,
+.table-hover > tbody > tr:hover > .success2,
+.table-hover > tbody > tr.success2:hover > th {
+  background-color: #9ae2ad;
+}
 .table > thead > tr > td.info,
 .table > tbody > tr > td.info,
 .table > tfoot > tr > td.info,
@@ -2438,6 +2460,50 @@ table th[class*="col-"] {
 .table-hover > tbody > tr:hover > .danger,
 .table-hover > tbody > tr.danger:hover > th {
   background-color: #ebcccc;
+}
+.table > thead > tr > td.finalizado,
+.table > tbody > tr > td.finalizado,
+.table > tfoot > tr > td.finalizado,
+.table > thead > tr > th.finalizado,
+.table > tbody > tr > th.finalizado,
+.table > tfoot > tr > th.finalizado,
+.table > thead > tr.finalizado > td,
+.table > tbody > tr.finalizado > td,
+.table > tfoot > tr.finalizado > td,
+.table > thead > tr.finalizado > th,
+.table > tbody > tr.finalizado > th,
+.table > tfoot > tr.finalizado > th {
+  background-color: #1d176d;
+  color: white;
+}
+.table-hover > tbody > tr > td.finalizado:hover,
+.table-hover > tbody > tr > th.finalizado:hover,
+.table-hover > tbody > tr.finalizado:hover > td,
+.table-hover > tbody > tr:hover > .finalizado,
+.table-hover > tbody > tr.finalizado:hover > th {
+  background-color: #17125b;
+}
+.table > thead > tr > td.atendendo,
+.table > tbody > tr > td.atendendo,
+.table > tfoot > tr > td.atendendo,
+.table > thead > tr > th.atendendo,
+.table > tbody > tr > th.atendendo,
+.table > tfoot > tr > th.atendendo,
+.table > thead > tr.atendendo > td,
+.table > tbody > tr.atendendo > td,
+.table > tfoot > tr.atendendo > td,
+.table > thead > tr.atendendo > th,
+.table > tbody > tr.atendendo > th,
+.table > tfoot > tr.atendendo > th {
+  background-color: #1280a5;
+  color: white;
+}
+.table-hover > tbody > tr > td.atendendo:hover,
+.table-hover > tbody > tr > th.atendendo:hover,
+.table-hover > tbody > tr.atendendo:hover > td,
+.table-hover > tbody > tr:hover > .atendendo,
+.table-hover > tbody > tr.atendendo:hover > th {
+  background-color: #0f7496;
 }
 .table-responsive {
   min-height: .01%;
