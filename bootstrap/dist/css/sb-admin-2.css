@@ -41,7 +41,7 @@ body {
     margin-top: 4px;
     padding: 10px;
     max-width: 240px;
-    /*font-style: italic;*/
+    font-style: italic;
     font-size: 13px;
 
 }
@@ -127,6 +127,8 @@ body {
 .ui-datepicker .ui-datepicker-calendar td {
     text-align: center;
     padding: 4px 0;
+    font-size: 12px;
+    
 }
 .ui-datepicker .ui-datepicker-calendar td {
     border-radius: 4px;

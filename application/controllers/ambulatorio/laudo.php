@@ -601,6 +601,7 @@ class Laudo extends BaseController {
         $data['laudo'] = $this->laudo->listarlaudo($ambulatorio_laudo_id);
         $data['empresa'] = $this->guia->listarempresa();
         $data['exame_id'] = $exame_id;
+        $agenda_exames_id = $exame_id;
         $data['ambulatorio_laudo_id'] = $ambulatorio_laudo_id;
 
         $dataFuturo = date("Y-m-d");

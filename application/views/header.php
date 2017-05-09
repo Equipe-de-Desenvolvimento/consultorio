@@ -68,7 +68,21 @@ function debug($object) {
 <!--CSS DO CHOSEN--> 
 <!-- <script src="<?= base_url() ?>bootstrap/vendor/chosen/chosen.jquery.js"></script> 
  <script src="<?= base_url() ?>bootstrap/vendor/chosen/docsupport/init.js"></script> -->
+<!--        <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/moments.js"></script>
+        <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/interact.js"></script>
+        <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/angular.js"></script>
+        <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/angular-animate.js"></script>
+        <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/ui-bootstrap-tpls.js"></script>
+        <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/rule.js"></script>
+        <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/angular-bootstrap-colorpicker.js"></script>
+        <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/angular-bootstrap-calendar.js"></script>
+        <link href="<?= base_url() ?>bootstrap/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
 
+        <link href="<?= base_url() ?>bootstrap/calendario/angular-bootstrap-calendar.min.css" rel="stylesheet" />
+        <script src="<?= base_url() ?>bootstrap/calendario/calendario-example.js"></script>
+        <script src="<?= base_url() ?>bootstrap/calendario/calendario-helpers.js"></script>
+        
+-->
 
   </head>
   <body>

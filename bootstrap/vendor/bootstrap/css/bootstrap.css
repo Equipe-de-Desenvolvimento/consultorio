@@ -2473,7 +2473,7 @@ table th[class*="col-"] {
 .table > thead > tr.finalizado > th,
 .table > tbody > tr.finalizado > th,
 .table > tfoot > tr.finalizado > th {
-  background-color: #1d176d;
+  background-color: #59A9C2;
   color: white;
 }
 .table-hover > tbody > tr > td.finalizado:hover,
@@ -2481,7 +2481,7 @@ table th[class*="col-"] {
 .table-hover > tbody > tr.finalizado:hover > td,
 .table-hover > tbody > tr:hover > .finalizado,
 .table-hover > tbody > tr.finalizado:hover > th {
-  background-color: #17125b;
+  background-color: #539bb2;
 }
 .table > thead > tr > td.atendendo,
 .table > tbody > tr > td.atendendo,

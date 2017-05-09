@@ -1,5 +1,28 @@
-<div >
-    <?
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="STG SAUDE">
+    <title>Editar Receituário Especial</title>
+    <!--CSS PADRAO DO BOOTSTRAP COM ALGUMAS ALTERAÇÕES DO TEMA-->
+    <link href="<?= base_url() ?>bootstrap/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>bootstrap/vendor/metisMenu/metisMenu.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>bootstrap/dist/css/sb-admin-2.css" rel="stylesheet" />
+    <!--BIBLIOTECA RESPONSAVEL PELOS ICONES-->
+    <link href="<?= base_url() ?>bootstrap/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <!--DEFINE TAMANHO MAXIMO DOS CAMPOS-->
+    <link href="<?= base_url() ?>css/form.css" rel="stylesheet" type="text/css" />
+    <!--AUTOCOMPLETE NOVO-->
+    <link href="<?= base_url() ?>bootstrap/vendor/autocomplete/easy-autocomplete.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url() ?>bootstrap/vendor/autocomplete/easy-autocomplete.themes.css" rel="stylesheet" type="text/css" />
+    <!--CSS DO ALERTA BONITINHO-->
+    <link href="<?= base_url() ?>bootstrap/vendor/alert/dist/sweetalert.css" rel="stylesheet" type="text/css" />
+
+
+    <link href="<?= base_url() ?>bootstrap/vendor/clock/compiled/flipclock.css" rel="stylesheet" />
+</head>
+<?
     $dataFuturo = date("Y-m-d");
     $dataAtual = @$obj->_nascimento;
     $date_time = new DateTime($dataAtual);
@@ -14,67 +37,131 @@
     $medico = $receita[0]->medico_parecer1;
     $operador_id = $this->session->userdata('operador_id');
     ?>
+<div class="container-fluid">
 
-    <div >
-        <form name="form_laudo" id="form_laudo" action="<?= base_url() ?>ambulatorio/laudo/editarexame2/<?= $receituario_id ?>" method="post">
-            <div >
-                <fieldset>
-                    <legend>Dados</legend>
-                    <table> 
-                        <tr><td width="400px;">Paciente:<?= @$obj->_nome ?></td>
-                            <td width="400px;">Exame: <?= @$obj->_procedimento ?></td>
-                            <td>Solicitante: <?= @$obj->_solicitante ?></td>
-                        </tr>
-                        <tr><td>Idade: <?= $teste ?></td>
-                            <td>Nascimento:<?= substr(@$obj->_nascimento, 8, 2) . "/" . substr(@$obj->_nascimento, 5, 2) . "/" . substr(@$obj->_nascimento, 0, 4); ?></td>
-                            <td>Sala:<?= @$obj->_sala ?></td>
-                        </tr>
-                    </table>
+    <form name="form_laudo" id="form_laudo" action="<?= base_url() ?>ambulatorio/laudo/editarexame2/<?= $receituario_id ?>" method="post">
 
-                </fieldset>
-                <div >
-                    <div>
 
-                        <fieldset>
-                            <legend>Solicitar Exame</legend>
-                            <div>
-                                <input type="hidden" id="receituario_id" name="receituario_id" value="<?= $receituario_id ?>"/>
-                                <input type="hidden" id="ambulatorio_laudo_id" name="ambulatorio_laudo_id" value="<?= $ambulatorio_laudo_id ?>"/>
-                                <input type="hidden" id="medico" name="medico" value="<?= $operador_id ?>"/>
-                            </div>
-                            <div>
-                                <textarea id="laudo" name="laudo" rows="20" cols="80" style="width: 80%"><?= $texto ?></textarea></td>
-                            </div>
 
-                            <hr>
-                            <button type="submit" name="btnEnviar">Salvar</button>
-                        </fieldset>
-                        </form>
+        <div class="row">
+            <div class="col-lg-12"> 
+                <div class="alert alert-success ">
+                    Editar Solicitação de Exame
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="alert alert-info">
+                        Dados do Paciente
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table"> 
+                                <input type="hidden" name="guia_id" id="guia_id" class="texto01"  value="<?= @$obj->_guia_id; ?>"/>
+                                <tr>
+                                    <td>Paciente: <?= @$obj->_nome ?></td>
+                                    <td >Exame: <?= @$obj->_procedimento ?></td>
+                                    <td>Solicitante: <?= @$obj->_solicitante ?></td>
+                                    <td rowspan="3">
+                                        <? if (file_exists("./upload/webcam/pacientes/" . @$obj->_paciente_id . ".jpg")) { ?>
+                                            <img class=" img-rounded" src="<?= base_url() ?>upload/webcam/pacientes/<?= @$obj->_paciente_id ?>.jpg" width="100" height="120" />  
+                                        <? } else { ?>
+                                            <!--<img src="<?= base_url() ?>upload/webcam/pacientes/<?= @$obj->_paciente_id ?>.jpg" width="100" height="120" />-->
+                                        <? }
+                                        ?> 
 
-                    </div> 
-                </div> 
-            </div> 
-            
-            </fieldset>
+                                    </td>
+                                </tr>
+                                <tr><td>Idade: <?= $teste ?></td>
+                                    <td>Nascimento:<?= substr(@$obj->_nascimento, 8, 2) . "/" . substr(@$obj->_nascimento, 5, 2) . "/" . substr(@$obj->_nascimento, 0, 4); ?></td>
+                                    <td>Sala:<?= @$obj->_sala ?></td>
+                                </tr>
+                                <tr><td>Sexo: <?= @$obj->_sexo ?></td>
+                                    <td>Convenio:<?= @$obj->_convenio; ?></td>
+                                    <td>Telefone: <?= @$obj->_telefone ?></td>
+                                </tr>
+    <!--                            <tr>
+                                    <td>Sexo: <?= @$obj->_sexo ?></td>
+                                    <td>Convenio:<?= @$obj->_convenio; ?></td>
+                                    <td>Telefone: <?= @$obj->_telefone ?></td>
+    
+                                </tr>-->
 
-    </div> 
+
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="panel panel-default">
+
+            <div class="alert alert-info">
+                Solicitação de Exame
+            </div>
+            <div class="panel-body">
+
+
+                <br>
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <textarea id="laudo" name="laudo" rows="20" cols="80" style="width: 80%"><?= $texto ?></textarea>
+                        <input type="hidden" id="receituario_id" name="receituario_id" value="<?= $receituario_id ?>"/>
+                        <input type="hidden" id="ambulatorio_laudo_id" name="ambulatorio_laudo_id" value="<?= $ambulatorio_laudo_id ?>"/>
+                        <input type="hidden" id="medico" name="medico" value="<?= $operador_id ?>"/>
+
+                    </div>
+                </div>   
+                <br>
+
+                <div class="row">
+                    <div class="col-lg-1">
+                        <button class="btn btn-outline btn-success btn-sm" type="submit" name="btnEnviar"><i class="fa fa-floppy-o" aria-hidden="true"></i>
+                            Salvar</button>
+                    </div>
+                    <div class="col-lg-1">
+                        <button class="btn btn-outline btn-danger btn-sm" type="reset" name="btnLimpar">Limpar</button>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </form>
 </div> 
+
 </div> <!-- Final da DIV content -->
 <style>
     #sortable { list-style-type: none; margin: 0; padding: 0; width: 1300px; }
     #sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 100px; height: 90px; font-size: 4em; text-align: center; }
 </style>
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-<link href="<?= base_url() ?>css/estilo.css" rel="stylesheet" type="text/css" />
-<link href="<?= base_url() ?>css/form.css" rel="stylesheet" type="text/css" />
-<link href="<?= base_url() ?>css/style_p.css" rel="stylesheet" type="text/css" />
-<link href="<?= base_url() ?>css/jquery-ui-1.8.5.custom.css" rel="stylesheet" type="text/css" />
-<link href="<?= base_url() ?>css/jquery-treeview.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="<?= base_url() ?>js/jquery-1.4.2.min.js" ></script>
-<script type="text/javascript" src="<?= base_url() ?>js/jquery-1.9.1.js" ></script>
+<script src="<?= base_url() ?>bootstrap/vendor/jquery/jquery.min.js"></script>
+
+<script src="<?= base_url() ?>bootstrap/vendor/clock/compiled/flipclock.js"></script>
+<script src="<?= base_url() ?>bootstrap/vendor/font-awesome/css/fonts.js"></script>
+
+<script  src="<?= base_url() ?>bootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script  src="<?= base_url() ?>bootstrap/vendor/metisMenu/metisMenu.min.js"></script>
+<script  src="<?= base_url() ?>bootstrap/dist/js/sb-admin-2.js"></script>
+
+<script type="text/javascript" src="<?= base_url() ?>bootstrap/vendor/autocomplete/jquery.easy-autocomplete.js" ></script>
+
+<!--<script type="text/javascript" src="<?= base_url() ?>js/jquery.maskedinput.js"></script>-->
+<script type="text/javascript" src="<?= base_url() ?>js/jquery.maskMoney.js"></script>
+
+<!--        SWEET ALERT. (PLUGIN DO ALERTA BONITINHO)-->
+
+<script src="<?= base_url() ?>bootstrap/vendor/alert/dist/sweetalert.min.js"></script> 
 <script type="text/javascript" src="<?= base_url() ?>js/jquery-ui-1.10.4.js" ></script>
 <script type="text/javascript" src="<?= base_url() ?>js/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
-<script type="text/javascript" src="<?= base_url() ?>js/jquery.validate.js"></script>
+<script type="text/javascript" src="<?= base_url() ?>js/jquery.maskedinput.js"></script>
 <script type="text/javascript">
 
 

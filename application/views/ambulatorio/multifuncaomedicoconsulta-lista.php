@@ -64,7 +64,7 @@
                                     </select>
                                 </td>
                                 <td> <input type="text"  id="data" alt="date" name="data" class="form-control texto04"  value="<?php echo @$_GET['data']; ?>" /></td>
-                                <td style="text-align: center;"><button type="submit" class="btn btn-default btn-outline btn-danger" name="enviar"><i class="fa fa-search fa-1x"></i></button></td>
+                                <td style="text-align: center;"><button type="submit" class="btn btn-default  btn-danger" name="enviar"><i class="fa fa-search fa-1x"></i></button></td>
                             </tr> 
                         </table> 
                     </form>
@@ -171,21 +171,21 @@
                                                 <? if ($item->situacaolaudo != '') { ?>
                                       
                                                 <? if (($item->medico_parecer1 == $operador_id && $item->situacaolaudo == 'FINALIZADO') || ($item->realizada == 't' && $item->situacaolaudo != 'FINALIZADO') || $operador_id == 1) { ?>
-                                                    <a class="btn btn-outline btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaranaminese/<?= $item->ambulatorio_laudo_id ?>/<?= $item->exame_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');" >
+                                                    <a class="btn  btn-danger btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaranaminese/<?= $item->ambulatorio_laudo_id ?>/<?= $item->exame_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');" >
                                                         Atender</a>
                                                 <? } else { ?>
-                                                <button class="btn btn-outline btn-primary btn-sm" disabled="">
+                                                <button class="btn  btn-primary btn-sm" disabled="">
                                                         Atender
                                                     </button>
                                                 <? } ?>
-                                                <a class="btn btn-outline btn-info btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $item->ambulatorio_laudo_id ?>');">
+                                                <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $item->ambulatorio_laudo_id ?>');">
                                                     Arquivos</a>
                                                 
                                                 <?}else{?>
-                                                    <button class="btn btn-outline btn-primary btn-sm" disabled="">
+                                                    <button class="btn  btn-primary btn-sm" disabled="">
                                                         Atender
                                                     </button>
-                                                    <button class="btn btn-outline btn-primary btn-sm" disabled="">
+                                                    <button class="btn  btn-primary btn-sm" disabled="">
                                                         Arquivos
                                                     </button>
                                                 <?}?>
@@ -203,21 +203,21 @@
                                                 <? if ($item->situacaolaudo != '') { ?>
                                       
                                                 <? if (($item->medico_parecer1 == $operador_id && $item->situacaolaudo == 'FINALIZADO') || ($item->realizada == 't' && $item->situacaolaudo != 'FINALIZADO') || $operador_id == 1) { ?>
-                                                    <a class="btn btn-outline btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaranaminese/<?= $item->ambulatorio_laudo_id ?>/<?= $item->exame_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');" >
+                                                    <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaranaminese/<?= $item->ambulatorio_laudo_id ?>/<?= $item->exame_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');" >
                                                         Atender</a>
                                                 <? } else { ?>
-                                                <button class="btn btn-outline btn-primary btn-sm" disabled="">
+                                                <button class="btn  btn-primary btn-sm" disabled="">
                                                         Atender
                                                     </button>
                                                 <? } ?>
-                                                <a class="btn btn-outline btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $item->ambulatorio_laudo_id ?>');">
+                                                <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $item->ambulatorio_laudo_id ?>');">
                                                     Arquivos</a>
                                                 
                                                 <?}else{?>
-                                                    <button class="btn btn-outline btn-primary btn-sm" disabled="">
+                                                    <button class="btn  btn-primary btn-sm" disabled="">
                                                         Atender
                                                     </button>
-                                                    <button class="btn btn-outline btn-primary btn-sm" disabled="">
+                                                    <button class="btn  btn-primary btn-sm" disabled="">
                                                         Arquivos
                                                     </button>
                                                 <?}?>
@@ -236,21 +236,21 @@
                                                 <? if ($item->situacaolaudo != '') { ?>
                                       
                                                 <? if (($item->medico_parecer1 == $operador_id && $item->situacaolaudo == 'FINALIZADO') || ($item->realizada == 't' && $item->situacaolaudo != 'FINALIZADO') || $operador_id == 1) { ?>
-                                                    <a class="btn btn-outline btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaranaminese/<?= $item->ambulatorio_laudo_id ?>/<?= $item->exame_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');" >
+                                                    <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaranaminese/<?= $item->ambulatorio_laudo_id ?>/<?= $item->exame_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');" >
                                                         Atender</a>
                                                 <? } else { ?>
-                                                <button class="btn btn-outline btn-primary btn-sm" disabled="">
+                                                <button class="btn  btn-primary btn-sm" disabled="">
                                                         Atender
                                                     </button>
                                                 <? } ?>
-                                                <a class="btn btn-outline btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $item->ambulatorio_laudo_id ?>');">
+                                                <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $item->ambulatorio_laudo_id ?>');">
                                                     Arquivos</a>
                                                 
                                                 <?}else{?>
-                                                    <button class="btn btn-outline btn-primary btn-sm" disabled="">
+                                                    <button class="btn  btn-primary btn-sm" disabled="">
                                                         Atender
                                                     </button>
-                                                    <button class="btn btn-outline btn-primary btn-sm" disabled="">
+                                                    <button class="btn  btn-primary btn-sm" disabled="">
                                                         Arquivos
                                                     </button>
                                                 <?}?>
@@ -268,21 +268,21 @@
                                                 <? if ($item->situacaolaudo != '') { ?>
                                       
                                                 <? if (($item->medico_parecer1 == $operador_id && $item->situacaolaudo == 'FINALIZADO') || ($item->realizada == 't' && $item->situacaolaudo != 'FINALIZADO') || $operador_id == 1) { ?>
-                                                    <a class="btn btn-outline btn-info btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaranaminese/<?= $item->ambulatorio_laudo_id ?>/<?= $item->exame_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');" >
+                                                    <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaranaminese/<?= $item->ambulatorio_laudo_id ?>/<?= $item->exame_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');" >
                                                         Atender</a>
                                                 <? } else { ?>
-                                                <button class="btn btn-outline btn-info btn-sm" disabled="">
+                                                <button class="btn  btn-primary btn-sm" disabled="">
                                                         Atender
                                                     </button>
                                                 <? } ?>
-                                                <a class="btn btn-outline btn-info btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $item->ambulatorio_laudo_id ?>');">
+                                                <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $item->ambulatorio_laudo_id ?>');">
                                                     Arquivos</a>
                                                 
                                                 <?}else{?>
-                                                    <button class="btn btn-outline btn-info btn-sm" disabled="">
+                                                    <button class="btn  btn-primary btn-sm" disabled="">
                                                         Atender
                                                     </button>
-                                                    <button class="btn btn-outline btn-info btn-sm" disabled="">
+                                                    <button class="btn  btn-primary btn-sm" disabled="">
                                                         Arquivos
                                                     </button>
                                                 <?}?>
@@ -295,13 +295,13 @@
                             }
                             ?>
                             <tr>
-                                <th class="tabela_footer  btn-info" colspan="9">
+                                <th class="tabela_footer  btn-primary" colspan="9">
                                     <?php $this->utilitario->paginacao($url, $total, $pagina, $limit); ?>
 
                                 </th>
                             </tr>
                             <tr>
-                                <th class="tabela_footer  btn-info" colspan="9">
+                                <th class="tabela_footer  btn-primary" colspan="9">
 
                                     Total de registros: <?php echo $total; ?>
                                 </th>
