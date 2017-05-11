@@ -12,13 +12,13 @@
                     <form method="get" action="<?= base_url() ?>ambulatorio/exame/listarmultifuncaomedicoconsulta">
                         <table width="100%" class="table " id="dataTables-example">
                             <tr class="info">
-                                <th>Situação</th>
+                                <!--<th>Situação</th>-->
                                 <th>Medico</th>
                                 <th >Data</th>
                                 <th class="text-center">Ações</th>
                             </tr> 
                             <tr class="">
-                                <td>
+<!--                                <td>
 
                                     <select name="situacao" id="situacao" class="form-control texto06">
                                         <option value=""></option>
@@ -44,7 +44,7 @@
                                         ?>>VAGO</option>
                                     </select>
 
-                                </td>
+                                </td>-->
 
                                 <td>
                                     <select name="medico" id="medico" class="form-control texto06">
@@ -295,13 +295,13 @@
                             }
                             ?>
                             <tr>
-                                <th class="tabela_footer  btn-primary" colspan="9">
+                                <th class="tabela_footer  btn-info" colspan="9">
                                     <?php $this->utilitario->paginacao($url, $total, $pagina, $limit); ?>
 
                                 </th>
                             </tr>
                             <tr>
-                                <th class="tabela_footer  btn-primary" colspan="9">
+                                <th class="tabela_footer  btn-info" colspan="9">
 
                                     Total de registros: <?php echo $total; ?>
                                 </th>

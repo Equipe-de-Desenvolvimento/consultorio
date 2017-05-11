@@ -2440,6 +2440,30 @@ table th[class*="col-"] {
 .table-hover > tbody > tr.warning:hover > th {
   background-color: #faf2cc;
 }
+
+.table > thead > tr > td.agendado,
+.table > tbody > tr > td.agendado,
+.table > tfoot > tr > td.agendado,
+.table > thead > tr > th.agendado,
+.table > tbody > tr > th.agendado,
+.table > tfoot > tr > th.agendado,
+.table > thead > tr.agendado > td,
+.table > tbody > tr.agendado > td,
+.table > tfoot > tr.agendado > td,
+.table > thead > tr.agendado > th,
+.table > tbody > tr.agendado > th,
+.table > tfoot > tr.agendado > th {
+  background-color: #E1FAFC;
+  /*color:#5c5d60;*/
+}
+.table-hover > tbody > tr > td.agendado:hover,
+.table-hover > tbody > tr > th.agendado:hover,
+.table-hover > tbody > tr.agendado:hover > td,
+.table-hover > tbody > tr:hover > .agendado,
+.table-hover > tbody > tr.agendado:hover > th {
+  background-color: #d7f0f2;
+  
+}
 .table > thead > tr > td.danger,
 .table > tbody > tr > td.danger,
 .table > tfoot > tr > td.danger,
@@ -2495,15 +2519,15 @@ table th[class*="col-"] {
 .table > thead > tr.atendendo > th,
 .table > tbody > tr.atendendo > th,
 .table > tfoot > tr.atendendo > th {
-  background-color: #1280a5;
-  color: white;
+  background-color: #EDF9FF;
+  color: #443838;
 }
 .table-hover > tbody > tr > td.atendendo:hover,
 .table-hover > tbody > tr > th.atendendo:hover,
 .table-hover > tbody > tr.atendendo:hover > td,
 .table-hover > tbody > tr:hover > .atendendo,
 .table-hover > tbody > tr.atendendo:hover > th {
-  background-color: #0f7496;
+  background-color: #d7e9f2;
 }
 .table-responsive {
   min-height: .01%;

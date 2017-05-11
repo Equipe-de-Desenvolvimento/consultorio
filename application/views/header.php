@@ -26,7 +26,9 @@ function debug($object) {
       <meta name="viewport" content="width=device-width, initial-scale=1">
           <meta name="description" content="">
               <meta name="author" content="STG SAUDE">
-
+<!--<script src="<?= base_url() ?>calendario/codebase/dhtmlxscheduler.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="<?= base_url() ?>calendario/codebase/dhtmlxscheduler_flat.css" type="text/css" charset="utf-8">
+    <script src="<?= base_url() ?>calendario/codebase/locale/locale_pt.js" type="text/javascript" charset="utf-8"></script>-->
   <!--CSS -->
   <!--CSS PADRAO DO BOOTSTRAP COM ALGUMAS ALTERAÇÕES DO TEMA-->
   <link href="<?= base_url() ?>bootstrap/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
@@ -45,7 +47,7 @@ function debug($object) {
 
 
 
-
+  
   <!--SCRIPTS -->
   <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.js" type="text/javascript"></script>-->
   <script src="<?= base_url() ?>bootstrap/vendor/jquery/jquery.min.js"></script>
@@ -75,17 +77,16 @@ function debug($object) {
         <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/ui-bootstrap-tpls.js"></script>
         <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/rule.js"></script>
         <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/angular-bootstrap-colorpicker.js"></script>
-        <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/angular-bootstrap-calendar.js"></script>
-        <link href="<?= base_url() ?>bootstrap/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
+        <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/angular-bootstrap-calendar.js"></script>-->
 
         <link href="<?= base_url() ?>bootstrap/calendario/angular-bootstrap-calendar.min.css" rel="stylesheet" />
         <script src="<?= base_url() ?>bootstrap/calendario/calendario-example.js"></script>
         <script src="<?= base_url() ?>bootstrap/calendario/calendario-helpers.js"></script>
         
--->
+
 
   </head>
-  <body>
+  
       <div id="wrapper">
 
           <!-- Navigation -->
@@ -149,6 +150,9 @@ function debug($object) {
                                               <a href="<?= base_url() ?>cadastros/pacientes">Cadastro</a>
                                           </li>
 
+                                          <li>
+                                              <a href="<?= base_url() ?>ambulatorio/exame/listarmultifuncaoconsultacalendario">Calendario</a>
+                                          </li>
                                           <li>
                                               <a href="<?= base_url() ?>ambulatorio/exame/listarmultifuncaoconsulta">Agendamento</a>
                                           </li>
@@ -316,7 +320,7 @@ function debug($object) {
           </nav>
       </div>
 
-  </body>
+  
 
   <script>
       $(document).ready(function () {

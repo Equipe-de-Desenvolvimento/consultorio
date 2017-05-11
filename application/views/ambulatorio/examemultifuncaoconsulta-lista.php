@@ -150,10 +150,14 @@
                                             date_default_timezone_set('America/Fortaleza');
                                             $data_atual = date('Y-m-d');
                                             $hora_atual = date('H:i:s');
-                                            if ($item->data < $data_atual) {
+                                            if ($item->data < $data_atual && $item->paciente_id != null) {
                                                 $situacao = "Faltou";
                                                 $faltou = true;
-                                            } else {
+                                            }elseif($item->data < $data_atual && $item->paciente_id == null){
+                                                $situacao = 'Vago';
+                                                $verifica = 1;
+                                            } 
+                                            else {
                                                 $situacao = "Agendado";
                                             }
                                         } else {
@@ -193,7 +197,7 @@
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td class="tabela_acoes">
-                                                <a class="btn btn-outline btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarconsultatemp/<?= $item->agenda_exames_id ?>');">Consultas
+                                                <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarconsultatemp/<?= $item->agenda_exames_id ?>');">Consultas
                                                 </a>
                                             </td>
                                         </tr>  
@@ -205,7 +209,7 @@
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td class="tabela_acoes">
-                                                <a class="btn  btn-outline btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas
+                                                <a class="btn btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas
                                                 </a>
                                             </td>
                                         </tr>
@@ -218,7 +222,7 @@
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td class="tabela_acoes">
-                                                <a class="btn  btn-outline btn-warning btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas
+                                                <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas
                                                 </a>
                                             </td>
                                         </tr>
@@ -230,19 +234,19 @@
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td class="tabela_acoes">
-                                                <a class="btn btn-outline btn-info btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas
+                                                <a class="btn btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas
                                                 </a>
                                             </td>
                                         </tr>
                                     <? } elseif ($verifica == 5) { ?>
-                                        <tr class="success2">
+                                        <tr class="atendendo">
                                             <td><?= $situacao ?></td>
                                             <td><?= $item->inicio ?></td>
                                             <td><?= $item->paciente ?></td>
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td class="tabela_acoes">
-                                                <a class="btn  btn-outline btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas
+                                                <a class="btn btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas
                                                 </a>
                                             </td>
                                         </tr>
@@ -251,15 +255,15 @@
                                         if($faltou){?>
                                         <tr class="danger">
                                         <?}else{?>
-                                        <tr class="warning">    
+                                        <tr class="agendado">    
                                         <?}?>
-                                            <td><?= $situacao ?></td>
+                                            <td><?= $situacao?></td>
                                             <td><?= $item->inicio ?></td>
                                             <td><?= $item->paciente ?></td>
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td class="tabela_acoes">
-                                                <a class="btn btn-outline btn-danger btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas
+                                                <a class="btn btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas
                                                 </a>
                                             </td>
                                         </tr>

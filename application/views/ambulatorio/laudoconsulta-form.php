@@ -187,7 +187,7 @@
                             <div class="col-lg-7">
                                 <div class="form-group">
                                     <label>Anamnese</label>
-                                    <textarea id="laudo" name="laudo"><?= @$obj->_texto; ?></textarea>
+                                    <textarea id="laudo" style="width: 600px;height: 500px;" name="laudo"><?= @$obj->_texto; ?></textarea>
                                 </div>
                             </div>
                             <div class="col-lg-5">

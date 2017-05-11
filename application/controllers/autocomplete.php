@@ -103,7 +103,7 @@ class Autocomplete extends Controller {
         }
         echo json_encode($var);
     }
-    
+
     function procedimentocirurgia() {
         if (isset($_GET['procedimento_id'])) {
             $result = $this->procedimento->listarprocedimentocirurgia2autocomplete($_GET['procedimento_id'], $_GET['convenio_id']);
@@ -111,7 +111,7 @@ class Autocomplete extends Controller {
             $result = $this->procedimento->listarprocedimentocirurgia2autocomplete();
         }
         foreach ($result as $item) {
-            $retorno['value'] = $item->codigo . " - " .$item->nome ;
+            $retorno['value'] = $item->codigo . " - " . $item->nome;
             $retorno['id'] = $item->procedimento_tuss_id;
             $retorno['valor'] = $item->procedimento_tuss_id;
             $var[] = $retorno;
@@ -384,7 +384,7 @@ class Autocomplete extends Controller {
         }
         echo json_encode($result);
     }
-    
+
     function conveniocarteira() {
 
         if (isset($_GET['convenio1'])) {
@@ -1450,7 +1450,7 @@ class Autocomplete extends Controller {
         }
         echo json_encode($var);
     }
-    
+
     function cidadeibge() {
 
         if (isset($_GET['ibge'])) {
@@ -1810,6 +1810,55 @@ class Autocomplete extends Controller {
         }
         echo json_encode($var);
     }
+    
+    function listarhorarioscalendario() {
+        
+            $result = $this->exametemp->listarhorarioscalendariovago();
+       
+//            $result2 = $this->exametemp->listarhorarioscalendarioocupado();
+        
+        foreach ($result as $item) {
+            if($item->situacao == 'LIVRE'){
+                $retorno['title'] =  'H: Vagos: ' . $item->contagem;
+            }else{
+              $retorno['title'] =  'H: Ocupados: ' . $item->contagem;
+            }
+            
+            $retorno['start'] = $item->data;
+            $retorno['end'] = $item->data;
+            if($item->situacao == 'LIVRE'){
+                $retorno['color'] = '#92DBC7';
+            }else{
+              $retorno['color'] = '#36C4D0';
+            }
+            
+            
+            $dia = date("d", strtotime($item->data));
+            $mes = date("m", strtotime($item->data));
+            $ano = date("Y", strtotime($item->data));
+            if($item->situacao == 'LIVRE'){
+            $retorno['url'] = "../../ambulatorio/exame/listarmultifuncaoconsulta?empresa=&especialidade=&medico=&situacao=LIVRE&data=$dia%2F$mes%2F$ano&nome=";
+            }else{
+            $retorno['url'] = "../../ambulatorio/exame/listarmultifuncaoconsulta?empresa=&especialidade=&medico=&situacao=OK&data=$dia%2F$mes%2F$ano&nome=";
+            }
+            
+            $var[] = $retorno;
+        }
+//        foreach ($result2 as $value) {
+//            $retorno['title'] =  'H: Ocupados: ' . $value->contagem_ocupado;
+//            $retorno['start'] = $value->data;
+//            $retorno['end'] = $value->data;
+//            $retorno['color'] = '#0E9AA7';
+//            $dia = date("d", strtotime($item->data));
+//            $mes = date("m", strtotime($item->data));
+//            $ano = date("Y", strtotime($item->data));
+//            $retorno['url'] = "../../ambulatorio/exame/listarmultifuncaoconsulta?empresa=&especialidade=&medico=&situacao=OK&data=$dia%2F$mes%2F$ano&nome=";
+//            $var[] = $retorno;
+//        }
+        echo json_encode($var);
+    }
+
+    
 
     function cid2() {
         if (isset($_GET['term'])) {
