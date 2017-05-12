@@ -1,33 +1,33 @@
 <div id="page-wrapper">
-    <div class="row text-left" >
-        <!--<div class="col-lg-1 text-left">-->
+<!--    <div class="row text-left">
+        <div class="col-lg-1 text-left">
             <a class="btn btn-outline btn-danger" href="<?= base_url() ?>cadastros/pacientes">
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
 
             </a>
-        <!--</div>-->
-    </div>
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
+        </div>
+    </div>-->
+    
             <div class="panel panel-default">
+                <a class="btn btn-outline btn-danger" href="<?= base_url() ?>cadastros/pacientes">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+
+            </a>
                 <div class=" alert alert-info ">
                     Solicita&ccedil;&otilde;es do Paciente
                 </div>
                 <!-- /.panel-heading -->
-                <div class="panel-body text-center" >
+                <div class="panel-body" >
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#home-pills" data-toggle="tab">Exame</a>
+
+                        <li class="active"><a href="#profile-pills" data-toggle="tab">Atendimento</a>
                         </li>
-                        <li><a href="#profile-pills" data-toggle="tab">Consulta</a>
+
+
+                        <li><a href="#guia" data-toggle="tab">Guia</a>
                         </li>
-                        <li><a href="#messages-pills" data-toggle="tab">Especialidade</a>
-                        </li>
-                        <li><a href="#settings-pills" data-toggle="tab">Atendimento</a>
-                        </li>
-                        <li><a href="#atendimento" data-toggle="tab">Guia</a>
-                        </li>
-                        <li><a href="#guia" data-toggle="tab">Avançado</a>
+                        <li><a href="#avancado" data-toggle="tab">Avançado</a>
                         </li>
                     </ul>
 
@@ -36,49 +36,48 @@
 
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div class="tab-pane fade in active" id="home-pills">
+                        
+                        <div class="tab-pane fade in active" id="profile-pills">
                             <div>
-                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/guia/novo/<?= $paciente_id ?>">Novo exame</a>
+                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/guia/novoconsulta/<?= $paciente_id ?>">Novo Atendimento</a>
                             </div>
                             <div>
-                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>cadastros/pacientes/procedimentoautorizar/<?= $paciente_id ?>">Autorizar exame</a>
+                                <a class="btn btn-outline btn-info " href="<?= base_url() ?>cadastros/pacientes/procedimentoautorizarconsulta/<?= $paciente_id ?>">Autorizar Atendimento</a>
                             </div>
                             <div>
-                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/guia/acompanhamento/<?= $paciente_id ?>">Acompanhamento</a>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade " id="profile-pills">
-                            <div>
-                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/guia/novoconsulta/<?= $paciente_id ?>">Nova consulta</a>
-                            </div>
-                            <div>
-                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>cadastros/pacientes/procedimentoautorizarconsulta/<?= $paciente_id ?>">Autorizar consulta</a>
-                            </div>
-                            <div>
-                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/laudo/carregarlaudohistorico/<?= $paciente_id ?>">Hist. Consulta</a>
+                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/laudo/carregarlaudohistorico/<?= $paciente_id ?>">Hist. Atendimentos</a>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="messages-pills">
+                   
+                        <div class="tab-pane fade" id="guia">
                             <div>
-                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/guia/novofisioterapia/<?= $paciente_id ?>">Nova Especialidade</a> 
+                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/guia/pesquisar/<?= $paciente_id ?>">Guias</a>
                             </div>
                             <div>
-                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>cadastros/pacientes/procedimentoautorizarfisioterapia/<?= $paciente_id ?>">Autorizar Especialidade</a>
+                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $paciente_id ?>">Atendimentos</a>
                             </div>
                             <div>
-                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/exame/autorizarsessaofisioterapia/<?= $paciente_id ?>">Sessao Especialidade</a>
+                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/guia/orcamento/<?= $paciente_id ?>">Or&ccedil;amento</a>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="settings-pills">
-
+                        
+                        <div class="tab-pane fade" id="avancado">
+                            <div>
+                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>cadastros/pacientes/anexarimagem/<?= $paciente_id ?>">Arquivos</a>
+                            </div>
+                            <div>
+                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/exametemp/unificar/<?= $paciente_id ?>">Unificar</a>
+                            </div>
+                            <div>
+                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/exametemp/excluirpaciente/<?= $paciente_id ?>">Excluir</a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <!-- /.panel-body -->
             </div>
             <!-- /.panel -->
-        </div>
-    </div>
+       
     <?
     $args['paciente'] = $paciente_id;
     $perfil_id = $this->session->userdata('perfil_id');
@@ -93,20 +92,20 @@
                     <td width="80px;"><div class="bt_link_new"></div></td>
                     <td width="80px;"><div class="bt_link_new"></div></td>
                     <td width="80px;"><div class="bt_link_new"><a href="<?= base_url() ?>ambulatorio/guia/novoatendimento/<?= $paciente_id ?>">Novo Atendimento</a></div></td>
-                    <td width="100px;"><div class="bt_linkm"><a href="<?= base_url() ?>ambulatorio/guia/pesquisar/<?= $args['paciente'] ?>">Guias</a></div></td>
+                    <td width="100px;"><div class="bt_linkm"></div></td>
 
 
 
-                    <td width="100px;"><div class="bt_linkm"><a href="<?= base_url() ?>cadastros/pacientes/anexarimagem/<?= $paciente_id ?>">Arquivos</a></div></td>
+                    <td width="100px;"><div class="bt_linkm"></div></td>
                     <td width="100px;"><div class="bt_linkm"><a href="<?= base_url() ?>cadastros/pacientes/cancelamento/<?= $paciente_id ?>" target="_blank">Cancelamentos</a></div></td>
                 </tr>
                 <tr><td width="100px;"><div class="bt_link_new"></div></td>
                     <td width="100px;"><div class="bt_link_new"></div></td>
                     <td width="100px;"><div class="bt_link_new"></div></td>
                     <td width="100px;"><div class="bt_link_new"><a href="<?= base_url() ?>cadastros/pacientes/procedimentoautorizaratendimento/<?= $paciente_id ?>">Autorizar Atendimento</a></div></td>
-                    <td width="100px;"><div class="bt_linkm"><a href="<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $paciente_id ?>">Consultas</a></div></td>
+                    <td width="100px;"><div class="bt_linkm"></div></td>
                     <? if ($perfil_id == 1) { ?>
-                        <td width="100px;"><div class="bt_linkm"><a href="<?= base_url() ?>ambulatorio/exametemp/unificar/<?= $paciente_id ?>">unificar</a></div></td>
+                        <td width="100px;"><div class="bt_linkm"></div></td>
                     <? } ?>
 
 
@@ -119,10 +118,10 @@
                     <td width="100px;"><div class="bt_link_new"><a href="<?= base_url() ?>ambulatorio/laudo/carregarlaudohistorico/<?= $paciente_id ?>">Hist. Consulta</a></div></td>
                     <td width="250px;"><div class="bt_link_new"><a href="<?= base_url() ?>emergencia/triagem/gravarsolicitacaotriagem/<?= $paciente_id ?>">triagem</a></div></td>
                     <td width="250px;"><div class="bt_link_new"></div></td>
-                    <td width="250px;"><div class="bt_link_new"><a href="<?= base_url() ?>ambulatorio/guia/orcamento/<?= $paciente_id ?>">Or&ccedil;amento</a></div></td>
+                    <td width="250px;"><div class="bt_link_new"></div></td>
                     <td width="100px;"><div class="bt_linkm"><a href="<?= base_url() ?>ambulatorio/exametemp/carregarpacientetemp/<?= $paciente_id ?>">Exames</a></div></td>
                     <? if ($perfil_id == 1) { ?>
-                        <td width="100px;"><div class="bt_linkm"><a href="<?= base_url() ?>ambulatorio/exametemp/excluirpaciente/<?= $paciente_id ?>">excluir</a></div></td>
+                        <td width="100px;"><div class="bt_linkm"></div></td>
                     <? } ?>
 
                 </tr>

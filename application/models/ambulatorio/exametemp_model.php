@@ -344,6 +344,7 @@ class exametemp_model extends Model {
                             a.medico_agenda,
                             o.nome as medico,
                             c.nome as convenio,
+                            c.convenio_id,
                             a.medico_consulta_id,
                             a.procedimento_tuss_id,
                             pt.nome as procedimento,
@@ -354,7 +355,7 @@ class exametemp_model extends Model {
         $this->db->join('tb_procedimento_convenio pc', 'pc.procedimento_convenio_id = a.procedimento_tuss_id', 'left');
         $this->db->join('tb_procedimento_tuss pt', 'pt.procedimento_tuss_id = pc.procedimento_tuss_id', 'left');
         $this->db->join('tb_convenio c', 'c.convenio_id = pc.convenio_id', 'left');
-        $this->db->where("a.tipo", 'CONSULTA');
+//        $this->db->where("a.tipo", 'CONSULTA');
         $this->db->where("a.confirmado", 'true');
         $this->db->where("a.paciente_id", $pacientetemp_id);
         $this->db->orderby("a.data desc");

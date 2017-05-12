@@ -7675,6 +7675,9 @@ ORDER BY ae.agenda_exames_id)";
                 $this->db->set('medico_consulta_id', $_POST['medicoagenda']);
                 $this->db->set('medico_agenda', $_POST['medicoagenda']);
             }
+            if ($_POST['crm1'] != "") {
+                $this->db->set('medico_solicitante', $_POST['crm1']);
+            }
             $this->db->set('valor', $_POST['valor1']);
             $valortotal = $_POST['valor1'] * $_POST['qtde1'];
             $this->db->set('valor_total', $valortotal);

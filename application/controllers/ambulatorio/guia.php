@@ -865,7 +865,7 @@ class Guia extends BaseController {
 //        var_dump($percentual); die;
         $paciente_id = $_POST['txtpaciente_id'];
 
-        if ($_POST['sala1'] == '' || $_POST['medicoagenda'] == '' || $_POST['qtde1'] == '' || $_POST['convenio1'] == -1 || $_POST['procedimento1'] == '') {
+        if ($_POST['procedimento1'] == '') {
 
             $data['mensagem'] = 'Insira os campos obrigatorios.';
             $this->session->set_flashdata('message', $data['mensagem']);
@@ -887,6 +887,7 @@ class Guia extends BaseController {
                 $this->guia->gravarconsulta($ambulatorio_guia, $percentual);
             }
             //        $this->gerardicom($ambulatorio_guia);
+            $data['mensagem'] = Array( 'Sucesso ao gravar atendimento.', 'success');
             $this->session->set_flashdata('message', $data['mensagem']);
             //        $this->novo($paciente_id, $ambulatorio_guia);
             redirect(base_url() . "ambulatorio/guia/novoconsulta/$paciente_id/$ambulatorio_guia");
