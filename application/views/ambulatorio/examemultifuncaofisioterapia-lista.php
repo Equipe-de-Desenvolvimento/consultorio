@@ -439,7 +439,6 @@
 
                         for (var c = 0; c < j.length; c++) {
 
-
                             if (j[0].operador_id != undefined) {
                                 options += '<option value="' + j[c].operador_id + '">' + j[c].nome + '</option>';
 

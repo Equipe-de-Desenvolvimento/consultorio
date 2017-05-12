@@ -43,8 +43,8 @@ function debug($object) {
   <link href="<?= base_url() ?>bootstrap/vendor/autocomplete/easy-autocomplete.themes.css" rel="stylesheet" type="text/css" />
 <!--CSS DO ALERTA BONITINHO-->
   <link href="<?= base_url() ?>bootstrap/vendor/alert/dist/sweetalert.css" rel="stylesheet" type="text/css" />
-  
-
+<!--CSS DO Calendário-->
+  <link href="<?= base_url() ?>bootstrap/fullcalendar/fullcalendar.css" rel="stylesheet" />
 
 
   
@@ -66,24 +66,24 @@ function debug($object) {
   <!--        SWEET ALERT. (PLUGIN DO ALERTA BONITINHO)-->
 
   <script src="<?= base_url() ?>bootstrap/vendor/alert/dist/sweetalert.min.js"></script> 
+  
+<!--Scripts necessários para o calendário-->
+<script type="text/javascript" src="<?= base_url() ?>bootstrap/fullcalendar/lib/moment.min.js"></script>
+<script src="<?= base_url() ?>bootstrap/fullcalendar/locale/pt-br.js" type="text/javascript" charset="utf-8"></script>
+<script src="<?= base_url() ?>bootstrap/fullcalendar/fullcalendar.js" type="text/javascript" charset="utf-8"></script>
+<script src="<?= base_url() ?>bootstrap/fullcalendar/scheduler.js" type="text/javascript" charset="utf-8"></script>
 
 <!--CSS DO CHOSEN--> 
 <!-- <script src="<?= base_url() ?>bootstrap/vendor/chosen/chosen.jquery.js"></script> 
  <script src="<?= base_url() ?>bootstrap/vendor/chosen/docsupport/init.js"></script> -->
-<!--        <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/moments.js"></script>
-        <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/interact.js"></script>
-        <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/angular.js"></script>
-        <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/angular-animate.js"></script>
-        <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/ui-bootstrap-tpls.js"></script>
-        <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/rule.js"></script>
-        <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/angular-bootstrap-colorpicker.js"></script>
-        <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/angular-bootstrap-calendar.js"></script>-->
-
-        <link href="<?= base_url() ?>bootstrap/calendario/angular-bootstrap-calendar.min.css" rel="stylesheet" />
-        <script src="<?= base_url() ?>bootstrap/calendario/calendario-example.js"></script>
-        <script src="<?= base_url() ?>bootstrap/calendario/calendario-helpers.js"></script>
-        
-
+<!--<script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/moments.js"></script>
+ <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/interact.js"></script>
+ <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/angular.js"></script>
+ <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/angular-animate.js"></script>
+ <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/ui-bootstrap-tpls.js"></script>
+ <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/rule.js"></script>
+ <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/angular-bootstrap-colorpicker.js"></script>
+ <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/angular-bootstrap-calendar.js"></script>-->
 
   </head>
   

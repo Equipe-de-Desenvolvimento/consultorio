@@ -549,15 +549,28 @@ class exametemp_model extends Model {
         return $return->result();
     }
     
-    function listarhorarioscalendariovago() {
-        $this->db->select('ae.data, count(ae.data) as contagem, situacao');
+    function listarhorarioscalendariovago($medico = null) {
+        if($medico != ''){
+        $this->db->select('ae.data, count(ae.data) as contagem, situacao, ae.medico_agenda as medico');  
         
+        }else{
+        $this->db->select('ae.data, count(ae.data) as contagem, situacao');
+        }
         $this->db->from('tb_agenda_exames ae');
         $this->db->where("ae.tipo = 'CONSULTA'");
         $this->db->where("(ae.situacao = 'LIVRE' OR ae.situacao = 'OK')");
         $this->db->where('ae.bloqueado', 'f');
         $this->db->where("ae.empresa_id", 1);
-        $this->db->groupby("ae.data, situacao");
+        if($medico != ''){
+         $this->db->where("ae.medico_agenda", $medico);   
+        }
+        if($medico != ''){
+         $this->db->groupby("ae.data, situacao, ae.medico_agenda");
+        
+        }else{
+         $this->db->groupby("ae.data, situacao");
+        }
+       
         $this->db->orderby("ae.data");
         
         $return = $this->db->get();
