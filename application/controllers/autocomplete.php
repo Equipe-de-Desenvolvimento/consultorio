@@ -1813,8 +1813,8 @@ class Autocomplete extends Controller {
 
     function listarhorarioscalendario() {
 //            echo $_POST['custom_param1'];
-        if (isset($_POST['medico'])) {
-            $result = $this->exametemp->listarhorarioscalendariovago($_POST['medico']);
+        if (isset($_POST['medico']) || isset($_POST['especialidade'])) {
+            $result = $this->exametemp->listarhorarioscalendariovago($_POST['medico'],$_POST['especialidade']);
         } else {
             $result = $this->exametemp->listarhorarioscalendariovago();
         }
@@ -1839,25 +1839,28 @@ class Autocomplete extends Controller {
             } else {
                 $retorno['color'] = '#36C4D0';
             }
-
+            $situacao = $item->situacao;
+            if(isset($item->medico)) {
+              $medico = $item->medico;
+                
+            }else{
+                $medico = null;
+            }
+            if(isset($item->especialidade)) {
+              $especialidade = $item->especialidade;
+                
+            }else{
+                $especialidade = null;
+            }
 
             $dia = date("d", strtotime($item->data));
             $mes = date("m", strtotime($item->data));
             $ano = date("Y", strtotime($item->data));
-            if(isset($item->medico)) {
+            
+//            $medico = $item->medico;
+                
+              $retorno['url'] = "../../ambulatorio/exame/listarmultifuncaoconsulta?empresa=&especialidade=$especialidade&medico=$medico&situacao=$situacao&data=$dia%2F$mes%2F$ano&nome=";
 
-                if ($item->situacao == 'LIVRE') {
-                    $retorno['url'] = "../../ambulatorio/exame/listarmultifuncaoconsulta?empresa=&especialidade=&medico=$item->medico&situacao=LIVRE&data=$dia%2F$mes%2F$ano&nome=";
-                } else {
-                    $retorno['url'] = "../../ambulatorio/exame/listarmultifuncaoconsulta?empresa=&especialidade=&medico=$item->medico&situacao=OK&data=$dia%2F$mes%2F$ano&nome=";
-                }
-            }else{
-                if ($item->situacao == 'LIVRE') {
-                    $retorno['url'] = "../../ambulatorio/exame/listarmultifuncaoconsulta?empresa=&especialidade=&medico=&situacao=LIVRE&data=$dia%2F$mes%2F$ano&nome=";
-                } else {
-                    $retorno['url'] = "../../ambulatorio/exame/listarmultifuncaoconsulta?empresa=&especialidade=&medico=&situacao=OK&data=$dia%2F$mes%2F$ano&nome=";
-                }
-            }
 
             $var[] = $retorno;
         }

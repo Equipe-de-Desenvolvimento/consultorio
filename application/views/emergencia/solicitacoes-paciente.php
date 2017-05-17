@@ -39,37 +39,37 @@
                         
                         <div class="tab-pane fade in active" id="profile-pills">
                             <div>
-                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/guia/novoconsulta/<?= $paciente_id ?>">Novo Atendimento</a>
+                                <a style="width: 130pt;" class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/guia/novoconsulta/<?= $paciente_id ?>">Novo Atendimento</a>
                             </div>
                             <div>
-                                <a class="btn btn-outline btn-info " href="<?= base_url() ?>cadastros/pacientes/procedimentoautorizarconsulta/<?= $paciente_id ?>">Autorizar Atendimento</a>
+                                <a style="width: 130pt;" class="btn btn-outline btn-info " href="<?= base_url() ?>cadastros/pacientes/procedimentoautorizarconsulta/<?= $paciente_id ?>">Autorizar Atendimento</a>
                             </div>
                             <div>
-                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/laudo/carregarlaudohistorico/<?= $paciente_id ?>">Hist. Atendimentos</a>
+                                <a style="width: 130pt;" class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/laudo/carregarlaudohistorico/<?= $paciente_id ?>">Hist. Atendimentos</a>
                             </div>
                         </div>
                    
                         <div class="tab-pane fade" id="guia">
                             <div>
-                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/guia/pesquisar/<?= $paciente_id ?>">Guias</a>
+                                <a  style="width: 130pt;" class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/guia/pesquisar/<?= $paciente_id ?>">Guias</a>
                             </div>
                             <div>
-                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $paciente_id ?>">Atendimentos</a>
+                                <a  style="width: 130pt;" class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $paciente_id ?>">Atendimentos</a>
                             </div>
                             <div>
-                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/guia/orcamento/<?= $paciente_id ?>">Or&ccedil;amento</a>
+                                <a style="width: 130pt;" class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/guia/orcamento/<?= $paciente_id ?>">Or&ccedil;amento</a>
                             </div>
                         </div>
                         
                         <div class="tab-pane fade" id="avancado">
                             <div>
-                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>cadastros/pacientes/anexarimagem/<?= $paciente_id ?>">Arquivos</a>
+                                <a style="width: 130pt;" class="btn btn-outline btn-info" href="<?= base_url() ?>cadastros/pacientes/anexarimagem/<?= $paciente_id ?>">Arquivos</a>
                             </div>
                             <div>
-                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/exametemp/unificar/<?= $paciente_id ?>">Unificar</a>
+                                <a style="width: 130pt;" class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/exametemp/unificar/<?= $paciente_id ?>">Unificar</a>
                             </div>
                             <div>
-                                <a class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/exametemp/excluirpaciente/<?= $paciente_id ?>">Excluir</a>
+                                <a style="width: 130pt;" class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/exametemp/excluirpaciente/<?= $paciente_id ?>">Excluir</a>
                             </div>
                         </div>
                     </div>

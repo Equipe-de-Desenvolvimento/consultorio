@@ -2389,7 +2389,7 @@ table th[class*="col-"] {
 .table > thead > tr.success2 > th,
 .table > tbody > tr.success2 > th,
 .table > tfoot > tr.success2 > th {
-  background-color: #aaffc0;
+  background-color: #E1F2F9;
 }
 .table-hover > tbody > tr > td.success2:hover,
 .table-hover > tbody > tr > th.success2:hover,
@@ -2497,7 +2497,7 @@ table th[class*="col-"] {
 .table > thead > tr.finalizado > th,
 .table > tbody > tr.finalizado > th,
 .table > tfoot > tr.finalizado > th {
-  background-color: #59A9C2;
+  background-color: #74B2D7;
   color: white;
 }
 .table-hover > tbody > tr > td.finalizado:hover,
@@ -5165,6 +5165,39 @@ a.thumbnail.active {
   border-top-color: #a6e1ec;
 }
 .alert-info .alert-link {
+  color: #245269;
+}
+.alert-atendendo {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+.alert-atendendo hr {
+  border-top-color: #a6e1ec;
+}
+.alert-atendendo .alert-link {
+  color: #245269;
+}
+.alert-agendado {
+  color: #392b2b;
+  background-color: #C3EAF1;
+  border-color: #bce8f1;
+}
+.alert-agendado hr {
+  border-top-color: #a6e1ec;
+}
+.alert-agendado .alert-link {
+  color: #245269;
+}
+.alert-aguardando {
+    color: #392b2b;
+  background-color: #F8F9FB;
+  border-color: #bce8f1;
+}
+.alert-aguardando hr {
+  border-top-color: #a6e1ec;
+}
+.alert-aguardando .alert-link {
   color: #245269;
 }
 .alert-warning {

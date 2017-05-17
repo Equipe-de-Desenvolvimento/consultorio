@@ -79,7 +79,7 @@
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th>Situação</th>
@@ -87,7 +87,7 @@
                                     <th>Paciente</th>
                                     <th>Médico</th>
                                     <th>Data</th>
-                                    <th class="tabela_acoes">Ações</th>
+                                    <th class="text-center">Ações</th>
                                 </tr>
                             </thead>
 
@@ -142,7 +142,7 @@
                                         } elseif ($item->realizada == 't' && $item->situacaoexame == 'FINALIZADO') {
                                             $situacao = "Atendendo";
                                             $verifica = 5;
-                                        } elseif ($item->confirmado == 'f' && $item->operador_atualizacao == null) {
+                                        } elseif ($item->confirmado == 'f' && $item->paciente_id == null) {
                                             $situacao = "Vago";
                                             $verifica = 1;
                                         } elseif ($item->confirmado == 'f' && $item->operador_atualizacao != null) {
@@ -153,11 +153,12 @@
                                             if ($item->data < $data_atual && $item->paciente_id != null) {
                                                 $situacao = "Faltou";
                                                 $faltou = true;
-                                            }elseif($item->data < $data_atual && $item->paciente_id == null){
+                                            } elseif ($item->data < $data_atual && $item->paciente_id == null) {
+//                                                echo 'a';
                                                 $situacao = 'Vago';
                                                 $verifica = 1;
-                                            } 
-                                            else {
+                                            } else {
+//                                                echo 'a';
                                                 $situacao = "Agendado";
                                             }
                                         } else {
@@ -190,19 +191,19 @@
                                     ?>
 
                                     <? if ($verifica == 1) { ?>
-                                        <tr class="">
+                                        <tr class="success2">
                                             <td><?= $situacao ?></td>
                                             <td><?= $item->inicio ?></td>
                                             <td><?= $item->paciente ?></td>
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td class="tabela_acoes">
-                                                <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarconsultatemp/<?= $item->agenda_exames_id ?>');">Consultas
+                                                <a class="btn btn-success btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarconsultatemp/<?= $item->agenda_exames_id ?>');">Agendar
                                                 </a>
                                             </td>
                                         </tr>  
                                     <? } elseif ($verifica == 2) { ?>
-                                        <tr class="info">
+                                        <tr class="alert alert-aguardando">
                                             <td><?= $situacao ?></td>
                                             <td><?= $item->inicio ?></td>
                                             <td><?= $item->paciente ?></td>
@@ -246,29 +247,41 @@
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td class="tabela_acoes">
+                                                <a class="btn btn-danger btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/guiacancelamento/<?= $item->agenda_exames_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');">Cancelar
+                                                </a>
                                                 <a class="btn btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas
                                                 </a>
+                                                
                                             </td>
                                         </tr>
 
-                                    <? } elseif ($verifica == 6) {
-                                        if($faltou){?>
-                                        <tr class="danger">
-                                        <?}else{?>
-                                        <tr class="agendado">    
-                                        <?}?>
-                                            <td><?= $situacao?></td>
+                                    <?
+                                    } elseif ($verifica == 6) {
+                                        if ($faltou) {
+                                            ?>
+                                            <tr class="alert alert-danger">
+                                            <? } else { ?>
+                                            <tr class="alert alert-agendado">    
+            <? } ?>
+                                            <td><?= $situacao ?></td>
                                             <td><?= $item->inicio ?></td>
                                             <td><?= $item->paciente ?></td>
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
-                                            <td class="tabela_acoes">
+                                            <td class="text-right" style="width: 130pt;">
+                                                <?if(date("d/m/Y") == date("d/m/Y", strtotime($item->data))){?>
+                                                <a class="btn btn-info btn-sm" onclick="javascript:window.open('<?= base_url() ?>cadastros/pacientes/procedimentoautorizarconsulta/<?= $item->paciente_id ?>');">Autorizar
+                                                </a>
+                                                
+                                                <?}?>
                                                 <a class="btn btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas
                                                 </a>
+
+
                                             </td>
                                         </tr>
-                                        
-                                    <? } ?>
+
+        <? } ?>
 
 
 
@@ -283,7 +296,7 @@
                             ?>
                             <tr>
                                 <th class="tabela_footer  btn-info" colspan="9">
-                                    <?php $this->utilitario->paginacao($url, $total, $pagina, $limit); ?>
+<?php $this->utilitario->paginacao($url, $total, $pagina, $limit); ?>
 
                                 </th>
                             </tr>
@@ -308,84 +321,84 @@
 </div> <!-- Final da DIV page-wrapper -->
 <script type="text/javascript" src="<?= base_url() ?>js/jquery-ui-1.10.4.js" ></script>
 <script type="text/javascript">
-                                        $(document).ready(function () {
+                                                        $(document).ready(function () {
 
-                                            $(function () {
-                                                $('#especialidade').change(function () {
+                                                            $(function () {
+                                                                $('#especialidade').change(function () {
 
-                                                    if ($(this).val()) {
+                                                                    if ($(this).val()) {
 
 //                                                  alert('teste_parada');
-                                                        $('.carregando').show();
+                                                                        $('.carregando').show();
 //                                                        alert('teste_parada');
-                                                        $.getJSON('<?= base_url() ?>autocomplete/medicoespecialidade', {txtcbo: $(this).val(), ajax: true}, function (j) {
-                                                            options = '<option value=""></option>';
-                                                            console.log(j);
+                                                                        $.getJSON('<?= base_url() ?>autocomplete/medicoespecialidade', {txtcbo: $(this).val(), ajax: true}, function (j) {
+                                                                            options = '<option value=""></option>';
+                                                                            console.log(j);
 
-                                                            for (var c = 0; c < j.length; c++) {
+                                                                            for (var c = 0; c < j.length; c++) {
 
 
-                                                                if (j[0].operador_id != undefined) {
-                                                                    options += '<option value="' + j[c].operador_id + '">' + j[c].nome + '</option>';
+                                                                                if (j[0].operador_id != undefined) {
+                                                                                    options += '<option value="' + j[c].operador_id + '">' + j[c].nome + '</option>';
 
+                                                                                }
+                                                                            }
+                                                                            $('#medico').html(options).show();
+                                                                            $('.carregando').hide();
+
+
+
+                                                                        });
+                                                                    } else {
+                                                                        $('.carregando').show();
+//                                                        alert('teste_parada');
+                                                                        $.getJSON('<?= base_url() ?>autocomplete/medicoespecialidadetodos', {txtcbo: $(this).val(), ajax: true}, function (j) {
+                                                                            options = '<option value=""></option>';
+                                                                            console.log(j);
+
+                                                                            for (var c = 0; c < j.length; c++) {
+
+
+                                                                                if (j[0].operador_id != undefined) {
+                                                                                    options += '<option value="' + j[c].operador_id + '">' + j[c].nome + '</option>';
+
+                                                                                }
+                                                                            }
+                                                                            $('#medico').html(options).show();
+                                                                            $('.carregando').hide();
+
+
+
+                                                                        });
+
+                                                                    }
+                                                                });
+                                                            });
+
+
+
+                                                            $(function () {
+                                                                $("#data").datepicker({
+                                                                    autosize: true,
+                                                                    changeYear: true,
+                                                                    changeMonth: true,
+                                                                    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                                                                    dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                                                                    buttonImage: '<?= base_url() ?>img/form/date.png',
+                                                                    dateFormat: 'dd/mm/yy'
+                                                                });
+                                                            });
+
+                                                            setTimeout('delayReload()', 20000);
+                                                            function delayReload()
+                                                            {
+                                                                if (navigator.userAgent.indexOf("MSIE") != -1) {
+                                                                    history.go(0);
+                                                                } else {
+                                                                    window.location.reload();
                                                                 }
                                                             }
-                                                            $('#medico').html(options).show();
-                                                            $('.carregando').hide();
-
-
 
                                                         });
-                                                    } else {
-                                                        $('.carregando').show();
-//                                                        alert('teste_parada');
-                                                        $.getJSON('<?= base_url() ?>autocomplete/medicoespecialidadetodos', {txtcbo: $(this).val(), ajax: true}, function (j) {
-                                                            options = '<option value=""></option>';
-                                                            console.log(j);
-
-                                                            for (var c = 0; c < j.length; c++) {
-
-
-                                                                if (j[0].operador_id != undefined) {
-                                                                    options += '<option value="' + j[c].operador_id + '">' + j[c].nome + '</option>';
-
-                                                                }
-                                                            }
-                                                            $('#medico').html(options).show();
-                                                            $('.carregando').hide();
-
-
-
-                                                        });
-
-                                                    }
-                                                });
-                                            });
-
-
-
-                                            $(function () {
-                                                $("#data").datepicker({
-                                                    autosize: true,
-                                                    changeYear: true,
-                                                    changeMonth: true,
-                                                    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-                                                    dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
-                                                    buttonImage: '<?= base_url() ?>img/form/date.png',
-                                                    dateFormat: 'dd/mm/yy'
-                                                });
-                                            });
-
-                                            setTimeout('delayReload()', 20000);
-                                            function delayReload()
-                                            {
-                                                if (navigator.userAgent.indexOf("MSIE") != -1) {
-                                                    history.go(0);
-                                                } else {
-                                                    window.location.reload();
-                                                }
-                                            }
-
-                                        });
 
 </script>

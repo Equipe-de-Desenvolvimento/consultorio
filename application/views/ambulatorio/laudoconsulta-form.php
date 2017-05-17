@@ -610,7 +610,27 @@
     </div> 
 </form>
 <!-- Final da DIV content -->
+<script src="<?= base_url() ?>bootstrap/vendor/jquery/jquery.min.js"></script>
 
+<script src="<?= base_url() ?>bootstrap/vendor/clock/compiled/flipclock.js"></script>
+<script src="<?= base_url() ?>bootstrap/vendor/font-awesome/css/fonts.js"></script>
+
+<script  src="<?= base_url() ?>bootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script  src="<?= base_url() ?>bootstrap/vendor/metisMenu/metisMenu.min.js"></script>
+<script  src="<?= base_url() ?>bootstrap/dist/js/sb-admin-2.js"></script>
+
+<script type="text/javascript" src="<?= base_url() ?>bootstrap/vendor/autocomplete/jquery.easy-autocomplete.js" ></script>
+
+<!--<script type="text/javascript" src="<?= base_url() ?>js/jquery.maskedinput.js"></script>-->
+<script type="text/javascript" src="<?= base_url() ?>js/jquery.maskMoney.js"></script>
+
+<!--        SWEET ALERT. (PLUGIN DO ALERTA BONITINHO)-->
+
+<script src="<?= base_url() ?>bootstrap/vendor/alert/dist/sweetalert.min.js"></script> 
+<script type="text/javascript" src="<?= base_url() ?>js/jquery-ui-1.10.4.js" ></script>
+<script type="text/javascript" src="<?= base_url() ?>js/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="<?= base_url() ?>js/jquery.maskedinput.js"></script>
+<script type="text/javascript">
 <script src="<?= base_url() ?>bootstrap/vendor/jquery/jquery.min.js"></script>
 
 <script src="<?= base_url() ?>bootstrap/vendor/clock/compiled/flipclock.js"></script>

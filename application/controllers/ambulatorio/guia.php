@@ -606,6 +606,7 @@ class Guia extends BaseController {
     }
 
     function importarimagem() {
+//        var_dump($_POST); die;
         $guia_id = $_POST['guia_id'];
         if (!is_dir("./upload/guia/$guia_id")) {
             mkdir("./upload/guia/$guia_id");
@@ -613,7 +614,7 @@ class Guia extends BaseController {
             chmod($destino, 0777);
         }
 
-        $config['upload_path'] = "/home/sisprod/projetos/clinica/upload/guia/" . $guia_id . "/";
+        $config['upload_path'] = "./upload/guia/" . $guia_id . "/";
         $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf|doc|docx|xls|xlsx|ppt';
         $config['max_size'] = '0';
         $config['overwrite'] = FALSE;
@@ -858,6 +859,8 @@ class Guia extends BaseController {
     function gravarprocedimentosconsulta() {
         $procedimentopercentual = $_POST['procedimento1'];
         $medicopercentual = $_POST['medicoagenda'];
+        $tipo = $this->guia->procedimentotipo($procedimentopercentual);
+//        var_dump($tipo); die;
         $percentual = $this->guia->percentualmedicoconvenioexames($procedimentopercentual, $medicopercentual);
         if (count($percentual) == 0) {
             $percentual = $this->guia->percentualmedicoprocedimento($procedimentopercentual, $medicopercentual);
@@ -884,14 +887,47 @@ class Guia extends BaseController {
                 } else {
                     $ambulatorio_guia = $resultadoguia['ambulatorio_guia_id'];
                 }
-                $this->guia->gravarconsulta($ambulatorio_guia, $percentual);
+                $agenda_exames_id = $this->guia->gravarconsulta($ambulatorio_guia, $percentual, $tipo);
+//             var_dump($agenda_exames_id); die;
             }
             //        $this->gerardicom($ambulatorio_guia);
-            $data['mensagem'] = Array( 'Sucesso ao gravar atendimento.', 'success');
-            $this->session->set_flashdata('message', $data['mensagem']);
+//            $data['mensagem'] = Array( 'Sucesso ao gravar atendimento.', 'success');
+//            $this->session->set_flashdata('message', $data['mensagem']);
+            $this->gravarexame($ambulatorio_guia, $tipo, $agenda_exames_id);
             //        $this->novo($paciente_id, $ambulatorio_guia);
             redirect(base_url() . "ambulatorio/guia/novoconsulta/$paciente_id/$ambulatorio_guia");
         }
+    }
+
+    function gravarexame($ambulatorio_guia, $tipo, $agenda_exames_id) {
+//        var_dump($_POST); die;
+        $paciente_id = $_POST['txtpaciente_id'];
+        $total = $this->exame->contadorexames($agenda_exames_id);
+
+        if ($total == 0) {
+            $procedimentopercentual = $_POST['procedimento1'];
+            $medicopercentual = $_POST['medicoagenda'];
+            $percentual = $this->guia->percentualmedicoconvenioexames($procedimentopercentual, $medicopercentual);
+            if (count($percentual) == 0) {
+                $percentual = $this->guia->percentualmedicoprocedimento($procedimentopercentual, $medicopercentual);
+            }
+//            var_dump($_POST['txtagenda_exames_id']);
+//            var_dump($percentual); die;
+            $laudo_id = $this->exame->gravarexame($percentual, $ambulatorio_guia, $tipo, $agenda_exames_id);
+            if ($laudo_id == "-1") {
+                $data['mensagem'] = Array('Erro ao gravar o atendimento. Operação Cancelada.', 'error');
+            } else {
+                $data['mensagem'] = Array('Sucesso ao gravar o atendimento.', 'success');
+//                $this->gerarcr($agenda_exames_id); //clinica humana
+//                $this->gerardicom($laudo_id); //clinica ronaldo
+//               $this->laudo->chamada($laudo_id);
+            }
+        } else {
+            $data['mensagem'] = Array('Erro ao gravar o atendimento. Atendimento ja cadastrato.', 'warning');
+        }
+//        die;
+        $this->session->set_flashdata('message', $data['mensagem']);
+        redirect(base_url() . "ambulatorio/guia/novoconsulta/$paciente_id/$ambulatorio_guia");
     }
 
     function gravarprocedimentosfisioterapia() {
@@ -984,11 +1020,13 @@ class Guia extends BaseController {
         $paciente_id = $_POST['txtpaciente_id'];
         $ambulatorio_guia_id = $this->guia->editarexames($percentual);
         if ($ambulatorio_guia_id == "-1") {
-            $data['mensagem'] = 'Erro ao gravar a Dados. Opera&ccedil;&atilde;o cancelada.';
+            $data['mensagem'] = Array( 'Erro ao ao editar atendimento. Operação cancelada.', 'error');
         } else {
-            $data['mensagem'] = 'Sucesso ao gravar a Dados.';
+            $data['mensagem'] =Array( 'Sucesso ao editar atendimento.', 'success');
         }
-        $this->pesquisar($paciente_id);
+        $this->session->set_flashdata('message', $data['mensagem']);
+        redirect(base_url() . "ambulatorio/guia/pesquisar/$paciente_id");
+//        $this->pesquisar($paciente_id);
     }
 
     function editarexame($paciente_id, $guia_id, $ambulatorio_guia_id) {
@@ -1009,11 +1047,12 @@ class Guia extends BaseController {
         $paciente_id = $_POST['txtpaciente_id'];
         $ambulatorio_guia_id = $this->guia->valorexames();
         if ($ambulatorio_guia_id == "-1") {
-            $data['mensagem'] = 'Erro ao gravar a Dados. Opera&ccedil;&atilde;o cancelada.';
+            $data['mensagem'] =Array( 'Erro ao editar dados. Operação Cancelada.', 'error');
         } else {
-            $data['mensagem'] = 'Sucesso ao gravar a Dados.';
+            $data['mensagem'] =Array(  'Sucesso ao editar dados.', 'success');
         }
-        $this->pesquisar($paciente_id);
+        $this->session->set_flashdata('message', $data['mensagem']);
+        redirect(base_url() . "ambulatorio/guia/pesquisar/$paciente_id");
     }
 
     function valorexame($paciente_id, $guia_id, $ambulatorio_guia_id) {
@@ -2126,7 +2165,7 @@ class Guia extends BaseController {
         $data['empresa'] = $this->guia->listarempresas();
         $this->loadView('ambulatorio/relatoriovalormedio', $data);
     }
-    
+
     function listardadospacienterelatorionota($paciente_id) {
         $data['paciente'] = $this->paciente->listardadospacienterelatorionota($paciente_id);
         $data['paciente_id'] = $paciente_id;
@@ -2655,7 +2694,7 @@ class Guia extends BaseController {
     function gravarnotavalor($guia_id) {
         if ((float) $_POST['txtvalorguia'] <= (float) $_POST['totguia']) {
             $this->guia->gravarnotavalor($guia_id);
-             redirect(base_url() . "seguranca/operador/pesquisarrecepcao");
+            redirect(base_url() . "seguranca/operador/pesquisarrecepcao");
         } else {
             echo '<html>
         <script type="text/javascript">
@@ -2668,7 +2707,6 @@ class Guia extends BaseController {
             </script>
             </html>';
         }
-
     }
 
     function graficovalormedio($procedimento, $valor, $txtdata_inicio, $txtdata_fim) {

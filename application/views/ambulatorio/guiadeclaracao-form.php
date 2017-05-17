@@ -1,46 +1,102 @@
-<meta http-equiv="Content-Style-Type" content="text/css" />
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="STG SAUDE">
+    <title>Declaração</title>
+    <!--CSS PADRAO DO BOOTSTRAP COM ALGUMAS ALTERAÇÕES DO TEMA-->
+    <link href="<?= base_url() ?>bootstrap/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>bootstrap/vendor/metisMenu/metisMenu.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>bootstrap/dist/css/sb-admin-2.css" rel="stylesheet" />
+    <!--BIBLIOTECA RESPONSAVEL PELOS ICONES-->
+    <link href="<?= base_url() ?>bootstrap/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <!--DEFINE TAMANHO MAXIMO DOS CAMPOS-->
+    <link href="<?= base_url() ?>css/form.css" rel="stylesheet" type="text/css" />
+    <!--AUTOCOMPLETE NOVO-->
+    <link href="<?= base_url() ?>bootstrap/vendor/autocomplete/easy-autocomplete.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url() ?>bootstrap/vendor/autocomplete/easy-autocomplete.themes.css" rel="stylesheet" type="text/css" />
+    <!--CSS DO ALERTA BONITINHO-->
+    <link href="<?= base_url() ?>bootstrap/vendor/alert/dist/sweetalert.css" rel="stylesheet" type="text/css" />
+
+
+    <link href="<?= base_url() ?>bootstrap/vendor/clock/compiled/flipclock.css" rel="stylesheet" />
+</head>
 <body bgcolor="#C0C0C0">
 
     <? $guia = $guia_id[0]->ambulatorio_guia_id; ?>
-    <div class="content"> <!-- Inicio da DIV content -->
-        <h3 class="singular">Declara&ccedil;&atilde;o</h3>
-        <div>
-            <form name="form1" id="form1" action="<?= base_url() ?>ambulatorio/guia/impressaodeclaracaoguia/<?= $guia_id[0]->ambulatorio_guia_id ?>" method="post">
-                <fieldset>
-                    <dl class="dl_desconto_lista">
-                        <dt>
+    <div class="container-fluid"> <!-- Inicio da DIV content -->
+        <div class="row">
+            <div class="col-lg-12"> 
+                <div class="alert alert-success ">
+                    Declaração da Guia
+                </div>
+            </div>
+        </div>
+        <form name="form1" id="form1" action="<?= base_url() ?>ambulatorio/guia/impressaodeclaracaoguia/<?= $guia_id[0]->ambulatorio_guia_id ?>" method="post">
+        <div class="panel panel-default">
+
+
+            <div class="alert alert-info">
+                Declaração
+            </div> 
+            <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
                             <label>Modelo</label>
-                        </dt>
-                        <dd>
-                            <select name="modelo" id="modelo" class="size2" >
+
+
+                            <select name="modelo" id="modelo" class="form-control" >
                                 <option value='' >Selecione</option>
                                 <? foreach ($modelos as $modelo) { ?>                                
                                     <option value='<?= $modelo->ambulatorio_modelo_declaracao_id ?>'>
                                         <?= $modelo->nome ?></option>
                                 <? } ?>
                             </select>
-                        </dd>
-                        <dd>
-                            <textarea id="declaracao" name="declaracao" cols="90" rows="30" ><?= $guia_id[0]->declaracao ?></textarea>
-                        </dd>
-                    </dl>    
 
-                    <hr/>
-                    <button type="submit" name="btnEnviar">enviar</button>
-
-
-            </form>
-            </fieldset>
+                        </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                        
+                        <textarea id="declaracao" name="declaracao" cols="85" rows="30" ><?= $guia_id[0]->declaracao ?></textarea>
+                </div>
+            </div>
+            
+            <br>
+            <div class="row">
+                <div class="col-lg-2">
+                        <button type="submit" class="btn btn-outline btn-success btn-sm" name="btnEnviar"><i class="fa fa-floppy-o" aria-hidden="true"></i> Enviar</button>
+                </div>
+            </div>
+            </div>
         </div>
+             </form>
     </div> <!-- Final da DIV content -->
 </body>
-<script type="text/javascript" src="<?= base_url() ?>js/jquery.validate.js"></script>
-<script type="text/javascript" src="<?= base_url() ?>js/jquery-verificaCPF.js"></script>
-<script type="text/javascript" src="<?= base_url() ?>js/jquery-1.4.2.min.js" ></script>
-<script type="text/javascript" src="<?= base_url() ?>js/jquery-1.9.1.js" ></script>
+
+<script src="<?= base_url() ?>bootstrap/vendor/jquery/jquery.min.js"></script>
+
+<script src="<?= base_url() ?>bootstrap/vendor/clock/compiled/flipclock.js"></script>
+<script src="<?= base_url() ?>bootstrap/vendor/font-awesome/css/fonts.js"></script>
+
+<script  src="<?= base_url() ?>bootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script  src="<?= base_url() ?>bootstrap/vendor/metisMenu/metisMenu.min.js"></script>
+<script  src="<?= base_url() ?>bootstrap/dist/js/sb-admin-2.js"></script>
+
+<script type="text/javascript" src="<?= base_url() ?>bootstrap/vendor/autocomplete/jquery.easy-autocomplete.js" ></script>
+
+<!--<script type="text/javascript" src="<?= base_url() ?>js/jquery.maskedinput.js"></script>-->
+<script type="text/javascript" src="<?= base_url() ?>js/jquery.maskMoney.js"></script>
+
+<!--        SWEET ALERT. (PLUGIN DO ALERTA BONITINHO)-->
+
+<script src="<?= base_url() ?>bootstrap/vendor/alert/dist/sweetalert.min.js"></script> 
 <script type="text/javascript" src="<?= base_url() ?>js/jquery-ui-1.10.4.js" ></script>
 <script type="text/javascript" src="<?= base_url() ?>js/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="<?= base_url() ?>js/jquery.maskedinput.js"></script>
 <script type="text/javascript">
     $('#btnimprimir').click(function () {
         $(location).attr('href', '<?= base_url(); ?>ambulatorio/guia/impressaodeclaracaoguia');

@@ -151,11 +151,12 @@ class pacientes extends BaseController {
             $ambulatorio_guia_id = $this->guia->gravarguia($paciente_id);
         }
         $teste = $this->exametemp->autorizarpacientetempconsulta($paciente_id, $ambulatorio_guia_id);
+//        var_dump($teste); die;
         if ($teste == 0) {
 //            $this->gerardicom($ambulatorio_guia_id);
-            $data['mensagem'] = 'Paciente gravado com sucesso';
+            $data['mensagem'] = Array('Atendimento autorizado com sucesso', 'success');
         } else {
-            $data['mensagem'] = 'Erro ao gravar paciente';
+            $data['mensagem'] =Array( 'Erro ao gravar atendimento', 'error');
         }
         $this->session->set_flashdata('message', $data['mensagem']);
         redirect(base_url() . "ambulatorio/guia/pesquisar/$paciente_id");

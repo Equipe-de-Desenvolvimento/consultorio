@@ -549,45 +549,48 @@ class exametemp_model extends Model {
         $return = $this->db->get();
         return $return->result();
     }
-    
-    function listarhorarioscalendariovago($medico = null) {
-        if($medico != ''){
-        $this->db->select('ae.data, count(ae.data) as contagem, situacao, ae.medico_agenda as medico');  
-        
-        }else{
-        $this->db->select('ae.data, count(ae.data) as contagem, situacao');
+
+    function listarhorarioscalendariovago($medico = null, $especialidade = null) {
+        if ($medico != '') {
+            $this->db->select('ae.data, count(ae.data) as contagem, situacao, ae.medico_agenda as medico');
+        }elseif($especialidade != ''){
+            $this->db->select('ae.data, count(ae.data) as contagem, situacao,o.cbo_ocupacao_id as especialidade');
+        } else {
+            $this->db->select('ae.data, count(ae.data) as contagem, situacao');
         }
         $this->db->from('tb_agenda_exames ae');
-        $this->db->where("ae.tipo = 'CONSULTA'");
+        $this->db->join('tb_operador o', 'o.operador_id = ae.medico_agenda', 'left');
         $this->db->where("(ae.situacao = 'LIVRE' OR ae.situacao = 'OK')");
-        $this->db->where('ae.bloqueado', 'f');
-        $this->db->where("ae.empresa_id", 1);
-        if($medico != ''){
-         $this->db->where("ae.medico_agenda", $medico);   
-        }
-        if($medico != ''){
-         $this->db->groupby("ae.data, situacao, ae.medico_agenda");
+        $this->db->where("ae.tipo IN ('CONSULTA', 'ESPECIALIDADE', 'FISIOTERAPIA')");
         
-        }else{
-         $this->db->groupby("ae.data, situacao");
+        if ($medico != '') {
+            $this->db->where("ae.medico_agenda", $medico);
+            $this->db->groupby("ae.data, situacao, ae.medico_agenda");
         }
-       
+        elseif($especialidade != ''){
+            $this->db->where('o.cbo_ocupacao_id', $especialidade);
+            $this->db->groupby("ae.data, situacao, o.cbo_ocupacao_id");
+        }
+         else {
+            $this->db->groupby("ae.data, situacao");
+        }
+
         $this->db->orderby("ae.data");
-        
+
         $return = $this->db->get();
         return $return->result();
     }
-    
+
     function listarhorarioscalendarioocupado() {
         $this->db->select('ae.data, count(ae.data) as contagem_ocupado');
-        
+
         $this->db->from('tb_agenda_exames ae');
         $this->db->where("ae.tipo = 'CONSULTA'");
         $this->db->where('ae.situacao', 'OK');
         $this->db->where("ae.empresa_id", 1);
         $this->db->groupby("ae.data");
         $this->db->orderby("ae.data");
-        
+
         $return = $this->db->get();
         return $return->result();
     }
@@ -1230,11 +1233,10 @@ class exametemp_model extends Model {
             $this->db->set('data_cadastro', $horario);
             $this->db->set('operador_cadastro', $operador_id);
             $this->db->insert('tb_agenda_exames');
-            
+
             $this->db->set('data_criacao', date("Y-m-d", strtotime(str_replace('/', '-', $_POST['data_realizacao']))));
             $this->db->where('ambulatorio_guia_id', $_POST['txtguiaid']);
             $this->db->update('tb_ambulatorio_guia');
-            
         }
     }
 
@@ -2715,6 +2717,7 @@ class exametemp_model extends Model {
                 $g = 0;
                 $h = 0;
                 $k = 0;
+                $l = 0;
                 $i++;
 
                 foreach ($_POST['confimado'] as $key => $itemconfimado) {
@@ -2727,13 +2730,7 @@ class exametemp_model extends Model {
 //Verifica o confirmado e entra de fato na função
                 if ($confimado == "on" && $procedimento_tuss_id > 0) {
 
-                    foreach ($_POST['sala'] as $itemnome) {
-                        $c++;
-                        if ($i == $c) {
-                            $sala = $itemnome;
-                            break;
-                        }
-                    }
+                    
                     foreach ($_POST['valor'] as $itemnome) {
                         $z++;
                         if ($i == $z) {
@@ -2755,6 +2752,14 @@ class exametemp_model extends Model {
                             break;
                         }
                     }
+                    foreach ($_POST['crm'] as $solicitante) {
+                        $l++;
+                        if ($i == $l) {
+                            $solicitante = $solicitante;
+                            break;
+                        }
+                    }
+                    
                     foreach ($_POST['convenio'] as $itemconvenio) {
                         $w++;
                         if ($i == $w) {
@@ -2830,12 +2835,15 @@ class exametemp_model extends Model {
                     $this->db->set('procedimento_tuss_id', $procedimento_tuss_id);
 
                     $this->db->set('convenio_id', $convenio);
-                    if ($_POST['ordenador'] != "") {
-                        $this->db->set('ordenador', $_POST['ordenador']);
-                    }
+//                    if ($_POST['ordenador'] != "") {
+//                        $this->db->set('ordenador', $_POST['ordenador']);
+//                    }
                     if ($medico_id != "") {
                         $this->db->set('medico_agenda', $medico_id);
                         $this->db->set('medico_consulta_id', $medico_id);
+                    }
+                    if ($solicitante != "") {
+                        $this->db->set('medico_solicitante', $solicitante);
                     }
                     $this->db->set('autorizacao', $autorizacao);
                     if ($indicacao != "") {
@@ -2843,7 +2851,7 @@ class exametemp_model extends Model {
                     }
                     $this->db->set('guia_id', $ambulatorio_guia_id);
                     $this->db->set('quantidade', '1');
-                    $this->db->set('agenda_exames_nome_id', $sala);
+//                    $this->db->set('agenda_exames_nome_id', $sala);
                     $this->db->set('valor', $valor);
                     $this->db->set('valor_total', $valor);
                     if ($formapagamento != 0 && $dinheiro == "t") {
@@ -2862,6 +2870,76 @@ class exametemp_model extends Model {
                     $this->db->set('senha', md5($agenda_exames_id));
                     $this->db->where('agenda_exames_id', $agenda_exames_id);
                     $this->db->update('tb_agenda_exames');
+
+
+                    $exame_id = $agenda_exames_id;
+                    // ENVIANDO DA SALA DE ESPERA 
+
+                    $this->db->select('ag.tipo');
+                    $this->db->from('tb_procedimento_convenio pc');
+                    $this->db->join('tb_procedimento_tuss pt', 'pt.procedimento_tuss_id = pc.procedimento_tuss_id', 'left');
+                    $this->db->join('tb_ambulatorio_grupo ag', 'ag.nome = pt.grupo', 'left');
+                    $this->db->where('pc.procedimento_convenio_id', $procedimento_tuss_id);
+                    $return = $this->db->get()->result();
+                    $tipo = $return[0]->tipo;
+
+                    $this->db->set('empresa_id', $empresa_id);
+                    $this->db->set('paciente_id', $paciente_id);
+
+                    $this->db->set('procedimento_tuss_id', $procedimento_tuss_id);
+                    $this->db->set('guia_id', $ambulatorio_guia_id);
+                    $this->db->set('tipo', $tipo);
+                    $this->db->set('agenda_exames_id', $agenda_exames_id);
+//                $agenda_exames_id = $ambulatorio_guia_id;
+
+                    if ($medico_id != "") {
+                        $this->db->set('medico_realizador', $medico_id);
+                    }
+
+                    $this->db->set('data_cadastro', $horario);
+                    $this->db->set('operador_cadastro', $operador_id);
+                    $this->db->insert('tb_exames');
+                    $exames_id = $this->db->insert_id();
+                    $data = date("Y-m-d");
+                    $this->db->set('empresa_id', $empresa_id);
+                    $this->db->set('data', $data);
+                    $this->db->set('paciente_id', $paciente_id);
+                    $this->db->set('procedimento_tuss_id', $procedimento_tuss_id);
+                    $this->db->set('exame_id', $exames_id);
+                    $this->db->set('guia_id', $ambulatorio_guia_id);
+                    $this->db->set('tipo', $tipo);
+                    $this->db->set('data_cadastro', $horario);
+                    $this->db->set('operador_cadastro', $operador_id);
+                    if ($medico_id != "") {
+                        $this->db->set('medico_parecer1', $medico_id);
+                    }
+                    $this->db->insert('tb_ambulatorio_laudo');
+                    $laudo_id = $this->db->insert_id();
+                    $guia_id = $ambulatorio_guia_id;
+
+                    if ($medico_id != "") {
+                        $this->db->set('medico_consulta_id', $medico_id);
+                        $this->db->set('medico_agenda', $medico_id);
+                        $this->db->set('valor_medico', $percentual[0]->perc_medico);
+                        $this->db->set('percentual_medico', $percentual[0]->percentual);
+                    }
+                    $this->db->set('realizada', 'true');
+                    $this->db->set('senha', md5($exame_id));
+                    $this->db->set('data_realizacao', $horario);
+                    $this->db->set('operador_realizacao', $operador_id);
+//                    $this->db->set('agenda_exames_nome_id', $_POST['txtsalas']);
+                    $this->db->where('agenda_exames_id', $agenda_exames_id);
+                    $this->db->update('tb_agenda_exames');
+
+                    $this->db->set('data_cadastro', $horario);
+                    $this->db->set('operador_cadastro', $operador_id);
+                    $this->db->set('empresa_id', $empresa_id);
+                    $this->db->set('agenda_exames_id', $agenda_exames_id);
+
+                    $this->db->set('paciente_id', $paciente_id);
+                    $this->db->insert('tb_ambulatorio_chamada');
+
+
                     $confimado = "";
                 }
             }

@@ -7654,8 +7654,21 @@ ORDER BY ae.agenda_exames_id)";
         }
     }
 
-    function gravarconsulta($ambulatorio_guia_id, $percentual) {
+    function procedimentotipo($procedimento) {
+        $this->db->select('ag.tipo');
+        $this->db->from('tb_procedimento_convenio pc');
+        $this->db->join('tb_procedimento_tuss pt', 'pt.procedimento_tuss_id = pc.procedimento_tuss_id', 'left');
+        $this->db->join('tb_ambulatorio_grupo ag', 'ag.nome = pt.grupo', 'left');
+        $this->db->where('pc.procedimento_convenio_id', $procedimento);
+        $return = $this->db->get()->result();
+        return $tipo = $return[0]->tipo;
+    }
+
+    function gravarconsulta($ambulatorio_guia_id, $percentual, $tipo) {
+
         try {
+
+
             $horario = date("Y-m-d H:i:s");
             $operador_id = $this->session->userdata('operador_id');
             $this->db->select('dinheiro');
@@ -7685,13 +7698,13 @@ ORDER BY ae.agenda_exames_id)";
             $this->db->set('quantidade', $_POST['qtde1']);
             $this->db->set('autorizacao', $_POST['autorizacao1']);
 //            $this->db->set('observacoes', $_POST['observacao']);
-            if ($_POST['ordenador'] != "") {
-                $this->db->set('ordenador', $_POST['ordenador']);
-            }
+//            if ($_POST['ordenador'] != "") {
+//                $this->db->set('ordenador', $_POST['ordenador']);
+//            }
             if ($_POST['indicacao'] != "") {
                 $this->db->set('indicacao', $_POST['indicacao']);
             }
-            $this->db->set('agenda_exames_nome_id', $_POST['sala1']);
+//            $this->db->set('agenda_exames_nome_id', $_POST['sala1']);
             $this->db->set('inicio', $hora);
             $this->db->set('fim', $hora);
             if ($_POST['formapamento'] != 0 && $dinheiro == "t") {
@@ -7704,7 +7717,7 @@ ORDER BY ae.agenda_exames_id)";
             $empresa_id = $this->session->userdata('empresa_id');
             $this->db->set('empresa_id', $empresa_id);
             $this->db->set('confirmado', 't');
-            $this->db->set('tipo', 'CONSULTA');
+            $this->db->set('tipo', $tipo);
             $this->db->set('ativo', 'f');
             $this->db->set('situacao', 'OK');
             $this->db->set('guia_id', $ambulatorio_guia_id);
@@ -7964,7 +7977,11 @@ ORDER BY ae.agenda_exames_id)";
             $this->db->set('realizada', 't');
             if ($_POST['medicoagenda'] != "") {
                 $this->db->set('medico_consulta_id', $_POST['medicoagenda']);
-                $this->db->set('medico_solicitante', $_POST['medicoagenda']);
+//                $this->db->set('medico_solicitante', $_POST['medicoagenda']);
+            }
+            if ($_POST['crm1'] != "") {
+//                $this->db->set('medico_consulta_id', $_POST['medicoagenda']);
+                $this->db->set('medico_solicitante', $_POST['crm1']);
             }
             $this->db->set('faturado', 't');
             $this->db->set('situacao', 'OK');
@@ -8021,7 +8038,7 @@ ORDER BY ae.agenda_exames_id)";
 //            var_dump($percentual);die;
 
             $this->db->set('autorizacao', $_POST['autorizacao1']);
-            $this->db->set('agenda_exames_nome_id', $_POST['sala1']);
+//          $this->db->set('agenda_exames_nome_id', $_POST['sala1']);
             $this->db->set('guia_id', $_POST['guia_id']);
             $horario = date("Y-m-d H:i:s");
             $operador_id = $this->session->userdata('operador_id');
@@ -8038,9 +8055,9 @@ ORDER BY ae.agenda_exames_id)";
             $this->db->where('agenda_exames_id', $_POST['agenda_exames_id']);
             $this->db->update('tb_agenda_exames');
 
-            $this->db->set('sala_id', $_POST['sala1']);
-            $this->db->where('agenda_exames_id', $_POST['agenda_exames_id']);
-            $this->db->update('tb_exames');
+//            $this->db->set('sala_id', $_POST['sala1']);
+//            $this->db->where('agenda_exames_id', $_POST['agenda_exames_id']);
+//            $this->db->update('tb_exames');
             $erro = $this->db->_error_message();
             if (trim($erro) != "") { // erro de banco
                 return -1;

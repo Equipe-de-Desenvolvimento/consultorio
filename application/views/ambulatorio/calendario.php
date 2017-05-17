@@ -35,7 +35,7 @@
     </style>
     <?
     $medicos = $this->operador_m->listarmedicos();
-//    $especialidade = $this->exame->listarespecialidade();
+    $especialidade = $this->exame->listarespecialidade();
 //    $empresas = $this->exame->listarempresas();
 //    $empresa_logada = $this->session->userdata('empresa_id');
     ?>
@@ -47,12 +47,24 @@
                     <form method="post" id="form" action="<?php echo base_url() ?>ambulatorio/exame/listarmultifuncaoconsultacalendario">
                         <table width="60%" class="table " id="dataTables-example">
                             <tr class="info">
+                                <th>Especialidade</th>
                                 <th>Medico</th>
                                 <th class="text-center">Ações</th>
                             </tr> 
                             <tr class="">
 
 
+                                <td>
+                                    <select name="especialidade" id="especialidade" class="form-control texto06">
+                                        <option value=""></option>
+                                        <? foreach ($especialidade as $value) : ?>
+                                            <option value="<?= $value->cbo_ocupacao_id; ?>"<?
+                                            if (@$_POST['especialidade'] == $value->cbo_ocupacao_id):echo 'selected';
+                                            endif;
+                                            ?>><?php echo $value->descricao; ?></option>
+                                                <? endforeach; ?>
+                                    </select>
+                                </td>
                                 <td>
                                     <select name="medico" id="medico" class="form-control texto06">
                                         <option value="">TODOS</option>
@@ -120,7 +132,7 @@
         dayClick: function (date) {
             var data = date.format();
 
-            window.open('<?= base_url() ?>ambulatorio/exame/listarmultifuncaoconsulta?empresa=&especialidade=&medico=&situacao=&data='+moment(data).format('DD%2FMM%2FYYYY')+'&nome=', '_self');
+            window.open('<?= base_url() ?>ambulatorio/exame/listarmultifuncaoconsulta?empresa=&especialidade=&medico=&situacao=&data=' + moment(data).format('DD%2FMM%2FYYYY') + '&nome=', '_self');
 
 
 
@@ -150,8 +162,8 @@
                 url: '<?= base_url() ?>autocomplete/listarhorarioscalendario',
                 type: 'POST',
                 data: {
-                    medico: $('#medico').val()
-//                        custom_param2: 'somethingelse'
+                    medico: $('#medico').val(),
+                    especialidade: $('#especialidade').val()
                 },
                 error: function () {
                     alert('there was an error while fetching events!');
@@ -181,15 +193,92 @@
 
 //    });
     $('#medico').change(function () {
-    document.getElementById('form').submit();
+        document.getElementById('form').submit();
     });
-//date();
-//$('#medico').change(function () {
-//    
-//});
-$('#calendar').fullCalendar({
-	
-});
+    $('#especialidade').change(function () {
+        document.getElementById('form').submit();
+    });
+
+    $(function () {
+        $('#especialidade').change(function () {
+
+            if ($(this).val()) {
+
+//                                                  alert('teste_parada');
+                $('.carregando').show();
+//                                                        alert('teste_parada');
+                $.getJSON('<?= base_url() ?>autocomplete/medicoespecialidade', {txtcbo: $(this).val(), ajax: true}, function (j) {
+                    options = '<option value="">TODOS</option>';
+                    console.log(j);
+
+                    for (var c = 0; c < j.length; c++) {
+
+
+                        if (j[0].operador_id != undefined) {
+                            options += '<option value="' + j[c].operador_id + '">' + j[c].nome + '</option>';
+
+                        }
+                    }
+                    $('#medico').html(options).show();
+                    $('.carregando').hide();
+
+
+
+                });
+            } else {
+                $('.carregando').show();
+//                                                        alert('teste_parada');
+                $.getJSON('<?= base_url() ?>autocomplete/medicoespecialidadetodos', {txtcbo: $(this).val(), ajax: true}, function (j) {
+                    options = '<option value="">TODOS</option>';
+                    console.log(j);
+
+                    for (var c = 0; c < j.length; c++) {
+
+
+                        if (j[0].operador_id != undefined) {
+                            options += '<option value="' + j[c].operador_id + '">' + j[c].nome + '</option>';
+
+                        }
+                    }
+                    $('#medico').html(options).show();
+                    $('.carregando').hide();
+
+
+
+                });
+
+            }
+        });
+    });
+    
+    
+    if ($('#especialidade').val()) {
+
+//                                                  alert('teste_parada');
+                $('.carregando').show();
+//                                                        alert('teste_parada');
+                $.getJSON('<?= base_url() ?>autocomplete/medicoespecialidade', {txtcbo: $('#especialidade').val(), ajax: true}, function (j) {
+                    options = '<option value="">TODOS</option>';
+                    console.log(j);
+
+                    for (var c = 0; c < j.length; c++) {
+
+
+                        if (j[0].operador_id != undefined) {
+                            options += '<option value="' + j[c].operador_id + '">' + j[c].nome + '</option>';
+
+                        }
+                    }
+                    $('#medico').html(options).show();
+                    $('.carregando').hide();
+
+
+
+                });
+            } else {
+                
+
+            }
 </script>
 
 

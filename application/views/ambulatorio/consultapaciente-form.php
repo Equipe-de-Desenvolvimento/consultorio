@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <label>Paciente*</label>
                         <input type="hidden" id="txtNomeid" class="form-control texto02" name="txtNomeid" readonly="true" />
-                        <input type="text" id="txtNome" required name="txtNome" class="form-control" onblur="calculoIdade(document.getElementById('nascimento').value)"  />
+                        <input type="text" id="txtNome" required name="txtNome" class="form-control eac-square" onblur="calculoIdade(document.getElementById('nascimento').value)"  />
                     </div>
 
 
