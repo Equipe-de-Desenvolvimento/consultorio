@@ -268,7 +268,7 @@
                                             <td><?= $item->paciente ?></td>
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
-                                            <td class="text-right" style="width: 130pt;">
+                                            <td class="text-center" style="width: 130pt;">
                                                 <?if(date("d/m/Y") == date("d/m/Y", strtotime($item->data))){?>
                                                 <a class="btn btn-info btn-sm" onclick="javascript:window.open('<?= base_url() ?>cadastros/pacientes/procedimentoautorizarconsulta/<?= $item->paciente_id ?>');">Autorizar
                                                 </a>

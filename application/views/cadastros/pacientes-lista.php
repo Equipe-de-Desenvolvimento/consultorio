@@ -13,7 +13,7 @@
                 <div class="table-responsive" id="pesquisar">
                     <form method="get" action="<?php echo base_url() ?>cadastros/pacientes/pesquisar">
                         <table width="100%" class="table " id="dataTables-example">
-                            <tr class="btn-info">
+                            <tr class="info">
                                 <th>Prontuário</th>
                                 <th>Nome/Nome da Mae/Telefone/CPF</th>
                                 <th>Data de Nasc</th>

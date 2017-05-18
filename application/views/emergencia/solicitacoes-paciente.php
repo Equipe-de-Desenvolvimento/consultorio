@@ -45,7 +45,7 @@
                                 <a style="width: 130pt;" class="btn btn-outline btn-info " href="<?= base_url() ?>cadastros/pacientes/procedimentoautorizarconsulta/<?= $paciente_id ?>">Autorizar Atendimento</a>
                             </div>
                             <div>
-                                <a style="width: 130pt;" class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/laudo/carregarlaudohistorico/<?= $paciente_id ?>">Hist. Atendimentos</a>
+                                <a style="width: 130pt;" class="btn btn-outline btn-info" href="<?= base_url() ?>cadastros/pacientes/carregar/<?= $paciente_id ?>">Editar</a>
                             </div>
                         </div>
                    

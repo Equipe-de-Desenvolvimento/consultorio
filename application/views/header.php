@@ -302,6 +302,77 @@ function debug($object) {
                                                     <a href="#"><i class="fa fa-cogs fa-fw"></i> Configurações <span class="fa arrow"></span></a>
                                                     <ul class="nav nav-second-level">
                                                         <li>
+                                                            <a href="#"><i class="fa fa-address-book-o fa-fw"></i> Recepção <span class="fa arrow"></span></a>
+                                                            <ul class="nav nav-third-level">
+                                                                <li>
+                                                                    <a href="<?= base_url() ?>seguranca/operador">Listar Profissionais</a>
+                                                                </li>
+
+                                                                <li>
+                                                                    <a href="<?= base_url() ?>ambulatorio/motivocancelamento">Motivo cancelamento</a>
+                                                                </li>
+
+                                                                <li>
+                                                                    <a href="<?= base_url() ?>ambulatorio/tipoconsulta">Tipo consulta</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="<?= base_url() ?>ambulatorio/agenda">Agenda Horarios</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="<?= base_url() ?>ambulatorio/exame">Agenda Manter</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="<?= base_url() ?>ambulatorio/modelodeclaracao">Modelo Declara&ccedil;&atilde;o</a>
+                                                                </li>
+                                                            </ul>
+                                    
+                                                            <li>
+
+                                                        </li>
+                                               
+                                                  
+                                                    
+                                                        <li>
+                                                            <a href="#"><i class="fa fa-clone fa-fw"></i> Modelos <span class="fa arrow"></span></a>
+                                                            <ul class="nav nav-third-level">
+                                                                <li>
+                                                                    <a href="<?= base_url() ?>ambulatorio/modelolaudo">Manter Modelo Laudo</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="<?= base_url() ?>ambulatorio/modelolinha">Manter Modelo Linha</a>
+                                                                </li>
+
+                                                                <li>
+                                                                    <a href="<?= base_url() ?>ambulatorio/modeloreceita">Manter Modelo Receita</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="<?= base_url() ?>ambulatorio/modeloatestado">Manter Modelo Atestado</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="<?= base_url() ?>ambulatorio/modeloreceitaespecial">Manter Modelo R. Especial</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="<?= base_url() ?>ambulatorio/modelodeclaracao">Modelo Declara&ccedil;&atilde;o</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="<?= base_url() ?>ambulatorio/modelosolicitarexames">Manter Modelo S.Exames</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="<?= base_url() ?>ambulatorio/modelomedicamento">Manter Medicamento</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="<?= base_url() ?>ambulatorio/modelomedicamento/pesquisarunidade">Manter Medicamento Unidade</a>
+                                                                </li>
+                                                                
+<!--                                                                <li>
+                                                                    <a href="<?= base_url() ?>ambulatorio/modelolinha">Manter Modelo Linha</a>
+                                                                </li>-->
+
+                                                            </ul>
+          
+
+                                                        </li>
+                                                        <li>
                                                             <a href="#"><i class="fa fa-medkit fa-fw"></i> Procedimentos <span class="fa arrow"></span></a>
                                                             <ul class="nav nav-third-level">
                                                                 <li>
@@ -346,8 +417,8 @@ function debug($object) {
 
                                                         </li>
 
-                                                    </ul>
-                                                </li>
+                                                    
+                                                
 
 
 

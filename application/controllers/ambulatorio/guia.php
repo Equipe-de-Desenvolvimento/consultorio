@@ -596,8 +596,8 @@ class Guia extends BaseController {
             $destino = "./upload/guia/$guia_id";
             chmod($destino, 0777);
         }
-//        $data['arquivo_pasta'] = directory_map("/home/sisprod/projetos/clinica/upload/$paciente_id/");
-        $data['arquivo_pasta'] = directory_map("/home/sisprod/projetos/clinica/upload/guia/$guia_id/");
+//        $data['arquivo_pasta'] = directory_map("./upload/$paciente_id/");
+        $data['arquivo_pasta'] = directory_map("./upload/guia/$guia_id/");
         if ($data['arquivo_pasta'] != false) {
             sort($data['arquivo_pasta']);
         }
@@ -628,7 +628,8 @@ class Guia extends BaseController {
             $data = array('upload_data' => $this->upload->data());
         }
         $data['guia_id'] = $guia_id;
-        $this->anexarimagem($guia_id);
+//        $this->anexarimagem($guia_id);
+        redirect(base_url() . "ambulatorio/guia/anexarimagem/$guia_id");
     }
 
     function excluirimagem($guia_id, $nome) {
@@ -644,7 +645,7 @@ class Guia extends BaseController {
         $destino = "./uploadopm/guia/$guia_id/$nome";
         copy($origem, $destino);
         unlink($origem);
-        $this->anexarimagem($guia_id);
+        redirect(base_url() . "ambulatorio/guia/anexarimagem/$guia_id");
     }
 
     function galeria($exame_id) {

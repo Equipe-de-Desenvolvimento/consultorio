@@ -41,8 +41,8 @@
             </div>
         </div>
     </div>
-    <div >
-        <table>
+    <div class="table-responsive">
+        <table class="table">
             <tr>
                 <?
                 $i = 0;
@@ -52,7 +52,7 @@
                         $i++;
                         ?>
 
-                        <td width="10px"><img  width="50px" height="50px" onclick="javascript:window.open('<?= base_url() . "upload/guia/" . $guia_id . "/" . $value ?>', '_blank', 'toolbar=no,Location=no,menubar=no,width=1200,height=600');" src="<?= base_url() . "upload/guia/" . $guia_id . "/" . $value ?>"><br><? echo substr($value, 0, 10) ?><br><a href="<?= base_url() ?>ambulatorio/guia/excluirimagem/<?= $guia_id ?>/<?= $value ?>">Excluir</a></td>
+                <td width="10px"><img  width="50px" height="50px" onclick="javascript:window.open('<?= base_url() . "upload/guia/" . $guia_id . "/" . $value ?>', '_blank', 'toolbar=no,Location=no,menubar=no,width=1200,height=600');" src="<?= base_url() . "upload/guia/" . $guia_id . "/" . $value ?>"><br><? echo substr($value, 0, 10) ?><br><a class="btn btn-outline btn-danger btn-xs" href="<?= base_url() ?>ambulatorio/guia/excluirimagem/<?= $guia_id ?>/<?= $value ?>">Excluir</a></td>
                         <?
                         if ($i == 8) {
                             ?>

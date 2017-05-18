@@ -131,19 +131,19 @@ class Operador extends BaseController {
         $usuario = $this->operador_m->listarusuariocontador();
         if ($_POST['operador_id'] == '') {
             if ($cpf > 0) {
-                $data['mensagem'] = 'Erro. CPF já cadastrado.';
+                $data['mensagem'] = array('Erro. CPF já cadastrado.', 'warning');
                 $this->session->set_flashdata('message', $data['mensagem']);
                 redirect(base_url() . "seguranca/operador", $data);
             }
             if ($usuario > 0) {
-                $data['mensagem'] = 'Erro. Usuário já cadastrado.';
+                $data['mensagem'] = array( 'Erro. Usuário já cadastrado.', 'warning');
                 $this->session->set_flashdata('message', $data['mensagem']);
                 redirect(base_url() . "seguranca/operador", $data);
             }
             if ($this->operador_m->gravar()) {
-                $data['mensagem'] = 'Operador cadastrado com sucesso.';
+                $data['mensagem'] = array('Operador cadastrado com sucesso.', 'success');
             } else {
-                $data['mensagem'] = 'Erro ao cadastrar novo operador . Opera&ccedil;&atilde;o cancelada.';
+                $data['mensagem'] = array('Erro ao cadastrar novo operador . Operação cancelada', 'error');
             }
             $data['lista'] = $this->operador_m->listar($filtro = null, $maximo = null, $inicio = null);
 
@@ -152,9 +152,9 @@ class Operador extends BaseController {
             
         } else {
             if ($this->operador_m->gravar()) {
-                $data['mensagem'] = 'Operador cadastrado com sucesso.';
+                $data['mensagem'] = array( 'Operador cadastrado com sucesso.', 'success');
             } else {
-                $data['mensagem'] = 'Erro ao cadastrar novo operador . Opera&ccedil;&atilde;o cancelada.';
+                $data['mensagem'] =array(  'Erro ao cadastrar novo operador . Operação cancelada.', 'error');
             }
             $data['lista'] = $this->operador_m->listar($filtro = null, $maximo = null, $inicio = null);
 
@@ -214,6 +214,8 @@ class Operador extends BaseController {
             }
             $data['operador_id'] = $operador_id;
         }
+        $data['mensagem'] = array( 'Arquivo adicionado com sucesso.', 'success');
+        $this->session->set_flashdata('message', $data['mensagem']);
 
         redirect(base_url() . "seguranca/operador/anexarimagem/ $operador_id");
     }
@@ -221,7 +223,10 @@ class Operador extends BaseController {
     function ecluirimagem($operador_id) {
 
         unlink("./upload/1ASSINATURAS/$operador_id.jpg");
-        $this->anexarimagem($operador_id);
+        $data['mensagem'] = array( 'Arquivo excluido com sucesso.', 'success');
+        $this->session->set_flashdata('message', $data['mensagem']);
+        redirect(base_url() . "seguranca/operador/anexarimagem/ $operador_id");
+//        $this->($operador_id);
     }
 
     function operadorconvenio($operador_id) {
@@ -265,7 +270,7 @@ class Operador extends BaseController {
 
     function gravarrecepcao() {
         if ($this->operador_m->gravarrecepcao()) {
-            $data['mensagem'] = 'Operador cadastrado com sucesso.';
+            $data['mensagem'] = array( 'Operador cadastrado com sucesso.', 'success');
         } else {
             $data['mensagem'] = 'Erro ao cadastrar novo operador . Opera&ccedil;&atilde;o cancelada.';
         }
@@ -278,7 +283,7 @@ class Operador extends BaseController {
 
     function excluirOperador($operador_id) {
         $this->operador_m->excluirOperador($operador_id);
-        $data['mensagem'] = 'Operador excluido com sucesso.';
+        $data['mensagem'] = array( 'Operador excluido com sucesso.', 'success');
 
         $data['lista'] = $this->operador_m->listar($filtro = null, $maximo = null, $inicio = null);
 
@@ -289,7 +294,7 @@ class Operador extends BaseController {
 
     function reativaroperador($operador_id) {
         $this->operador_m->reativaroperador($operador_id);
-        $data['mensagem'] = 'Operador excluido com sucesso.';
+        $data['mensagem'] = array('Operador ativoado com sucesso.', 'success');
 
         $data['lista'] = $this->operador_m->listar($filtro = null, $maximo = null, $inicio = null);
 

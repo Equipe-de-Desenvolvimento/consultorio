@@ -1,40 +1,40 @@
-    <?php
-    //Utilitario::pmf_mensagem($message);
-    
+<?php
+//Utilitario::pmf_mensagem($message);
+//unset($message);
+?>
+<div id="page-wrapper"> <!-- Inicio da DIV content -->
+    <div>
 
-
-    //unset($message);
-    ?>
-<div class="content"> <!-- Inicio da DIV content -->
-    <div class="bt_link_new">
-        <a href="<?php echo base_url() ?>ambulatorio/agenda/novohorarioagenda/<?=$agenda;?>">
-            Novo Horario
-        </a>
     </div>
-    <div id="accordion">
-        <h3 class="singular"><a href="#">Manter Horario Fixo</a></h3>
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th class="tabela_header">Data</th>
-                        <th class="tabela_header">Entrada 1</th>
-                        <th class="tabela_header">Sa&iacute;da 1</th>
-                        <th class="tabela_header">Inicio intervalo</th>
-                        <th class="tabela_header">Fim do intervalo</th>
-                        <th class="tabela_header">Tempo consulta</th>
-                        <th class="tabela_header">Obs</th>
-                        <th class="tabela_header">Empresa</th>
-                        <th class="tabela_header">&nbsp;</th>
-                    </tr>
-                </thead>
+    <div class="panel panel-default">
+        <div class="alert alert-info">Manter Horario Fixo</div>
+        <div class="panel-body">
+            <a class="btn btn-outline btn-danger" href="<?php echo base_url() ?>ambulatorio/agenda/novohorarioagenda/<?= $agenda; ?>">
+                <i class="fa fa-plus fa-w"></i>Novo Horario
+            </a>
 
-                <tbody>
-                    <?php
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="tabela_header">Data</th>
+                            <th class="tabela_header">Entrada 1</th>
+                            <th class="tabela_header">Sa&iacute;da 1</th>
+                            <th class="tabela_header">Inicio intervalo</th>
+                            <th class="tabela_header">Fim do intervalo</th>
+                            <th class="tabela_header">Tempo consulta</th>
+                            <th class="tabela_header">Obs</th>
+                            <th class="tabela_header" >Empresa</th>
+                            <th class="tabela_header">Ações</th>
+                        </tr>
+                    </thead>
+
+                   
+                        <?php
                         $estilo_linha = "tabela_content01";
                         foreach ($lista as $item) {
                             ($estilo_linha == "tabela_content01") ? $estilo_linha = "tabela_content02" : $estilo_linha = "tabela_content01";
-                     ?>
+                            ?>
                             <tr>
                                 <td class="<?php echo $estilo_linha; ?>"><?= $item->dia; ?></td>
                                 <td class="<?php echo $estilo_linha; ?>"><?= $item->horaentrada1; ?></td>
@@ -45,32 +45,46 @@
                                 <td class="<?php echo $estilo_linha; ?>"><?= $item->observacoes; ?></td>
                                 <td class="<?php echo $estilo_linha; ?>"><?= $item->empresa; ?></td>
 
-                           
+
 
                                 <td class="<?php echo $estilo_linha; ?>" width="100px;">
-                                    <a onclick="javascript: return confirm('Deseja realmente excluir o horario');"
-                                       href="<?=base_url()?>ambulatorio/agenda/excluirhorarioagenda/<?=$item->horarioagenda_id;?>/<?=$agenda;?>">
-                                        <img border="0" title="Excluir" alt="Excluir"
-                                     src="<?=  base_url()?>img/form/page_white_delete.png" />
+                                    <a class="btn btn-outline btn-danger btn-sm" onclick="confirmacaoexcluir(<?= $item->horarioagenda_id; ?>);">
+                                        Excluir
                                     </a>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
 
-                        </tbody>
+                        
                         <?php
-                                }
-                            
-                        ?>
+                    }
+                    ?>
 
-            </table>
+                </table>
+            </div>
         </div>
     </div>
-
 </div> <!-- Final da DIV content -->
 <script type="text/javascript">
 
-    $(function() {
-        $( "#accordion" ).accordion();
-    });
+     function confirmacaoexcluir(idexcluir) {
+        swal({
+            title: "Tem certeza?",
+            text: "Você está prestes a excluir o horario fixo!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#337ab7",
+            confirmButtonText: "Sim, quero deletar!",
+            cancelButtonText: "Não, cancele!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        window.open('<?= base_url() ?>ambulatorio/agenda/excluirhorarioagenda/' + idexcluir, '_self');
+                    } else {
+                        swal("Cancelado", "Você desistiu de excluir excluir o horario fixo", "error");
+                    }
+                });
 
+    }
 </script>

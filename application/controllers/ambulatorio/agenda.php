@@ -76,11 +76,11 @@ class Agenda extends BaseController {
 
     function excluirhorarioagenda($horariovariavel_id, $horariotipo) {
         if ($this->agenda->excluirhorariofixo($horariovariavel_id)) {
-            $mensagem = 'Sucesso ao excluir o Horario';
+            $mensagem = array('Sucesso ao excluir o Horario', 'success');
         } else {
             $mensagem = 'Erro ao excluir o Horario. Opera&ccedil;&atilde;o cancelada.';
         }
-        $this->session->set_flashdata('message', $data['mensagem']);
+        $this->session->set_flashdata('message', $mensagem);
         redirect(base_url() . "ambulatorio/agenda/listarhorarioagenda/$horariotipo");
     }
 

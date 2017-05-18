@@ -20,13 +20,13 @@
                 <div class="row">
 
                     <div class="col-lg-4">
-                        <div >
+                        <div class="form-group">
                             <label>Nome*</label>
                             <input type="text" id="txtNome" name="nome" class="form-control texto08" value="<?= @$obj->_nome; ?>" required="true"  placeholder="Nome do Paciente">
                             <input type ="hidden" name ="paciente_id"  value ="<?= @$obj->_paciente_id; ?>" id ="txtPacienteId">
 
                         </div>
-                        <div>
+                        <div class="form-group">
                             <label>CPF</label>
 
 
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="col-lg-2">
-                        <div >
+                        <div class="form-group">
                             <label>Sexo*</label>
                             <select name="sexo" id="txtSexo" class="form-control texto04" required="">
                                 <option value="" <?
@@ -54,7 +54,7 @@
                             </select>
                         </div>
 
-                        <div>
+                        <div class="form-group">
                             <label>RG</label>
 
 
@@ -63,7 +63,7 @@
                     </div>
                     <div class="col-lg-3">
 
-                        <div >
+                        <div class="form-group">
                             <label>Data de Nascimento*</label>
                             <input type="text" name="nascimento" id="txtNascimento" required="true" alt="date" class="form-control texto04 date" 
                                    placeholder="Data de Nascimento"
@@ -77,7 +77,7 @@
                                    >
                         </div>
 
-                        <div>
+                        <div class="form-group">
                             <label>Email</label>
                             <input  placeholder="Email" type="text" id="txtCns" name="cns"  class="form-control texto04" value="<?= @$obj->_cns; ?>" />
                         </div>
@@ -98,17 +98,16 @@
 
                             </a>
                             <span id="imagem_paciente">
-                                
-                                <?
-                                if(file_exists("./upload/webcam/pacientes/" . @$obj->_paciente_id . ".jpg")){?>
-                                 <img class="img-thumbnail img-rounded img-responsive" src="<?= base_url() ?>upload/webcam/pacientes/<?= @$obj->_paciente_id ?>.jpg" alt="" style="width: 100pt; height: 100pt;" />   
-                               <? }else{?>
-                                   <img class="img-thumbnail img-rounded img-responsive" src="" alt="" style="width: 100pt; height: 100pt;" />
-                                <?}
+
+                                <? if (file_exists("./upload/webcam/pacientes/" . @$obj->_paciente_id . ".jpg")) { ?>
+                                    <img class="img-thumbnail img-rounded img-responsive" src="<?= base_url() ?>upload/webcam/pacientes/<?= @$obj->_paciente_id ?>.jpg" alt="" style="width: 100pt; height: 100pt;" />   
+                                <? } else { ?>
+                                    <img class="img-thumbnail img-rounded img-responsive" src="" alt="" style="width: 100pt; height: 100pt;" />
+                                <? }
                                 ?>
-                                
-                             
-                            <!-- Modal -->
+
+
+                                <!-- Modal -->
                             </span>
 
                         </div>
@@ -128,22 +127,22 @@
                                                         Câmera
                                                     </th>
                                                     <th>
-                                                       &nbsp; 
-                                                       &nbsp; 
-                                                       &nbsp; 
-                                                       &nbsp; 
-                                                       &nbsp; 
+                                                        &nbsp; 
+                                                        &nbsp; 
+                                                        &nbsp; 
+                                                        &nbsp; 
+                                                        &nbsp; 
                                                     </th>
                                                     <th>
-                                                       Resultado 
+                                                        Resultado 
                                                     </th>
                                                 </tr>
                                                 <tr>
                                                     <td >
-                                                        
+
                                                         <div  id="my_camera">
-                                                            
-                                                            
+
+
                                                         </div>
                                                     </td>
 
@@ -179,10 +178,10 @@
 
             </div>
         </div>
-        
-        
+
+
         <input id="mydata" type="hidden" name="mydata" value=""/>
-        
+
         <div class="panel panel-default ">
             <div class="alert alert-info">
                 Domicilio
@@ -191,26 +190,14 @@
                 <div class="row">
 
                     <div class="col-lg-2">
-                        <div >
-                            <label>T.Logradouro</label>
-                            <select name="tipo_logradouro" id="txtTipoLogradouro" class="form-control texto04" >
-                                <option value='' >Selecione</option>
-                                <?php
-                                $listaLogradouro = $this->paciente->listaTipoLogradouro($_GET);
-                                foreach ($listaLogradouro as $item) {
-                                    ?>
+                        <div class="form-group">
+                            <label>CEP</label>
 
-                                    <option   value =<?php echo $item->tipo_logradouro_id; ?> <?
-                                    if (@$obj->_tipoLogradouro == $item->tipo_logradouro_id):echo 'selected';
-                                    endif;
-                                    ?>><?php echo $item->descricao; ?></option>
-                                              <?php
-                                          }
-                                          ?> 
-                            </select>
+                            <input type="text" id="cep" class="form-control texto03 eac-square" name="cep"  value="<?= @$obj->_cep; ?>" />
+                            <input type="hidden" id="ibge" class="form-control texto02" name="ibge" />
 
                         </div>
-                        <div>
+                        <div class="form-group">
                             <label>Indicação</label>
 
                             <select name="indicacao" id="indicacao" class="form-control texto04" >
@@ -224,7 +211,7 @@
                                     if (@$obj->_indicacao == $item->paciente_indicacao_id):echo 'selected';
                                     endif;
                                     ?>>
-                                                <?php echo $item->nome; ?>
+                                            <?php echo $item->nome; ?>
                                     </option>
                                     <?php
                                 }
@@ -232,7 +219,7 @@
                             </select>
                         </div>
 
-                        <div>
+                        <div class="form-group">
                             <label>Telefone</label>
                             <?
                             if (@$obj->_telefone != '' && strlen(@$obj->_telefone) > 3) {
@@ -263,18 +250,18 @@
                     </div>
 
                     <div class="col-lg-4">
-                        <div>
+                        <div class="form-group">
                             <label>Endere&ccedil;o</label>
                             <input type="text" id="rua" class="form-control texto10" name="endereco" value="<?= @$obj->_endereco; ?>" />
                         </div>
 
-                        <div>
+                        <div class="form-group">
                             <label>Bairro</label>
 
 
                             <input type="text" id="bairro" class="form-control texto10" name="bairro" value="<?= @$obj->_bairro; ?>" />
                         </div>
-                        <div>
+                        <div class="form-group">
                             <label>Celular*</label>
                             <input type="text" id="txtCelular" class="form-control texto04" name="celular" value="<?= @$celular; ?>" required=""/>
                         </div>
@@ -283,14 +270,14 @@
                     </div>
                     <div class="col-lg-3">
 
-                        <div>
+                        <div class="form-group">
                             <label>N&uacute;mero</label>
 
 
                             <input type="text" id="txtNumero" class="form-control texto04" name="numero" value="<?= @$obj->_numero; ?>" />
                         </div>
 
-                        <div>
+                        <div class="form-group">
                             <label>Município</label>
 
 
@@ -302,20 +289,14 @@
                     </div>
                     <div class="col-lg-3">
 
-                        <div>
+                        <div class="form-group">
                             <label>Complemento</label>
 
 
                             <input type="text" id="txtComplemento" class="form-control texto08" name="complemento" value="<?= @$obj->_complemento; ?>" />
                         </div>
 
-                        <div>
-                            <label>CEP</label>
-
-                            <input type="text" id="cep" class="form-control texto03 eac-square" name="cep"  value="<?= @$obj->_cep; ?>" />
-                            <input type="hidden" id="ibge" class="form-control texto02" name="ibge" />
-
-                        </div>
+                        
 
                     </div>
 
@@ -333,7 +314,7 @@
                 <div class="row">
 
                     <div class="col-lg-2">
-                        <div>
+                        <div class="form-group">
                             <label>Plano de Saude</label>
 
 
@@ -345,95 +326,95 @@
                                     ?>
 
                                     <option   value =<?php echo $item->convenio_id; ?> <?
-                                    if (@$obj->_convenio == $item->convenio_id):echo 'selected';
-                                    endif;
+                                if (@$obj->_convenio == $item->convenio_id):echo 'selected';
+                                endif;
                                     ?>><?php echo $item->descricao; ?></option>
                                               <?php
                                           }
                                           ?> 
                             </select>
                         </div>
-                        <div>
+                        <div class="form-group">
                             <label>Estado civil</label>
 
 
                             <select name="estado_civil_id" id="txtEstadoCivil" class="form-control texto04" selected="<?= @$obj->_estado_civil; ?>">
                                 <option value=0 <?
-                                if (@$obj->_estado_civil == 0):echo 'selected';
-                                endif;
-                                ?>>Selecione</option>
+                                          if (@$obj->_estado_civil == 0):echo 'selected';
+                                          endif;
+                                          ?>>Selecione</option>
                                 <option value=1 <?
                                 if (@$obj->_estado_civil == 1):echo 'selected';
                                 endif;
-                                ?>>Solteiro</option>
+                                          ?>>Solteiro</option>
                                 <option value=2 <?
                                 if (@$obj->_estado_civil == 2):echo 'selected';
                                 endif;
-                                ?>>Casado</option>
+                                          ?>>Casado</option>
                                 <option value=3 <?
                                 if (@$obj->_estado_civil == 3):echo 'selected';
                                 endif;
-                                ?>>Divorciado</option>
+                                          ?>>Divorciado</option>
                                 <option value=4 <?
                                 if (@$obj->_estado_civil == 4):echo 'selected';
                                 endif;
-                                ?>>Viuvo</option>
+                                          ?>>Viuvo</option>
                                 <option value=5 <?
                                 if (@$obj->_estado_civil == 5):echo 'selected';
                                 endif;
-                                ?>>Outros</option>
+                                          ?>>Outros</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="col-lg-4">
-                        <div>
+                        <div class="form-group">
                             <label>N&uacute;mero da Carteirinha</label>
 
 
                             <input type="text" id="txtconvenionumero" class="form-control texto08" name="convenionumero" value="<?= @$obj->_convenionumero; ?>" />
                         </div>
 
-                        <div>
+                        <div class="form-group">
                             <label>Escolaridade</label>
 
                             <select name="escolaridade" id="escolaridade" class="form-control texto04" selected="<?= @$obj->_escolaridade_id; ?>">
                                 <option value=0 <?
                                 if (@$obj->_escolaridade_id == 0):echo 'selected';
                                 endif;
-                                ?>>Selecione</option>
+                                          ?>>Selecione</option>
                                 <option value=1 <?
                                 if (@$obj->_escolaridade_id == 1):echo 'selected';
                                 endif;
-                                ?>>Fundamental-Incompleto </option>
+                                          ?>>Fundamental-Incompleto </option>
                                 <option value=2 <?
                                 if (@$obj->_escolaridade_id == 2):echo 'selected';
                                 endif;
-                                ?>>Fundamental-Completo</option>
+                                          ?>>Fundamental-Completo</option>
 
                                 <option value=3 <?
                                 if (@$obj->_escolaridade_id == 3):echo 'selected';
                                 endif;
-                                ?>>Médio 
+                                          ?>>Médio 
                                     -
                                     Incompleto</option>
                                 <option value=4 <?
                                 if (@$obj->_escolaridade_id == 4):echo 'selected';
                                 endif;
-                                ?>>Médio 
+                                          ?>>Médio 
                                     -
                                     Completo
                                 </option>
                                 <option value=5 <?
                                 if (@$obj->_escolaridade_id == 5):echo 'selected';
                                 endif;
-                                ?>>Superior 
+                                          ?>>Superior 
                                     -
                                     Incompleto</option>
                                 <option value=6 <?
                                 if (@$obj->_escolaridade_id == 6):echo 'selected';
                                 endif;
-                                ?>>Superior-Completo </option>
+                                          ?>>Superior-Completo </option>
 
 
                             </select>
@@ -441,13 +422,13 @@
 
                     </div>
                     <div class="col-lg-4">
-                        <div>
+                        <div class="form-group">
                             <label>Ocupa&ccedil;&atilde;o</label>
                             <input type="hidden" id="txtcboID" class="texto_id" name="txtcboID" value="<?= @$obj->_cbo_ocupacao_id; ?>" readonly="true" />
                             <input type="text" id="txtcbo" class="form-control texto08 eac-square" name="txtcbo" value="<?= @$obj->_cbo_nome; ?>" />
                         </div>  
 
-                        <div>
+                        <div class="form-group">
                             <label>Ra&ccedil;a / Cor</label>
 
 
@@ -456,27 +437,27 @@
                                 <option value=0  <?
                                 if (@$obj->_raca_cor == 0):echo 'selected';
                                 endif;
-                                ?>>Selecione</option>
+                                          ?>>Selecione</option>
                                 <option value=1 <?
                                 if (@$obj->_raca_cor == 1):echo 'selected';
                                 endif;
-                                ?>>Branca</option>
+                                          ?>>Branca</option>
                                 <option value=2 <?
                                 if (@$obj->_raca_cor == 2):echo 'selected';
                                 endif;
-                                ?>>Amarela</option>
+                                          ?>>Amarela</option>
                                 <option value=3 <?
                                 if (@$obj->_raca_cor == 3):echo 'selected';
                                 endif;
-                                ?>>Preta</option>
+                                          ?>>Preta</option>
                                 <option value=4 <?
                                 if (@$obj->_raca_cor == 4):echo 'selected';
                                 endif;
-                                ?>>Parda</option>
+                                          ?>>Parda</option>
                                 <option value=5 <?
                                 if (@$obj->_raca_cor == 5):echo 'selected';
                                 endif;
-                                ?>>Ind&iacute;gena</option>
+                                          ?>>Ind&iacute;gena</option>
                             </select>
                         </div>
                     </div>
@@ -497,16 +478,14 @@
             <div class="panel-body">
                 <div class="row">
 
-                    <div class="col-lg-1">
-                        <button  class="btn btn-success" type="submit">Enviar</button>
+                    <div class="col-lg-3">
+                        <p>
+                            <button  class="btn btn-outline btn-success btn-sm" type="submit"><i class="fa fa-floppy-o" aria-hidden="true"></i> Enviar</button>
 
-                    </div>
-                    <div class="col-lg-1">
-
-                        <a  href="<?= base_url() ?>cadastros/pacientes">
-                            <button class="btn btn-warning" type="button" class="btn">Voltar</button>
-                        </a>
-
+                            <a  href="<?= base_url() ?>cadastros/pacientes">
+                                <button class="btn btn-outline btn-warning btn-sm" type="button" class="btn">Voltar</button>
+                            </a>
+                        </p>
 
                     </div>
 
@@ -550,7 +529,7 @@
                 var raw_image_data = data_uri.replace(/^data\:image\/\w+\;base64\,/, '');
                 //              Pega o valor do campo mydata, campo hidden que armazena temporariamente o código da imagem
                 document.getElementById('mydata').value = raw_image_data;
-                
+
                 document.getElementById('imagem_paciente').innerHTML =
                         '<img class="img-thumbnail img-rounded img-responsive" src="' + data_uri + '" alt="" style="width: 100pt; height: 100pt;" /> ';
 
