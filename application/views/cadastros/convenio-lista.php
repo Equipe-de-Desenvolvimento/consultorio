@@ -7,7 +7,7 @@
                 <div class="table-responsive" id="pesquisar">
                     <form method="get" action="<?= base_url() ?>cadastros/convenio/pesquisar">
                         <table width="100%" class="table " id="dataTables-example">
-                            <tr class="btn-info">
+                            <tr class="info">
                                 <th>Convênio</th>
 
                                 <th style="text-align: center;">Ações</th>

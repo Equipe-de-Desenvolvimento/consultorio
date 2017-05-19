@@ -13,7 +13,7 @@
                 <div class="table-responsive" id="pesquisar">
                     <form method="get" action="<?= base_url() ?>cadastros/caixa/pesquisar">
                         <table width="100%" class="table " id="dataTables-example">
-                            <tr class="btn-info">
+                            <tr class="info">
                                 <th>Conta</th>
                                 <th>Data Inicio</th>
                                 <th>Data Fim</th>

@@ -73,18 +73,6 @@ function debug($object) {
                             <script src="<?= base_url() ?>bootstrap/fullcalendar/fullcalendar.js" type="text/javascript" charset="utf-8"></script>
                             <script src="<?= base_url() ?>bootstrap/fullcalendar/scheduler.js" type="text/javascript" charset="utf-8"></script>
 
-                            <!--CSS DO CHOSEN--> 
-                            <!-- <script src="<?= base_url() ?>bootstrap/vendor/chosen/chosen.jquery.js"></script> 
-                             <script src="<?= base_url() ?>bootstrap/vendor/chosen/docsupport/init.js"></script> -->
-                            <!--<script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/moments.js"></script>
-                             <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/interact.js"></script>
-                             <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/angular.js"></script>
-                             <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/angular-animate.js"></script>
-                             <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/ui-bootstrap-tpls.js"></script>
-                             <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/rule.js"></script>
-                             <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/angular-bootstrap-colorpicker.js"></script>
-                             <script type="text/javascript" src="<?= base_url() ?>bootstrap/calendario/angular-bootstrap-calendar.js"></script>-->
-
                             </head>
                             <div>
                                 <div>
@@ -125,7 +113,7 @@ function debug($object) {
                                                 <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                                             </a>
                                             <ul class="dropdown-menu dropdown-user-left">
-                                                <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
+                                                <li><a href="<?= base_url() ?>seguranca/operador/alterar/<?=$operador_id?>"><i class="fa fa-user fa-fw"></i> Perfil</a>
                                                 </li>
                                                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configurações</a>
                                                 </li>
@@ -308,9 +296,7 @@ function debug($object) {
                                                                     <a href="<?= base_url() ?>seguranca/operador">Listar Profissionais</a>
                                                                 </li>
 
-                                                                <li>
-                                                                    <a href="<?= base_url() ?>ambulatorio/motivocancelamento">Motivo cancelamento</a>
-                                                                </li>
+                                                                
 
                                                                 <!--                                                                <li>
                                                                                                                                     <a href="<?= base_url() ?>ambulatorio/tipoconsulta">Tipo consulta</a>
@@ -325,8 +311,11 @@ function debug($object) {
                                                                                                                                     <a href="<?= base_url() ?>ambulatorio/exame">Agenda Manter</a>
                                                                                                                                 </li>-->
                                                                 <li>
-                                                                    <a href="<?= base_url() ?>ambulatorio/modelodeclaracao">Modelo Declara&ccedil;&atilde;o</a>
+                                                                    <a href="<?= base_url() ?>ambulatorio/motivocancelamento">Motivo cancelamento</a>
                                                                 </li>
+<!--                                                                <li>
+                                                                    <a href="<?= base_url() ?>ambulatorio/modelodeclaracao">Modelo Declara&ccedil;&atilde;o</a>
+                                                                </li>-->
                                                             </ul>
 
                                                             <li>
@@ -420,6 +409,7 @@ function debug($object) {
 
                                                             </li>
                                                     </ul>
+                                            </li>   
 
                                                 </li>
 

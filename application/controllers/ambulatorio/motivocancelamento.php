@@ -54,9 +54,9 @@ class Motivocancelamento extends BaseController {
     function gravar() {
         $exame_motivocancelamento_id = $this->motivocancelamento->gravar();
         if ($exame_motivocancelamento_id == "-1") {
-            $data['mensagem'] = 'Erro ao gravar a Motivocancelamento. Opera&ccedil;&atilde;o cancelada.';
+            $data['mensagem'] = array( 'Erro ao gravar o motivo de cancelamento. Operação Cancelada.', 'error');
         } else {
-            $data['mensagem'] = 'Sucesso ao gravar a Motivocancelamento.';
+            $data['mensagem'] =array( 'Sucesso ao gravar o motivo de cancelamento.', 'success');
         }
         $this->session->set_flashdata('message', $data['mensagem']);
         redirect(base_url() . "ambulatorio/motivocancelamento");

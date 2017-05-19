@@ -12,7 +12,7 @@
                 <div class="table-responsive" id="pesquisar">
                     <form method="get" action="<?= base_url() ?>cadastros/fornecedor/pesquisar">
                         <table width="100%" class="table " id="dataTables-example">
-                            <tr class="btn-info">
+                            <tr class="info">
                                 <th>Razão Social</th>
                                 <th style="text-align: center;">Ações</th>
                             </tr> 
