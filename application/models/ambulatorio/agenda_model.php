@@ -45,6 +45,18 @@ class agenda_model extends Model {
         return $return->result();
     }
 
+    function listaratribuiragenda($agenda_id) {
+        $this->db->select('agenda_id,
+                            nome, 
+                            tipo');
+        $this->db->from('tb_agenda');
+        $this->db->where('ativo', 'true');
+        $this->db->where('agenda_id', $agenda_id);
+        $this->db->orderby('nome');
+        $return = $this->db->get();
+        return $return->result();
+    }
+
     function listarespecialidades() {
         $this->db->select('ambulatorio_grupo_id,
                             nome');
@@ -66,6 +78,11 @@ class agenda_model extends Model {
     }
 
     function excluir($agenda_id) {
+        if ($_POST['excluir'] == 'on') {
+            $this->db->where('horarioagenda_id', $agenda_id);
+            $this->db->where('paciente_id is null');
+            $this->db->delete('tb_agenda_exames');
+        }
 
         $this->db->set('ativo', 'f');
         $horario = date("Y-m-d H:i:s");
@@ -125,8 +142,8 @@ class agenda_model extends Model {
     function gravarmedico() {
         try {
 
-            $datainicial = date("Y-m-d", strtotime( str_replace("/", "-", $_POST['datainicio']) ) );
-            $datafinal = date("Y-m-d", strtotime( str_replace("/", "-", $_POST['datafim']) ) );
+            $datainicial = date("Y-m-d", strtotime(str_replace("/", "-", $_POST['datainicio'])));
+            $datafinal = date("Y-m-d", strtotime(str_replace("/", "-", $_POST['datafim'])));
 
             if (isset($_POST['txtdomingo'])) {
                 $Domingo = 'Domingo';
@@ -668,9 +685,9 @@ class agenda_model extends Model {
     function gravarmedicogeral() {
         try {
 
-            $datainicial = date("Y-m-d", strtotime( str_replace("/", "-", $_POST['datainicio']) ) );
-            $datafinal = date("Y-m-d", strtotime( str_replace("/", "-", $_POST['datafim']) ) );
-            
+            $datainicial = date("Y-m-d", strtotime(str_replace("/", "-", $_POST['datainicio'])));
+            $datafinal = date("Y-m-d", strtotime(str_replace("/", "-", $_POST['datafim'])));
+
             if (isset($_POST['txtdomingo'])) {
                 $Domingo = 'Domingo';
             } else {
@@ -1251,7 +1268,7 @@ class agenda_model extends Model {
                         }
                         $this->db->set('operador_medico_agenda', $operador_id);
                         $this->db->where('data', $index);
-                        $this->db->where('tipo', 'CONSULTA');
+//                        $this->db->where('tipo', 'CONSULTA');
                         $this->db->where('inicio >=', $_POST['horainicio']);
                         $this->db->where('inicio <=', $_POST['horafim']);
                         $this->db->where('agenda_exames_nome_id', $_POST['sala']);
@@ -1272,7 +1289,7 @@ class agenda_model extends Model {
                         }
                         $this->db->set('operador_medico_agenda', $operador_id);
                         $this->db->where('data', $index);
-                        $this->db->where('tipo', 'CONSULTA');
+//                        $this->db->where('tipo', 'CONSULTA');
                         $this->db->where('inicio >=', $_POST['horainicio']);
                         $this->db->where('inicio <=', $_POST['horafim']);
                         $this->db->where('agenda_exames_nome_id', $_POST['sala']);
@@ -1293,7 +1310,7 @@ class agenda_model extends Model {
                         }
                         $this->db->set('operador_medico_agenda', $operador_id);
                         $this->db->where('data', $index);
-                        $this->db->where('tipo', 'CONSULTA');
+//                        $this->db->where('tipo', 'CONSULTA');
                         $this->db->where('inicio >=', $_POST['horainicio']);
                         $this->db->where('inicio <=', $_POST['horafim']);
                         $this->db->where('agenda_exames_nome_id', $_POST['sala']);
@@ -1314,7 +1331,7 @@ class agenda_model extends Model {
                         }
                         $this->db->set('operador_medico_agenda', $operador_id);
                         $this->db->where('data', $index);
-                        $this->db->where('tipo', 'CONSULTA');
+//                        $this->db->where('tipo', 'CONSULTA');
                         $this->db->where('inicio >=', $_POST['horainicio']);
                         $this->db->where('inicio <=', $_POST['horafim']);
                         $this->db->where('agenda_exames_nome_id', $_POST['sala']);
@@ -1335,7 +1352,7 @@ class agenda_model extends Model {
                         }
                         $this->db->set('operador_medico_agenda', $operador_id);
                         $this->db->where('data', $index);
-                        $this->db->where('tipo', 'CONSULTA');
+//                        $this->db->where('tipo', 'CONSULTA');
                         $this->db->where('inicio >=', $_POST['horainicio']);
                         $this->db->where('inicio <=', $_POST['horafim']);
                         $this->db->where('agenda_exames_nome_id', $_POST['sala']);
@@ -1356,7 +1373,7 @@ class agenda_model extends Model {
                         }
                         $this->db->set('operador_medico_agenda', $operador_id);
                         $this->db->where('data', $index);
-                        $this->db->where('tipo', 'CONSULTA');
+//                        $this->db->where('tipo', 'CONSULTA');
                         $this->db->where('inicio >=', $_POST['horainicio']);
                         $this->db->where('inicio <=', $_POST['horafim']);
                         $this->db->where('agenda_exames_nome_id', $_POST['sala']);
@@ -1377,7 +1394,7 @@ class agenda_model extends Model {
                         }
                         $this->db->set('operador_medico_agenda', $operador_id);
                         $this->db->where('data', $index);
-                        $this->db->where('tipo', 'CONSULTA');
+//                        $this->db->where('tipo', 'CONSULTA');
                         $this->db->where('inicio >=', $_POST['horainicio']);
                         $this->db->where('inicio <=', $_POST['horafim']);
                         $this->db->where('agenda_exames_nome_id', $_POST['sala']);
@@ -1423,7 +1440,7 @@ class agenda_model extends Model {
                         }
                         $this->db->set('operador_medico_agenda', $operador_id);
                         $this->db->where('data', $index);
-                        $this->db->where('tipo', 'CONSULTA');
+//                        $this->db->where('tipo', 'CONSULTA');
                         $this->db->where('inicio >=', $_POST['horainicio']);
                         $this->db->where('inicio <=', $_POST['horafim']);
                         $this->db->where('paciente_id is null');
@@ -1444,7 +1461,7 @@ class agenda_model extends Model {
                         }
                         $this->db->set('operador_medico_agenda', $operador_id);
                         $this->db->where('data', $index);
-                        $this->db->where('tipo', 'CONSULTA');
+//                        $this->db->where('tipo', 'CONSULTA');
                         $this->db->where('inicio >=', $_POST['horainicio']);
                         $this->db->where('inicio <=', $_POST['horafim']);
                         $this->db->where('paciente_id is null');
@@ -1465,7 +1482,7 @@ class agenda_model extends Model {
                         }
                         $this->db->set('operador_medico_agenda', $operador_id);
                         $this->db->where('data', $index);
-                        $this->db->where('tipo', 'CONSULTA');
+//                        $this->db->where('tipo', 'CONSULTA');
                         $this->db->where('inicio >=', $_POST['horainicio']);
                         $this->db->where('inicio <=', $_POST['horafim']);
                         $this->db->where('paciente_id is null');
@@ -1486,7 +1503,7 @@ class agenda_model extends Model {
                         }
                         $this->db->set('operador_medico_agenda', $operador_id);
                         $this->db->where('data', $index);
-                        $this->db->where('tipo', 'CONSULTA');
+//                        $this->db->where('tipo', 'CONSULTA');
                         $this->db->where('inicio >=', $_POST['horainicio']);
                         $this->db->where('inicio <=', $_POST['horafim']);
                         $this->db->where('paciente_id is null');
@@ -1507,7 +1524,7 @@ class agenda_model extends Model {
                         }
                         $this->db->set('operador_medico_agenda', $operador_id);
                         $this->db->where('data', $index);
-                        $this->db->where('tipo', 'CONSULTA');
+//                        $this->db->where('tipo', 'CONSULTA');
                         $this->db->where('inicio >=', $_POST['horainicio']);
                         $this->db->where('inicio <=', $_POST['horafim']);
                         $this->db->where('paciente_id is null');
@@ -1528,7 +1545,7 @@ class agenda_model extends Model {
                         }
                         $this->db->set('operador_medico_agenda', $operador_id);
                         $this->db->where('data', $index);
-                        $this->db->where('tipo', 'CONSULTA');
+//                        $this->db->where('tipo', 'CONSULTA');
                         $this->db->where('inicio >=', $_POST['horainicio']);
                         $this->db->where('inicio <=', $_POST['horafim']);
                         $this->db->where('paciente_id is null');
@@ -1548,7 +1565,7 @@ class agenda_model extends Model {
                         $this->db->set('bloqueado', 't');
                         $this->db->set('operador_medico_agenda', $operador_id);
                         $this->db->where('data', $index);
-                        $this->db->where('tipo', 'CONSULTA');
+//                        $this->db->where('tipo', 'CONSULTA');
                         $this->db->where('inicio >=', $_POST['horainicio']);
                         $this->db->where('inicio <=', $_POST['horafim']);
                         $this->db->where('paciente_id is null');
@@ -1591,7 +1608,7 @@ class agenda_model extends Model {
 
                         $this->db->where('paciente_id is null');
                         $this->db->where('data', $index);
-                        $this->db->where('tipo', 'CONSULTA');
+//                        $this->db->where('tipo', 'CONSULTA');
                         $this->db->where('inicio >=', $_POST['horainicio']);
                         $this->db->where('inicio <=', $_POST['horafim']);
                         $this->db->where('medico_consulta_id', $_POST['medico']);
@@ -1607,7 +1624,7 @@ class agenda_model extends Model {
 
                         $this->db->where('paciente_id is null');
                         $this->db->where('data', $index);
-                        $this->db->where('tipo', 'CONSULTA');
+//                        $this->db->where('tipo', 'CONSULTA');
                         $this->db->where('inicio >=', $_POST['horainicio']);
                         $this->db->where('inicio <=', $_POST['horafim']);
                         $this->db->where('medico_consulta_id', $_POST['medico']);
@@ -1623,7 +1640,7 @@ class agenda_model extends Model {
 
                         $this->db->where('paciente_id is null');
                         $this->db->where('data', $index);
-                        $this->db->where('tipo', 'CONSULTA');
+//                        $this->db->where('tipo', 'CONSULTA');
                         $this->db->where('inicio >=', $_POST['horainicio']);
                         $this->db->where('inicio <=', $_POST['horafim']);
                         $this->db->where('medico_consulta_id', $_POST['medico']);
@@ -1639,7 +1656,7 @@ class agenda_model extends Model {
 
                         $this->db->where('paciente_id is null');
                         $this->db->where('data', $index);
-                        $this->db->where('tipo', 'CONSULTA');
+//                        $this->db->where('tipo', 'CONSULTA');
                         $this->db->where('inicio >=', $_POST['horainicio']);
                         $this->db->where('inicio <=', $_POST['horafim']);
                         $this->db->where('medico_consulta_id', $_POST['medico']);
@@ -1655,7 +1672,7 @@ class agenda_model extends Model {
 
                         $this->db->where('paciente_id is null');
                         $this->db->where('data', $index);
-                        $this->db->where('tipo', 'CONSULTA');
+//                        $this->db->where('tipo', 'CONSULTA');
                         $this->db->where('inicio >=', $_POST['horainicio']);
                         $this->db->where('inicio <=', $_POST['horafim']);
                         $this->db->where('medico_consulta_id', $_POST['medico']);
@@ -1671,7 +1688,7 @@ class agenda_model extends Model {
 
                         $this->db->where('paciente_id is null');
                         $this->db->where('data', $index);
-                        $this->db->where('tipo', 'CONSULTA');
+//                        $this->db->where('tipo', 'CONSULTA');
                         $this->db->where('inicio >=', $_POST['horainicio']);
                         $this->db->where('inicio <=', $_POST['horafim']);
                         $this->db->where('medico_consulta_id', $_POST['medico']);
@@ -1687,7 +1704,7 @@ class agenda_model extends Model {
 
                         $this->db->where('paciente_id is null');
                         $this->db->where('data', $index);
-                        $this->db->where('tipo', 'CONSULTA');
+//                        $this->db->where('tipo', 'CONSULTA');
                         $this->db->where('inicio >=', $_POST['horainicio']);
                         $this->db->where('inicio <=', $_POST['horafim']);
                         $this->db->where('medico_consulta_id', $_POST['medico']);
@@ -1707,8 +1724,8 @@ class agenda_model extends Model {
     function gravarmedicoespecialidade() {
         try {
 
-            $datainicial = date("Y-m-d", strtotime( str_replace("/", "-", $_POST['datainicio']) ) );
-            $datafinal = date("Y-m-d", strtotime( str_replace("/", "-", $_POST['datafim']) ) );
+            $datainicial = date("Y-m-d", strtotime(str_replace("/", "-", $_POST['datainicio'])));
+            $datafinal = date("Y-m-d", strtotime(str_replace("/", "-", $_POST['datafim'])));
 
             if (isset($_POST['txtdomingo'])) {
                 $Domingo = 'Domingo';
@@ -2254,6 +2271,79 @@ class agenda_model extends Model {
         $return = $this->db->get();
         return $return->result();
     }
+    
+    function listarhorarioagendaexclusao($agenda_id = null) {
+        $this->db->select('e.nome as empresa,
+                           h.dia,
+                           h.horaentrada1,
+                           h.horasaida1,
+                           h.intervaloinicio,
+                           h.intervalofim,
+                           h.tempoconsulta,
+                           h.agenda_id,
+                           h.qtdeconsulta,
+                           h.empresa_id,
+                           h.observacoes,
+                           h.horarioagenda_id');
+        $this->db->from('tb_horarioagenda h');
+        $this->db->join('tb_empresa e', 'e.empresa_id = h.empresa_id', 'left');
+        $this->db->where('horarioagenda_id', $agenda_id);
+        $this->db->orderby('dia');
+        $return = $this->db->get();
+        return $return->result();
+    }
+
+    function listarhorarioagendacriacao($agenda_id = null, $medico_id = null, $datainicial, $datafinal) {
+
+        $this->db->select('distinct(horario_id)');
+        $this->db->from('tb_agenda_exames ae');
+//        $this->db->join('tb_empresa e', 'e.empresa_id = h.empresa_id', 'left');
+        $this->db->where('horarioagenda_id', $agenda_id);
+        $this->db->where('medico_agenda', $medico_id);
+        $this->db->where('data >=', $datainicial);
+        $this->db->where('data <=', $datafinal);
+        $this->db->groupby('horario_id');
+        $return2 = $this->db->get()->result();
+        if (count($return2) > 0) {
+            $horario_id = '';
+//            $horario_id = $return2
+            foreach ($return2 as $item) {
+                if ($horario_id == '') {
+                    $horario_id = $horario_id . "$item->horario_id";
+                } else {
+                    $horario_id = $horario_id . ",$item->horario_id";
+                }
+            }
+        }
+//        var_dump($horario_id); die;
+
+
+        $this->db->select('e.nome as empresa,
+                           h.dia,
+                           h.horaentrada1,
+                           h.horasaida1,
+                           h.intervaloinicio,
+                           h.intervalofim,
+                           h.tempoconsulta,
+                           h.agenda_id,
+                           h.qtdeconsulta,
+                           h.empresa_id,
+                           h.observacoes,
+                           h.horarioagenda_id');
+        $this->db->from('tb_horarioagenda h');
+        $this->db->join('tb_empresa e', 'e.empresa_id = h.empresa_id', 'left');
+        $this->db->where('agenda_id', $agenda_id);
+
+        if (count($return2) > 0) {
+
+            $this->db->where("horarioagenda_id NOT IN ($horario_id)");
+        }
+
+        $this->db->orderby('dia');
+        $return = $this->db->get();
+//        var_dump($return->result()); die;
+        return $return->result();
+    }
 
     function listartotalhoariofixo() {
         $this->db->select();
@@ -2266,20 +2356,37 @@ class agenda_model extends Model {
 
     function gravarhorariofixo() {
         try {
+//            echo '<pre>';
+            $agenda_id = $_POST['txtagendaID'];
+            $i = 0;
+            foreach ($_POST['txtDia'] as $dia) {
+                $i++;
+                $horaentrada1 = $_POST['txthoraEntrada'][$i];
+                $horasaida1 = $_POST['txthoraSaida'][$i];
+                $intervaloinicio = $_POST['txtIniciointervalo'][$i];
+                $intervalofim = $_POST['txtFimintervalo'][$i];
+                $tempoconsulta = $_POST['txtTempoconsulta'][$i];
+
+//                var_dump($dia, $horaentrada1, $horasaida1, $intervaloinicio, $intervalofim, $tempoconsulta);
+
+
+                $this->db->set('agenda_id', $agenda_id);
+                $this->db->set('dia', $dia);
+                $this->db->set('horaentrada1', $horaentrada1);
+                $this->db->set('horasaida1', $horasaida1);
+                $this->db->set('intervaloinicio', $intervaloinicio);
+                $this->db->set('intervalofim', $intervalofim);
+                $this->db->set('tempoconsulta', $tempoconsulta);
+//            $this->db->set('qtdeconsulta', $_POST['txtQtdeconsulta']);
+//            $this->db->set('empresa_id', $_POST['empresa']);
+                $this->db->set('observacoes', $_POST['obs']);
+
+                $this->db->insert('tb_horarioagenda');
+            }
+
 
             /* inicia o mapeamento no banco */
-            $this->db->set('agenda_id', $_POST['txtagendaID']);
-            $this->db->set('dia', $_POST['txtDia']);
-            $this->db->set('horaentrada1', $_POST['txthoraEntrada1']);
-            $this->db->set('horasaida1', $_POST['txthoraSaida1']);
-            $this->db->set('intervaloinicio', $_POST['txtIniciointervalo']);
-            $this->db->set('intervalofim', $_POST['txtFimintervalo']);
-            $this->db->set('tempoconsulta', $_POST['txtTempoconsulta']);
-            $this->db->set('qtdeconsulta', $_POST['txtQtdeconsulta']);
-            $this->db->set('empresa_id', $_POST['empresa']);
-            $this->db->set('observacoes', $_POST['obs']);
 
-            $this->db->insert('tb_horarioagenda');
             $erro = $this->db->_error_message();
             if (trim($erro) != "") // erro de banco
                 return true;
@@ -2291,6 +2398,12 @@ class agenda_model extends Model {
     }
 
     function excluirhorariofixo($agenda_id) {
+//        var_dump($agenda_id); die;
+        if ($_POST['excluir'] == 'on') {
+            $this->db->where('horario_id', $agenda_id);
+            $this->db->where('paciente_id is null');
+            $this->db->delete('tb_agenda_exames');
+        }
 
         $this->db->where('horarioagenda_id', $agenda_id);
         $this->db->delete('tb_horarioagenda');

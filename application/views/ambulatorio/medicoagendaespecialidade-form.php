@@ -1,4 +1,4 @@
-<div class="content"> <!-- Inicio da DIV content -->
+<div id="page-wrapper"> <!-- Inicio da DIV content -->
     <div id="accordion">
         <h3 class="singular"><a href="#">Bloqueio / Altera&ccedil;&otilde;s</a></h3>
         <div>

@@ -1,5 +1,5 @@
 
-<div class="content"> <!-- Inicio da DIV content -->
+<div id="page-wrapper"> <!-- Inicio da DIV content -->
     <table>
         <thead>
             <tr>

@@ -1907,6 +1907,7 @@ class exame_model extends Model {
                             ae.operador_atualizacao,
                             ae.paciente_id,
                             ae.telefonema,
+                            ae.nome,
                             ae.observacoes,
                             ae.encaixe,
                             ae.chegada,
@@ -5054,7 +5055,7 @@ class exame_model extends Model {
         }
     }
 
-    function gravarconsulta($agenda_id, $horaconsulta, $horaverifica, $nome, $datainicial, $datafinal, $index, $medico_id, $id, $observacoes, $empresa_id) {
+    function gravarconsulta($horario_id,$agenda_id, $horaconsulta, $horaverifica, $nome, $datainicial, $datafinal, $index, $medico_id, $id, $observacoes, $empresa_id) {
         try {
 
             $index = date("Y-m-d", strtotime(str_replace("/", "-", $index)));
@@ -5066,7 +5067,7 @@ class exame_model extends Model {
             $this->db->set('data_inicio', $datainicial);
             $this->db->set('data_fim', $datafinal);
             $this->db->set('data', $index);
-            $this->db->set('tipo_consulta_id', $_POST['txttipo']);
+            $this->db->set('horario_id', $horario_id);
             $this->db->set('nome_id', $id);
             $this->db->set('medico_consulta_id', $medico_id);
             $this->db->set('medico_agenda', $medico_id);

@@ -25,13 +25,13 @@
                                 <th>Inicio intervalo</th>
                                 <th>Fim do intervalo</th>
                                 <th>Tempo Consulta</th>
-                                <th>QTDE Consulta</th>
+                                <!--<th>QTDE Consulta</th>-->
                                 <th>Ações</th>
                                 <!--<th>Empresa</th>-->
                             </tr>
                             <tr>
                                 <td>                
-                                    <select name="txtDia[1]" id="txtData" class='form-control'>
+                                    <select name="txtDia[1]" id="txtData" class='form-control' required>
                                         <option value=""></option>
                                         <option value="1 - Segunda">1 - Segunda</option>
                                         <option value="2 - Terça">2 - Terça</option>
@@ -42,33 +42,42 @@
                                         <option value="7 - Domingo">7 - Domingo</option>
                                     </select>
                                 </td>
-                                <td><input type='text'  id="txthoraEntrada1" name="txthoraEntrada[1]" alt='time' class='form-control' /></td>
-                                <td><input type='text'  id='txthoraSaida1' name="txthoraSaida[1]" alt='time' class='form-control' /></td>
-                                <td><input type='text'  id="txtIniciointervalo" name="txtIniciointervalo[1]" alt='time' value='00:00' class='form-control' /></td>
-                                <td><input type='text'  id="txtFimintervalo" name="txtFimintervalo[1]" alt='time' value='00:00' class='form-control' /></td>
-                                <td><input type='text'  id="txtTempoconsulta" name="txtTempoconsulta[1]" class='form-control' /></td>
-                                <td><input type='text'  id="txtQtdeconsulta" name="txtQtdeconsulta[1]" value='0' class='form-control' /></td>
+                                <td><input type='text'  id="txthoraEntrada1" name="txthoraEntrada[1]" alt='time' class='form-control hora' required/></td>
+                                <td><input type='text'  id='txthoraSaida1' name="txthoraSaida[1]" alt='time' class='form-control hora' required/></td>
+                                <td><input type='text'  id="txtIniciointervalo" name="txtIniciointervalo[1]" alt='time' value='00:00' class='form-control hora' required/></td>
+                                <td><input type='text'  id="txtFimintervalo" name="txtFimintervalo[1]" alt='time' value='00:00' class='form-control hora' required/></td>
+                                <td><input type='text'  id="txtTempoconsulta" name="txtTempoconsulta[1]" class='form-control' data-container="body" data-toggle="popover" data-placement="left" data-content="Digite o tempo de consulta em minutos. Não digite letras, por favor. (Clique novamente no campo para sumir esta mensagem)" required/></td>
+                                <!--<td><input type='text'  id="txtQtdeconsulta" name="txtQtdeconsulta[1]" value='0' class='form-control' /></td>-->
+                                <td><a href='#' class='btn btn-outline btn-danger btn-sm delete'>Excluir</a></td>
 
                             </tr>
                         </table>
                     </div>
                     <div class="row">
                         <div class="col-lg-3">
-                            <a class="btn btn-success btn-sm" href="#" id="plusInfusao">Adicionar Ítem</a>
+                            <a class="btn btn-success btn-sm" href="#" id="plusInfusao"><i class="fa fa-plus-circle fa-fw"></i> Adicionar Dia</a>
                         </div>
                     </div>
-                    <br/><br/>
-                    <table>
-                        <tr>
-                            <td>
-                                <textarea rows="2" cols="50" placeholder="obs..." value="" name="obs"></textarea>
-                            </td>
-                        </tr>
-                    </table>
-                    <hr/>
-                    <button type="submit" name="btnEnviar">Enviar</button>
-                    <button type="reset" name="btnLimpar">Limpar</button>
-                    <button type="button" id="btnVoltar" name="btnVoltar">Voltar</button>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-8 form-group">
+                            <label>Observações</label>
+                            <textarea class="form-control" rows="2" cols="50" placeholder="obs..." value="" name="obs"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 form-group">
+                            <p>
+                                <button class="btn btn-outline btn-success  btn-sm" type="submit" name="btnEnviar"><i class="fa fa-floppy-o fa-fw"></i> Enviar</button>
+                            <button class="btn btn-outline btn-danger  btn-sm" type="reset" name="btnLimpar">Limpar</button>
+                            </p>
+                        </div>
+                    </div>
+
+
+
+                    <!--<button type="button" id="btnVoltar" name="btnVoltar">Voltar</button>-->
                 </form>
             </div>
         </div>
@@ -103,10 +112,13 @@
 
         $('#plusInfusao').click(function () {
 //            alert('asd');
+//        if(){
+//            
+//        }
 
             var linha = "<tr>";
             linha += "<td>";
-            linha += "<select  name='txtDia[" + idlinha + "]' class='form-control'>";
+            linha += "<select  name='txtDia[" + idlinha + "]' class='form-control' required>";
             linha += "<option value=''></option>";
             linha += "<option value='1 - Segunda'>1 - Segunda</option>";
             linha += "<option value='2 - Terça'>2 - Terça</option>";
@@ -118,21 +130,24 @@
             linha += "</select>";
             linha += "</td>";
 
-            linha += "<td><input type='text'  id='txthoraEntrada1[" + idlinha + "]' name='txthoraEntrada[" + idlinha + "]' alt='time' class='form-control' /></td>";
-            linha += "<td><input type='text'  id='txthoraSaida1' name='txthoraSaida[" + idlinha + "]' alt='time' class='form-control' /></td>";
-            linha += "<td><input type='text'  id='txtIniciointervalo' name='txtIniciointervalo[" + idlinha + "]' alt='time' value='00:00' class='form-control' /></td>";
-            linha += "<td><input type='text'  id='txtFimintervalo' name='txtFimintervalo[" + idlinha + "]' alt='time' value='00:00' class='form-control' /></td>";
-            linha += "<td><input type='text'  id='txtTempoconsulta' name='txtTempoconsulta[" + idlinha + "]' class='form-control' /></td>";
-            linha += "<td><input type='text'  id='txtQtdeconsulta' name='txtQtdeconsulta[" + idlinha + "]' value='0' class='form-control' /></td>";
+            linha += "<td><input type='text'  id='txthoraEntrada1[" + idlinha + "]' name='txthoraEntrada[" + idlinha + "]' alt='time' class='form-control hora' required/></td>";
+            linha += "<td><input type='text'  id='txthoraSaida1' name='txthoraSaida[" + idlinha + "]' alt='time' class='form-control hora' required/></td>";
+            linha += "<td><input type='text'  id='txtIniciointervalo' name='txtIniciointervalo[" + idlinha + "]' alt='time' value='00:00' class='form-control hora' required/></td>";
+            linha += "<td><input type='text'  id='txtFimintervalo' name='txtFimintervalo[" + idlinha + "]' alt='time' value='00:00' class='form-control hora' required/></td>";
+            linha += "<td><input type='text'  id='txtTempoconsulta' name='txtTempoconsulta[" + idlinha + "]' class='form-control' data-container='body' data-toggle='popover' data-placement='left' data-content='Digite o tempo de consulta em minutos. Não digite letras, por favor. (Clique novamente no campo para sumir esta mensagem)' required/></td>";
+//            linha += "<td><input type='text'  id='txtQtdeconsulta' name='txtQtdeconsulta[" + idlinha + "]' value='0' class='form-control' /></td>";
             linha += "<td>";
-            linha += "<a href='#' class='delete'>Excluir</a>";
+            linha += "<a href='#' class='btn btn-outline btn-danger btn-sm delete'>Excluir</a>";
             linha += "</td>";
             linha += "</tr>";
 //            alert(linha);
 
+
+
             idlinha++;
             classe = (classe == 1) ? 2 : 1;
             $('#tabela-agenda').append(linha);
+            $(".hora").mask('99:99');
             addRemove();
             return false;
         });
@@ -169,5 +184,14 @@
 
         }
     });
+
+
+    $('.tooltip-demo').tooltip({
+        selector: "[data-toggle=tooltip]",
+        container: "body"
+    });
+    // popover demo
+    $("[data-toggle=popover]")
+            .popover();
 
 </script>
