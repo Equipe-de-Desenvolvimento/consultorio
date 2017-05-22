@@ -47,14 +47,14 @@
                     <form method="post" id="form" action="<?php echo base_url() ?>ambulatorio/exame/listarmultifuncaoconsultacalendario">
                         <table width="60%" class="table " id="dataTables-example">
                             <tr class="info">
-                                <th>Especialidade</th>
+                                <!--<th>Especialidade</th>-->
                                 <th>Medico</th>
                                 <th class="text-center">Ações</th>
                             </tr> 
                             <tr class="">
 
 
-                                <td>
+                                <td style="display:none;">
                                     <select name="especialidade" id="especialidade" class="form-control texto06">
                                         <option value=""></option>
                                         <? foreach ($especialidade as $value) : ?>
