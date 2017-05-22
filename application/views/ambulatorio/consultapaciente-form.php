@@ -10,98 +10,98 @@
         </div>
     </div>
     <form name="form_exametemp" id="form_exametemp" action="<?= base_url() ?>ambulatorio/exametemp/gravarpacienteconsultatemp/<?= $agenda_exames_id ?>" method="post">
-    <div class="panel panel-default ">
-        <div class="alert alert-info">
-            Dados do Atendimento
-        </div>
-        <div class="panel-body">
-            <div class="row">
-                <!--                    <div class="col-lg-2">
-                                        <div class="form-group">
-                                            <label>Prontuário*</label>
-                                            <input type="text" id="txtNomeid" class="form-control" name="txtNomeid" readonly="true" />
-                                        </div>
-                
-                
-                                    </div>-->
-                <div class="col-lg-8">
-                    <div class="form-group">
-                        <label>Paciente*</label>
-                        <input type="hidden" id="txtNomeid" class="form-control texto02" name="txtNomeid" readonly="true" />
-                        <input type="text" id="txtNome" required name="txtNome" class="form-control eac-square" onblur="calculoIdade(document.getElementById('nascimento').value)"  />
-                    </div>
-
-
-                </div>
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <label>Data de Nasc</label>
-                        <!--<input type="text" id="txtNomeid" class="form-control texto02" name="txtNomeid" readonly="true" />-->
-                        <input type="text" name="nascimento" id="nascimento" class="form-control data" alt="date"  maxlength="10"  onkeypress="mascara3(this)" onblur="calculoIdade(this.value)"/>
-                    </div>
-
-
-                </div>
+        <div class="panel panel-default ">
+            <div class="alert alert-info">
+                Dados do Atendimento
             </div>
-            <div class="row">
+            <div class="panel-body">
+                <div class="row">
+                    <!--                    <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label>Prontuário*</label>
+                                                <input type="text" id="txtNomeid" class="form-control" name="txtNomeid" readonly="true" />
+                                            </div>
+                    
+                    
+                                        </div>-->
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <label>Paciente*</label>
+                            <input type="hidden" id="txtNomeid" class="form-control texto02" name="txtNomeid" readonly="true" />
+                            <input type="text" id="txtNome" required name="txtNome" class="form-control eac-square" onblur="calculoIdade(document.getElementById('nascimento').value)"  />
+                        </div>
 
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <label>Telefone</label>
-                        <input type="text" id="txtTelefone" class="form-control" name="txtTelefone"/>
+
                     </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Data de Nasc</label>
+                            <!--<input type="text" id="txtNomeid" class="form-control texto02" name="txtNomeid" readonly="true" />-->
+                            <input type="text" name="nascimento" id="nascimento" class="form-control data" alt="date"  maxlength="10"  onkeypress="mascara3(this)" onblur="calculoIdade(this.value)"/>
+                        </div>
 
 
-                </div>
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <label>Celular</label>
-                        <input type="text" id="txtCelular" class="form-control" name="txtCelular"/>
                     </div>
-
-
                 </div>
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label>Convenio *</label>
-                        <select name="convenio" id="convenio" class="form-control" required>
-                            <option  value="0">Selecione</option>
-                            <? foreach ($convenio as $value) : ?>
-                                <option value="<?= $value->convenio_id; ?>"><?php echo $value->nome; ?></option>
-                            <? endforeach; ?>
-                        </select>
+                <div class="row">
+
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Telefone</label>
+                            <input type="text" id="txtTelefone" class="form-control" name="txtTelefone"/>
+                        </div>
+
+
                     </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Celular</label>
+                            <input type="text" id="txtCelular" class="form-control" name="txtCelular"/>
+                        </div>
 
 
-                </div>
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label>Procedimento</label>
-                        <select  name="procedimento" id="procedimento" class="form-control" required >
-                            <option value="">Selecione</option>
-                        </select>
                     </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Convenio *</label>
+                            <select name="convenio" id="convenio" class="form-control" required>
+                                <option  value="0">Selecione</option>
+                                <? foreach ($convenio as $value) : ?>
+                                    <option value="<?= $value->convenio_id; ?>"><?php echo $value->nome; ?></option>
+                                <? endforeach; ?>
+                            </select>
+                        </div>
 
 
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Procedimento</label>
+                            <select  name="procedimento" id="procedimento" class="form-control" required >
+                                <option value="">Selecione</option>
+                            </select>
+                        </div>
+
+
+                    </div>
                 </div>
-            </div>
-            <div class="row">
+                <div class="row">
 
-                <div class="col-lg-8">
-                    <div class="form-group">
-                        <label>Observacoes</label>
-                        <textarea id="observacoes" class="form-control" name="observacoes"></textarea>
-                            
-                       
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <label>Observacoes</label>
+                            <textarea id="observacoes" class="form-control" name="observacoes"></textarea>
+
+
 
                         <!--<input type="text" id="observacoes" class="form-control" name="observacoes" />-->
+                        </div>
+
+
                     </div>
 
-
                 </div>
-
-            </div>
-            <div class="row">
+                <div class="row">
                     <div class="col-lg-1">
                         <button class="btn btn-outline btn-success btn-sm" type="submit" name="btnEnviar"><i class="fa fa-floppy-o" aria-hidden="true"></i>
                             Enviar</button>
@@ -113,54 +113,54 @@
 
 
 
-        </div>
+            </div>
 
-    </div>
-        </form>
+        </div>
+    </form>
 
     <div class="row">
         <div class="col-lg-12">
             <div class="table-responsive">
-                
-            
-            <table class="table table-bordered table-striped table-hover">
-            <thead>
 
-                <tr>
-                    <th class="tabela_header">Data</th>
-                    <th class="tabela_header">Hora</th>
-                    <th class="tabela_header">Exame</th>
-                    <th class="tabela_header">Observa&ccedil;&otilde;es</th>
-                </tr>
-            </thead>
-            <?
-            $estilo_linha = "tabela_content01";
-            foreach ($consultas as $item) {
-                ($estilo_linha == "tabela_content01") ? $estilo_linha = "tabela_content02" : $estilo_linha = "tabela_content01";
-                ?>
-               
-                    <tr>
-                        <td class="<?php echo $estilo_linha; ?>"><?= substr($item->data, 8, 2) . '/' . substr($item->data, 5, 2) . '/' . substr($item->data, 0, 4); ?></td>
-                        <td class="<?php echo $estilo_linha; ?>"><?= $item->inicio; ?></td>
-                        <td class="<?php echo $estilo_linha; ?>"><?= $item->medico; ?></td>
-                        <td class="<?php echo $estilo_linha; ?>"><?= $item->observacoes; ?></td>
-                   </tr>
 
-                
-                <?
-            }
-            ?>
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+
+                        <tr>
+                            <th class="tabela_header">Data</th>
+                            <th class="tabela_header">Hora</th>
+                            <th class="tabela_header">Exame</th>
+                            <th class="tabela_header">Observa&ccedil;&otilde;es</th>
+                        </tr>
+                    </thead>
+                    <?
+                    $estilo_linha = "tabela_content01";
+                    foreach ($consultas as $item) {
+                        ($estilo_linha == "tabela_content01") ? $estilo_linha = "tabela_content02" : $estilo_linha = "tabela_content01";
+                        ?>
+
+                        <tr>
+                            <td class="<?php echo $estilo_linha; ?>"><?= substr($item->data, 8, 2) . '/' . substr($item->data, 5, 2) . '/' . substr($item->data, 0, 4); ?></td>
+                            <td class="<?php echo $estilo_linha; ?>"><?= $item->inicio; ?></td>
+                            <td class="<?php echo $estilo_linha; ?>"><?= $item->medico; ?></td>
+                            <td class="<?php echo $estilo_linha; ?>"><?= $item->observacoes; ?></td>
+                        </tr>
+
+
+                        <?
+                    }
+                    ?>
 <!--            <tfoot>
-                <tr>
-                    <th class="tabela_footer" colspan="4">
-                    </th>
-                </tr>
-            </tfoot>-->
-        </table>
-                </div>
+<tr>
+    <th class="tabela_footer" colspan="4">
+    </th>
+</tr>
+</tfoot>-->
+                </table>
+            </div>
 
         </div>
-        
+
     </div>
 
 
@@ -172,47 +172,47 @@
 <script type="text/javascript" src="<?= base_url() ?>js/jquery-ui-1.10.4.js" ></script>
 <!--<script type="text/javascript" src="<?= base_url() ?>js/jquery.maskedinput.js"></script>-->
 <script>
-                            function mascaraTelefone(campo) {
+                                function mascaraTelefone(campo) {
 
-                                function trata(valor, isOnBlur) {
+                                    function trata(valor, isOnBlur) {
 
-                                    valor = valor.replace(/\D/g, "");
-                                    valor = valor.replace(/^(\d{2})(\d)/g, "($1)$2");
+                                        valor = valor.replace(/\D/g, "");
+                                        valor = valor.replace(/^(\d{2})(\d)/g, "($1)$2");
 
-                                    if (isOnBlur) {
+                                        if (isOnBlur) {
 
-                                        valor = valor.replace(/(\d)(\d{4})$/, "$1-$2");
-                                    } else {
+                                            valor = valor.replace(/(\d)(\d{4})$/, "$1-$2");
+                                        } else {
 
-                                        valor = valor.replace(/(\d)(\d{3})$/, "$1-$2");
+                                            valor = valor.replace(/(\d)(\d{3})$/, "$1-$2");
+                                        }
+                                        return valor;
                                     }
-                                    return valor;
-                                }
 
-                                campo.onkeypress = function (evt) {
+                                    campo.onkeypress = function (evt) {
 
-                                    var code = (window.event) ? window.event.keyCode : evt.which;
-                                    var valor = this.value
+                                        var code = (window.event) ? window.event.keyCode : evt.which;
+                                        var valor = this.value
 
-                                    if (code > 57 || (code < 48 && code != 8)) {
-                                        return false;
-                                    } else {
-                                        this.value = trata(valor, false);
+                                        if (code > 57 || (code < 48 && code != 8)) {
+                                            return false;
+                                        } else {
+                                            this.value = trata(valor, false);
+                                        }
                                     }
-                                }
 
-                                campo.onblur = function () {
+                                    campo.onblur = function () {
 
-                                    var valor = this.value;
-                                    if (valor.length < 13) {
-                                        this.value = ""
-                                    } else {
-                                        this.value = trata(this.value, true);
+                                        var valor = this.value;
+                                        if (valor.length < 13) {
+                                            this.value = ""
+                                        } else {
+                                            this.value = trata(this.value, true);
+                                        }
                                     }
-                                }
 
-                                campo.maxLength = 14;
-                            }
+                                    campo.maxLength = 14;
+                                }
 
 
 </script>
@@ -287,8 +287,8 @@
 //            }
 //        });
 //    });
-    
-        // NOVOS AUTOCOMPLETES.
+
+    // NOVOS AUTOCOMPLETES.
     // A primeira coisa a definir é o nome da variável pra jogar no Jquery mais tarde
     // Url é a função que vai trazer o JSON.
     // getValue é onde se define o nome do campo que você quer que apareça na lista
@@ -299,7 +299,15 @@
     // Daí embaixo tem o Jquery padrão pra jogar o ID no campo Hidden
 
     var paciente = {
-        url: "<?= base_url() ?>index.php?c=autocomplete&m=paciente",
+//        url: "<?= base_url() ?>index.php?c=autocomplete&m=paciente",
+        url: function (phrase) {
+            if (phrase.length > 2) {
+                return "<?= base_url() ?>autocomplete/paciente?term=" + phrase;
+            } else {
+                //duckduckgo doesn't support empty strings
+//                return "http://api.duckduckgo.com/?q=empty&format=json";
+            }
+        },
         getValue: "value",
         list: {
             onSelectItemEvent: function () {
@@ -329,6 +337,7 @@
             },
             maxNumberOfElements: 10
         },
+        requestDelay: 200,
         theme: "bootstrap"
     };
 
