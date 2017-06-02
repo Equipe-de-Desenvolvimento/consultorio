@@ -58,12 +58,12 @@ class Modelolaudo extends BaseController {
     function gravar() {
         $exame_modelolaudo_id = $this->modelolaudo->gravar();
         if ($exame_modelolaudo_id == "-1") {
-            $data['mensagem'] = 'Erro ao gravar a Modelolaudo. Opera&ccedil;&atilde;o cancelada.';
+            $data['mensagem'] = array('Erro ao gravar o modelo de laudo. Operação cancelada.', 'error');
         } else {
-            $data['mensagem'] = 'Sucesso ao gravar a Modelolaudo.';
+            $data['mensagem'] = array('Sucesso ao gravar o modelo de laudo.', 'success');
         }
         $this->session->set_flashdata('message', $data['mensagem']);
-        redirect(base_url() . "ambulatorio/modelolaudo");
+        redirect(base_url() . "ambulatorio/modelolaudo/pesquisar");
     }
 
     private function carregarView($data = null, $view = null) {

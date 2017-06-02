@@ -148,13 +148,17 @@
 
                 <br>
                 <div class="row">
-                    <div class="col-lg-1">
+                    
+                    <div class="col-lg-5">
+                        <p>
                         <button class="btn btn-outline btn-success btn-sm" type="submit" name="btnEnviar"><i class="fa fa-floppy-o" aria-hidden="true"></i>
                             Enviar</button>
-                    </div>
-                    <div class="col-lg-1">
+                    <!--</div>-->
+                    <!--<div class="col-lg-1">-->
                         <button class="btn btn-outline btn-danger btn-sm" type="reset" name="btnLimpar">Limpar</button>
+                        </p>
                     </div>
+                    
                 </div>
             </div>
 

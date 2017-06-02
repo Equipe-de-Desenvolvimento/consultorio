@@ -1,3 +1,8 @@
+<link href="<?= base_url() ?>bootstrap/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="<?= base_url() ?>bootstrap/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet" type="text/css" />
+<script src="<?= base_url() ?>bootstrap/vendor/datatables/js/jquery.dataTables.min.js"></script> 
+<script src="<?= base_url() ?>bootstrap/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script> 
+<script src="<?= base_url() ?>bootstrap/vendor/datatables-responsive/dataTables.responsive.js"></script> 
 <div class="content ficha_ceatox"> <!-- Inicio da DIV content -->
     <div class="clear"></div>
     <form name="form_exametemp" id="form_exametemp" action="<?= base_url() ?>ambulatorio/exametemp/gravarpacienteexametemp/<?= $agenda_exames_id ?>" method="post">

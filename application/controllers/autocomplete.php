@@ -1733,7 +1733,12 @@ class Autocomplete extends Controller {
         } else {
             $result = $this->exame->listarautocompletepaciente();
         }
+//        $retorno['data'] = array();
         foreach ($result as $item) {
+//            $retorno['data'][] = array(
+//                $item->nome, $item->telefone, $item->celular,substr($item->nascimento, 8, 2) . "/" . substr($item->nascimento, 5, 2) . "/" . substr($item->nascimento, 0, 4),
+//                $item->paciente_id,$item->logradouro . " - " . $item->numero
+//            );
             $retorno['value'] = $item->nome;
             $retorno['itens'] = $item->telefone;
             $retorno['celular'] = $item->celular;

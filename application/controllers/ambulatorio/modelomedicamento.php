@@ -78,10 +78,10 @@ class Modelomedicamento extends BaseController {
         if($_POST['unidadeid'] != ''){
             $verifica = $this->modelomedicamento->gravar();
             if($verifica){
-                $mensagem = 'Sucesso ao excluir a Medicamento';
+                $mensagem = array('Sucesso ao gravar medicamento', 'success');
             } 
             else{
-                $mensagem = 'Erro ao excluir o Medicamento';
+                $mensagem = array('Erro ao gravar medicamento', 'error');
             }
         }
         else{

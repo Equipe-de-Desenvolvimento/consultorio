@@ -1,3 +1,27 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="STG SAUDE">
+    <title>Atendimento Médico</title>
+    <!--CSS PADRAO DO BOOTSTRAP COM ALGUMAS ALTERAÇÕES DO TEMA-->
+    <link href="<?= base_url() ?>bootstrap/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>bootstrap/vendor/metisMenu/metisMenu.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>bootstrap/dist/css/sb-admin-2.css" rel="stylesheet" />
+    <!--BIBLIOTECA RESPONSAVEL PELOS ICONES-->
+    <link href="<?= base_url() ?>bootstrap/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <!--DEFINE TAMANHO MAXIMO DOS CAMPOS-->
+    <link href="<?= base_url() ?>css/form.css" rel="stylesheet" type="text/css" />
+    <!--AUTOCOMPLETE NOVO-->
+    <link href="<?= base_url() ?>bootstrap/vendor/autocomplete/easy-autocomplete.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url() ?>bootstrap/vendor/autocomplete/easy-autocomplete.themes.css" rel="stylesheet" type="text/css" />
+    <!--CSS DO ALERTA BONITINHO-->
+    <link href="<?= base_url() ?>bootstrap/vendor/alert/dist/sweetalert.css" rel="stylesheet" type="text/css" />
+
+
+    <link href="<?= base_url() ?>bootstrap/vendor/clock/compiled/flipclock.css" rel="stylesheet" />
+</head>
 <div > <!-- Inicio da DIV content -->
         <div class="bt_link_voltar">
         <a href="<?=  base_url()?>ambulatorio/modelolaudo">

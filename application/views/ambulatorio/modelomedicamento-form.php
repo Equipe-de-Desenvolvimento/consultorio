@@ -1,47 +1,79 @@
-<div class="content"> <!-- Inicio da DIV content -->
+<div id="page-wrapper"> <!-- Inicio da DIV content -->
     <div id="accordion">
-        <h3 class="singular"><a href="#">Cadastro Modelo Medicamento</a></h3>
+        <!--<h3 class="singular"><a href="#">Cadastro Modelo Medicamento</a></h3>-->
+        <div class="row">
+            <div class="col-lg-12">
+                <!--<div class="panel panel-default">-->
+                <div class="alert alert-success">
+                    Cadastro Modelo Medicamento
+                </div>
+
+                <!--</div>-->
+            </div>
+        </div>
         <div>
             <form name="form_novomedicamento" id="form_novomedicamento" action="<?= base_url() ?>ambulatorio/modelomedicamento/gravar" method="post">
-
-                <dl class="dl_desconto_lista">
-                    <dt>
-                        <label>Nome</label>
-                    </dt>
-                    <dd>
-                        <input type="hidden" name="txtmedicamentoID" id="txtmedicamentoID" class="texto09">
-                        <input type=text" name="txtmedicamento" id="txtmedicamento" class="texto09">
-                    </dd>
-
-                    <dt>
-                        <label>Quantidade</label>
-                    </dt>
-                    <dd>
-                        <input type=text" name="qtde" id="qtde" class="texto02" alt="integer">
-                    </dd>
-
-                    <dt>
-                        <label>Unidade</label>
-                    </dt>
-                    <dd>
-                        <input type=hidden" name="unidadeid" id="unidadeid" class="texto02" style="display: none;">
-                        <input type=text" name="unidade" id="unidade" class="texto02">
-                    </dd>
-
-                    <dt>
-                        <label>Posologia</label>
-                    </dt>
-                    <dd>
-                        <input type=text" name="posologia" id="posologia" class="texto09">
-                    </dd>
+                <div class="panel panel-default ">
+                    <div class="alert alert-info">
+                        Dados da Contas a Pagar
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Nome</label>
 
 
-                </dl>    
+                                    <input type="hidden" name="txtmedicamentoID" id="txtmedicamentoID" class="form-control">
+                                    <input type=text" name="txtmedicamento" id="txtmedicamento" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Quantidade</label>
 
-                <hr/>
-                <button type="submit" name="btnEnviar">Enviar</button>
-                <button type="reset" name="btnLimpar">Limpar</button>
-                <button type="button" id="btnVoltar" name="btnVoltar">Voltar</button>
+                                    <input type=text" name="qtde" id="qtde" class="form-control" alt="integer">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Unidade</label>
+
+
+                                    <input type=hidden" name="unidadeid" id="unidadeid" class="form-control" style="display: none;">
+                                    <input type=text" name="unidade" id="unidade" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Posologia</label>
+                                    <input type=text" name="posologia" id="posologia" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <p>
+                                    <button class="btn btn-outline btn-success btn-sm" type="submit" name="btnEnviar"><i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                        Enviar</button>
+                                    <!--</div>-->
+                                    <!--<div class="col-lg-1">-->
+                                    <button class="btn btn-outline btn-danger btn-sm" type="reset" name="btnLimpar">Limpar</button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<hr/>-->
+
+                <!--<button type="button" id="btnVoltar" name="btnVoltar">Voltar</button>-->
             </form>
         </div>
     </div>

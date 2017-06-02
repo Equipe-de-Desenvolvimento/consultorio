@@ -145,7 +145,7 @@ class modelomedicamento_model extends Model {
                             medico_id,
                             o.nome as medico,
                             amr.texto');
-            $this->db->from('tb_ambulatorio_modelo_medicamento amr');
+            $this->db->from('tb_ambulatorio_receituario_medicamento amr');
             $this->db->join('tb_operador o', 'o.operador_id = amr.medico_id', 'left');
             $this->db->where("ambulatorio_receituario_medicamento_id", $ambulatorio_modelo_medicamento_id);
             $query = $this->db->get();

@@ -27,7 +27,7 @@ class modeloatestado_model extends Model {
             $this->db->where('aml.nome ilike', "%" . $args['nome'] . "%");
             $this->db->orwhere('o.nome ilike', "%" . $args['nome'] . "%");
             $this->db->where('aml.ativo', "t");
-            $this->db->orwhere('pt.nome ilike', "%" . $args['nome'] . "%");
+            $this->db->orwhere('aml.nome ilike', "%" . $args['nome'] . "%");
             $this->db->where('aml.ativo', "t");
         }
         return $this->db;

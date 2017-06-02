@@ -1,6 +1,3 @@
-<head>
-    <meta charset="utf-8">
-</head>
 <div id="page-wrapper"> <!-- Inicio da DIV content -->
     <div class="row">
         <!--<h3 class="singular"><a href="#">Manter Modelos de Declaração</a></h3>-->
@@ -8,7 +5,7 @@
             <div class="panel panel-default">
 
                 <div class="table-responsive" id="pesquisar">
-                    <form method="get" action="<?= base_url() ?>ambulatorio/modelodeclaracao/pesquisar">
+                    <form method="post" action="<?= base_url() ?>ambulatorio/modelodeclaracao/pesquisar">
                         <table width="100%" class="table " id="dataTables-example">
                             <tr class="info">
                                 <th>Nome</th>
@@ -16,7 +13,7 @@
                                 <th style="text-align: center;">Ações</th>
                             </tr> 
                             <tr class="">
-                                <td><input type="text" name="nome" id="" class="form-control" alt="date" value="<?php echo @$_GET['nome']; ?>" /></td>
+                                <td><input type="text" name="nome" id="" class="form-control" alt="date" value="<?php echo @$_POST['nome']; ?>" /></td>
                                 <td style="text-align: center;"><button type="submit" class="btn btn-default btn-outline btn-danger" name="enviar"><i class="fa fa-search fa-1x"></i></button></td>
                             </tr> 
 
@@ -38,17 +35,17 @@
                                 </tr>
                             </thead>
                             <?php
-                            $url = $this->utilitario->build_query_params(current_url(), $_GET);
-                            $consulta = $this->modelodeclaracao->listar($_GET);
+                            $url = $this->utilitario->build_query_params(current_url(), $_POST);
+                            $consulta = $this->modelodeclaracao->listar($_POST);
                             $total = $consulta->count_all_results();
                             $limit = 10;
-                            isset($_GET['per_page']) ? $pagina = $_GET['per_page'] : $pagina = 0;
+                            isset($_POST['per_page']) ? $pagina = $_POST['per_page'] : $pagina = 0;
 
                             if ($total > 0) {
                                 ?>
                                 
                                     <?php
-                                    $lista = $this->modelodeclaracao->listar($_GET)->orderby('amd.nome')->orderby('ambulatorio_modelo_declaracao_id')->limit($limit, $pagina)->get()->result();
+                                    $lista = $this->modelodeclaracao->listar($_POST)->orderby('amd.nome')->orderby('ambulatorio_modelo_declaracao_id')->limit($limit, $pagina)->get()->result();
                                     $estilo_linha = "tabela_content01";
                                     foreach ($lista as $item) {
                                         ($estilo_linha == "tabela_content01") ? $estilo_linha = "tabela_content02" : $estilo_linha = "tabela_content01";

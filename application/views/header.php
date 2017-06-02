@@ -34,6 +34,8 @@ function debug($object) {
                             <link href="<?= base_url() ?>bootstrap/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
                             <link href="<?= base_url() ?>bootstrap/vendor/metisMenu/metisMenu.css" rel="stylesheet" />
                             <link href="<?= base_url() ?>bootstrap/dist/css/sb-admin-2.css" rel="stylesheet" />
+                            <!--DATATABLES RESPONSIVE-->
+          
                             <!--BIBLIOTECA RESPONSAVEL PELOS ICONES-->
                             <link href="<?= base_url() ?>bootstrap/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
                             <!--DEFINE TAMANHO MAXIMO DOS CAMPOS-->
@@ -63,7 +65,10 @@ function debug($object) {
                             <script type="text/javascript" src="<?= base_url() ?>js/jquery.maskedinput.js"></script>
                             <script type="text/javascript" src="<?= base_url() ?>js/jquery.maskMoney.js"></script>
 
-                            <!--        SWEET ALERT. (PLUGIN DO ALERTA BONITINHO)-->
+                            <!--SWEET ALERT. (PLUGIN DO ALERTA BONITINHO)-->
+
+                            
+                            <!--SWEET ALERT. (PLUGIN DO ALERTA BONITINHO)-->
 
                             <script src="<?= base_url() ?>bootstrap/vendor/alert/dist/sweetalert.min.js"></script> 
                             <link href="<?= base_url() ?>css/jquery-ui-1.8.5.custom.css" rel="stylesheet" type="text/css" />
@@ -328,29 +333,29 @@ function debug($object) {
                                                                 <a href="#"><i class="fa fa-clone fa-fw"></i> Modelos <span class="fa arrow"></span></a>
                                                                 <ul class="nav nav-third-level">
                                                                     <li>
-                                                                        <a href="<?= base_url() ?>ambulatorio/modelolaudo">Manter Modelo Laudo</a>
+                                                                        <a href="<?= base_url() ?>ambulatorio/modelolaudo/pesquisar">Manter Modelo Laudo</a>
                                                                     </li>
                                                                     <li>
-                                                                        <a href="<?= base_url() ?>ambulatorio/modelolinha">Manter Modelo Linha</a>
+                                                                        <a href="<?= base_url() ?>ambulatorio/modelolinha/pesquisar">Manter Modelo Linha</a>
                                                                     </li>
 
                                                                     <li>
-                                                                        <a href="<?= base_url() ?>ambulatorio/modeloreceita">Manter Modelo Receita</a>
+                                                                        <a href="<?= base_url() ?>ambulatorio/modeloreceita/pesquisar">Manter Modelo Receita</a>
                                                                     </li>
                                                                     <li>
-                                                                        <a href="<?= base_url() ?>ambulatorio/modeloatestado">Manter Modelo Atestado</a>
+                                                                        <a href="<?= base_url() ?>ambulatorio/modeloatestado/pesquisar">Manter Modelo Atestado</a>
                                                                     </li>
                                                                     <li>
-                                                                        <a href="<?= base_url() ?>ambulatorio/modeloreceitaespecial">Manter Modelo R. Especial</a>
+                                                                        <a href="<?= base_url() ?>ambulatorio/modeloreceitaespecial/pesquisar">Manter Modelo R. Especial</a>
                                                                     </li>
                                                                     <li>
-                                                                        <a href="<?= base_url() ?>ambulatorio/modelodeclaracao">Modelo Declara&ccedil;&atilde;o</a>
+                                                                        <a href="<?= base_url() ?>ambulatorio/modelodeclaracao/pesquisar">Modelo Declara&ccedil;&atilde;o</a>
                                                                     </li>
                                                                     <li>
-                                                                        <a href="<?= base_url() ?>ambulatorio/modelosolicitarexames">Manter Modelo S.Exames</a>
+                                                                        <a href="<?= base_url() ?>ambulatorio/modelosolicitarexames/pesquisar">Manter Modelo S.Exames</a>
                                                                     </li>
                                                                     <li>
-                                                                        <a href="<?= base_url() ?>ambulatorio/modelomedicamento">Manter Medicamento</a>
+                                                                        <a href="<?= base_url() ?>ambulatorio/modelomedicamento/pesquisar">Manter Medicamento</a>
                                                                     </li>
                                                                     <li>
                                                                         <a href="<?= base_url() ?>ambulatorio/modelomedicamento/pesquisarunidade">Manter Medicamento Unidade</a>

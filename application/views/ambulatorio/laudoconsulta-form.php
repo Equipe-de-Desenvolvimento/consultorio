@@ -18,9 +18,11 @@
     <link href="<?= base_url() ?>bootstrap/vendor/autocomplete/easy-autocomplete.themes.css" rel="stylesheet" type="text/css" />
     <!--CSS DO ALERTA BONITINHO-->
     <link href="<?= base_url() ?>bootstrap/vendor/alert/dist/sweetalert.css" rel="stylesheet" type="text/css" />
+    <!--<link rel="stylesheet" href="<?= base_url() ?>js/chosen/docsupport/prism.css">-->
+    <!--<link rel="stylesheet" href="<?= base_url() ?>js/chosen/docsupport/bootstrap-chosen.css">-->
 
 
-    <link href="<?= base_url() ?>bootstrap/vendor/clock/compiled/flipclock.css" rel="stylesheet" />
+    <!--<link href="<?= base_url() ?>bootstrap/vendor/clock/compiled/flipclock.css" rel="stylesheet" />-->
 </head>
 <form name="form_laudo" id="form_laudo" action="<?= base_url() ?>ambulatorio/laudo/gravaranaminese/<?= $ambulatorio_laudo_id ?>/<?= $exame_id ?>//<?= $procedimento_tuss_id ?>" method="post">
     <div class="container-fluid">
@@ -59,9 +61,9 @@
                                     <td>Solicitante: <?= @$obj->_solicitante ?></td>
                                     <td rowspan="3">
                                         <? if (file_exists("./upload/webcam/pacientes/" . @$obj->_paciente_id . ".jpg")) { ?>
-                                            <img class=" img-rounded" src="<?= base_url() ?>upload/webcam/pacientes/<?=@$obj->_paciente_id?>.jpg" width="100" height="120" />  
+                                            <img class=" img-rounded" src="<?= base_url() ?>upload/webcam/pacientes/<?= @$obj->_paciente_id ?>.jpg" width="100" height="120" />  
                                         <? } else { ?>
-                                            <!--<img src="<?= base_url() ?>upload/webcam/pacientes/<?=@$obj->_paciente_id?>.jpg" width="100" height="120" />-->
+                                            <!--<img src="<?= base_url() ?>upload/webcam/pacientes/<?= @$obj->_paciente_id ?>.jpg" width="100" height="120" />-->
                                         <? }
                                         ?> 
 
@@ -253,13 +255,13 @@
                                     <select name="diabetes" id="diabetes" class="form-control">
                                         <option value=''>Selecione</option>
                                         <option value='nao'<?
-                                    if (@$obj->_diabetes == 'nao'):echo 'selected';
-                                    endif;
-                                    ?> >Não</option>
+                                        if (@$obj->_diabetes == 'nao'):echo 'selected';
+                                        endif;
+                                        ?> >Não</option>
                                         <option value='sim' <?
                                         if (@$obj->_diabetes == 'sim'):echo 'selected';
                                         endif;
-                                    ?> >Sim</option>
+                                        ?> >Sim</option>
                                     </select>
                                 </div>
                             </div>
@@ -271,11 +273,11 @@
                                         <option value='nao'<?
                                         if (@$obj->_diabetes == 'nao'):echo 'selected';
                                         endif;
-                                    ?> >Não</option>
+                                        ?> >Não</option>
                                         <option value='sim' <?
                                         if (@$obj->_diabetes == 'sim'):echo 'selected';
                                         endif;
-                                    ?> >Sim</option>
+                                        ?> >Sim</option>
                                     </select>
                                 </div>
                             </div>
@@ -526,8 +528,8 @@
                                     <select name="medico" id="medico" class="form-control">
                                         <? foreach ($operadores as $value) : ?>
                                             <option value="<?= $value->operador_id; ?>"<?
-                                        if (@$obj->_medico_parecer1 == $value->operador_id):echo 'selected';
-                                        endif;
+                                            if (@$obj->_medico_parecer1 == $value->operador_id):echo 'selected';
+                                            endif;
                                             ?>><?= $value->nome; ?></option>
                                                 <? endforeach; ?>
                                     </select>
@@ -538,13 +540,13 @@
                                     <label>Situa&ccedil;&atilde;o</label>
                                     <select name="situacao" id="situacao" class="form-control">
                                         <option value='DIGITANDO'<?
-                                                if (@$obj->_status == 'DIGITANDO'):echo 'selected';
-                                                endif;
-                                                ?> >DIGITANDO</option>
+                                        if (@$obj->_status == 'DIGITANDO'):echo 'selected';
+                                        endif;
+                                        ?> >DIGITANDO</option>
                                         <option value='FINALIZADO' <?
                                         if (@$obj->_status == 'FINALIZADO'):echo 'selected';
                                         endif;
-                                                ?> >FINALIZADO</option>
+                                        ?> >FINALIZADO</option>
                                     </select>
                                     <input type="hidden" name="status" id="status" value="<?= @$obj->_status; ?>" class="size2" />
                                 </div>  
@@ -630,7 +632,6 @@
 <script type="text/javascript" src="<?= base_url() ?>js/jquery-ui-1.10.4.js" ></script>
 <script type="text/javascript" src="<?= base_url() ?>js/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
 <script type="text/javascript" src="<?= base_url() ?>js/jquery.maskedinput.js"></script>
-<script type="text/javascript">
 <script src="<?= base_url() ?>bootstrap/vendor/jquery/jquery.min.js"></script>
 
 <script src="<?= base_url() ?>bootstrap/vendor/clock/compiled/flipclock.js"></script>
@@ -681,163 +682,163 @@
                                                             pesob1 = document.getElementById('Peso').value;
                                                             peso = parseFloat(pesob1.replace(',', '.'));
 //    eso = pesob1.substring(0, 2)  + "." + pesob1.substring(3, 1);
-                   alturae1 = document.getElementById('Altura').value;
-                   var res = alturae1.substring(0, 1) + "." + alturae1.substring(1, 3);
-                   var altura = parseFloat(res);
-                   imc = peso / Math.pow(altura, 2);
-                   //imc = res;
-                   resultado = imc.toFixed(2)
-                   document.getElementById('imc').value = resultado.replace('.', ',');
+                                                            alturae1 = document.getElementById('Altura').value;
+                                                            var res = alturae1.substring(0, 1) + "." + alturae1.substring(1, 3);
+                                                            var altura = parseFloat(res);
+                                                            imc = peso / Math.pow(altura, 2);
+                                                            //imc = res;
+                                                            resultado = imc.toFixed(2)
+                                                            document.getElementById('imc').value = resultado.replace('.', ',');
 
-                   function calculaImc() {
-                       pesob1 = document.getElementById('Peso').value;
-                       peso = parseFloat(pesob1.replace(',', '.'));
-                       //                                        peso = pesob1.substring(0, 2)  + "." + pesob1.substring(3, 1);
-                       alturae1 = document.getElementById('Altura').value;
-                       var res = alturae1.substring(0, 1) + "." + alturae1.substring(1, 3);
-                       var altura = parseFloat(res);
-                       imc = peso / Math.pow(altura, 2);
-                       //imc = res;
-                       resultado = imc.toFixed(2)
-                       document.getElementById('imc').value = resultado.replace('.', ',');
-                   }
-
-
-
-                    var sHors = "0" + 0;
-                    var sMins = "0" + 0;
-                    var sSecs = -1;
-                    function getSecs() {
-                        sSecs++;
-                        if (sSecs == 60) {
-                            sSecs = 0;
-                            sMins++;
-                            if (sMins <= 9)
-                                sMins = "0" + sMins;
-                        }
-                        if (sMins == 60) {
-                            sMins = "0" + 0;
-                            sHors++;
-                            if (sHors <= 9)
-                                sHors = "0" + sHors;
-                        }
-                        if (sSecs <= 9)
-                            sSecs = "0" + sSecs;
-                        clock1.innerHTML = sHors + "<font color=#000000>:</font>" + sMins + "<font color=#000000>:</font>" + sSecs;
-                        setTimeout('getSecs()', 1000);
-                    }
-
-
-                    $(document).ready(function () {
-                        $('#sortable').sortable();
-                    });
-
-
-                    $(document).ready(function () {
-                        jQuery('#ficha_laudo').validate({
-                            rules: {
-                                imagem: {
-                                    required: true
-                                }
-                            },
-                            messages: {
-                                imagem: {
-                                    required: "*"
-                                }
-                            }
-                        });
-                    });
+                                                            function calculaImc() {
+                                                                pesob1 = document.getElementById('Peso').value;
+                                                                peso = parseFloat(pesob1.replace(',', '.'));
+                                                                //                                        peso = pesob1.substring(0, 2)  + "." + pesob1.substring(3, 1);
+                                                                alturae1 = document.getElementById('Altura').value;
+                                                                var res = alturae1.substring(0, 1) + "." + alturae1.substring(1, 3);
+                                                                var altura = parseFloat(res);
+                                                                imc = peso / Math.pow(altura, 2);
+                                                                //imc = res;
+                                                                resultado = imc.toFixed(2)
+                                                                document.getElementById('imc').value = resultado.replace('.', ',');
+                                                            }
 
 
 
-                    function muda(obj) {
-                        if (obj.value != 'DIGITANDO') {
-                            document.getElementById('titulosenha').style.display = "block";
-                            document.getElementById('senha').style.display = "block";
-                        } else {
-                            document.getElementById('titulosenha').style.display = "none";
-                            document.getElementById('senha').style.display = "none";
-                        }
-                    }
+                                                            var sHors = "0" + 0;
+                                                            var sMins = "0" + 0;
+                                                            var sSecs = -1;
+                                                            function getSecs() {
+                                                                sSecs++;
+                                                                if (sSecs == 60) {
+                                                                    sSecs = 0;
+                                                                    sMins++;
+                                                                    if (sMins <= 9)
+                                                                        sMins = "0" + sMins;
+                                                                }
+                                                                if (sMins == 60) {
+                                                                    sMins = "0" + 0;
+                                                                    sHors++;
+                                                                    if (sHors <= 9)
+                                                                        sHors = "0" + sHors;
+                                                                }
+                                                                if (sSecs <= 9)
+                                                                    sSecs = "0" + sSecs;
+                                                                clock1.innerHTML = sHors + "<font color=#000000>:</font>" + sMins + "<font color=#000000>:</font>" + sSecs;
+                                                                setTimeout('getSecs()', 1000);
+                                                            }
 
-                    // NOVOS AUTOCOMPLETES.
-                    // A primeira coisa a definir é o nome da variável pra jogar no Jquery mais tarde
-                    // Url é a função que vai trazer o JSON.
-                    // getValue é onde se define o nome do campo que você quer que apareça na lista
-                    // Exemplo do getValue. Na função abaixo do CBOprofissionais, o Hamilton definiu value como o valor do CBO dos profissionais
-                    // Daí dentro da função list você define que match está enable, pra que ele possa verificar pelo texto que o cara digita
-                    // OnSelectItem event é a função responsável por jogar o ID que você quer no campo Hidden
-                    // getSelectedItemData(). Depois do ponto você coloca o campo que vai ser jogado no Hidden
-                    // Daí embaixo tem o Jquery padrão pra jogar o ID no campo Hidden
 
-                    var cid1 = {
-                        url: "<?= base_url() ?>index.php?c=autocomplete&m=cid1",
-                        getValue: "value",
-                        list: {
-                            onSelectItemEvent: function () {
-                                var value = $("#txtCICPrimariolabel").getSelectedItemData().id;
+                                                            $(document).ready(function () {
+                                                                $('#sortable').sortable();
+                                                            });
 
-                                $("#txtCICPrimario").val(value).trigger("change");
-                            },
-                            match: {
-                                enabled: true
-                            },
-                            showAnimation: {
-                                type: "fade", //normal|slide|fade
-                                time: 200,
-                                callback: function () {}
-                            },
-                            hideAnimation: {
-                                type: "slide", //normal|slide|fade
-                                time: 200,
-                                callback: function () {}
-                            },
-                            maxNumberOfElements: 20
-                        },
-                        theme: "bootstrap"
-                    };
 
-                    $("#txtCICPrimariolabel").easyAutocomplete(cid1);
-                    // FINAL DO AUTOCOMPLETE NOVO. DEFINE AQUI O ID DO CAMPO ATRIBUIDO E A VARIVEL
-                    // NOVOS AUTOCOMPLETES.
-                    // A primeira coisa a definir é o nome da variável pra jogar no Jquery mais tarde
-                    // Url é a função que vai trazer o JSON.
-                    // getValue é onde se define o nome do campo que você quer que apareça na lista
-                    // Exemplo do getValue. Na função abaixo do CBOprofissionais, o Hamilton definiu value como o valor do CBO dos profissionais
-                    // Daí dentro da função list você define que match está enable, pra que ele possa verificar pelo texto que o cara digita
-                    // OnSelectItem event é a função responsável por jogar o ID que você quer no campo Hidden
-                    // getSelectedItemData(). Depois do ponto você coloca o campo que vai ser jogado no Hidden
-                    // Daí embaixo tem o Jquery padrão pra jogar o ID no campo Hidden
+                                                            $(document).ready(function () {
+                                                                jQuery('#ficha_laudo').validate({
+                                                                    rules: {
+                                                                        imagem: {
+                                                                            required: true
+                                                                        }
+                                                                    },
+                                                                    messages: {
+                                                                        imagem: {
+                                                                            required: "*"
+                                                                        }
+                                                                    }
+                                                                });
+                                                            });
 
-                    var cid2 = {
-                        url: "<?= base_url() ?>index.php?c=autocomplete&m=cid1",
-                        getValue: "value",
-                        list: {
-                            onSelectItemEvent: function () {
-                                var value = $("#txtCICSecundariolabel").getSelectedItemData().id;
 
-                                $("#txtCICSecundario").val(value).trigger("change");
-                            },
-                            match: {
-                                enabled: true
-                            },
-                            showAnimation: {
-                                type: "fade", //normal|slide|fade
-                                time: 200,
-                                callback: function () {}
-                            },
-                            hideAnimation: {
-                                type: "slide", //normal|slide|fade
-                                time: 200,
-                                callback: function () {}
-                            },
-                            maxNumberOfElements: 20
-                        },
-                        theme: "bootstrap"
-                    };
 
-                    $("#txtCICSecundariolabel").easyAutocomplete(cid2);
-                    // FINAL DO AUTOCOMPLETE NOVO. DEFINE AQUI O ID DO CAMPO ATRIBUIDO E A VARIVEL
+                                                            function muda(obj) {
+                                                                if (obj.value != 'DIGITANDO') {
+                                                                    document.getElementById('titulosenha').style.display = "block";
+                                                                    document.getElementById('senha').style.display = "block";
+                                                                } else {
+                                                                    document.getElementById('titulosenha').style.display = "none";
+                                                                    document.getElementById('senha').style.display = "none";
+                                                                }
+                                                            }
+
+                                                            // NOVOS AUTOCOMPLETES.
+                                                            // A primeira coisa a definir é o nome da variável pra jogar no Jquery mais tarde
+                                                            // Url é a função que vai trazer o JSON.
+                                                            // getValue é onde se define o nome do campo que você quer que apareça na lista
+                                                            // Exemplo do getValue. Na função abaixo do CBOprofissionais, o Hamilton definiu value como o valor do CBO dos profissionais
+                                                            // Daí dentro da função list você define que match está enable, pra que ele possa verificar pelo texto que o cara digita
+                                                            // OnSelectItem event é a função responsável por jogar o ID que você quer no campo Hidden
+                                                            // getSelectedItemData(). Depois do ponto você coloca o campo que vai ser jogado no Hidden
+                                                            // Daí embaixo tem o Jquery padrão pra jogar o ID no campo Hidden
+
+                                                            var cid1 = {
+                                                                url: "<?= base_url() ?>index.php?c=autocomplete&m=cid1",
+                                                                getValue: "value",
+                                                                list: {
+                                                                    onSelectItemEvent: function () {
+                                                                        var value = $("#txtCICPrimariolabel").getSelectedItemData().id;
+
+                                                                        $("#txtCICPrimario").val(value).trigger("change");
+                                                                    },
+                                                                    match: {
+                                                                        enabled: true
+                                                                    },
+                                                                    showAnimation: {
+                                                                        type: "fade", //normal|slide|fade
+                                                                        time: 200,
+                                                                        callback: function () {}
+                                                                    },
+                                                                    hideAnimation: {
+                                                                        type: "slide", //normal|slide|fade
+                                                                        time: 200,
+                                                                        callback: function () {}
+                                                                    },
+                                                                    maxNumberOfElements: 20
+                                                                },
+                                                                theme: "bootstrap"
+                                                            };
+
+                                                            $("#txtCICPrimariolabel").easyAutocomplete(cid1);
+                                                            // FINAL DO AUTOCOMPLETE NOVO. DEFINE AQUI O ID DO CAMPO ATRIBUIDO E A VARIVEL
+                                                            // NOVOS AUTOCOMPLETES.
+                                                            // A primeira coisa a definir é o nome da variável pra jogar no Jquery mais tarde
+                                                            // Url é a função que vai trazer o JSON.
+                                                            // getValue é onde se define o nome do campo que você quer que apareça na lista
+                                                            // Exemplo do getValue. Na função abaixo do CBOprofissionais, o Hamilton definiu value como o valor do CBO dos profissionais
+                                                            // Daí dentro da função list você define que match está enable, pra que ele possa verificar pelo texto que o cara digita
+                                                            // OnSelectItem event é a função responsável por jogar o ID que você quer no campo Hidden
+                                                            // getSelectedItemData(). Depois do ponto você coloca o campo que vai ser jogado no Hidden
+                                                            // Daí embaixo tem o Jquery padrão pra jogar o ID no campo Hidden
+
+                                                            var cid2 = {
+                                                                url: "<?= base_url() ?>index.php?c=autocomplete&m=cid1",
+                                                                getValue: "value",
+                                                                list: {
+                                                                    onSelectItemEvent: function () {
+                                                                        var value = $("#txtCICSecundariolabel").getSelectedItemData().id;
+
+                                                                        $("#txtCICSecundario").val(value).trigger("change");
+                                                                    },
+                                                                    match: {
+                                                                        enabled: true
+                                                                    },
+                                                                    showAnimation: {
+                                                                        type: "fade", //normal|slide|fade
+                                                                        time: 200,
+                                                                        callback: function () {}
+                                                                    },
+                                                                    hideAnimation: {
+                                                                        type: "slide", //normal|slide|fade
+                                                                        time: 200,
+                                                                        callback: function () {}
+                                                                    },
+                                                                    maxNumberOfElements: 20
+                                                                },
+                                                                theme: "bootstrap"
+                                                            };
+
+                                                            $("#txtCICSecundariolabel").easyAutocomplete(cid2);
+                                                            // FINAL DO AUTOCOMPLETE NOVO. DEFINE AQUI O ID DO CAMPO ATRIBUIDO E A VARIVEL
 
 //               $(function () {
 //                   $("#txtCICPrimariolabel").autocomplete({

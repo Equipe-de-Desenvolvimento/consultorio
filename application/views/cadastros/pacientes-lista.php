@@ -1,4 +1,8 @@
-
+<!--<link href="<?= base_url() ?>bootstrap/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="<?= base_url() ?>bootstrap/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet" type="text/css" />
+<script src="<?= base_url() ?>bootstrap/vendor/datatables/js/jquery.dataTables.min.js"></script> 
+<script src="<?= base_url() ?>bootstrap/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script> 
+<script src="<?= base_url() ?>bootstrap/vendor/datatables-responsive/dataTables.responsive.js"></script> -->
 <div id="page-wrapper"> 
     <!--Inicio da DIV PAGE WRAPPER--> 
 
