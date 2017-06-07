@@ -203,7 +203,7 @@
                                                     <input type="text" name="autorizacao[<?= $i; ?>]" id="autorizacao" class="form-control size1"/>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-1">
+                                            <div class="col-lg-2">
                                                 <div class="form-group">
                                                     <label>V.Unit</label>  
 

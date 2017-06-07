@@ -3313,9 +3313,9 @@ class guia_model extends Model {
         if ($_POST['convenio'] == "") {
             $this->db->where("c.dinheiro", "f");
         }
-        if ($_POST['grupoconvenio'] != "0") {
-            $this->db->where("c.convenio_grupo_id", $_POST['grupoconvenio']);
-        }
+//        if ($_POST['grupoconvenio'] != "0") {
+//            $this->db->where("c.convenio_grupo_id", $_POST['grupoconvenio']);
+//        }
         if ($_POST['empresa'] != "0") {
             $this->db->where('ae.empresa_id', $_POST['empresa']);
         }
@@ -3396,9 +3396,9 @@ class guia_model extends Model {
         if ($_POST['convenio'] == "") {
             $this->db->where("c.dinheiro", "f");
         }
-        if ($_POST['grupoconvenio'] != "0") {
-            $this->db->where("c.convenio_grupo_id", $_POST['grupoconvenio']);
-        }
+//        if ($_POST['grupoconvenio'] != "0") {
+//            $this->db->where("c.convenio_grupo_id", $_POST['grupoconvenio']);
+//        }
         if ($_POST['empresa'] != "0") {
             $this->db->where('ae.empresa_id', $_POST['empresa']);
         }
@@ -3515,9 +3515,9 @@ class guia_model extends Model {
         if ($_POST['convenio'] == "") {
             $this->db->where("c.dinheiro", "f");
         }
-        if ($_POST['grupoconvenio'] != "0") {
-            $this->db->where("c.convenio_grupo_id", $_POST['grupoconvenio']);
-        }
+//        if ($_POST['grupoconvenio'] != "0") {
+//            $this->db->where("c.convenio_grupo_id", $_POST['grupoconvenio']);
+//        }
         if ($_POST['empresa'] != "0") {
             $this->db->where('ae.empresa_id', $_POST['empresa']);
         }
@@ -3569,9 +3569,9 @@ class guia_model extends Model {
         if ($_POST['convenio'] == "") {
             $this->db->where("c.dinheiro", "f");
         }
-        if ($_POST['grupoconvenio'] != "0") {
-            $this->db->where("c.convenio_grupo_id", $_POST['grupoconvenio']);
-        }
+//        if ($_POST['grupoconvenio'] != "0") {
+//            $this->db->where("c.convenio_grupo_id", $_POST['grupoconvenio']);
+//        }
         if ($_POST['empresa'] != "0") {
             $this->db->where('ae.empresa_id', $_POST['empresa']);
         }
@@ -3626,9 +3626,9 @@ class guia_model extends Model {
         if ($_POST['convenio'] == "") {
             $this->db->where("c.dinheiro", "f");
         }
-        if ($_POST['grupoconvenio'] != "0") {
-            $this->db->where("c.convenio_grupo_id", $_POST['grupoconvenio']);
-        }
+//        if ($_POST['grupoconvenio'] != "0") {
+//            $this->db->where("c.convenio_grupo_id", $_POST['grupoconvenio']);
+//        }
         if ($_POST['empresa'] != "0") {
             $this->db->where('ae.empresa_id', $_POST['empresa']);
         }
@@ -3685,9 +3685,9 @@ class guia_model extends Model {
         if ($_POST['convenio'] == "") {
             $this->db->where("c.dinheiro", "f");
         }
-        if ($_POST['grupoconvenio'] != "0") {
-            $this->db->where("c.convenio_grupo_id", $_POST['grupoconvenio']);
-        }
+//        if ($_POST['grupoconvenio'] != "0") {
+//            $this->db->where("c.convenio_grupo_id", $_POST['grupoconvenio']);
+//        }
         if ($_POST['empresa'] != "0") {
             $this->db->where('ae.empresa_id', $_POST['empresa']);
         }

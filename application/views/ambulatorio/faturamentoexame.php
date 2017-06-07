@@ -85,22 +85,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label>Empresa</label>
+                <!--<div class="row">-->
+                    <!--<div class="col-lg-4">-->
+                        <!--<div class="form-group">-->
+                            <!--<label>Empresa</label>-->
+                            <input type="hidden" name="empresa" value="0"/>
 
+                            
 
-                            <select name="empresa" id="empresa" class="form-control">
-                                <? foreach ($empresa as $value) : ?>
-                                    <option value="<?= $value->empresa_id; ?>" ><?php echo $value->nome; ?></option>
-                                <? endforeach; ?>
-                                <option value="0">TODOS</option>
-                            </select>
-
-                        </div>   
-                    </div>   
-                </div>   
+                        <!--</div>-->   
+                    <!--</div>-->   
+                <!--</div>-->   
                 <div class="row">
                     <div class="col-lg-4">
                         <p>

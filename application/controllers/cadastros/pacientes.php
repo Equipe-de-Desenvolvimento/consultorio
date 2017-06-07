@@ -222,6 +222,18 @@ class pacientes extends BaseController {
         $data['exames'] = $this->exametemp->listaragendaspaciente($paciente_id);
         $this->loadView('ambulatorio/procedimentoautorizar-form', $data);
     }
+    function contatosite() {
+        
+        var_dump($_POST); die;
+        
+//        $data['paciente_id'] = $paciente_id;
+//        $data['convenio'] = $this->convenio->listardados();
+//        $data['forma_pagamento'] = $this->guia->formadepagamento();
+//        $data['paciente'] = $this->paciente->listardados($data['paciente_id']);
+//        $data['procedimento'] = $this->procedimento->listarprocedimentos();
+//        $data['exames'] = $this->exametemp->listaragendaspaciente($paciente_id);
+//        $this->loadView('ambulatorio/procedimentoautorizar-form', $data);
+    }
 
     function procedimentoautorizarconsulta($paciente_id) {
         $data['paciente_id'] = $paciente_id;

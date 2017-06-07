@@ -107,7 +107,7 @@
                     </div>-->
                     <div class="table-responsive">
 
-                        <table class="table table-hover">
+                        <table class="table ">
                             <thead>
                                 <tr>
                                     <th>Situação</th>
@@ -160,7 +160,7 @@
                                     }
                                     ?>
                                     <? if ($verifica == 1) { ?>
-                                        <tr class="">
+                                        <tr class="success2">
                                             <td><?= $situacao ?></td>
                                             <td><?= $item->inicio ?></td>
                                             <td><?= $item->paciente ?></td>
@@ -192,7 +192,7 @@
                                             </td>
                                         </tr>  
                                     <? } elseif ($verifica == 2) { ?>
-                                        <tr class="info">
+                                        <tr class="alert alert-aguardando">
                                             <td><?= $situacao ?></td>
                                             <td><?= $item->inicio ?></td>
                                             <td><?= $item->paciente ?></td>

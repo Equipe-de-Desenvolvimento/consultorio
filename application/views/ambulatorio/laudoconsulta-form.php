@@ -22,7 +22,7 @@
     <!--<link rel="stylesheet" href="<?= base_url() ?>js/chosen/docsupport/bootstrap-chosen.css">-->
 
 
-    <!--<link href="<?= base_url() ?>bootstrap/vendor/clock/compiled/flipclock.css" rel="stylesheet" />-->
+    <link href="<?= base_url() ?>bootstrap/vendor/clock/compiled/flipclock.css" rel="stylesheet" />
 </head>
 <form name="form_laudo" id="form_laudo" action="<?= base_url() ?>ambulatorio/laudo/gravaranaminese/<?= $ambulatorio_laudo_id ?>/<?= $exame_id ?>//<?= $procedimento_tuss_id ?>" method="post">
     <div class="container-fluid">

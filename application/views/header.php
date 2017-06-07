@@ -163,17 +163,9 @@ function debug($object) {
                                                             <a href="flot.html"><i class="fa fa-bar-chart-o fa-fw"></i> Relatorios <span class="fa arrow"></span></a>
                                                             <ul class="nav nav-third-level">
                                                                 <li>
-                                                                    <a href="#">Third Level Item</a>
+                                                                    <a href="<?= base_url() ?>ambulatorio/guia/relatorioaniversariante">Relatorio Aniversariantes</a>
                                                                 </li>
-                                                                <li>
-                                                                    <a href="#">Third Level Item</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Third Level Item</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Third Level Item</a>
-                                                                </li>
+                                                                
                                                             </ul>
                                                         </li>
                                                     </ul>
@@ -191,23 +183,7 @@ function debug($object) {
                                                             </ul>
 
                                                         </li>
-                                                        <li>
-                                                            <a href="flot.html"><i class="fa fa-bar-chart-o fa-fw"></i> Relatorios <span class="fa arrow"></span></a>
-                                                            <ul class="nav nav-third-level">
-                                                                <li>
-                                                                    <a href="#">Third Level Item</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Third Level Item</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Third Level Item</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Third Level Item</a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
+                                                        
                                                     </ul>
                                                 </li>
                                                 <li>
@@ -242,17 +218,12 @@ function debug($object) {
                                                             <a href="flot.html"><i class="fa fa-bar-chart-o fa-fw"></i> Relatorios <span class="fa arrow"></span></a>
                                                             <ul class="nav nav-third-level">
                                                                 <li>
-                                                                    <a href="#">Third Level Item</a>
+                                                                    <a href="<?= base_url() ?>ambulatorio/guia/relatoriocaixa">Relatorio Caixa</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="#">Third Level Item</a>
+                                                                    <a href="<?= base_url() ?>ambulatorio/guia/relatoriomedicoconveniofinanceiro">Relatorio Produ&ccedil;&atilde;o M&eacute;dica</a>
                                                                 </li>
-                                                                <li>
-                                                                    <a href="#">Third Level Item</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Third Level Item</a>
-                                                                </li>
+                                                                
                                                             </ul>
                                                         </li>
                                                     </ul>
@@ -276,17 +247,9 @@ function debug($object) {
                                                             <a href="flot.html"><i class="fa fa-bar-chart-o fa-fw"></i> Relatorios <span class="fa arrow"></span></a>
                                                             <ul class="nav nav-third-level">
                                                                 <li>
-                                                                    <a href="#">Third Level Item</a>
+                                                                    <a href="<?= base_url() ?>ambulatorio/guia/relatorioexame">Relatorio Conferencia</a>
                                                                 </li>
-                                                                <li>
-                                                                    <a href="#">Third Level Item</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Third Level Item</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Third Level Item</a>
-                                                                </li>
+                                                                
                                                             </ul>
                                                         </li>
                                                     </ul>

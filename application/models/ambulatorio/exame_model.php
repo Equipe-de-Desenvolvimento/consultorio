@@ -2912,8 +2912,10 @@ class exame_model extends Model {
         $this->db->join('tb_ambulatorio_laudo al', 'al.exame_id = e.exames_id', 'left');
         $this->db->join('tb_operador o', 'o.operador_id = ae.medico_consulta_id', 'left');
         $this->db->join('tb_ambulatorio_grupo ag', 'ag.nome = pt.grupo', 'left');
-        $this->db->where('ae.empresa_id', $empresa_id);
-        $this->db->where("( (ag.tipo = 'CONSULTA') OR (ae.tipo = 'CONSULTA' AND ae.procedimento_tuss_id IS NULL) )");
+//        $this->db->where('ae.empresa_id', $empresa_id);
+//        $this->db->where("( (ag.tipo = 'CONSULTA') OR (ae.tipo = 'CONSULTA' AND ae.procedimento_tuss_id IS NULL) )");
+        $this->db->where('ae.tipo !=', 'CIRURGICO');
+        $this->db->where('ae.tipo !=', 'MAT/MED');
 //        $this->db->orderby('ae.data');
 //        $this->db->orderby('ae.inicio');
 //        $this->db->orderby('al.situacao');
@@ -3080,8 +3082,10 @@ class exame_model extends Model {
         $this->db->join('tb_ambulatorio_laudo al', 'al.exame_id = e.exames_id', 'left');
         $this->db->join('tb_operador o', 'o.operador_id = ae.medico_consulta_id', 'left');
         $this->db->join('tb_ambulatorio_grupo ag', 'ag.nome = pt.grupo', 'left');
-        $this->db->where('ae.empresa_id', $empresa_id);
-        $this->db->where("( (ag.tipo = 'CONSULTA') OR (ae.tipo = 'CONSULTA' AND ae.procedimento_tuss_id IS NULL) )");
+//        $this->db->where('ae.empresa_id', $empresa_id);
+//        $this->db->where("( (ag.tipo = 'CONSULTA') OR (ae.tipo = 'CONSULTA' AND ae.procedimento_tuss_id IS NULL) )");
+        $this->db->where('ae.tipo !=', 'CIRURGICO');
+        $this->db->where('ae.tipo !=', 'MAT/MED');
         $this->db->orderby('ae.data');
         $this->db->orderby('ae.inicio');
         $this->db->orderby('al.situacao');
@@ -3252,7 +3256,7 @@ class exame_model extends Model {
             if (isset($args['sala']) && strlen($args['sala']) > 0) {
                 $this->db->where('ae.agenda_exames_nome_id', $args['sala']);
             }
-             if (isset($args['medico']) && strlen($args['medico']) > 0) {
+            if (isset($args['medico']) && strlen($args['medico']) > 0) {
                 $this->db->where('ae.medico_consulta_id', $args['medico']);
             }
             if (isset($args['situacao']) && strlen($args['situacao']) > 0) {
@@ -4265,7 +4269,7 @@ class exame_model extends Model {
         return $return->result();
     }
 
-    function gravarexame($percentual,$ambulatorio_guia, $tipo, $agenda_exames_id) {
+    function gravarexame($percentual, $ambulatorio_guia, $tipo, $agenda_exames_id) {
 //        var_dump($percentual); die;
         try {
             $horario = date("Y-m-d H:i:s");
@@ -4295,11 +4299,11 @@ class exame_model extends Model {
                 $this->db->set('tipo', $tipo);
                 $this->db->set('agenda_exames_id', $agenda_exames_id);
                 $agenda_exames_id = $ambulatorio_guia;
-                
+
                 if ($_POST['medicoagenda'] != "") {
                     $this->db->set('medico_realizador', $_POST['medicoagenda']);
                 }
-                
+
                 $this->db->set('data_cadastro', $horario);
                 $this->db->set('operador_cadastro', $operador_id);
                 $this->db->insert('tb_exames');
@@ -4339,7 +4343,7 @@ class exame_model extends Model {
                 $this->db->set('operador_cadastro', $operador_id);
                 $this->db->set('empresa_id', $empresa_id);
                 $this->db->set('agenda_exames_id', $agenda_exames_id);
-                
+
                 $this->db->set('paciente_id', $_POST['txtpaciente_id']);
                 $this->db->insert('tb_ambulatorio_chamada');
             }
@@ -4353,11 +4357,11 @@ class exame_model extends Model {
                 $this->db->set('tipo', $tipo);
                 $this->db->set('agenda_exames_id', $agenda_exames_id);
                 $agenda_exames_id = $ambulatorio_guia;
-                
+
                 if ($_POST['medicoagenda'] != "") {
                     $this->db->set('medico_realizador', $_POST['medicoagenda']);
                 }
-                
+
                 $this->db->set('tipo', $tipo);
                 $this->db->set('data_cadastro', $horario);
                 $this->db->set('operador_cadastro', $operador_id);
@@ -4398,7 +4402,7 @@ class exame_model extends Model {
                 $this->db->set('operador_cadastro', $operador_id);
                 $this->db->set('empresa_id', $empresa_id);
                 $this->db->set('agenda_exames_id', $agenda_exames_id);
-                
+
                 $this->db->set('paciente_id', $_POST['txtpaciente_id']);
                 $this->db->insert('tb_ambulatorio_chamada');
             }
@@ -4413,11 +4417,11 @@ class exame_model extends Model {
                 $this->db->set('tipo', $tipo);
                 $this->db->set('agenda_exames_id', $agenda_exames_id);
                 $agenda_exames_id = $ambulatorio_guia;
-                
+
                 if ($_POST['medicoagenda'] != "") {
                     $this->db->set('medico_realizador', $_POST['medicoagenda']);
                 }
-                
+
                 $this->db->set('tipo', $tipo);
                 $this->db->set('data_cadastro', $horario);
                 $this->db->set('operador_cadastro', $operador_id);
@@ -4458,12 +4462,12 @@ class exame_model extends Model {
                 $this->db->set('operador_cadastro', $operador_id);
                 $this->db->set('empresa_id', $empresa_id);
                 $this->db->set('agenda_exames_id', $agenda_exames_id);
-                
+
                 $this->db->set('paciente_id', $_POST['txtpaciente_id']);
                 $this->db->insert('tb_ambulatorio_chamada');
             }
 
-            
+
 
             return $laudo_id;
         } catch (Exception $exc) {
@@ -5055,7 +5059,7 @@ class exame_model extends Model {
         }
     }
 
-    function gravarconsulta($horario_id,$agenda_id, $horaconsulta, $horaverifica, $nome, $datainicial, $datafinal, $index, $medico_id, $id, $observacoes, $empresa_id) {
+    function gravarconsulta($horario_id, $agenda_id, $horaconsulta, $horaverifica, $nome, $datainicial, $datafinal, $index, $medico_id, $id, $observacoes, $empresa_id) {
         try {
 
             $index = date("Y-m-d", strtotime(str_replace("/", "-", $index)));

@@ -2498,7 +2498,7 @@ table th[class*="col-"] {
 .table > tbody > tr.finalizado > th,
 .table > tfoot > tr.finalizado > th {
   background-color: #74B2D7;
-  color: white;
+  color: #f9f7f7;
 }
 .table-hover > tbody > tr > td.finalizado:hover,
 .table-hover > tbody > tr > th.finalizado:hover,
