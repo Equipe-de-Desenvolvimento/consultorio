@@ -21,9 +21,9 @@
                     </form>
                 </div>
                 <div class="panel-body">
-                    <a class="btn btn-outline btn-danger" href="<?php echo base_url() ?>cadastros/tipo/carregartipo/0">
+                    <button class="btn btn-outline btn-danger"  onclick="criar();">
                         <i class="fa fa-plus fa-w"></i> Novo Tipo Entrada/saida
-                    </a>
+                    </button>
                     <div class="table-responsive" id="pesquisar">
                         <table width="100%" class="table table-striped table-bordered table-hover " id="dataTables-example">
                             <thead>
@@ -54,8 +54,8 @@
                                         <td class="<?php echo $estilo_linha; ?>"><?= $item->descricao; ?></td>
 
                                         <td class="tabela_acoes" width="70px;">                                  
-                                            <a  class="btn btn-outline btn-primary btn-sm" href="<?= base_url() ?>cadastros/tipo/carregartipo/<?= $item->tipo_entradas_saida_id ?>">Editar</a>
-
+                                            <!--<a  class="btn btn-outline btn-primary btn-sm" href="<?= base_url() ?>cadastros/tipo/carregartipo/<?= $item->tipo_entradas_saida_id ?>">Editar</a>-->
+                                            <button class="btn btn-outline btn-primary btn-sm" onclick="editar(<?= $item->tipo_entradas_saida_id ?>, '<?= $item->descricao ?>');" >Editar</button>
                                             <a class="btn btn-outline btn-danger btn-sm" onclick="confirmacaoexcluir(<?= $item->tipo_entradas_saida_id ?>);">Excluir</a>
                                         </td>
                                     </tr>
@@ -109,6 +109,122 @@
                         swal("Cancelado", "Você desistiu de excluir o tipo", "error");
                     }
                 });
+
+    }
+    
+    
+    
+        function criar() {
+        swal({
+            title: "Criar Novo tipo!",
+            text: "Escreva o nome do tipo:",
+            type: "input",
+            imageUrl: "<?= base_url() ?>img/money.png",
+            showCancelButton: true,
+            cancelButtonText: "Cancele!",
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+            animation: "slide-from-top",
+//            inputValue: 'teste',
+            inputPlaceholder: "Digite aqui!"
+        },
+                function (inputValue) {
+                    if (inputValue === false)
+                        return false;
+
+                    if (inputValue === "") {
+                        swal.showInputError("Você precisa digitar o nome do tipo!");
+                        return false
+                    }
+
+
+                    jQuery.ajax({
+                        type: "POST",
+                        url: "<?= base_url(); ?>cadastros/tipo/gravar",
+                        data: {
+                            txtNome: inputValue,
+                            txtcadastrostipoid: ''
+                        },
+                        success: function () {
+//                            swal("Bom trabalho!", "Agenda: " + inputValue + ' criada com sucesso', "success");
+                            swal({
+                                title: "Bom trabalho!",
+                                text: 'Tipo: '  + inputValue +  ' criado com sucesso!',
+                                type: "success",
+//                                showCancelButton: true,
+                                confirmButtonColor: "#337ab7",
+                                confirmButtonText: "OK!",
+//                                cancelButtonText: "No, cancel plx!",
+                                closeOnConfirm: false,
+                                closeOnCancel: false
+                            },
+                                    function (isConfirm) {
+                                        if (isConfirm) {
+                                            location.reload();
+                                        }
+                                    });
+                            
+                        }
+                    });
+                });
+
+
+    }
+    
+        function editar(id, descricao) {
+        swal({
+            title: "Editar tipo entradas/saidas!",
+            text: "Edite o tipo entradas/saidas:",
+            type: "input",
+            imageUrl: "<?= base_url() ?>img/money.png",
+            showCancelButton: true,
+            cancelButtonText: "Cancele!",
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+            animation: "slide-from-top",
+            inputValue: descricao,
+            inputPlaceholder: "Digite aqui!"
+        },
+                function (inputValue) {
+                    if (inputValue === false)
+                        return false;
+
+                    if (inputValue === "") {
+                        swal.showInputError("Você precisa digitar o nome do tipo!");
+                        return false
+                    }
+
+
+                    jQuery.ajax({
+                        type: "POST",
+                        url: "<?= base_url(); ?>cadastros/tipo/gravar",
+                        data: {
+                            txtNome: inputValue,
+                            txtcadastrostipoid: id
+                        },
+                        success: function () {
+//                            swal("Bom trabalho!", "Agenda: " + inputValue + ' criada com sucesso', "success");
+                            swal({
+                                title: "Bom trabalho!",
+                                text: 'Unidade: '  + inputValue +  ' editada com sucesso!',
+                                type: "success",
+//                                showCancelButton: true,
+                                confirmButtonColor: "#337ab7",
+                                confirmButtonText: "OK!",
+//                                cancelButtonText: "No, cancel plx!",
+                                closeOnConfirm: false,
+                                closeOnCancel: false
+                            },
+                                    function (isConfirm) {
+                                        if (isConfirm) {
+                                            location.reload();
+                                        }
+                                    });
+                            
+                        }
+                    });
+                });
+
 
     }
 

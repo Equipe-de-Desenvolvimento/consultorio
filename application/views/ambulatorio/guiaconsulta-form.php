@@ -8,6 +8,7 @@ $medico_solicitante = "";
 $medico_solicitante_id = "";
 $convenio_paciente = "";
 //var_dump($consultasanteriores);die;
+$operador_id = $this->session->userdata('operador_id');
 if ($contador > 0) {
     $sala_id = $exames[0]->agenda_exames_nome_id;
     $sala = $exames[0]->sala;
@@ -147,8 +148,8 @@ if ($contador > 0) {
                                 <option value="">Selecione</option>
                                 <? foreach ($medicos as $item) : ?>
                                     <option value="<?= $item->operador_id; ?>"<?
-                                    if ($medico == $item->nome):echo 'selected';
-                                    endif;
+                                    if ($medico == $item->operador_id || $operador_id == $item->operador_id){echo 'selected';
+                                    }
                                     ?>><?= $item->nome; ?></option>
                                         <? endforeach; ?>
                             </select>

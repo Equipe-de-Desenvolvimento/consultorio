@@ -54,9 +54,9 @@ class Forma extends BaseController {
     function gravar() {
         $exame_forma_id = $this->forma->gravar();
         if ($exame_forma_id == "-1") {
-            $data['mensagem'] = 'Erro ao gravar a Forma. Opera&ccedil;&atilde;o cancelada.';
+            $data['mensagem'] = array('Erro ao gravar a Forma. Opera&ccedil;&atilde;o cancelada.', 'error');
         } else {
-            $data['mensagem'] = 'Sucesso ao gravar a Forma.';
+            $data['mensagem'] = array('Sucesso ao gravar a Forma.', 'success');
         }
         $this->session->set_flashdata('message', $data['mensagem']);
         redirect(base_url() . "cadastros/forma");

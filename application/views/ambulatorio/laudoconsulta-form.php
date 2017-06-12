@@ -87,7 +87,7 @@
                                 <tr>
                                     <td colspan="3">Indicaçao: <?= @$obj->_indicacao ?></td>
                                     <td>
-                                        <a class="btn btn-outline btn-primary" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/chamarpaciente/<?= $ambulatorio_laudo_id ?>');" >
+                                        <a style="width: 60pt;" class="btn btn-outline btn-primary" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/chamarpaciente/<?= $ambulatorio_laudo_id ?>');" >
                                             Chamar
                                         </a>
 
@@ -95,7 +95,13 @@
                                     <!--<td>Indicacao: <?= @$obj->_indicado ?></td>-->
                                 </tr>
                                 <tr>
-                                    <td >Endereco: <?= @$obj->_logradouro ?>, <?= @$obj->_numero . ' ' . @$obj->_bairro ?> - <?= @$obj->_uf ?></td>
+                                    <td colspan="3">Endereco: <?= @$obj->_logradouro ?>, <?= @$obj->_numero . ' ' . @$obj->_bairro ?> - <?= @$obj->_uf ?></td>
+                                    <td>
+                                        <a style="width: 60pt;" class="btn btn-outline btn-primary" onclick="javascript:window.open('<?= base_url() ?>cadastros/pacientes/carregar/<?= @$obj->_paciente_id ?>');" >
+                                          Cadastro
+                                        </a>
+
+                                    </td>
                                 </tr>
                             </table>
                         </div>
@@ -211,7 +217,7 @@
                                 /*top: 0;*/
                                 /*right:0;*/
                                 z-index: 15;
-                                /*zoom: 0.5;*/
+                                zoom: 0.5;
                                 -moz-transform: scale(0.5)
                             }
                         </style>               

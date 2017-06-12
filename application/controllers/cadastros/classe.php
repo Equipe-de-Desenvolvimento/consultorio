@@ -56,9 +56,9 @@ class Classe extends BaseController {
     function gravar() {
         $exame_classe_id = $this->classe->gravar();
         if ($exame_classe_id == "-1") {
-            $data['mensagem'] = 'Erro ao gravar a Classe. Opera&ccedil;&atilde;o cancelada.';
+            $data['mensagem'] = array('Erro ao gravar a Classe. Opera&ccedil;&atilde;o cancelada.', 'error');
         } else {
-            $data['mensagem'] = 'Sucesso ao gravar a Classe.';
+            $data['mensagem'] = array('Sucesso ao gravar a Classe.', 'success');
         }
         $this->session->set_flashdata('message', $data['mensagem']);
         redirect(base_url() . "cadastros/classe");

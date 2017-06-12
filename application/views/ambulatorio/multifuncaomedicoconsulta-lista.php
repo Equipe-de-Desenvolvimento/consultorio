@@ -23,25 +23,25 @@
                                     <select name="situacao" id="situacao" class="form-control texto06">
                                         <option value=""></option>
                                         <option value="BLOQUEADO" <?
-                                        if (@$_GET['situacao'] == "BLOQUEADO") {
-                                            echo 'selected';
-                                        }
-                                        ?>>BLOQUEADO</option>
+                                if (@$_GET['situacao'] == "BLOQUEADO") {
+                                    echo 'selected';
+                                }
+                                ?>>BLOQUEADO</option>
                                         <option value="FALTOU" <?
-                                        if (@$_GET['situacao'] == "FALTOU") {
-                                            echo 'selected';
-                                        }
-                                        ?>>FALTOU</option>
+                                if (@$_GET['situacao'] == "FALTOU") {
+                                    echo 'selected';
+                                }
+                                ?>>FALTOU</option>
                                         <option value="OK" <?
-                                        if (@$_GET['situacao'] == "OK") {
-                                            echo 'selected';
-                                        }
-                                        ?>>OCUPADO</option>
+                                if (@$_GET['situacao'] == "OK") {
+                                    echo 'selected';
+                                }
+                                ?>>OCUPADO</option>
                                         <option value="LIVRE" <?
-                                        if (@$_GET['situacao'] == "LIVRE") {
-                                            echo 'selected';
-                                        }
-                                        ?>>VAGO</option>
+                                if (@$_GET['situacao'] == "LIVRE") {
+                                    echo 'selected';
+                                }
+                                ?>>VAGO</option>
                                     </select>
 
                                 </td>-->
@@ -167,28 +167,50 @@
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td><?= $item->procedimento; ?></td>
                                             <td><?= $item->observacoes; ?></td>
-                                            <td class="tabela_acoes">
+                                            <td class="tabela_acoes" style="width: 130pt;">
                                                 <? if ($item->situacaolaudo != '') { ?>
-                                      
-                                                <? if (($item->medico_parecer1 == $operador_id && $item->situacaolaudo == 'FINALIZADO') || ($item->realizada == 't' && $item->situacaolaudo != 'FINALIZADO') || $operador_id == 1) { ?>
-                                                    <a class="btn  btn-danger btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaranaminese/<?= $item->ambulatorio_laudo_id ?>/<?= $item->exame_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');" >
-                                                        Atender</a>
+
+                                                    <? if (($item->medico_parecer1 == $operador_id && $item->situacaolaudo == 'FINALIZADO') || ($item->realizada == 't' && $item->situacaolaudo != 'FINALIZADO') || $operador_id == 1) { ?>
+                                                        <a class="btn  btn-danger btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaranaminese/<?= $item->ambulatorio_laudo_id ?>/<?= $item->exame_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');" >
+                                                            Atender</a>
+                                                    <? } else { ?>
+                                                        <button class="btn  btn-primary btn-sm" disabled="">
+                                                            Atender
+                                                        </button>
+                                                    <? } ?>
+                                                    <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $item->ambulatorio_laudo_id ?>');">
+                                                        Arquivos</a>
+
                                                 <? } else { ?>
-                                                <button class="btn  btn-primary btn-sm" disabled="">
-                                                        Atender
-                                                    </button>
+                                                    <p>
+                                                        <? if ($item->paciente_id != '') { ?>
+
+
+                                                            <? if (date("d/m/Y") == date("d/m/Y", strtotime($item->data)) && $item->confirmado == 'f') { ?>
+                                                                <a class="btn btn-info btn-sm" onclick="javascript:window.open('<?= base_url() ?>cadastros/pacientes/procedimentoautorizarconsulta/<?= $item->paciente_id ?>');">Autorizar
+                                                                </a>
+
+                                                            <? } ?>
+                                                            <button class="btn  btn-primary btn-sm" disabled="">
+                                                                Atender
+                                                            </button>
+                                                        <? } else { ?>
+
+                                                            <? if ($item->bloqueado == 'f') { ?>
+                                                                <a class="btn btn-success btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarconsultatemp/<?= $item->agenda_exames_id ?>');">Agendar
+                                                                </a>
+                                                                <a class="btn btn-success btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/bloquear/<?= $item->agenda_exames_id ?>/<?= $item->inicio; ?>');">Bloquear <i class="fa fa-lock" aria-hidden="true"></i>
+                                                                </a>
+                                                            <? } else { ?>
+                                                                <a class="btn btn-success btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/desbloquear/<?= $item->agenda_exames_id ?>/<?= $item->inicio; ?> ', 'toolbar=no,Location=no,menubar=no,width=500,height=200');">Desbloq. <i class="fa fa-unlock" aria-hidden="true"></i>
+                                                                </a>
+                                                            <? }
+                                                            ?>
+
+                                                        <? } ?>
+
+                                                    </p>
                                                 <? } ?>
-                                                <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $item->ambulatorio_laudo_id ?>');">
-                                                    Arquivos</a>
-                                                
-                                                <?}else{?>
-                                                    <button class="btn  btn-primary btn-sm" disabled="">
-                                                        Atender
-                                                    </button>
-                                                    <button class="btn  btn-primary btn-sm" disabled="">
-                                                        Arquivos
-                                                    </button>
-                                                <?}?>
                                             </td>
                                         </tr>  
                                     <? } elseif ($verifica == 2) { ?>
@@ -201,26 +223,26 @@
                                             <td><?= $item->observacoes; ?></td>
                                             <td class="tabela_acoes">
                                                 <? if ($item->situacaolaudo != '') { ?>
-                                      
-                                                <? if (($item->medico_parecer1 == $operador_id && $item->situacaolaudo == 'FINALIZADO') || ($item->realizada == 't' && $item->situacaolaudo != 'FINALIZADO') || $operador_id == 1) { ?>
-                                                    <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaranaminese/<?= $item->ambulatorio_laudo_id ?>/<?= $item->exame_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');" >
-                                                        Atender</a>
+
+                                                    <? if (($item->medico_parecer1 == $operador_id && $item->situacaolaudo == 'FINALIZADO') || ($item->realizada == 't' && $item->situacaolaudo != 'FINALIZADO') || $operador_id == 1) { ?>
+                                                        <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaranaminese/<?= $item->ambulatorio_laudo_id ?>/<?= $item->exame_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');" >
+                                                            Atender</a>
+                                                    <? } else { ?>
+                                                        <button class="btn  btn-primary btn-sm" disabled="">
+                                                            Atender
+                                                        </button>
+                                                    <? } ?>
+                                                    <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $item->ambulatorio_laudo_id ?>');">
+                                                        Arquivos</a>
+
                                                 <? } else { ?>
-                                                <button class="btn  btn-primary btn-sm" disabled="">
-                                                        Atender
-                                                    </button>
-                                                <? } ?>
-                                                <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $item->ambulatorio_laudo_id ?>');">
-                                                    Arquivos</a>
-                                                
-                                                <?}else{?>
                                                     <button class="btn  btn-primary btn-sm" disabled="">
                                                         Atender
                                                     </button>
                                                     <button class="btn  btn-primary btn-sm" disabled="">
                                                         Arquivos
                                                     </button>
-                                                <?}?>
+                                                <? } ?>
                                             </td>
                                         </tr>
 
@@ -234,26 +256,26 @@
                                             <td><?= $item->observacoes; ?></td>
                                             <td class="tabela_acoes">
                                                 <? if ($item->situacaolaudo != '') { ?>
-                                      
-                                                <? if (($item->medico_parecer1 == $operador_id && $item->situacaolaudo == 'FINALIZADO') || ($item->realizada == 't' && $item->situacaolaudo != 'FINALIZADO') || $operador_id == 1) { ?>
-                                                    <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaranaminese/<?= $item->ambulatorio_laudo_id ?>/<?= $item->exame_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');" >
-                                                        Atender</a>
+
+                                                    <? if (($item->medico_parecer1 == $operador_id && $item->situacaolaudo == 'FINALIZADO') || ($item->realizada == 't' && $item->situacaolaudo != 'FINALIZADO') || $operador_id == 1) { ?>
+                                                        <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaranaminese/<?= $item->ambulatorio_laudo_id ?>/<?= $item->exame_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');" >
+                                                            Atender</a>
+                                                    <? } else { ?>
+                                                        <button class="btn  btn-primary btn-sm" disabled="">
+                                                            Atender
+                                                        </button>
+                                                    <? } ?>
+                                                    <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $item->ambulatorio_laudo_id ?>');">
+                                                        Arquivos</a>
+
                                                 <? } else { ?>
-                                                <button class="btn  btn-primary btn-sm" disabled="">
-                                                        Atender
-                                                    </button>
-                                                <? } ?>
-                                                <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $item->ambulatorio_laudo_id ?>');">
-                                                    Arquivos</a>
-                                                
-                                                <?}else{?>
                                                     <button class="btn  btn-primary btn-sm" disabled="">
-                                                        Atender
+                                                        Atender2
                                                     </button>
                                                     <button class="btn  btn-primary btn-sm" disabled="">
                                                         Arquivos
                                                     </button>
-                                                <?}?>
+                                                <? } ?>
                                             </td>
                                         </tr>
                                     <? } elseif ($verifica == 4) { ?>
@@ -266,26 +288,27 @@
                                             <td><?= $item->observacoes; ?></td>
                                             <td class="tabela_acoes">
                                                 <? if ($item->situacaolaudo != '') { ?>
-                                      
-                                                <? if (($item->medico_parecer1 == $operador_id && $item->situacaolaudo == 'FINALIZADO') || ($item->realizada == 't' && $item->situacaolaudo != 'FINALIZADO') || $operador_id == 1) { ?>
-                                                    <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaranaminese/<?= $item->ambulatorio_laudo_id ?>/<?= $item->exame_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');" >
-                                                        Atender</a>
+
+                                                    <? if (($item->medico_parecer1 == $operador_id && $item->situacaolaudo == 'FINALIZADO') || ($item->realizada == 't' && $item->situacaolaudo != 'FINALIZADO') || $operador_id == 1) { ?>
+                                                        <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaranaminese/<?= $item->ambulatorio_laudo_id ?>/<?= $item->exame_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');" >
+                                                            Atender</a>
+                                                    <? } else { ?>
+                                                        <button class="btn  btn-primary btn-sm" disabled="">
+                                                            Atender
+                                                        </button>
+                                                    <? } ?>
+                                                    <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $item->ambulatorio_laudo_id ?>');">
+                                                        Arquivos</a>
+
                                                 <? } else { ?>
-                                                <button class="btn  btn-primary btn-sm" disabled="">
-                                                        Atender
-                                                    </button>
-                                                <? } ?>
-                                                <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $item->ambulatorio_laudo_id ?>');">
-                                                    Arquivos</a>
-                                                
-                                                <?}else{?>
                                                     <button class="btn  btn-primary btn-sm" disabled="">
                                                         Atender
                                                     </button>
                                                     <button class="btn  btn-primary btn-sm" disabled="">
                                                         Arquivos
                                                     </button>
-                                                <?}?>
+
+                                                <? } ?>
                                             </td>
                                         </tr>
                                     <? } ?>
@@ -326,93 +349,93 @@
 <!--<script type="text/javascript" src="<?= base_url() ?>js/jquery-1.9.1.js" ></script>-->
 <script type="text/javascript" src="<?= base_url() ?>js/jquery-ui-1.10.4.js" ></script>
 <script type="text/javascript">
-                                                    $(document).ready(function () {
+                                                        $(document).ready(function () {
 //alert('teste_parada');
-                                                        $(function () {
-                                                            $('#especialidade').change(function () {
+                                                            $(function () {
+                                                                $('#especialidade').change(function () {
 
-                                                                if ($(this).val()) {
+                                                                    if ($(this).val()) {
 
 //                                                  alert('teste_parada');
-                                                                    $('.carregando').show();
+                                                                        $('.carregando').show();
 //                                                        alert('teste_parada');
-                                                                    $.getJSON('<?= base_url() ?>autocomplete/medicoespecialidade', {txtcbo: $(this).val(), ajax: true}, function (j) {
-                                                                        options = '<option value=""></option>';
-                                                                        console.log(j);
+                                                                        $.getJSON('<?= base_url() ?>autocomplete/medicoespecialidade', {txtcbo: $(this).val(), ajax: true}, function (j) {
+                                                                            options = '<option value=""></option>';
+                                                                            console.log(j);
 
-                                                                        for (var c = 0; c < j.length; c++) {
+                                                                            for (var c = 0; c < j.length; c++) {
 
 
-                                                                            if (j[0].operador_id != undefined) {
-                                                                                options += '<option value="' + j[c].operador_id + '">' + j[c].nome + '</option>';
+                                                                                if (j[0].operador_id != undefined) {
+                                                                                    options += '<option value="' + j[c].operador_id + '">' + j[c].nome + '</option>';
 
+                                                                                }
                                                                             }
-                                                                        }
-                                                                        $('#medico').html(options).show();
-                                                                        $('.carregando').hide();
+                                                                            $('#medico').html(options).show();
+                                                                            $('.carregando').hide();
 
 
 
-                                                                    });
-                                                                } else {
-                                                                    $('.carregando').show();
+                                                                        });
+                                                                    } else {
+                                                                        $('.carregando').show();
 //                                                        alert('teste_parada');
-                                                                    $.getJSON('<?= base_url() ?>autocomplete/medicoespecialidadetodos', {txtcbo: $(this).val(), ajax: true}, function (j) {
-                                                                        options = '<option value=""></option>';
-                                                                        console.log(j);
+                                                                        $.getJSON('<?= base_url() ?>autocomplete/medicoespecialidadetodos', {txtcbo: $(this).val(), ajax: true}, function (j) {
+                                                                            options = '<option value=""></option>';
+                                                                            console.log(j);
 
-                                                                        for (var c = 0; c < j.length; c++) {
+                                                                            for (var c = 0; c < j.length; c++) {
 
 
-                                                                            if (j[0].operador_id != undefined) {
-                                                                                options += '<option value="' + j[c].operador_id + '">' + j[c].nome + '</option>';
+                                                                                if (j[0].operador_id != undefined) {
+                                                                                    options += '<option value="' + j[c].operador_id + '">' + j[c].nome + '</option>';
 
+                                                                                }
                                                                             }
-                                                                        }
-                                                                        $('#medico').html(options).show();
-                                                                        $('.carregando').hide();
+                                                                            $('#medico').html(options).show();
+                                                                            $('.carregando').hide();
 
 
 
-                                                                    });
+                                                                        });
 
-                                                                }
+                                                                    }
+                                                                });
                                                             });
-                                                        });
 
-                                                        $(function () {
-                                                            $("#txtCICPrimariolabel").autocomplete({
-                                                                source: "<?= base_url() ?>index.php?c=autocomplete&m=cid1",
-                                                                minLength: 3,
-                                                                focus: function (event, ui) {
-                                                                    $("#txtCICPrimariolabel").val(ui.item.label);
-                                                                    return false;
-                                                                },
-                                                                select: function (event, ui) {
-                                                                    $("#txtCICPrimariolabel").val(ui.item.value);
-                                                                    $("#txtCICPrimario").val(ui.item.id);
-                                                                    return false;
-                                                                }
+                                                            $(function () {
+                                                                $("#txtCICPrimariolabel").autocomplete({
+                                                                    source: "<?= base_url() ?>index.php?c=autocomplete&m=cid1",
+                                                                    minLength: 3,
+                                                                    focus: function (event, ui) {
+                                                                        $("#txtCICPrimariolabel").val(ui.item.label);
+                                                                        return false;
+                                                                    },
+                                                                    select: function (event, ui) {
+                                                                        $("#txtCICPrimariolabel").val(ui.item.value);
+                                                                        $("#txtCICPrimario").val(ui.item.id);
+                                                                        return false;
+                                                                    }
+                                                                });
                                                             });
-                                                        });
 
 
 
-                                                        $(function () {
-                                                            $("#data").datepicker({
-                                                                autosize: true,
-                                                                changeYear: true,
-                                                                changeMonth: true,
-                                                                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-                                                                dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
-                                                                buttonImage: '<?= base_url() ?>img/form/date.png',
-                                                                dateFormat: 'dd/mm/yy'
+                                                            $(function () {
+                                                                $("#data").datepicker({
+                                                                    autosize: true,
+                                                                    changeYear: true,
+                                                                    changeMonth: true,
+                                                                    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                                                                    dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                                                                    buttonImage: '<?= base_url() ?>img/form/date.png',
+                                                                    dateFormat: 'dd/mm/yy'
+                                                                });
                                                             });
-                                                        });
 
-                                                        $(function () {
-                                                            $("#accordion").accordion();
-                                                        });
+                                                            $(function () {
+                                                                $("#accordion").accordion();
+                                                            });
 
 //                                                    setTimeout('delayReload()', 20000);
 //                                                    function delayReload()
@@ -424,10 +447,10 @@
 //                                                        }
 //                                                    }
 
-                                                    });
+                                                        });
 
-                                                    setInterval(function () {
-                                                        window.location.reload();
-                                                    }, 180000);
+                                                        setInterval(function () {
+                                                            window.location.reload();
+                                                        }, 180000);
 
 </script>

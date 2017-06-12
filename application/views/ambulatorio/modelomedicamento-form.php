@@ -79,7 +79,7 @@
     </div>
 </div> <!-- Final da DIV content -->
 
-<script type="text/javascript" src="<?= base_url() ?>js/jquery-ui-1.10.4.js" ></script>
+<!--<script type="text/javascript" src="<?= base_url() ?>js/jquery-ui-1.10.4.js" ></script>-->
 <script type="text/javascript" src="<?= base_url() ?>js/jquery.validate.js"></script>
 <script type="text/javascript">
     $('#btnVoltar').click(function () {
@@ -91,21 +91,51 @@
     });
 
     $(document).ready(function () {
-        $(function () {
-            $("#unidade").autocomplete({
-                source: "<?= base_url() ?>index.php?c=autocomplete&m=medicamentounidade",
-                minLength: 1,
-                focus: function (event, ui) {
-                    $("#unidade").val(ui.item.label);
-                    return false;
+//        $(function () {
+//            $("#unidade").autocomplete({
+//                source: "<?= base_url() ?>index.php?c=autocomplete&m=medicamentounidade",
+//                minLength: 1,
+//                focus: function (event, ui) {
+//                    $("#unidade").val(ui.item.label);
+//                    return false;
+//                },
+//                select: function (event, ui) {
+//                    $("#unidadeid").val(ui.item.id);
+//                    $("#unidade").val(ui.item.value);
+//                    return false;
+//                }
+//            });
+//        });
+
+
+        var unidade = {
+            url: "<?= base_url() ?>index.php?c=autocomplete&m=medicamentounidade",
+            getValue: "value",
+            list: {
+                onSelectItemEvent: function () {
+                    var value = $("#unidade").getSelectedItemData().id;
+
+                    $("#unidadeid").val(value).trigger("change");
                 },
-                select: function (event, ui) {
-                    $("#unidadeid").val(ui.item.id);
-                    $("#unidade").val(ui.item.value);
-                    return false;
-                }
-            });
-        });
+                match: {
+                    enabled: true
+                },
+                showAnimation: {
+                    type: "fade", //normal|slide|fade
+                    time: 200,
+                    callback: function () {}
+                },
+                hideAnimation: {
+                    type: "slide", //normal|slide|fade
+                    time: 200,
+                    callback: function () {}
+                },
+                maxNumberOfElements: 20
+            },
+            theme: "bootstrap"
+        };
+
+        $("#unidade").easyAutocomplete(unidade);
 
         jQuery('#form_novomedicamento').validate({
             rules: {

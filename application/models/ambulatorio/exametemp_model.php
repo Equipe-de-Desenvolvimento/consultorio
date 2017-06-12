@@ -101,9 +101,12 @@ class exametemp_model extends Model {
                             es.nome as sala,
                             a.medico_agenda,
                             o.nome as medico,
+                            pc.convenio_id as convenio_agenda,
+                            a.procedimento_tuss_id,
                             a.observacoes,
                             p.convenio_id');
         $this->db->from('tb_agenda_exames a');
+        $this->db->join('tb_procedimento_convenio pc', 'pc.procedimento_convenio_id = a.procedimento_tuss_id', 'left');
         $this->db->join('tb_exame_sala es', 'es.exame_sala_id = a.agenda_exames_nome_id', 'left');
         $this->db->join('tb_operador o', 'o.operador_id = a.medico_consulta_id', 'left');
         $this->db->join('tb_paciente p', 'p.paciente_id = a.paciente_id', 'left');

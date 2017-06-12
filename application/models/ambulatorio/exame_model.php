@@ -3047,6 +3047,7 @@ class exame_model extends Model {
                             ae.inicio,
                             ae.data_autorizacao,
                             ae.fim,
+                            ae.bloqueado,
                             ae.ativo,
                             ae.telefonema,
                             ae.situacao,
