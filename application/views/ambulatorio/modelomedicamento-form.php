@@ -45,7 +45,7 @@
 
 
                                     <input type=hidden" name="unidadeid" id="unidadeid" class="form-control" style="display: none;">
-                                    <input type=text" name="unidade" id="unidade" class="form-control">
+                                    <input type=text" name="unidade" id="unidade" class="form-control eac-square">
                                 </div>
                             </div>
                         </div>

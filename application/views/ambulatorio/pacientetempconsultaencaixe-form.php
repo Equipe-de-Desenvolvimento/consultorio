@@ -1,109 +1,146 @@
-<?$empresa_logada = $this->session->userdata('empresa_id');?>
-<div class="content ficha_ceatox"> <!-- Inicio da DIV content -->
-    <div class="clear"></div>
+<? $empresa_logada = $this->session->userdata('empresa_id'); ?>
+<div id="page-wrapper"> <!-- Inicio da DIV content -->
+    <div class="row">
+        <div class="col-lg-12">
+            <!--<div class="panel panel-default">-->
+            <div class="alert alert-success">
+                Encaixar Atendimento
+            </div>
+
+            <!--</div>-->
+        </div>
+    </div>
     <form name="form_exametemp" id="form_exametemp" action="<?= base_url() ?>ambulatorio/exametemp/gravarpacienteconsultaencaixe" method="post">
-        </fieldset>
-        <fieldset>
+        <div class="panel panel-default ">
+            <div class="alert alert-info">
+                Dados do Atendimento
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-2">
 
-            <legend>Manter Consultas</legend>
-            <div>
-                <label>Data</label>
-                <input type="text"  id="data_ficha" name="data_ficha" class="size1"  required/>
-                <input type="hidden" name="txtpaciente_id"  value="<?= @$obj->_ambulatorio_pacientetemp_id; ?>" />
-            </div>
-            <div>
-                <label>Medico</label>
-                <select name="medico" id="medico" class="size4" required>
-                    <option value="" >Selecione</option>
-                    <? foreach ($medico as $item) : ?>
-                        <option value="<?= $item->operador_id; ?>"><?= $item->nome; ?></option>
-                    <? endforeach; ?>
-                </select>
-            </div>
-            <div>
-                <label>Empresa</label>
-                <select name="empresa" id="empresa" class="size1">
-                    <?
-                    foreach ($empresas as $value) :
-                        ?>
-                        <option value="<?= $value->empresa_id; ?>" <?
-                        if ($empresa_logada == $value->empresa_id) {
-                            echo 'selected';
-                        }
-                        ?>><?php echo $value->nome; ?></option>
-                            <? endforeach; ?>
-                </select>
+                        <div class="form-group ">
+                            <label>Data</label>
+                            <input type="text"  id="data_ficha" name="data_ficha" class="form-control"  required/>
+                            <input type="hidden" name="txtpaciente_id"  value="<?= @$obj->_ambulatorio_pacientetemp_id; ?>" />
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Medico</label>
+                            <select name="medico" id="medico" class="form-control" required>
+                                <option value="" >Selecione</option>
+                                <? foreach ($medico as $item) : ?>
+                                    <option value="<?= $item->operador_id; ?>"><?= $item->nome; ?></option>
+                                <? endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Horarios</label>
+                            <input type="text" id="horarios" alt="time" class="form-control" name="horarios" required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <label>Observa&ccedil;&otilde;es</label>
+                            <input type="text" id="observacoes" class="form-control" name="observacoes" />
+                        </div>
+                    </div>
+                </div>
 
             </div>
-            <div>
-                <label>Horarios</label>
-                <input type="text" id="horarios" alt="time" class="size1" name="horarios" required/>
+        </div>
+        <div class="panel panel-default ">
+            <div class="alert alert-info">
+                Dados do Paciente
             </div>
-            <div>
-                <label>Observa&ccedil;&otilde;es</label>
-                <input type="text" id="observacoes" class="size3" name="observacoes" />
-            </div>
-            
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
 
+                        <div class="form-group">
+                            <label>Nome</label>
+                            <input type="hidden" id="txtNomeid" class="texto_id" name="txtNomeid" readonly="true" />
+                            <input type="text" id="txtNome" name="txtNome" class="form-control eac-square" required/>
+                        </div>
 
-        </fieldset>
-        <fieldset>
-            <legend>Paciente</legend>
-            <div>
-                <label>Nome</label>
-                <input type="hidden" id="txtNomeid" class="texto_id" name="txtNomeid" readonly="true" />
-                <input type="text" id="txtNome" name="txtNome" class="texto10" required/>
-            </div>
-            <div>
-                <label>Dt de nascimento</label>
-                <input type="text" name="nascimento" id="nascimento" class="texto02"/>
-            </div>
-            <div>
+                    </div>
 
-                <input type="hidden" name="idade" id="txtIdade" class="texto01" alt="numeromask"/>
-            </div>
-            <div>
-                <label>End.</label>
-                <input type="text" id="txtEnd" class="texto06" name="txtEnd"  />
-            </div>
-            <div>
-                <label>Telefone</label>
-                <input type="text" id="txtTelefone" class="texto02" name="txtTelefone"/>
-            </div>
-            <div>
-                <label>Celular</label>
-                <input type="text" id="txtCelular" class="texto02" name="txtCelular"/>
-            </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Dt de nascimento</label>
+                            <input type="text" name="nascimento" id="nascimento" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Telefone</label>
+                            <input type="text" id="txtTelefone" class="form-control" name="txtTelefone"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Celular</label>
+                            <input type="text" id="txtCelular" class="form-control" name="txtCelular"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
 
-            <div>
-                <label>Convenio *</label>
-                <select name="convenio" id="convenio" class="size4" required>
-                    <option  value="0">Selecione</option>
-                    <? foreach ($convenio as $value) : ?>
-                        <option value="<?= $value->convenio_id; ?>"><?php echo $value->nome; ?></option>
-                    <? endforeach; ?>
-                </select>
+                    <div class="col-lg-10">
+                        <div class="form-group">
+                            <label>End.</label>
+                            <input type="text" id="txtEnd" class="form-control" name="txtEnd"  />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Convenio *</label>
+                            <select name="convenio" id="convenio" class="form-control" required>
+                                <option  value="0">Selecione</option>
+                                <? foreach ($convenio as $value) : ?>
+                                    <option value="<?= $value->convenio_id; ?>"><?php echo $value->nome; ?></option>
+                                <? endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Procedimento</label>
+                            <select  name="procedimento" id="procedimento" class="form-control" required>
+                                <option value="">Selecione</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1">
+                        <button class="btn btn-outline btn-success btn-sm" type="submit" name="btnEnviar"><i class="fa fa-floppy-o" aria-hidden="true"></i>
+                            Enviar</button>
+                    </div>
+                    <div class="col-lg-1">
+                        <button class="btn btn-outline btn-danger btn-sm" type="reset" name="btnLimpar">Limpar</button>
+                    </div>
+                </div>
             </div>
-            <div>
-                <label>Procedimento</label>
-                <select  name="procedimento" id="procedimento" class="size1" required>
-                    <option value="">Selecione</option>
-                </select>
-            </div>
-            <div>
-                <label>&nbsp;</label>
-                <button type="submit" name="btnEnviar">Adicionar</button>
-            </div>
+        </div>
+
     </form>
 </fieldset>
 
 
 </div> <!-- Final da DIV content -->
-<link rel="stylesheet" href="<?= base_url() ?>css/jquery-ui-1.8.5.custom.css">
-<script type="text/javascript" src="<?= base_url() ?>js/jquery.validate.js"></script>
-<script type="text/javascript" src="<?= base_url() ?>js/jquery-1.9.1.js" ></script>
 <script type="text/javascript" src="<?= base_url() ?>js/jquery-ui-1.10.4.js" ></script>
-<script type="text/javascript" src="<?= base_url() ?>js/jquery.maskedinput.js"></script>
+
 <script>
     function mascaraTelefone(campo) {
 
@@ -150,8 +187,8 @@
 
 </script>
 <script type="text/javascript">
-    mascaraTelefone(form_exametemp.txtTelefone);
-    mascaraTelefone(form_exametemp.txtCelular);
+//    mascaraTelefone(form_exametemp.txtTelefone);
+//    mascaraTelefone(form_exametemp.txtCelular);
 
 
     $(function () {
@@ -166,26 +203,111 @@
         });
     });
 
-    $(function () {
-        $("#txtNome").autocomplete({
-            source: "<?= base_url() ?>index.php?c=autocomplete&m=paciente",
-            minLength: 3,
-            focus: function (event, ui) {
-                $("#txtNome").val(ui.item.label);
-                return false;
-            },
-            select: function (event, ui) {
-                $("#txtNome").val(ui.item.value);
-                $("#txtNomeid").val(ui.item.id);
-                $("#txtTelefone").val(ui.item.itens);
-                $("#txtCelular").val(ui.item.celular);
-                $("#nascimento").val(ui.item.valor);
-                $("#txtEnd").val(ui.item.endereco);
-                return false;
-            }
-        });
-    });
+//    $(function () {
+//        $("#txtNome").autocomplete({
+//            source: "<?= base_url() ?>index.php?c=autocomplete&m=paciente",
+//            minLength: 3,
+//            focus: function (event, ui) {
+//                $("#txtNome").val(ui.item.label);
+//                return false;
+//            },
+//            select: function (event, ui) {
+//                $("#txtNome").val(ui.item.value);
+//                $("#txtNomeid").val(ui.item.id);
+//                $("#txtTelefone").val(ui.item.itens);
+//                $("#txtCelular").val(ui.item.celular);
+//                $("#nascimento").val(ui.item.valor);
+//                $("#txtEnd").val(ui.item.endereco);
+//                return false;
+//            }
+//        });
+//    });
 
+    var paciente = {
+//        url: "<?= base_url() ?>index.php?c=autocomplete&m=paciente",
+        url: function (phrase) {
+            if (phrase.length > 2) {
+                return "<?= base_url() ?>autocomplete/paciente?term=" + phrase;
+            } else {
+                //duckduckgo doesn't support empty strings
+//                return "http://api.duckduckgo.com/?q=empty&format=json";
+            }
+        },
+        getValue: "value",
+        list: {
+            onSelectItemEvent: function () {
+                var value = $("#txtNome").getSelectedItemData().id;
+                var telefone = $("#txtNome").getSelectedItemData().itens;
+                var celular = $("#txtNome").getSelectedItemData().celular;
+                var nascimento = $("#txtNome").getSelectedItemData().valor;
+                var endereco = $("#txtNome").getSelectedItemData().endereco;
+
+                $("#txtNomeid").val(value).trigger("change");
+                $("#txtTelefone").val(telefone).trigger("change");
+                $("#txtCelular").val(celular).trigger("change");
+                $("#nascimento").val(nascimento).trigger("change");
+                $("#txtEnd").val(endereco).trigger("change");
+
+//                mascaraTelefone(form_exametemp.txtTelefone);
+//                mascaraTelefone(form_exametemp.txtCelular);
+
+            },
+            match: {
+                enabled: true
+            },
+//            template: {
+//                type: "iconLeft",
+//                fields: {
+//                    iconSrc: "icon"
+//                }
+//            },
+            showAnimation: {
+                type: "fade", //normal|slide|fade
+                time: 200,
+                callback: function () {}
+            },
+            hideAnimation: {
+                type: "slide", //normal|slide|fade
+                time: 200,
+                callback: function () {}
+            },
+            maxNumberOfElements: 10
+        },
+        requestDelay: 200,
+        theme: "bootstrap"
+    };
+
+    $("#txtNome").easyAutocomplete(paciente);
+
+
+    jQuery("#txtCelular")
+            .mask("(99) 9999-9999?9")
+            .change(function (event) {
+                var target, phone, element;
+                target = (event.currentTarget) ? event.currentTarget : event.srcElement;
+                phone = target.value.replace(/\D/g, '');
+                element = $(target);
+                element.unmask();
+                if (phone.length > 10) {
+                    element.mask("(99) 99999-999?9");
+                } else {
+                    element.mask("(99) 9999-9999?9");
+                }
+            });
+    jQuery("#txtTelefone")
+            .mask("(99) 9999-9999?9")
+            .change(function (event) {
+                var target, phone, element;
+                target = (event.currentTarget) ? event.currentTarget : event.srcElement;
+                phone = target.value.replace(/\D/g, '');
+                element = $(target);
+                element.unmask();
+                if (phone.length > 10) {
+                    element.mask("(99) 99999-999?9");
+                } else {
+                    element.mask("(99) 9999-9999?9");
+                }
+            });
 
     $(function () {
         $('#convenio').change(function () {

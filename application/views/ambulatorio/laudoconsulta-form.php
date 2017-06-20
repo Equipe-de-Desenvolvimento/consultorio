@@ -166,7 +166,7 @@
                                         $cabecalho = @$obj->_cabecalho;
                                     }
                                     ?>
-                                    <label>Queixa Principal</label>
+                                    <label>Procedimento Autorizado</label>
                                     <input type="text" id="cabecalho" class="form-control" name="cabecalho" value="<?= $cabecalho ?>"/>
 
                                 </div>
@@ -528,7 +528,7 @@
                     <div class="panel-body">
 
                         <div class="row">
-                            <div class="col-lg-3">
+<!--                            <div class="col-lg-3">
                                 <div class="form-group">
                                     <label>Médico Responsável</label>
                                     <select name="medico" id="medico" class="form-control">
@@ -540,7 +540,7 @@
                                                 <? endforeach; ?>
                                     </select>
                                 </div>  
-                            </div>
+                            </div>-->
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>Situa&ccedil;&atilde;o</label>
@@ -557,7 +557,7 @@
                                     <input type="hidden" name="status" id="status" value="<?= @$obj->_status; ?>" class="size2" />
                                 </div>  
                             </div>
-                            <div class="col-lg-1">
+<!--                            <div class="col-lg-1">
                                 <div class="form-group">
                                     <label>Assinatura</label>
                                     <?php
@@ -572,8 +572,8 @@
                                     }
                                     ?>
                                 </div>  
-                            </div>
-                            <div class="col-lg-1">
+                            </div>-->
+<!--                            <div class="col-lg-1">
                                 <div class="form-group">
                                     <label>Rodapé</label>
                                     <?php
@@ -588,7 +588,7 @@
                                     }
                                     ?>
                                 </div>  
-                            </div>
+                            </div>-->
 
                         </div>
                         <br>

@@ -1,4 +1,4 @@
-<div class="content ficha_ceatox"> <!-- Inicio da DIV content -->
+<div id="page-wrapper"> <!-- Inicio da DIV content -->
         <form name="form_formapagamento_parcela" id="form_formapagamento_parcela" action="<?= base_url() ?>cadastros/formapagamento/gravarparcelas" method="post">
             <fieldset>
                 <legend>Cadastro Forma de Pagamento</legend>

@@ -34,7 +34,7 @@
                             <label>Ajuste%</label>
 
 
-                            <input type="text" name="ajuste" class="form-control" id="ajuste" value="<?= @$obj->_ajuste; ?>" />
+                            <input type="number" name="ajuste" step=0.01 class="form-control" id="ajuste" value="<?= @$obj->_ajuste; ?>" />
                         </div>
 
 
@@ -47,7 +47,7 @@
                             <label>Dia de Recebimento</label>
 
 
-                            <input type="text" name="diareceber" class="form-control" id="diareceber" value="<?= @$obj->_dia_receber; ?>"/>
+                            <input type="number" min="0" name="diareceber" class="form-control" id="diareceber" value="<?= @$obj->_dia_receber; ?>" data-container="body" data-toggle="popover" data-placement="right" data-content="Nesse caso é digitado o dia do mês em que o dinheiro cai na conta após o pagamento ter sido efetuado. Exemplo: Alguns cartões definem que no dia 05 do mês irá ser depositado o dinheiro na conta associada no contrato com o cartão. Se a forma de pagamento que está cadastrando for dinheiro, deixe esse campo com 0 no seu valor "/>
                         </div>
 
 
@@ -60,8 +60,16 @@
                             <label>Tempo de Recebimento</label>
 
 
-                            <input title="Aqui é digitado o tempo que leva desde o momento do pagamento até o recebimento do dinheiro em si. (Esse campo anula o Dia de recebimento)" type="text" name="temporeceber" class="form-control" id="temporeceber" value= "<?= @$obj->_tempo_receber; ?>" />
-                            <input type="checkbox" name="arrendondamento" id="arrendondamento" <? if (@$obj->_fixar == 't') { ?>checked <? } ?>  />Fixar
+                            <input min="0"  type="number" name="temporeceber" class="form-control" id="temporeceber" value= "<?= @$obj->_tempo_receber; ?>" data-container="body" data-toggle="popover" data-placement="right" data-content="Nesse caso é digitado o tempo (Em dias) que demora para o cartão depositar o dinheiro na conta do vendedor após o pagamento do cliente. Exemplo: Alguns cartões definem que após 30 dias o dinheiro irá ser depositado na conta do beneficiario. Se a forma de pagamento que está cadastrando for dinheiro, deixe esse campo com 0 no seu valor "/>
+
+                        </div>
+
+
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Fixar</label>
+                            <input type="checkbox" class="checkbox" name="arrendondamento" id="arrendondamento" <? if (@$obj->_fixar == 't') { ?>checked <? } ?>  />
                         </div>
 
 
@@ -74,7 +82,7 @@
                             <label>N° Maximo de Parcelas</label>
 
 
-                            <input type="text" name="parcelas" class="form-control" id="parcelas" value= "<?= @$obj->_parcelas; ?>" required=""/>
+                            <input type="number" name="parcelas" class="form-control" id="parcelas" value= "<?= @$obj->_parcelas; ?>" required=""/>
                         </div>
 
 
@@ -87,7 +95,7 @@
                             <label>Valor Mínimo da Parcela</label>
 
 
-                            <input type="text" name="parcela_minima" class="form-control" id="parcela_minima" value= "<?= @$obj->_parcela_minima; ?>" />
+                            <input type="text" name="parcela_minima" class="form-control dinheiro" id="parcela_minima" value= "<?= number_format(@$obj->_parcela_minima, 2, ',', '.'); ?>" />
                         </div>
 
 
@@ -181,42 +189,54 @@
     });
 
 
-    $(document).ready(function () {
-        jQuery('#form_formapagamento').validate({
-            rules: {
-                txtNome: {
-                    required: true,
-                    minlength: 3
-                },
-                conta: {
-                    required: true
-
-                },
-                credor_devedor: {
-                    required: true
-                },
-                parcelas: {
-                    required: true
-                }
-
-            },
-            messages: {
-                txtNome: {
-                    required: "*",
-                    minlength: "!"
-                },
-                conta: {
-                    required: "*"
-
-                },
-                credor_devedor: {
-                    required: "*"
-                },
-                parcelas: {
-                    required: "*"
-                }
-            }
-        });
+    $('#temporeceber').blur(function () {
+        if ($(this).val() > 0) {
+//            alert('sd');
+            $("#diareceber").prop('readonly', true);
+//            
+        } else {
+            $("#diareceber").prop('readonly', false);
+//            
+        }
     });
+
+    $('#diareceber').blur(function () {
+        if ($(this).val() > 0) {
+//            alert('sd');
+            $("#temporeceber").prop('readonly', true);
+//            
+        } else {
+            $("#temporeceber").prop('readonly', false);
+//            
+        }
+    });
+
+    if ($("#diareceber").val() > 0) {
+//            alert('sd');
+        $("#temporeceber").prop('readonly', true);
+//            
+    } else {
+        $("#temporeceber").prop('readonly', false);
+//            
+    }
+
+    if ($("#temporeceber").val() > 0) {
+//            alert('sd');
+        $("#diareceber").prop('readonly', true);
+//            
+    } else {
+        $("#diareceber").prop('readonly', false);
+//            
+    }
+    
+    
+    $('.tooltip-demo').tooltip({
+        selector: "[data-toggle=tooltip]",
+        container: "body"
+    });
+    // popover demo
+    $("[data-toggle=popover]")
+        .popover();
+
 
 </script>

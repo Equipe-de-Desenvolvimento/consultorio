@@ -13,7 +13,7 @@
                         <table width="100%" class="table " id="dataTables-example">
                             <tr class="info">
                                 <!--<th>Situação</th>-->
-                                <th>Medico</th>
+                                <!--<th>Medico</th>-->
                                 <th >Data</th>
                                 <th class="text-center">Ações</th>
                             </tr> 
@@ -46,7 +46,7 @@
 
                                 </td>-->
 
-                                <td>
+<!--                                <td>
                                     <select name="medico" id="medico" class="form-control texto06">
                                         <option value=""> </option>
                                         <? foreach ($medicos as $value) : ?>
@@ -62,18 +62,30 @@
                                         <? endforeach; ?>
 
                                     </select>
-                                </td>
+                                </td>-->
                                 <td> <input type="text"  id="data" alt="date" name="data" class="form-control texto04"  value="<?php echo @$_GET['data']; ?>" /></td>
                                 <td style="text-align: center;"><button type="submit" class="btn btn-default  btn-danger" name="enviar"><i class="fa fa-search fa-1x"></i></button></td>
                             </tr> 
                         </table> 
                     </form>
+              <style>
 
+                    .desbloq{
+                        width: 150pt;
+                    }
+
+                </style>
 
                 </div>
                 <div class="panel-heading ">
                     Atendimento Médico
                 </div>
+                <a class="btn btn-outline btn-danger" href="<?php echo base_url() ?>ambulatorio/exametemp/novopacienteconsultaencaixe" target="_blank">
+                    <i class="fa fa-plus fa-w"></i> Encaixar
+                </a>
+                <a class="btn btn-outline btn-danger" href="<?php echo base_url() ?>cadastros/pacientes/novo" target="_blank">
+                    <i class="fa fa-plus fa-w"></i> Novo Cadastro
+                </a>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <!--<div class="table-responsive">-->
@@ -167,15 +179,17 @@
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td><?= $item->procedimento; ?></td>
                                             <td><?= $item->observacoes; ?></td>
-                                            <td class="tabela_acoes" style="width: 130pt;">
+                                            <td class="tabela_acoes desbloq">
                                                 <? if ($item->situacaolaudo != '') { ?>
 
                                                     <? if (($item->medico_parecer1 == $operador_id && $item->situacaolaudo == 'FINALIZADO') || ($item->realizada == 't' && $item->situacaolaudo != 'FINALIZADO') || $operador_id == 1) { ?>
                                                         <a class="btn  btn-danger btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaranaminese/<?= $item->ambulatorio_laudo_id ?>/<?= $item->exame_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');" >
-                                                            Atender</a>
+                                                            Atender <i class="fa fa-stethoscope" aria-hidden="true"></i>
+</a>
                                                     <? } else { ?>
                                                         <button class="btn  btn-primary btn-sm" disabled="">
-                                                            Atender
+                                                            Atender <i class="fa fa-stethoscope" aria-hidden="true"></i>
+
                                                         </button>
                                                     <? } ?>
                                                     <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $item->ambulatorio_laudo_id ?>');">
@@ -187,17 +201,20 @@
 
 
                                                             <? if (date("d/m/Y") == date("d/m/Y", strtotime($item->data)) && $item->confirmado == 'f') { ?>
-                                                                <a class="btn btn-info btn-sm" onclick="javascript:window.open('<?= base_url() ?>cadastros/pacientes/procedimentoautorizarconsulta/<?= $item->paciente_id ?>');">Autorizar
+                                                                <a class="btn btn-info btn-sm" onclick="javascript:window.open('<?= base_url() ?>cadastros/pacientes/procedimentoautorizarconsulta/<?= $item->paciente_id ?>');">Autorizar <i class="fa fa-check" aria-hidden="true"></i>
+
                                                                 </a>
 
                                                             <? } ?>
                                                             <button class="btn  btn-primary btn-sm" disabled="">
-                                                                Atender
+                                                                Atender <i class="fa fa-stethoscope" aria-hidden="true"></i>
+
                                                             </button>
                                                         <? } else { ?>
 
                                                             <? if ($item->bloqueado == 'f') { ?>
-                                                                <a class="btn btn-success btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarconsultatemp/<?= $item->agenda_exames_id ?>');">Agendar
+                                                                <a class="btn btn-success btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarconsultatemp/<?= $item->agenda_exames_id ?>');">Agendar <i class="fa fa-list-alt" aria-hidden="true"></i>
+
                                                                 </a>
                                                                 <a class="btn btn-success btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/bloquear/<?= $item->agenda_exames_id ?>/<?= $item->inicio; ?>');">Bloquear <i class="fa fa-lock" aria-hidden="true"></i>
                                                                 </a>

@@ -101,19 +101,28 @@
                         width: 1000px;
                         margin: 0 auto;
                     }
+                    .tabela_acoes{
+                        width: 150pt;
+                    }
+                    .desbloq{
+                        width: 125pt;
+                    }
 
                 </style>
                 <!--<div class="table-responsive text-right">-->
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div id='calendar'></div>
-                        </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div id='calendar'></div>
                     </div>
-                    
+                </div>
+
                 <!--</div>-->
                 <div class="panel-heading ">
                     Agendamento
                 </div>
+                <a class="btn btn-outline btn-danger" href="<?php echo base_url() ?>ambulatorio/exametemp/novopacienteconsultaencaixe" target="_blank">
+                    <i class="fa fa-plus fa-w"></i> Encaixar
+                </a>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -236,12 +245,13 @@
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
 
-                                            <td class="tabela_acoes">
+                                            <td class="tabela_acoes" style="width: 150pt;">
                                                 <? if ($item->bloqueado == 'f') { ?>
 
                                                     <a class="btn btn-success btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/bloquear/<?= $item->agenda_exames_id ?>/<?= $item->inicio; ?>');">Bloquear <i class="fa fa-lock" aria-hidden="true"></i>
                                                     </a>
-                                                    <a class="btn btn-success btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarconsultatemp/<?= $item->agenda_exames_id ?>');">Agendar
+                                                    <a class="btn btn-success btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarconsultatemp/<?= $item->agenda_exames_id ?>');">Agendar <i class="fa fa-calendar" aria-hidden="true"></i>
+
                                                     </a>
                                                 <? } else { ?>
                                                     <a class="btn btn-success btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/desbloquear/<?= $item->agenda_exames_id ?>/<?= $item->inicio; ?> ', 'toolbar=no,Location=no,menubar=no,width=500,height=200');">Desbloq.
@@ -260,7 +270,7 @@
 
                                             <td class="tabela_acoes">
 
-                                                <a class="btn btn-success btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/desbloquear/<?= $item->agenda_exames_id ?>/<?= $item->inicio; ?> ', 'toolbar=no,Location=no,menubar=no,width=500,height=200');">Desbloq. <i class="fa fa-unlock" aria-hidden="true"></i>
+                                                <a class="btn btn-success btn-sm desbloq" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/desbloquear/<?= $item->agenda_exames_id ?>/<?= $item->inicio; ?> ', 'toolbar=no,Location=no,menubar=no,width=500,height=200');">Desbloq. <i class="fa fa-unlock" aria-hidden="true"></i>
                                                 </a>
 
                                             </td>
@@ -273,7 +283,7 @@
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td class="tabela_acoes">
-                                                <a class="btn btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas
+                                                <a class="btn btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas <i class="fa fa-calendar" aria-hidden="true"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -286,7 +296,7 @@
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td class="tabela_acoes">
-                                                <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas
+                                                <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas <i class="fa fa-calendar" aria-hidden="true"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -298,7 +308,7 @@
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td class="tabela_acoes">
-                                                <a class="btn btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas
+                                                <a class="btn btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas <i class="fa fa-calendar" aria-hidden="true"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -312,7 +322,7 @@
                                             <td class="tabela_acoes">
                                                 <a class="btn btn-danger btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/guiacancelamento/<?= $item->agenda_exames_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');">Cancelar
                                                 </a>
-                                                <a class="btn btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas
+                                                <a class="btn btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas <i class="fa fa-calendar" aria-hidden="true"></i>
                                                 </a>
 
                                             </td>
@@ -328,16 +338,23 @@
                                             <? } ?>
                                             <td><?= $situacao ?></td>
                                             <td><?= $item->inicio ?></td>
-                                            <td><?= $item->paciente ?></td>
+                                            <td><?= $item->paciente ?> <?if($item->encaixe == 't'){?>
+                                                <span class="text-danger">(Encaixe)</span>
+                                           <? }?></td>
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
-                                            <td class="text-center" style="width: 130pt;">
+                                            <td class="tabela_acoes text-center" style="width: 150pt;">
                                                 <? if (date("d/m/Y") == date("d/m/Y", strtotime($item->data))) { ?>
-                                                    <a class="btn btn-info btn-sm" onclick="javascript:window.open('<?= base_url() ?>cadastros/pacientes/procedimentoautorizarconsulta/<?= $item->paciente_id ?>');">Autorizar
+                                                    <a class="btn btn-info btn-sm" onclick="javascript:window.open('<?= base_url() ?>cadastros/pacientes/procedimentoautorizarconsulta/<?= $item->paciente_id ?>');">Autorizar <i class="fa fa-user-md" aria-hidden="true"></i>
+
                                                     </a>
 
                                                 <? } ?>
-                                                <a class="btn btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas
+                                                <a class="btn btn-primary btn-sm <?
+                                                if (date("d/m/Y") != date("d/m/Y", strtotime($item->data))) {
+                                                    echo 'desbloq';
+                                                }
+                                                ?>" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas <i class="fa fa-calendar" aria-hidden="true"></i>
                                                 </a>
 
 

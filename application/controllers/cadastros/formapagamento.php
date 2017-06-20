@@ -129,11 +129,11 @@ class Formapagamento extends BaseController {
     function gravar() {
         $exame_formapagamento_id = $this->formapagamento->gravar();
         if ($exame_formapagamento_id == "-1") {
-            $data['mensagem'] = array('Erro ao excluir a forma de pagamento. Operação Cancelada.', 'error');
+            $data['mensagem'] = array('Erro ao gravar a forma de pagamento. Operação Cancelada.', 'error');
         } else {
-            $data['mensagem'] = array('Sucesso ao excluir a forma de pagamento' ,'success');
+            $data['mensagem'] = array('Sucesso ao gravar a forma de pagamento' ,'success');
         }
-//        $this->session->set_flashdata('message', $data['mensagem']);
+        $this->session->set_flashdata('message', $data['mensagem']);
         redirect(base_url() . "cadastros/formapagamento");
     }
 

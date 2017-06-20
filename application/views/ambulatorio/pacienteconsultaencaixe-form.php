@@ -1,4 +1,4 @@
-<div class="content ficha_ceatox"> <!-- Inicio da DIV content -->
+<div id="page-wrapper"> <!-- Inicio da DIV content -->
     <div class="clear"></div>
     <form name="form_exametemp" id="form_exametemp" action="<?= base_url() ?>ambulatorio/exametemp/gravapacienteconsultaencaixe" method="post">
         <fieldset>
