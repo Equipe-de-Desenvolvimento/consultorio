@@ -414,6 +414,97 @@ class paciente_model extends BaseModel {
             return false;
         }
     }
+    
+    function gravarpacientemedico() {
+
+        try {
+            $this->db->set('nome', $_POST['nome']);
+            if ($_POST['cpf'] != '') {
+                $this->db->set('cpf', str_replace("-", "", str_replace(".", "", $_POST['cpf'])));
+            }
+            if ($_POST['nascimento'] != '') {
+                $this->db->set('nascimento', date("Y-m-d", strtotime( str_replace("/", "-", $_POST['nascimento']) ) ) );
+            }
+            if ($_POST['data_emissao'] != '') {
+                $this->db->set('data_emissao', $_POST['data_emissao']);
+            }
+
+            if ($_POST['convenio'] != '') {
+                $this->db->set('convenio_id', $_POST['convenio']);
+            }
+            $this->db->set('cns', $_POST['cns']);
+            if ($_POST['indicacao'] != '') {
+                $this->db->set('indicacao', $_POST['indicacao']);
+            }
+            if ($_POST['escolaridade'] != '') {
+                $this->db->set('escolaridade_id', $_POST['escolaridade']);
+            }
+            $this->db->set('rg', $_POST['rg']);
+            $this->db->set('uf_rg', $_POST['uf_rg']);
+            $this->db->set('titulo_eleitor', $_POST['titulo_eleitor']);
+            $this->db->set('sexo', $_POST['sexo']);
+            if ($_POST['raca_cor'] != '') {
+                $this->db->set('raca_cor', $_POST['raca_cor']);
+            }
+            if ($_POST['estado_civil_id'] != '') {
+                $this->db->set('estado_civil_id', $_POST['estado_civil_id']);
+            }
+            $this->db->set('nome_pai', $_POST['nome_pai']);
+            $this->db->set('nome_mae', $_POST['nome_mae']);
+            $this->db->set('celular', str_replace("(", "", str_replace(")", "", str_replace("-", "", $_POST['celular']))));
+            $this->db->set('telefone', str_replace("(", "", str_replace(")", "", str_replace("-", "", $_POST['telefone']))));
+            if ($_POST['tipo_logradouro'] != '') {
+                $this->db->set('tipo_logradouro', $_POST['tipo_logradouro']);
+            }
+            $this->db->set('logradouro', $_POST['endereco']);
+            $this->db->set('convenionumero', $_POST['convenionumero']);
+
+            $this->db->set('numero', $_POST['numero']);
+            $this->db->set('bairro', $_POST['bairro']);
+            $this->db->set('complemento', $_POST['complemento']);
+            if ($_POST['municipio_id'] != '') {
+                $this->db->set('municipio_id', $_POST['municipio_id']);
+            }
+            if ($_POST['txtcboID'] != '') {
+                $this->db->set('profissao', $_POST['txtcboID']);
+            }
+            $this->db->set('cep', $_POST['cep']);
+
+            $horario = date("Y-m-d H:i:s");
+            $data = date("Y-m-d");
+            $operador_id = $this->session->userdata('operador_id');
+
+            $dia = substr($horario, 8, 2);
+            $mes = substr($horario, 5, 2);
+            $ano = substr($horario, 0, 4);
+            $dataatual = $dia . '/' . $mes . '/' . $ano;
+
+            // $this->db->set('paciente_id',$_POST['txtPacienteId'] );
+
+            if ($_POST['paciente_id'] == "") {// insert
+                $this->db->set('data_cadastro', $data);
+                $this->db->set('operador_cadastro', $operador_id);
+                $this->db->insert('tb_paciente');
+                $erro = $this->db->_error_message();
+                if (trim($erro) != "") { // erro de banco
+                    return false;
+                } else
+                    $paciente_id = $this->db->insert_id();
+            }
+            else { // update
+                $paciente_id = $_POST['paciente_id'];
+                $this->db->set('data_atualizacao', $data);
+                $this->db->set('operador_atualizacao', $operador_id);
+                $this->db->where('paciente_id', $paciente_id);
+                $this->db->update('tb_paciente');
+            }
+
+
+            return $paciente_id;
+        } catch (Exception $exc) {
+            return false;
+        }
+    }
 
     function gravarpacientetemp() {
         try {

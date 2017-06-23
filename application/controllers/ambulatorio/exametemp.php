@@ -299,6 +299,14 @@ class Exametemp extends BaseController {
         //$this->carregarView($data, 'giah/servidor-form');
         $this->loadView('ambulatorio/consultapaciente-form', $data);
     }
+    
+    function carregarconsultatempmedico($agenda_exames_id) {
+        $data['agenda_exames_id'] = $agenda_exames_id;
+        $data['convenio'] = $this->procedimentoplano->listarconvenio();
+        $data['consultas'] = $this->exametemp->listaragendasconsultapaciente($agenda_exames_id);
+        //$this->carregarView($data, 'giah/servidor-form');
+        $this->loadView('ambulatorio/consultapacientemedico-form', $data);
+    }
 
     function carregarfisioterapiatemp($agenda_exames_id) {
         $data['agenda_exames_id'] = $agenda_exames_id;
@@ -492,6 +500,32 @@ class Exametemp extends BaseController {
                 $data['mensagem'] = 'Erro ao marcar consulta o horario esta oculpado.';
                 $this->session->set_flashdata('message', $data['mensagem']);
                 redirect(base_url() . "ambulatorio/exame/listarmultifuncaoconsulta");
+            }
+        }
+    }
+    
+    function gravarpacienteconsultamedicotemp($agenda_exames_id) {
+        if (trim($_POST['txtNome']) == "" && trim($_POST['txtNomeid']) == "") {
+            $data['mensagem'] = 'Erro ao marcar consulta é obrigatorio nome do Paciente.';
+            $this->session->set_flashdata('message', $data['mensagem']);
+            redirect(base_url() . "seguranca/operador/pesquisarrecepcao");
+        } elseif (trim($_POST['convenio']) == "0") {
+            $data['mensagem'] = 'Erro ao marcar consulta é obrigatorio informar o convênio.';
+            $this->session->set_flashdata('message', $data['mensagem']);
+            redirect(base_url() . "seguranca/operador/pesquisarrecepcao");
+        } elseif (trim($_POST['procedimento']) == "") {
+            $data['mensagem'] = 'Erro ao marcar consulta é obrigatorio informar o procedimento.';
+            $this->session->set_flashdata('message', $data['mensagem']);
+            redirect(base_url() . "seguranca/operador/pesquisarrecepcao");
+        } else {
+            $data['medico'] = $this->exametemp->listarmedicoconsulta();
+            $paciente_id = $this->exametemp->gravarpacienteconsultas($agenda_exames_id);
+            if ($paciente_id != 0) {
+                redirect(base_url() . "seguranca/operador/pesquisarrecepcao");
+            } else {
+                $data['mensagem'] = 'Erro ao marcar consulta o horario esta oculpado.';
+                $this->session->set_flashdata('message', $data['mensagem']);
+                redirect(base_url() . "seguranca/operador/pesquisarrecepcao");
             }
         }
     }

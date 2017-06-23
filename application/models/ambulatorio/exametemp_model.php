@@ -557,7 +557,7 @@ class exametemp_model extends Model {
     function listarhorarioscalendariovago($medico = null, $especialidade = null) {
         if ($medico != '') {
             $this->db->select('ae.data, count(ae.data) as contagem, situacao, ae.medico_agenda as medico');
-        }elseif($especialidade != ''){
+        } elseif ($especialidade != '') {
             $this->db->select('ae.data, count(ae.data) as contagem, situacao,o.cbo_ocupacao_id as especialidade');
         } else {
             $this->db->select('ae.data, count(ae.data) as contagem, situacao');
@@ -566,16 +566,14 @@ class exametemp_model extends Model {
         $this->db->join('tb_operador o', 'o.operador_id = ae.medico_agenda', 'left');
         $this->db->where("(ae.situacao = 'LIVRE' OR ae.situacao = 'OK')");
         $this->db->where("ae.tipo IN ('CONSULTA', 'ESPECIALIDADE', 'FISIOTERAPIA')");
-        
+
         if ($medico != '') {
             $this->db->where("ae.medico_agenda", $medico);
             $this->db->groupby("ae.data, situacao, ae.medico_agenda");
-        }
-        elseif($especialidade != ''){
+        } elseif ($especialidade != '') {
             $this->db->where('o.cbo_ocupacao_id', $especialidade);
             $this->db->groupby("ae.data, situacao, o.cbo_ocupacao_id");
-        }
-         else {
+        } else {
             $this->db->groupby("ae.data, situacao");
         }
 
@@ -2697,6 +2695,28 @@ class exametemp_model extends Model {
         }
     }
 
+    function conveniodinheiro() {
+        $convenios = array_unique($_POST['convenio']);
+//                var_dump($convenios); die;
+        $convenios = implode(',', $convenios);
+        $this->db->select('dinheiro');
+        $this->db->from('tb_convenio');
+        $this->db->where("convenio_id IN ($convenios)");
+        $query = $this->db->get();
+        $return = $query->result();
+        foreach ($return as $item){
+            if($item->dinheiro == 't'){
+                $dinheiro = 't'; 
+                break;
+            }else{
+                $dinheiro = 'f'; 
+            }
+        }
+//        $dinheiro = $return[0]->dinheiro;
+//        var_dump($dinheiro); die;
+        return $dinheiro;
+    }
+
     function autorizarpacientetempconsulta($paciente_id, $ambulatorio_guia_id) {
         try {
 //            $testemedico = $_POST['medico_id'];
@@ -2734,7 +2754,7 @@ class exametemp_model extends Model {
 //Verifica o confirmado e entra de fato na função
                 if ($confimado == "on" && $procedimento_tuss_id > 0) {
 
-                    
+
                     foreach ($_POST['valor'] as $itemnome) {
                         $z++;
                         if ($i == $z) {
@@ -2763,7 +2783,7 @@ class exametemp_model extends Model {
                             break;
                         }
                     }
-                    
+
                     foreach ($_POST['convenio'] as $itemconvenio) {
                         $w++;
                         if ($i == $w) {

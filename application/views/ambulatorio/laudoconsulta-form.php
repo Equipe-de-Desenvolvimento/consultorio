@@ -52,8 +52,8 @@
                         Dados do Paciente
                     </div>
                     <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table"> 
+                        <div class="table-responsive" style="max-height: 200px;">
+                            <table class="table" > 
                                 <input type="hidden" name="guia_id" id="guia_id" class="texto01"  value="<?= @$obj->_guia_id; ?>"/>
                                 <tr>
                                     <td>Paciente: <?= @$obj->_nome ?></td>
@@ -84,7 +84,7 @@
     
                                 </tr>-->
 
-                                <tr>
+<!--                                <tr>
                                     <td colspan="3">Indicaçao: <?= @$obj->_indicacao ?></td>
                                     <td>
                                         <a style="width: 60pt;" class="btn btn-outline btn-primary" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/chamarpaciente/<?= $ambulatorio_laudo_id ?>');" >
@@ -92,12 +92,12 @@
                                         </a>
 
                                     </td>
-                                    <!--<td>Indicacao: <?= @$obj->_indicado ?></td>-->
-                                </tr>
+                                    <td>Indicacao: <?= @$obj->_indicado ?></td>
+                                </tr>-->
                                 <tr>
                                     <td colspan="3">Endereco: <?= @$obj->_logradouro ?>, <?= @$obj->_numero . ' ' . @$obj->_bairro ?> - <?= @$obj->_uf ?></td>
                                     <td>
-                                        <a style="width: 60pt;" class="btn btn-outline btn-primary" onclick="javascript:window.open('<?= base_url() ?>cadastros/pacientes/carregar/<?= @$obj->_paciente_id ?>');" >
+                                        <a style="width: 60pt;" class="btn btn-outline btn-primary" onclick="javascript:window.open('<?= base_url() ?>cadastros/pacientes/carregarmedico/<?= @$obj->_paciente_id ?>');" >
                                           Cadastro
                                         </a>
 
@@ -123,10 +123,10 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#profile-pills" id="anamnese" data-toggle="tab">Anamnese</a>
                     </li>
-                    <li ><a href="#home-pills" id="medidas" data-toggle="tab">Medidas</a>
+                    <li ><a href="#home-pills" id="medidas" data-toggle="tab">Inf. Adicionais</a>
                     </li>
 
-                    <li><a href="#messages-pills" id="opcoes" data-toggle="tab">Opções</a>
+                    <!--<li><a href="#messages-pills" id="opcoes" data-toggle="tab">Opções</a>-->
                     </li>
                     <li><a href="#settings-pills" id="historico" data-toggle="tab">Histórico</a>
                     </li>
@@ -146,7 +146,7 @@
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label>Laudo</label>
+                                    <label>Modelo Atendimento</label>
                                     <select name="exame" id="exame" class="form-control" >
                                         <option value='' >Selecione</option>
                                         <?php foreach ($lista as $item) { ?>
@@ -172,60 +172,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>CID Primario</label>
-                                    <input type="hidden" name="agrupadorfisioterapia" id="agrupadorfisioterapia" value="<?= @$obj->_agrupador_fisioterapia; ?>" class="size2" />
-                                    <input type="hidden" name="txtCICPrimario" id="txtCICPrimario" value="<?= @$obj->_cid; ?>" class="size2" />
-                                    <input type="text" name="txtCICPrimariolabel" id="txtCICPrimariolabel" value="<?= @$obj->_ciddescricao; ?>" class="form-control texto08 eac-square" />
-
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>CID Secundario</label>
-                                    <input type="hidden" name="txtCICSecundario" id="txtCICSecundario" value="<?= @$obj->_cid2; ?>" class="form-control" />
-                                    <input type="text" name="txtCICSecundariolabel" id="txtCICSecundariolabel" value="<?= @$obj->_cid2descricao; ?>" style="max-width: 400px;" class="form-control eac-square" />
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-7">
-                                <div class="form-group">
-                                    <label>Anamnese</label>
-                                    <textarea id="laudo" style="width: 600px;height: 500px;" name="laudo"><?= @$obj->_texto; ?></textarea>
-                                </div>
-                            </div>
-                            <div class="col-lg-5">
-                                <div class="your-clock"></div>
-                                    <!--<font color="#FF0000" size="6" face="Arial Black"><span id="clock1"></span><script>setTimeout('getSecs()', 1000);</script></font>-->
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-10">
-
-                            </div>
-
-                        </div>
-
-                        <style>
-                            .your-clock{
-                                /*position: fixed;*/
-                                /*top: 0;*/
-                                /*right:0;*/
-                                z-index: 15;
-                                zoom: 0.5;
-                                -moz-transform: scale(0.5)
-                            }
-                        </style>               
-
-
-                    </div>
-                    <div class="tab-pane fade " id="home-pills">
-
                         <div class="row">
                             <div class="col-lg-2">
                                 <label>Peso</label>
@@ -253,6 +199,80 @@
 
                             </div>
                         </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="form-group">
+                                    <label>Anamnese</label>
+                                    <textarea id="laudo" style="width: 600px;height: 500px;" name="laudo"><?= @$obj->_texto; ?></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="your-clock"></div>
+                                    <!--<font color="#FF0000" size="6" face="Arial Black"><span id="clock1"></span><script>setTimeout('getSecs()', 1000);</script></font>-->
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                <a class="btn btn-outline btn-info " onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregarreceituario/<?= $ambulatorio_laudo_id ?>//<?= $procedimento_tuss_id ?>');" >
+                                    Receituario</a>
+                                <a class="btn btn-outline btn-info " onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregarreceituarioespecial/<?= $ambulatorio_laudo_id ?>//<?= $procedimento_tuss_id ?>');" >
+                                    R. especial</a>
+                                <a class="btn btn-outline btn-info " onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregarexames/<?= $ambulatorio_laudo_id ?>/<?= $exame_id ?>');" >
+                                    S. exames</a>
+                                <a class="btn btn-outline btn-info " onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaratestado/<?= $ambulatorio_laudo_id ?>//<?= $procedimento_tuss_id ?>');" >
+                                    Atestado</a>
+                                <a class="btn btn-outline btn-info " onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $ambulatorio_laudo_id ?>');" >
+                                    Arquivos</a>
+                                <a class="btn btn-outline btn-info " onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/impressaolaudo/<?= $ambulatorio_laudo_id ?>/<?= $exame_id ?>');" >
+                                    <i class="fa fa-print" aria-hidden="true"></i>
+                                    Imprimir</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>CID Primario</label>
+                                    <input type="hidden" name="agrupadorfisioterapia" id="agrupadorfisioterapia" value="<?= @$obj->_agrupador_fisioterapia; ?>" class="size2" />
+                                    <input type="hidden" name="txtCICPrimario" id="txtCICPrimario" value="<?= @$obj->_cid; ?>" class="size2" />
+                                    <input type="text" name="txtCICPrimariolabel" id="txtCICPrimariolabel" value="<?= @$obj->_ciddescricao; ?>" class="form-control texto08 eac-square" />
+
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>CID Secundario</label>
+                                    <input type="hidden" name="txtCICSecundario" id="txtCICSecundario" value="<?= @$obj->_cid2; ?>" class="form-control" />
+                                    <input type="text" name="txtCICSecundariolabel" id="txtCICSecundariolabel" value="<?= @$obj->_cid2descricao; ?>" style="max-width: 400px;" class="form-control eac-square" />
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10">
+
+                            </div>
+
+                        </div>
+
+                        <style>
+                            .your-clock{
+                                /*position: fixed;*/
+                                /*top: 0;*/
+                                /*right:0;*/
+                                z-index: 15;
+                                zoom: 0.5;
+                                -moz-transform: scale(0.5)
+                            }
+                        </style>               
+
+
+                    </div>
+                    <div class="tab-pane fade " id="home-pills">
+
+                        
                         <div class="row">
 
                             <div class="col-lg-2">
@@ -289,29 +309,6 @@
                             </div>
                         </div>
 
-                    </div>
-                    <div class="tab-pane fade" id="messages-pills">
-                        <div class="row">
-                            <div class="col-lg-12">
-
-
-                                <a class="btn btn-outline btn-info " onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregarreceituario/<?= $ambulatorio_laudo_id ?>//<?= $procedimento_tuss_id ?>');" >
-                                    Receituario</a>
-                                <a class="btn btn-outline btn-info " onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregarreceituarioespecial/<?= $ambulatorio_laudo_id ?>//<?= $procedimento_tuss_id ?>');" >
-                                    R. especial</a>
-                                <a class="btn btn-outline btn-info " onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregarexames/<?= $ambulatorio_laudo_id ?>/<?= $exame_id ?>');" >
-                                    S. exames</a>
-                                <a class="btn btn-outline btn-info " onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaratestado/<?= $ambulatorio_laudo_id ?>//<?= $procedimento_tuss_id ?>');" >
-                                    Atestado</a>
-                                <a class="btn btn-outline btn-info " onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $ambulatorio_laudo_id ?>');" >
-                                    Arquivos</a>
-                                <a class="btn btn-outline btn-info " onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/imprimirmodeloaih/<?= $ambulatorio_laudo_id ?>');" >
-                                    AIH</a>
-                                <a class="btn btn-outline btn-info " onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/impressaolaudo/<?= $ambulatorio_laudo_id ?>/<?= $exame_id ?>');" >
-                                    <i class="fa fa-print" aria-hidden="true"></i>
-                                    Imprimir</a>
-                            </div>
-                        </div>
                     </div>
                     <div class="tab-pane fade" id="settings-pills">
                         <div >
@@ -541,7 +538,7 @@
                                     </select>
                                 </div>  
                             </div>-->
-                            <div class="col-lg-2">
+<!--                            <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>Situa&ccedil;&atilde;o</label>
                                     <select name="situacao" id="situacao" class="form-control">
@@ -556,7 +553,7 @@
                                     </select>
                                     <input type="hidden" name="status" id="status" value="<?= @$obj->_status; ?>" class="size2" />
                                 </div>  
-                            </div>
+                            </div>-->
 <!--                            <div class="col-lg-1">
                                 <div class="form-group">
                                     <label>Assinatura</label>
