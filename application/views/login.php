@@ -55,10 +55,10 @@
                                     <i class="fa fa-unlock fa-fw fa-3x text-right" style="display: none;" id="cadeado2d" aria-hidden="true"></i>
 
                                 </span>
-                                <span>
+<!--                                <span>
                                     <i class="fa fa-lock fa-fw fa-3x text-right" id="cadeado3" aria-hidden="true"></i>
                                     <i class="fa fa-unlock fa-fw fa-3x text-right" style="display: none;" id="cadeado3d" aria-hidden="true"></i>
-                                </span>
+                                </span>-->
 
 
 
@@ -73,9 +73,9 @@
                                         <div class="form-group">
                                             <input class="form-control" placeholder="Senha" name="txtSenha" id="txtSenha" type="password" value="<?= @$obj->_senha; ?>" required>
                                         </div>
-                                        <div class="form-group">
+<!--                                        <div class="form-group">
                                             <input class="form-control" placeholder="CPF" name="Txtcpf" id="Txtcpf" type="text" value="<? //= @$obj->_senha;      ?>" required>
-                                        </div>
+                                        </div>-->
 
                                         <br>
                                             <!-- Change this to a button or input when using this as a form -->
