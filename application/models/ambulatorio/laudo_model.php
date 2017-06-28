@@ -2416,8 +2416,8 @@ class laudo_model extends Model {
             $query = $this->db->get();
             $return = $query->result();
 
-            $this->db->set('medico_agenda', $_POST['medico']);
-            $this->db->set('medico_consulta_id', $_POST['medico']);
+            $this->db->set('medico_agenda', $operador_id);
+            $this->db->set('medico_consulta_id', $operador_id);
             $this->db->where('agenda_exames_id', $return[0]->agenda_exames_id);
             $this->db->update('tb_agenda_exames');
 
@@ -2441,7 +2441,7 @@ class laudo_model extends Model {
                 $this->db->set('cid2', $_POST['txtCICSecundario']);
             }
             if ($_POST['medico'] != '') {
-                $this->db->set('medico_parecer1', $_POST['medico']);
+                $this->db->set('medico_parecer1', $operador_id);
             }
             if ($_POST['diabetes'] != '') {
                 $this->db->set('diabetes', $_POST['diabetes']);

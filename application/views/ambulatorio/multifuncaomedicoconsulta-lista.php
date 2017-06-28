@@ -314,10 +314,10 @@
 
                                                     <? if (($item->medico_parecer1 == $operador_id && $item->situacaolaudo == 'FINALIZADO') || ($item->realizada == 't' && $item->situacaolaudo != 'FINALIZADO') || $operador_id == 1) { ?>
                                                         <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaranaminese/<?= $item->ambulatorio_laudo_id ?>/<?= $item->exame_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');" >
-                                                            Atender</a>
+                                                            Atender <i class="fa fa-stethoscope" aria-hidden="true"></i></a>
                                                     <? } else { ?>
                                                         <button class="btn  btn-primary btn-sm" disabled="">
-                                                            Atender
+                                                            Atender <i class="fa fa-stethoscope" aria-hidden="true"></i>
                                                         </button>
                                                     <? } ?>
                                                     <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $item->ambulatorio_laudo_id ?>');">
@@ -325,10 +325,10 @@
 
                                                 <? } else { ?>
                                                     <button class="btn  btn-primary btn-sm" disabled="">
-                                                        Atender
+                                                        Atender <i class="fa fa-stethoscope" aria-hidden="true"></i>
                                                     </button>
                                                     <button class="btn  btn-primary btn-sm" disabled="">
-                                                        Arquivos
+                                                        Arquivos <i class="fa fa-file-archive-o" aria-hidden="true"></i>
                                                     </button>
 
                                                 <? } ?>
