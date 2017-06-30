@@ -59,6 +59,9 @@
                             <div>
                                 <a style="width: 130pt;" class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/guia/orcamento/<?= $paciente_id ?>">Or&ccedil;amento</a>
                             </div>
+                            <div>
+                                <a style="width: 130pt;" class="btn btn-outline btn-info" href="<?= base_url() ?>ambulatorio/laudo/carregarlaudohistorico/<?= $paciente_id ?>">Histórico de Consultas</a>
+                            </div>
                         </div>
                         
                         <div class="tab-pane fade" id="avancado">

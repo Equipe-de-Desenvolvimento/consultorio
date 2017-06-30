@@ -74,6 +74,13 @@ class Operador extends BaseController {
         $data['listarPerfil'] = $this->operador_m->listarPerfil();
         $this->loadView('seguranca/operador-form', $data);
     }
+    function alterarheader($operador_id) {
+        $obj_operador_id = new operador_model($operador_id);
+        $data['obj'] = $obj_operador_id;
+        $data['classe'] = $this->classe->listarclasse();
+        $data['listarPerfil'] = $this->operador_m->listarPerfil();
+        $this->loadView('seguranca/operadorheader-form', $data);
+    }
 
     function alteraSenha($operador_id) {
         $data['lista'] = $this->operador_m->listarCada($operador_id);

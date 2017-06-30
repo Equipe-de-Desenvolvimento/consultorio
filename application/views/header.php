@@ -115,15 +115,16 @@ function debug($object) {
                                         <!-- /.dropdown -->
                                         <li class="dropdown">
                                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                                Seja bem-vindo, <?= $this->session->userdata('login'); ?> !
                                                 <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                                             </a>
                                             <ul class="dropdown-menu dropdown-user-left">
-                                                <li><a href="<?= base_url() ?>seguranca/operador/alterar/<?=$operador_id?>"><i class="fa fa-user fa-fw"></i> Perfil</a>
+                                                <li><a href="<?= base_url() ?>seguranca/operador/alterarheader/<?=$operador_id?>"><i class="fa fa-user fa-fw"></i> Perfil</a>
                                                 </li>
                                                 <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configurações</a>
                                                 </li>
                                                 <li class="divider"></li>
-                                                <li>
+                                                <li> 
                                                     <a  onclick="confirmacao();" style="cursor: pointer;"
                                                         ><i class="fa fa-sign-out fa-fw"></i> Sair</a>
                                                 </li>

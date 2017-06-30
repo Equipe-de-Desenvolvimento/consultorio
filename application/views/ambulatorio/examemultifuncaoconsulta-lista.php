@@ -5,6 +5,7 @@
     $especialidade = $this->exame->listarespecialidade();
     $empresas = $this->exame->listarempresas();
     $empresa_logada = $this->session->userdata('empresa_id');
+    $perfil_id = $this->session->userdata('perfil_id');
     ?>
 
     <div class="row">
@@ -283,6 +284,16 @@
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td class="tabela_acoes">
+                                                <? if ($perfil_id == 1 || $perfil_id == 4) { ?>
+
+                                                    <a class="btn btn-danger btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/guiacancelamento/<?= $item->agenda_exames_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');">Cancelar <i class="fa fa-times" aria-hidden="true"></i>
+
+                                                    </a>
+
+                                                <? } else { ?>
+                                                    <button class="btn btn-danger btn-sm" disabled="">Cancelar <i class="fa fa-times" aria-hidden="true"></i> </button> 
+                                                <? }
+                                                ?>
                                                 <a class="btn btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas <i class="fa fa-calendar" aria-hidden="true"></i>
                                                 </a>
                                             </td>
@@ -296,6 +307,16 @@
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td class="tabela_acoes">
+                                                <? if ($perfil_id == 1 || $perfil_id == 4) { ?>
+
+                                                    <a class="btn btn-danger btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/guiacancelamento/<?= $item->agenda_exames_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');">Cancelar <i class="fa fa-times" aria-hidden="true"></i>
+
+                                                    </a>
+
+                                                <? } else { ?>
+                                                    <button class="btn btn-danger btn-sm" disabled="">Cancelar <i class="fa fa-times" aria-hidden="true"></i> </button> 
+                                                <? }
+                                                ?>
                                                 <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas <i class="fa fa-calendar" aria-hidden="true"></i>
                                                 </a>
                                             </td>
@@ -308,6 +329,16 @@
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td class="tabela_acoes">
+                                                <? if ($perfil_id == 1 || $perfil_id == 4) { ?>
+
+                                                    <a class="btn btn-danger btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/guiacancelamento/<?= $item->agenda_exames_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');">Cancelar <i class="fa fa-times" aria-hidden="true"></i>
+
+                                                    </a>
+
+                                                <? } else { ?>
+                                                    <button disabled="" class="btn btn-danger btn-sm">Cancelar <i class="fa fa-times" aria-hidden="true"></i> </button> 
+                                                <? }
+                                                ?>
                                                 <a class="btn btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas <i class="fa fa-calendar" aria-hidden="true"></i>
                                                 </a>
                                             </td>
@@ -338,9 +369,9 @@
                                             <? } ?>
                                             <td><?= $situacao ?></td>
                                             <td><?= $item->inicio ?></td>
-                                            <td><?= $item->paciente ?> <?if($item->encaixe == 't'){?>
-                                                <span class="text-danger">(Encaixe)</span>
-                                           <? }?></td>
+                                            <td><?= $item->paciente ?> <? if ($item->encaixe == 't') { ?>
+                                                    <span class="text-danger">(Encaixe)</span>
+                                                <? } ?></td>
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td class="tabela_acoes text-center" style="width: 150pt;">

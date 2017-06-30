@@ -2406,6 +2406,7 @@ class laudo_model extends Model {
 
     function gravaranaminese($ambulatorio_laudo_id, $exame_id) {
         try {
+            $_POST['status'] = 'FINALIZADO';
             /* inicia o mapeamento no banco */
             $horario = date("Y-m-d H:i:s");
             $operador_id = $this->session->userdata('operador_id');

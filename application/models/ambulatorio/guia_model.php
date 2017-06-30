@@ -7717,6 +7717,7 @@ ORDER BY ae.agenda_exames_id)";
             $empresa_id = $this->session->userdata('empresa_id');
             $this->db->set('empresa_id', $empresa_id);
             $this->db->set('confirmado', 't');
+            $this->db->set('realizada', 't');
             $this->db->set('tipo', $tipo);
             $this->db->set('ativo', 'f');
             $this->db->set('situacao', 'OK');

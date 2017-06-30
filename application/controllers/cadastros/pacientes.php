@@ -150,20 +150,29 @@ class pacientes extends BaseController {
         if ($ambulatorio_guia_id == 0) {
             $ambulatorio_guia_id = $this->guia->gravarguia($paciente_id);
         }
-        $convenio_dinheiro = $this->exametemp->conveniodinheiro();
-//        var_dump($convenio_dinheiro); die;
-        $teste = $this->exametemp->autorizarpacientetempconsulta($paciente_id, $ambulatorio_guia_id);
+        
+//        var_dump($_POST); die;
+        if(isset($_POST['confirmado'])){
+            $convenio_dinheiro = $this->exametemp->conveniodinheiro();
+            $teste = $this->exametemp->autorizarpacientetempconsulta($paciente_id, $ambulatorio_guia_id);
+        } 
+        else{
+            $teste = 1;
+        }
+        
         
 //        var_dump($teste); die;
         if ($teste == 0) {
 //            $this->gerardicom($ambulatorio_guia_id);
             $data['mensagem'] = Array('Atendimento autorizado com sucesso', 'success');
         } else {
-            $data['mensagem'] = Array('Erro ao gravar atendimento', 'error');
+            $data['mensagem'] = Array('Erro ao autorizar atendimento', 'error');
         }
         $this->session->set_flashdata('message', $data['mensagem']);
         if($convenio_dinheiro == 't'){
             redirect(base_url() . "ambulatorio/guia/faturarguia/$ambulatorio_guia_id");
+        }elseif($teste == 1){
+             redirect(base_url() . "emergencia/filaacolhimento/novo/$paciente_id");
         }else{
             redirect(base_url() . "seguranca/operador/pesquisarrecepcao");   
         }

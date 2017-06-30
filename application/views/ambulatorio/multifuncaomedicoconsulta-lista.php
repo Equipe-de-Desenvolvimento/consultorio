@@ -51,7 +51,7 @@
                                     <select name="medico" id="medico" class="form-control texto06">
                                         <option value=""> </option>
                                 <? foreach ($medicos as $value) : ?>
-                                                    <option value="<?= $value->operador_id; ?>"<?
+                                                                <option value="<?= $value->operador_id; ?>"<?
                                     if (@$_GET['medico'] == $value->operador_id):echo 'selected';
                                     endif;
                                     ?>>
@@ -59,7 +59,7 @@
                                     <?php echo $value->nome . ' - CRM: ' . $value->conselho; ?>
 
 
-                                                    </option>
+                                                                </option>
                                 <? endforeach; ?>
 
                                     </select>
@@ -160,19 +160,26 @@
                                     $teste = $diff->format('%H:%I:%S');
 
                                     $verifica = 0;
-
+//echo $item->realizada;
                                     ($estilo_linha == "tabela_content01") ? $estilo_linha = "tabela_content02" : $estilo_linha = "tabela_content01";
-                                    if ($item->realizada == 't' && $item->situacaolaudo != 'FINALIZADO') {
-                                        $situacao = "Aguardando";
-                                        $verifica = 2;
-                                    } elseif ($item->realizada == 't' && $item->situacaolaudo == 'FINALIZADO') {
+                                    if ($item->realizada == 't' && $item->situacaolaudo == 'FINALIZADO') {
                                         $situacao = "Finalizado";
                                         $verifica = 4;
+                                        
+                                    }
+
+                                    elseif ($item->realizada == 't' && $item->situacaoexame == 'FINALIZADO') {
+                                        $situacao = "Atendendo";
+                                        $verifica = 3;
+                                    } 
+                                    elseif ($item->realizada == 't' && $item->situacaolaudo != 'FINALIZADO') {
+                                        $situacao = "Aguardando";
+                                        $verifica = 2;
                                     } elseif ($item->confirmado == 'f') {
                                         $situacao = "Agenda";
                                         $verifica = 1;
                                     } else {
-                                        $situacao = "Espera";
+                                        $situacao = "Aguardando";
                                         $verifica = 3;
                                     }
                                     ?>
@@ -185,24 +192,24 @@
                                             <td><?= $item->procedimento; ?></td>
                                             <td><?= $item->observacoes; ?></td>
                                             <td class="tabela_acoes desbloq">
-                                                <? if ($item->situacaolaudo != '') { ?>
+            <? if ($item->situacaolaudo != '') { ?>
 
                                                     <? if (($item->medico_parecer1 == $operador_id && $item->situacaolaudo == 'FINALIZADO') || ($item->realizada == 't' && $item->situacaolaudo != 'FINALIZADO') || $operador_id == 1) { ?>
                                                         <a class="btn  btn-danger btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaranaminese/<?= $item->ambulatorio_laudo_id ?>/<?= $item->exame_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');" >
                                                             Atender <i class="fa fa-stethoscope" aria-hidden="true"></i>
                                                         </a>
-                                                    <? } else { ?>
+                <? } else { ?>
                                                         <button class="btn  btn-primary btn-sm" disabled="">
                                                             Atender <i class="fa fa-stethoscope" aria-hidden="true"></i>
 
                                                         </button>
-                                                    <? } ?>
+                <? } ?>
                                                     <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $item->ambulatorio_laudo_id ?>');">
-                                                        Arquivos</a>
+                                                        Arquivos <i class="fa fa-file-archive-o" aria-hidden="true"></i></a>
 
-                                                <? } else { ?>
+            <? } else { ?>
                                                     <p>
-                                                        <? if ($item->paciente_id != '') { ?>
+                                                    <? if ($item->paciente_id != '') { ?>
 
 
                                                             <? if (date("d/m/Y") == date("d/m/Y", strtotime($item->data)) && $item->confirmado == 'f') { ?>
@@ -210,12 +217,12 @@
 
                                                                 </a>
 
-                                                            <? } ?>
+                    <? } ?>
                                                             <button class="btn  btn-primary btn-sm" disabled="">
                                                                 Atender <i class="fa fa-stethoscope" aria-hidden="true"></i>
 
                                                             </button>
-                                                        <? } else { ?>
+                <? } else { ?>
 
                                                             <? if ($item->bloqueado == 'f') { ?>
                                                                 <a class="btn btn-success btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarconsultatempmedico/<?= $item->agenda_exames_id ?>');">Agendar <i class="fa fa-list-alt" aria-hidden="true"></i>
@@ -223,7 +230,7 @@
                                                                 </a>
                                                                 <a class="btn btn-success btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/bloquear/<?= $item->agenda_exames_id ?>/<?= $item->inicio; ?>');">Bloquear <i class="fa fa-lock" aria-hidden="true"></i>
                                                                 </a>
-                                                            <? } else { ?>
+                    <? } else { ?>
                                                                 <a class="btn btn-success btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/desbloquear/<?= $item->agenda_exames_id ?>/<?= $item->inicio; ?> ', 'toolbar=no,Location=no,menubar=no,width=500,height=200');">Desbloq. <i class="fa fa-unlock" aria-hidden="true"></i>
                                                                 </a>
                                                             <? }
@@ -232,10 +239,10 @@
                                                         <? } ?>
 
                                                     </p>
-                                                <? } ?>
+                                                    <? } ?>
                                             </td>
                                         </tr>  
-                                    <? } elseif ($verifica == 2) { ?>
+                                            <? } elseif ($verifica == 2) { ?>
                                         <tr class="alert alert-aguardando">
                                             <td><?= $situacao ?></td>
                                             <td><?= $item->inicio ?></td>
@@ -243,8 +250,8 @@
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td><?= $item->procedimento; ?></td>
                                             <td><?= $item->observacoes; ?></td>
-                                            <td class="tabela_acoes">
-                                                <? if ($item->situacaolaudo != '') { ?>
+                                            <td class="tabela_acoes desbloq">
+            <? if ($item->situacaolaudo != '') { ?>
 
                                                     <? if (($item->medico_parecer1 == $operador_id && $item->situacaolaudo == 'FINALIZADO') || ($item->realizada == 't' && $item->situacaolaudo != 'FINALIZADO') || $operador_id == 1) { ?>
                                                         <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaranaminese/<?= $item->ambulatorio_laudo_id ?>/<?= $item->exame_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');" >
@@ -253,44 +260,44 @@
                                                         <button class="btn  btn-primary btn-sm" disabled="">
                                                             Atender <i class="fa fa-stethoscope" aria-hidden="true"></i>
                                                         </button>
-                                                    <? } ?>
+                <? } ?>
                                                     <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $item->ambulatorio_laudo_id ?>');">
                                                         Arquivos <i class="fa fa-file-archive-o" aria-hidden="true"></i></a>
 
-                                                <? } else { ?>
+            <? } else { ?>
                                                     <button class="btn  btn-primary btn-sm" disabled="">
                                                         Atender <i class="fa fa-stethoscope" aria-hidden="true"></i>
                                                     </button>
                                                     <button class="btn  btn-primary btn-sm" disabled="">
                                                         Arquivos <i class="fa fa-file-archive-o" aria-hidden="true"></i>
                                                     </button>
-                                                <? } ?>
+            <? } ?>
                                             </td>
                                         </tr>
 
-                                    <? } elseif ($verifica == 3) { ?>
-                                        <tr class="info">
+        <? } elseif ($verifica == 3) { ?>
+                                        <tr class="alert alert-aguardando">
                                             <td><?= $situacao ?></td>
                                             <td><?= $item->inicio ?></td>
                                             <td><?= $item->paciente ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td><?= $item->procedimento; ?></td>
                                             <td><?= $item->observacoes; ?></td>
-                                            <td class="tabela_acoes">
-                                                <? if ($item->situacaolaudo != '') { ?>
+                                            <td class="tabela_acoes desbloq">
+            <? if ($item->situacaolaudo != '') { ?>
 
-                                                    <? if (($item->medico_parecer1 == $operador_id && $item->situacaolaudo == 'FINALIZADO') || ($item->realizada == 't' && $item->situacaolaudo != 'FINALIZADO') || $operador_id == 1) { ?>
+                                                    <? if (($item->medico_parecer1 == $operador_id && $item->situacaolaudo == 'FINALIZADO') || ($item->realizada == 't' && $item->situacaolaudo != 'FINALIZADO') || ($item->realizada == 'f' && $item->situacaolaudo == 'AGUARDANDO') || $operador_id == 1) { ?>
                                                         <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaranaminese/<?= $item->ambulatorio_laudo_id ?>/<?= $item->exame_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');" >
                                                             Atender <i class="fa fa-stethoscope" aria-hidden="true"></i></a>
-                                                    <? } else { ?>
+                                                    <? } else {?>
                                                         <button class="btn  btn-primary btn-sm" disabled="">
                                                             Atender <i class="fa fa-stethoscope" aria-hidden="true"></i>
                                                         </button>
-                                                    <? } ?>
+                <? } ?>
                                                     <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $item->ambulatorio_laudo_id ?>');">
-                                                        Arquivos</a>
+                                                        Arquivos <i class="fa fa-file-archive-o" aria-hidden="true"></i></a>
 
-                                                <? } else { ?>
+            <? } else { ?>
                                                     <button class="btn  btn-primary btn-sm" disabled="">
                                                         Atender  <i class="fa fa-stethoscope" aria-hidden="true"></i>
                                                     </button>
@@ -298,10 +305,10 @@
                                                         Arquivos <i class="fa fa-file-archive-o" aria-hidden="true"></i>
 
                                                     </button>
-                                                <? } ?>
+            <? } ?>
                                             </td>
                                         </tr>
-                                    <? } elseif ($verifica == 4) { ?>
+                                            <? } elseif ($verifica == 4) { ?>
                                         <tr class="finalizado">
                                             <td><?= $situacao ?></td>
                                             <td><?= $item->inicio ?></td>
@@ -309,8 +316,8 @@
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td><?= $item->procedimento; ?></td>
                                             <td><?= $item->observacoes; ?></td>
-                                            <td class="tabela_acoes">
-                                                <? if ($item->situacaolaudo != '') { ?>
+                                            <td class="tabela_acoes desbloq">
+            <? if ($item->situacaolaudo != '') { ?>
 
                                                     <? if (($item->medico_parecer1 == $operador_id && $item->situacaolaudo == 'FINALIZADO') || ($item->realizada == 't' && $item->situacaolaudo != 'FINALIZADO') || $operador_id == 1) { ?>
                                                         <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/carregaranaminese/<?= $item->ambulatorio_laudo_id ?>/<?= $item->exame_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');" >
@@ -319,11 +326,11 @@
                                                         <button class="btn  btn-primary btn-sm" disabled="">
                                                             Atender <i class="fa fa-stethoscope" aria-hidden="true"></i>
                                                         </button>
-                                                    <? } ?>
+                <? } ?>
                                                     <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/laudo/anexarimagem/<?= $item->ambulatorio_laudo_id ?>');">
-                                                        Arquivos</a>
+                                                        Arquivos <i class="fa fa-file-archive-o" aria-hidden="true"></i></a>
 
-                                                <? } else { ?>
+            <? } else { ?>
                                                     <button class="btn  btn-primary btn-sm" disabled="">
                                                         Atender <i class="fa fa-stethoscope" aria-hidden="true"></i>
                                                     </button>
@@ -331,10 +338,10 @@
                                                         Arquivos <i class="fa fa-file-archive-o" aria-hidden="true"></i>
                                                     </button>
 
-                                                <? } ?>
+            <? } ?>
                                             </td>
                                         </tr>
-                                    <? } ?>
+                                            <? } ?>
 
                                     <?php
                                 }
@@ -342,7 +349,7 @@
                             ?>
                             <tr>
                                 <th class="tabela_footer  btn-info" colspan="9">
-                                    <?php $this->utilitario->paginacao($url, $total, $pagina, $limit); ?>
+                            <?php $this->utilitario->paginacao($url, $total, $pagina, $limit); ?>
 
                                 </th>
                             </tr>

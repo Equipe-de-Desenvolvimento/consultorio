@@ -1,93 +1,185 @@
+<form name="form_guia" id="form_guia" action="<?= base_url() ?>ambulatorio/exametemp/gravarunificar" method="post">
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--<div class="panel panel-default">-->
+                <div class="alert alert-success">
+                    Unificar
+                </div>
 
-<div class="content ficha_ceatox">
-    <div id="accordion">
-        <h3 class="singular"><a href="#">UNIFICAR</a></h3>
-    <form name="form_guia" id="form_guia" action="<?= base_url() ?>ambulatorio/exametemp/gravarunificar" method="post">
-        <fieldset>
-            <legend>Dados do Paciente</legend>
-            <div>
-                <label>Nome</label>                      
-                <input type="text" id="txtNome" name="nome"  class="texto09" value="<?= $paciente['0']->nome; ?>" readonly/>
-                <input type="hidden" id="paciente_id" name="paciente_id"  class="texto02" value="<?= $paciente_id; ?>"/>
+                <!--</div>-->
             </div>
-            <div>
-                <label>Prontuario</label>
-                <input type="text" name="nome_mae" id="txtNomeMae" class="texto02" value="<?= $paciente['0']->paciente_id; ?>" readonly/>
+        </div>
+        <div class="panel panel-default ">
+            <div class="alert alert-info">
+                Dados do Paciente
             </div>
-            <div>
-                <label>Nome da M&atilde;e</label>
-                <input type="text" name="nome_mae" id="txtNomeMae" class="texto08" value="<?= $paciente['0']->nome_mae; ?>" readonly/>
-            </div>
-            <div>
-                <label>Sexo</label>
-                <select name="sexo" id="txtSexo" class="size2">
-                    <option value="M" <?
-if ($paciente['0']->sexo == "M"):echo 'selected';
-endif;
-?>>Masculino</option>
-                    <option value="F" <?
-                            if ($paciente['0']->sexo == "F"):echo 'selected';
-                            endif;
-?>>Feminino</option>
-                </select>
-            </div>
-            <div>
-                <label>Nascimento</label>
-                <input type="text" name="nascimento" id="txtNascimento" class="texto02" alt="date" value="<?php echo substr($paciente['0']->nascimento, 8, 2) . '/' . substr($paciente['0']->nascimento, 5, 2) . '/' . substr($paciente['0']->nascimento, 0, 4); ?>" readonly/>
-            </div>
-        </fieldset>
-        <fieldset>
-            <legend>Paciente que sera unificado e excluido</legend>
-            <div>
-                <label>Nome</label>   
-                
-                <input type="text" id="txtpaciente" class="texto09" name="txtpaciente" />
-            </div>
-            <div>
-                <label>Prontuario</label>
-                <input type="text" id="pacienteid" class="texto02" name="pacienteid" readonly/>
-            </div>
-            <div>
-                <label>Nome da M&atilde;e</label>
-                <input type="text" name="txtnome_mae" id="txtnome_mae" class="texto08" readonly/>
-            </div>
-            <div>
-                <label>Nascimento</label>
-                <input type="text" name="txtdtnascimento" id="txtdtnascimento" class="texto02" readonly/>
-            </div>
-        </fieldset>
-        <button type="submit" name="btnEnviar">enviar</button>
-    </form>
-</div>
-</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <label>Nome</label>
+                            <input type="text" id="txtNome" name="nome"  class="form-control" value="<?= $paciente['0']->nome; ?>" readonly/>
 
+                        </div>
+
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Sexo</label>
+                            <input readonly type="text"  name="sexo" id="txtSexo"  class="form-control texto04"  value="<?
+                            if ($paciente['0']->sexo == "M") {
+                                echo 'Masculino';
+                            } elseif ($paciente['0']->sexo == "F") {
+                                echo 'Feminino';
+                            } else {
+                                echo 'Não Informado';
+                            }
+                            ?>"/>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Nascimento</label>
+                            <input type="text" name="nascimento" id="txtNascimento" class="form-control" alt="date" value="<?php echo substr($paciente['0']->nascimento, 8, 2) . '/' . substr($paciente['0']->nascimento, 5, 2) . '/' . substr($paciente['0']->nascimento, 0, 4); ?>" onblur="retornaIdade()" readonly/>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <label>Nome da Mãe</label>
+                            <input type="text" name="nome_mae" id="txtNomeMae" class="form-control" value="<?= $paciente['0']->nome_mae; ?>" readonly/>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="panel panel-default ">
+            <div class="alert alert-info">
+                Paciente Que Será Unificado e Excluído
+            </div>
+            <div class="panel-body">
+                <div class="row">
+
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Prontuário</label>
+                            <input type="text" id="pacienteid" class="form-control texto02" name="pacienteid" readonly="true" />
+                            <input type="hidden" id="paciente_id" name="paciente_id"  class="texto02" value="<?= $paciente_id; ?>"/>
+                            <!--<input type="text" id="txtpaciente" required name="txtpaciente" class="form-control eac-square" onblur="calculoIdade(document.getElementById('nascimento').value)"  />-->
+                        </div>
+
+
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <label>Paciente*</label>
+                            <!--<input type="hidden" id="pacienteid" class="form-control texto02" name="pacienteid" readonly="true" />-->
+                            <input type="text" id="txtpaciente" required name="txtpaciente" class="form-control eac-square" required  />
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-1">
+                        <button class="btn btn-outline btn-success btn-sm" type="submit" name="btnEnviar"><i class="fa fa-floppy-o" aria-hidden="true"></i>
+                            Enviar</button>
+                    </div>
+                    <div class="col-lg-1">
+                        <button class="btn btn-outline btn-danger btn-sm" type="reset" name="btnLimpar">Limpar</button>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+</form>
 
 <script type="text/javascript">
-    $(function() {
-        
-            
-        $(function() {
-            $( "#txtpaciente" ).autocomplete({
-                source: "<?= base_url() ?>index.php?c=autocomplete&m=pacienteunificar",
-                minLength: 3,
-                focus: function( event, ui ) {
-                    $( "#txtpaciente" ).val( ui.item.label );
-                    return false;
-                },
-                select: function( event, ui ) {
-                    $( "#txtpaciente" ).val( ui.item.value );
-                    $( "#txtnome_mae" ).val( ui.item.mae );
-                    $( "#txtdtnascimento" ).val( ui.item.valor );
-                    $( "#pacienteid" ).val( ui.item.id );
-                    return false;
-                }
-            });
-        });
-        
-        $( ".competencia" ).accordion({ autoHeight: false });
-        $( ".accordion" ).accordion({ autoHeight: false, active: false });
-        $( ".lotacao" ).accordion({
+    $(function () {
 
+
+//        $(function () {
+//            $("#txtpaciente").autocomplete({
+//                source: "<?= base_url() ?>index.php?c=autocomplete&m=pacienteunificar",
+//                minLength: 3,
+//                focus: function (event, ui) {
+//                    $("#txtpaciente").val(ui.item.label);
+//                    return false;
+//                },
+//                select: function (event, ui) {
+//                    $("#txtpaciente").val(ui.item.value);
+//                    $("#txtnome_mae").val(ui.item.mae);
+//                    $("#txtdtnascimento").val(ui.item.valor);
+//                    $("#pacienteid").val(ui.item.id);
+//                    return false;
+//                }
+//            });
+//        });
+//        
+
+
+        var paciente = {
+//        url: "<?= base_url() ?>index.php?c=autocomplete&m=paciente",
+            url: function (phrase) {
+                if (phrase.length > 2) {
+                    return "<?= base_url() ?>autocomplete/paciente?term=" + phrase;
+                } else {
+                    //duckduckgo doesn't support empty strings
+//                return "http://api.duckduckgo.com/?q=empty&format=json";
+                }
+            },
+            getValue: "value",
+            list: {
+                onSelectItemEvent: function () {
+                    var value = $("#txtpaciente").getSelectedItemData().id;
+//                var telefone = $("#txtpaciente").getSelectedItemData().itens;
+//                var celular = $("#txtpaciente").getSelectedItemData().celular;
+                    var nascimento = $("#txtpaciente").getSelectedItemData().valor;
+
+                    $("#pacienteid").val(value).trigger("change");
+//                $("#txtTelefone").val(telefone).trigger("change");
+//                $("#txtCelular").val(celular).trigger("change");
+                    $("#txtdtnascimento").val(nascimento).trigger("change");
+
+                },
+                match: {
+                    enabled: true
+                },
+                showAnimation: {
+                    type: "fade", //normal|slide|fade
+                    time: 200,
+                    callback: function () {}
+                },
+                hideAnimation: {
+                    type: "slide", //normal|slide|fade
+                    time: 200,
+                    callback: function () {}
+                },
+                maxNumberOfElements: 10
+            },
+            requestDelay: 200,
+            theme: "bootstrap"
+        };
+
+        $("#txtpaciente").easyAutocomplete(paciente);
+
+        $(".competencia").accordion({autoHeight: false});
+        $(".accordion").accordion({autoHeight: false, active: false});
+        $(".lotacao").accordion({
             active: true,
             autoheight: false,
             clearStyle: true

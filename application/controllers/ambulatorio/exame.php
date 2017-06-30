@@ -573,10 +573,10 @@ class Exame extends BaseController {
         $this->loadView('ambulatorio/guiacancelamento-form', $data);
     }
 
-    function examecancelamento($exames_id, $sala_id, $agenda_exames_id, $paciente_id, $procedimento_tuss_id) {
+    function examecancelamento($exames_id, $agenda_exames_id, $paciente_id, $procedimento_tuss_id) {
         $data['motivos'] = $this->motivocancelamento->listartodos();
         $data['exames_id'] = $exames_id;
-        $data['sala_id'] = $sala_id;
+//        $data['sala_id'] = $sala_id;
         $data['paciente_id'] = $paciente_id;
         $data['procedimento_tuss_id'] = $procedimento_tuss_id;
         $data['agenda_exames_id'] = $agenda_exames_id;

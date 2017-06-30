@@ -2244,8 +2244,8 @@ class Laudo extends BaseController {
     function gravarhistorico($paciente_id) {
 
         $this->laudo->gravarhistorico($paciente_id);
-        $mensagem = 'Sucesso ao gravar historico';
-        $this->session->set_flashdata('message', $data['mensagem']);
+        $mensagem = array('Sucesso ao gravar historico', 'success');
+        $this->session->set_flashdata('message', $mensagem);
         redirect(base_url() . "emergencia/filaacolhimento/novo/$paciente_id");
     }
 

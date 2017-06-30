@@ -65,7 +65,7 @@
                                             <td class="<?php echo $estilo_linha; ?>">Não Ativo</td>
                                         <? } ?>
                                         <? if ($item->ativo == 't') { ?>
-                                            <td class="<?php echo $estilo_linha; ?>" >
+                                            <td class="tabela_acoes" style='width: 180pt;'>
                                                 <p>
                                                     <a class="btn btn-outline btn-danger btn-sm" style="cursor: pointer;" onclick="confirmacaoexcluir('<?= $item->operador_id; ?>');"
                                                        >Excluir
@@ -78,7 +78,7 @@
                                                     <!--                                            </p>
                                                                                                         <a class="btn btn-outline btn-danger btn-sm" style="cursor: pointer;" onclick="javascript:window.open('<?= base_url() . "seguranca/operador/unificar/$item->operador_id"; ?> ', '_blank');">Unificar
                                                                                                         </a>-->
-
+                                                </p>
                                             </td>
                                         <? } else { ?>
                                             <td class="<?php echo $estilo_linha; ?>" ><div class="bt_link">

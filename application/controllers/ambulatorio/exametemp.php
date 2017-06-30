@@ -142,21 +142,21 @@ class Exametemp extends BaseController {
         $pacientetemp_id = $_POST['paciente_id'];
 
         if ($_POST['paciente_id'] == $_POST['pacienteid']) {
-            $data['mensagem'] = 'Erro ao unificar. Você está tentando unificar ';
+            $data['mensagem'] = array( 'Erro ao unificar. Você está tentando unificar o mesmo paciente', 'error');
             $this->session->set_flashdata('message', $data['mensagem']);
             redirect(base_url() . "ambulatorio/exametemp/unificar/$pacientetemp_id");
         }
 
         if ($_POST['txtpaciente'] == '' || $_POST['pacienteid'] == '') {
-            $data['mensagem'] = 'Paciente que sera unificado nao informado ou invalido.';
+            $data['mensagem'] = array('Paciente que sera unificado nao informado ou invalido.', 'error');
             $this->session->set_flashdata('message', $data['mensagem']);
             redirect(base_url() . "ambulatorio/exametemp/unificar/$pacientetemp_id");
         } else {
             $verifica = $this->exametemp->gravarunificacao();
             if ($verifica == "-1") {
-                $data['mensagem'] = 'Erro ao unificar Paciente. Opera&ccedil;&atilde;o cancelada.';
+                $data['mensagem'] = array('Erro ao unificar Paciente. Opera&ccedil;&atilde;o cancelada.', 'error');
             } else {
-                $data['mensagem'] = 'Sucesso ao unificar Paciente.';
+                $data['mensagem'] = array('Sucesso ao unificar Paciente.', 'success');
             }
             $this->session->set_flashdata('message', $data['mensagem']);
             redirect(base_url() . "ambulatorio/exametemp/unificar/$pacientetemp_id");

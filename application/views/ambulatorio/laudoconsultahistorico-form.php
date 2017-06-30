@@ -1,53 +1,135 @@
-<div >
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="STG SAUDE">
+    <title>Atendimento Médico</title>
+    <!--CSS PADRAO DO BOOTSTRAP COM ALGUMAS ALTERAÇÕES DO TEMA-->
+    <link href="<?= base_url() ?>bootstrap/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>bootstrap/vendor/metisMenu/metisMenu.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>bootstrap/dist/css/sb-admin-2.css" rel="stylesheet" />
+    <!--BIBLIOTECA RESPONSAVEL PELOS ICONES-->
+    <link href="<?= base_url() ?>bootstrap/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <!--DEFINE TAMANHO MAXIMO DOS CAMPOS-->
+    <link href="<?= base_url() ?>css/form.css" rel="stylesheet" type="text/css" />
+    <!--AUTOCOMPLETE NOVO-->
+    <link href="<?= base_url() ?>bootstrap/vendor/autocomplete/easy-autocomplete.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url() ?>bootstrap/vendor/autocomplete/easy-autocomplete.themes.css" rel="stylesheet" type="text/css" />
+    <!--CSS DO ALERTA BONITINHO-->
+    <link href="<?= base_url() ?>bootstrap/vendor/alert/dist/sweetalert.css" rel="stylesheet" type="text/css" />
+    <!--<link rel="stylesheet" href="<?= base_url() ?>js/chosen/docsupport/prism.css">-->
+    <!--<link rel="stylesheet" href="<?= base_url() ?>js/chosen/docsupport/bootstrap-chosen.css">-->
 
-    <div >
-        <form name="form_laudo" id="form_laudo" action="<?= base_url() ?>ambulatorio/laudo/gravarhistorico/<?= $paciente_id ?>" method="post">
-            <div >
-                <fieldset>
-                    <legend>Dados</legend>
-                    <table> 
-                        <tr><td width="400px;">Paciente:<?= $paciente['0']->nome; ?></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Nascimento:<?php echo substr($paciente['0']->nascimento, 8, 2) . '/' . substr($paciente['0']->nascimento, 5, 2) . '/' . substr($paciente['0']->nascimento, 0, 4); ?></td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </fieldset>
-                <div>
 
-                    <fieldset>
-                        <legend>Descri&ccedil;&atilde;o</legend>
-                        <div>
+    <link href="<?= base_url() ?>bootstrap/vendor/clock/compiled/flipclock.css" rel="stylesheet" />
+</head>
+<form name="form_laudo" id="form_laudo" action="<?= base_url() ?>ambulatorio/laudo/gravarhistorico/<?= $paciente_id ?>" method="post">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12"> 
+                <div class="alert alert-success ">
+                    Histórico de Atendimentos
+                </div>
+            </div>
+        </div> 
+        <div>
+
+            <div class="panel panel-default" >
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="alert alert-info">
+                            Dados do Atendimento
+                        </div>
+                        <div class="panel-body" >
+
+
+                            <table> 
+                                <tr><td> Paciente:  <?= $paciente['0']->nome; ?></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Nascimento:  <?php echo substr($paciente['0']->nascimento, 8, 2) . '/' . substr($paciente['0']->nascimento, 5, 2) . '/' . substr($paciente['0']->nascimento, 0, 4); ?></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+
                             <div>
-                                
-                                            <textarea id="laudo" name="laudo" rows="30" cols="80" style="width: 80%"></textarea>
-                            </div>
-                            <hr>
-                            <button type="submit" name="btnEnviar">Salvar</button>
-                    </fieldset>
-                    </form>
 
+
+
+                                <div>
+                                    <div>
+
+                                        <textarea id="laudo" name="laudo" rows="30" cols="80" style="width: 80%"></textarea>
+                                    </div>
+                                    
+
+
+
+                                </div> 
+                            </div> 
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <p>
+                                    <button class="btn btn-outline btn-success btn-sm" type="submit" name="btnEnviar"><i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                        Salvar</button>
+                                
+                                    <button class="btn btn-outline btn-danger btn-sm" type="reset" name="btnLimpar">Limpar</button>
+                                    </p>
+                                </div>
+                            </div>
+                        </div> 
+                    </div> 
                 </div> 
+
             </div> 
-    </div> 
-</div> <!-- Final da DIV content -->
+        </div> <!-- Final da DIV content -->
+</form>
 <style>
     #sortable { list-style-type: none; margin: 0; padding: 0; width: 1300px; }
     #sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 100px; height: 90px; font-size: 4em; text-align: center; }
 </style>
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-<link href="<?= base_url() ?>css/estilo.css" rel="stylesheet" type="text/css" />
-<link href="<?= base_url() ?>css/form.css" rel="stylesheet" type="text/css" />
-<link href="<?= base_url() ?>css/style_p.css" rel="stylesheet" type="text/css" />
-<link href="<?= base_url() ?>css/jquery-ui-1.8.5.custom.css" rel="stylesheet" type="text/css" />
-<link href="<?= base_url() ?>css/jquery-treeview.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="<?= base_url() ?>js/jquery-1.4.2.min.js" ></script>
-<script type="text/javascript" src="<?= base_url() ?>js/jquery-1.9.1.js" ></script>
+<script src="<?= base_url() ?>bootstrap/vendor/jquery/jquery.min.js"></script>
+
+<script src="<?= base_url() ?>bootstrap/vendor/clock/compiled/flipclock.js"></script>
+<script src="<?= base_url() ?>bootstrap/vendor/font-awesome/css/fonts.js"></script>
+
+<script  src="<?= base_url() ?>bootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script  src="<?= base_url() ?>bootstrap/vendor/metisMenu/metisMenu.min.js"></script>
+<script  src="<?= base_url() ?>bootstrap/dist/js/sb-admin-2.js"></script>
+
+<script type="text/javascript" src="<?= base_url() ?>bootstrap/vendor/autocomplete/jquery.easy-autocomplete.js" ></script>
+
+<!--<script type="text/javascript" src="<?= base_url() ?>js/jquery.maskedinput.js"></script>-->
+<script type="text/javascript" src="<?= base_url() ?>js/jquery.maskMoney.js"></script>
+
+<!--        SWEET ALERT. (PLUGIN DO ALERTA BONITINHO)-->
+
+<script src="<?= base_url() ?>bootstrap/vendor/alert/dist/sweetalert.min.js"></script> 
 <script type="text/javascript" src="<?= base_url() ?>js/jquery-ui-1.10.4.js" ></script>
 <script type="text/javascript" src="<?= base_url() ?>js/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
-<script type="text/javascript" src="<?= base_url() ?>js/jquery.validate.js"></script>
+<script type="text/javascript" src="<?= base_url() ?>js/jquery.maskedinput.js"></script>
+<script src="<?= base_url() ?>bootstrap/vendor/jquery/jquery.min.js"></script>
+
+<script src="<?= base_url() ?>bootstrap/vendor/clock/compiled/flipclock.js"></script>
+<script src="<?= base_url() ?>bootstrap/vendor/font-awesome/css/fonts.js"></script>
+
+<script  src="<?= base_url() ?>bootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script  src="<?= base_url() ?>bootstrap/vendor/metisMenu/metisMenu.min.js"></script>
+<script  src="<?= base_url() ?>bootstrap/dist/js/sb-admin-2.js"></script>
+
+<script type="text/javascript" src="<?= base_url() ?>bootstrap/vendor/autocomplete/jquery.easy-autocomplete.js" ></script>
+
+<!--<script type="text/javascript" src="<?= base_url() ?>js/jquery.maskedinput.js"></script>-->
+<script type="text/javascript" src="<?= base_url() ?>js/jquery.maskMoney.js"></script>
+
+<!--        SWEET ALERT. (PLUGIN DO ALERTA BONITINHO)-->
+
+<script src="<?= base_url() ?>bootstrap/vendor/alert/dist/sweetalert.min.js"></script> 
+<script type="text/javascript" src="<?= base_url() ?>js/jquery-ui-1.10.4.js" ></script>
+<script type="text/javascript" src="<?= base_url() ?>js/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="<?= base_url() ?>js/jquery.maskedinput.js"></script>
 <script type="text/javascript">
 
 

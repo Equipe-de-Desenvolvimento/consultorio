@@ -1920,6 +1920,7 @@ class exame_model extends Model {
                             o.nome as medicoagenda,
                             an.nome as sala,
                             e.situacao as situacaoexame,
+                            e.exames_id,
                             tc.descricao as tipoconsulta,
                             p.nome as paciente,
                             op.nome as secretaria,
@@ -3069,6 +3070,7 @@ class exame_model extends Model {
                             e.exames_id,
                             e.sala_id,                            
                             c.nome as convenio,
+                            e.situacao as situacaoexame,
                             co.nome as convenio_paciente,
                             pt.nome as procedimento,
                             al.situacao as situacaolaudo');
