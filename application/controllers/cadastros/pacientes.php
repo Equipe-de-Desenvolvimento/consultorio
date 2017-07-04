@@ -151,8 +151,8 @@ class pacientes extends BaseController {
             $ambulatorio_guia_id = $this->guia->gravarguia($paciente_id);
         }
         
-//        var_dump($_POST); die;
-        if(isset($_POST['confirmado'])){
+//        var_dump($_POST['confimado']); die;
+        if(count($_POST['confimado'])> 0){
             $convenio_dinheiro = $this->exametemp->conveniodinheiro();
             $teste = $this->exametemp->autorizarpacientetempconsulta($paciente_id, $ambulatorio_guia_id);
         } 
