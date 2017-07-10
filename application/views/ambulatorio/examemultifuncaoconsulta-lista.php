@@ -133,6 +133,8 @@
                                     <th>Situação</th>
                                     <th>Horário</th>
                                     <th>Paciente</th>
+                                    <th>Número</th>
+                                    <th>Convênio</th>
                                     <th>Médico</th>
                                     <th>Data</th>
                                     <th class="text-center">Ações</th>
@@ -243,6 +245,8 @@
                                             <td><?= $situacao ?></td>
                                             <td><?= $item->inicio ?></td>
                                             <td><?= $item->paciente ?></td>
+                                            <td><?= $item->celular ?></td>
+                                            <td><?= $item->convenio ?></td>
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
 
@@ -266,6 +270,8 @@
                                             <td><?= $situacao ?></td>
                                             <td><?= $item->inicio ?></td>
                                             <td><?= $item->paciente ?></td>
+                                            <td><?= $item->celular ?></td>
+                                            <td><?= $item->convenio ?></td>
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
 
@@ -281,6 +287,8 @@
                                             <td><?= $situacao ?></td>
                                             <td><?= $item->inicio ?></td>
                                             <td><?= $item->paciente ?></td>
+                                            <td><?= $item->celular ?></td>
+                                            <td><?= $item->convenio ?></td>
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td class="tabela_acoes">
@@ -304,6 +312,8 @@
                                             <td><?= $situacao ?></td>
                                             <td><?= $item->inicio ?></td>
                                             <td><?= $item->paciente ?></td>
+                                            <td><?= $item->celular ?></td>
+                                            <td><?= $item->convenio ?></td>
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td class="tabela_acoes">
@@ -326,6 +336,8 @@
                                             <td><?= $situacao ?></td>
                                             <td><?= $item->inicio ?></td>
                                             <td><?= $item->paciente ?></td>
+                                             <td><?= $item->celular ?></td>
+                                             <td><?= $item->convenio ?></td>
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td class="tabela_acoes">
@@ -348,6 +360,8 @@
                                             <td><?= $situacao ?></td>
                                             <td><?= $item->inicio ?></td>
                                             <td><?= $item->paciente ?></td>
+                                             <td><?= $item->celular ?></td>
+                                             <td><?= $item->convenio ?></td>
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td class="tabela_acoes">
@@ -372,6 +386,8 @@
                                             <td><?= $item->paciente ?> <? if ($item->encaixe == 't') { ?>
                                                     <span class="text-danger">(Encaixe)</span>
                                                 <? } ?></td>
+                                             <td><?= $item->celular ?></td>
+                                             <td><?= $item->convenio ?></td>
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td class="tabela_acoes text-center" style="width: 150pt;">

@@ -282,6 +282,9 @@ function debug($object) {
                                                                 <li>
                                                                     <a href="<?= base_url() ?>ambulatorio/motivocancelamento">Motivo cancelamento</a>
                                                                 </li>
+                                                                <li>
+                                                                    <a href="<?= base_url() ?>ambulatorio/guia/configurarimpressao">Configurar Impressão</a>
+                                                                </li>
 <!--                                                                <li>
                                                                     <a href="<?= base_url() ?>ambulatorio/modelodeclaracao">Modelo Declara&ccedil;&atilde;o</a>
                                                                 </li>-->

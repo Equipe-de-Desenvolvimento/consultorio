@@ -5385,6 +5385,18 @@ class guia_model extends Model {
         return $return->row_array();
     }
 
+    function listarconfiguracaoimpressao() {
+        $data = date("Y-m-d");
+        $empresa_id = $this->session->userdata('empresa_id');
+        $this->db->select('*');
+        $this->db->from('tb_empresa_impressao');
+        $this->db->where('empresa_id', $empresa_id);
+//        $this->db->where('paciente_id', $paciente_id);
+//        $this->db->where('data_criacao', $data);
+        $return = $this->db->get();
+        return $return->result();
+    }
+
     function listarorcamento($paciente_id) {
         $data = date("Y-m-d");
         $empresa_id = $this->session->userdata('empresa_id');
@@ -5573,6 +5585,40 @@ AND data <= '$data_fim'";
                 return -1;
             else
                 $ambulatorio_guia_id = $this->db->insert_id();
+
+
+            return $ambulatorio_guia_id;
+        } catch (Exception $exc) {
+            return -1;
+        }
+    }
+
+    function gravarconfiguracaoimpressao() {
+        try {
+//            var_dump($_POST); die;
+            /* inicia o mapeamento no banco */
+            $empresa_id = $this->session->userdata('empresa_id');
+            $horario = date("Y-m-d H:i:s");
+            $operador_id = $this->session->userdata('operador_id');
+            $this->db->set('cabecalho', $_POST['cabecalho']);
+            $this->db->set('rodape', $_POST['rodape']);
+            $this->db->set('empresa_id', $empresa_id);
+            if ($_POST['impressao_id'] == '') {
+                $this->db->set('data_cadastro', $horario);
+                $this->db->set('operador_cadastro', $operador_id);
+                $this->db->insert('tb_empresa_impressao');
+            } else {
+                $this->db->set('data_cadastro', $horario);
+                $this->db->set('operador_cadastro', $operador_id);
+                $this->db->where('empresa_impressao_id', $_POST['impressao_id']);
+                $this->db->update('tb_empresa_impressao');
+            }
+
+            $erro = $this->db->_error_message();
+            if (trim($erro) != "") // erro de banco
+                return -1;
+            else
+//                $ambulatorio_guia_id = $this->db->insert_id();
 
 
             return $ambulatorio_guia_id;
@@ -5954,7 +6000,8 @@ AND data <= '$data_fim'";
             if ($_POST['ajuste1'] != "0" || $_POST['ajuste2'] != "0" || $_POST['ajuste3'] != "0" || $_POST['ajuste4'] != "0") {
                 if ($_POST['valor1'] > $_POST['valorajuste1']) {
                     $desconto1 = $_POST['valor1'] - $_POST['valorajuste1'];
-                } else {
+                } 
+                else {
                     $desconto1 = $_POST['valorajuste1'] - $_POST['valor1'];
                 }
                 if ($_POST['valor2'] > $_POST['valorajuste2']) {
@@ -5977,7 +6024,7 @@ AND data <= '$data_fim'";
             } else {
                 $desconto = $_POST['desconto'];
             }
-
+//            var_dump($desconto); die;
 //            $desconto = $_POST['desconto'];
 //            $valor1 = $_POST['valor1'];
 //            $valor2 = $_POST['valor2'];

@@ -45,7 +45,7 @@ switch ($MES) {
         break;
 }
 ?>
-<p><center><img align = 'center'  width='400px' height='200px' src="<?= base_url() . "img/cabecalho.jpg" ?>"></center></p>
+<?=$impressao_tipo[0]->cabecalho?>
 
 <p>Paciente: <strong><?= utf8_decode($paciente['0']->nome); ?></strong></p>
 <? echo $modelo[0]->texto ?>
@@ -108,7 +108,7 @@ switch ($MES) {
 
         <?= date("H:i:s") ?>
     </p>
-    <p><center><img align = 'center'  width='1000px' height='100px' src="<?= base_url() . "img/rodape.jpg" ?>"></center></p> 
+    <?=$impressao_tipo[0]->rodape?>
 </footer>
 
 

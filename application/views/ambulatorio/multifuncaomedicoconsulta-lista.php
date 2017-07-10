@@ -189,7 +189,7 @@
                                             <td><?= $item->inicio ?></td>
                                             <td><?= $item->paciente ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
-                                            <td><?= $item->procedimento; ?></td>
+                                            <td><?= $item->convenio. " - " .$item->procedimento; ?></td>
                                             <td><?= $item->observacoes; ?></td>
                                             <td class="tabela_acoes desbloq">
             <? if ($item->situacaolaudo != '') { ?>
@@ -248,7 +248,7 @@
                                             <td><?= $item->inicio ?></td>
                                             <td><?= $item->paciente ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
-                                            <td><?= $item->procedimento; ?></td>
+                                            <td><?= $item->convenio. " - " .$item->procedimento; ?></td>
                                             <td><?= $item->observacoes; ?></td>
                                             <td class="tabela_acoes desbloq">
             <? if ($item->situacaolaudo != '') { ?>
@@ -281,7 +281,7 @@
                                             <td><?= $item->inicio ?></td>
                                             <td><?= $item->paciente ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
-                                            <td><?= $item->procedimento; ?></td>
+                                            <td><?= $item->convenio. " - " .$item->procedimento; ?></td>
                                             <td><?= $item->observacoes; ?></td>
                                             <td class="tabela_acoes desbloq">
             <? if ($item->situacaolaudo != '') { ?>
@@ -314,7 +314,7 @@
                                             <td><?= $item->inicio ?></td>
                                             <td><?= $item->paciente ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
-                                            <td><?= $item->procedimento; ?></td>
+                                            <td><?= $item->convenio. " - " .$item->procedimento; ?></td>
                                             <td><?= $item->observacoes; ?></td>
                                             <td class="tabela_acoes desbloq">
             <? if ($item->situacaolaudo != '') { ?>

@@ -98,7 +98,7 @@
                                     <td colspan="3">Endereco: <?= @$obj->_logradouro ?>, <?= @$obj->_numero . ' ' . @$obj->_bairro ?> - <?= @$obj->_uf ?></td>
                                     <td>
                                         <a style="width: 60pt;" class="btn btn-outline btn-primary" onclick="javascript:window.open('<?= base_url() ?>cadastros/pacientes/carregarmedico/<?= @$obj->_paciente_id ?>');" >
-                                          Cadastro
+                                            Cadastro
                                         </a>
 
                                     </td>
@@ -199,7 +199,7 @@
 
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="col-lg-7">
                                 <div class="form-group">
@@ -272,7 +272,7 @@
                     </div>
                     <div class="tab-pane fade " id="home-pills">
 
-                        
+
                         <div class="row">
 
                             <div class="col-lg-2">
@@ -307,180 +307,155 @@
                                     </select>
                                 </div>
                             </div>
+
                         </div>
-
-                    </div>
-                    <div class="tab-pane fade" id="settings-pills">
-                        <div >
-
-
-                            <fieldset>
-                                <legend><b><font size="3" color="red">Historico de consultas</font></b></legend>
-                                <div>
-                                    <? foreach ($historico as $item) {
-                                        ?>
-                                        <table>
-                                            <tbody>
-                                                <tr>
-                                                    <td >Data: <?= substr($item->data_cadastro, 8, 2) . "/" . substr($item->data_cadastro, 5, 2) . "/" . substr($item->data_cadastro, 0, 4); ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td >Medico: <?= $item->medico; ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td >Tipo: <?= $item->procedimento; ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td >Queixa principal: <?= $item->texto; ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Arquivos anexos:
-                                                        <?
-                                                        $this->load->helper('directory');
-                                                        $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/consulta/$item->ambulatorio_laudo_id/");
-
-                                                        $w = 0;
-                                                        if ($arquivo_pasta != false):
-                                                            foreach ($arquivo_pasta as $value) :
-                                                                $w++;
-                                                                ?>
-
-                                                                <a onclick="javascript:window.open('<?= base_url() . "upload/consulta/" . $item->ambulatorio_laudo_id . "/" . $value ?> ', '_blank', 'toolbar=no,Location=no,menubar=no,width=900,height=650');"><img  width="50px" height="50px" src="<?= base_url() . "upload/consulta/" . $item->ambulatorio_laudo_id . "/" . $value ?>"></a>
-                                                                <?
-                                                                if ($w == 8) {
-                                                                    
-                                                                }
-                                                            endforeach;
-                                                            $arquivo_pasta = "";
-                                                        endif
-                                                        ?>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <hr>
-                                    <? }
-                                    ?>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Alergias</label>
+                                    <input type="text" name="alergias" id="alergias" value="<?= @$obj->_alergias; ?>" class="form-control" />
                                 </div>
-                                <div>
-                                    <? foreach ($historicoantigo as $itens) {
-                                        ?>
-                                        <table>
-                                            <tbody>
-                                                <tr>
-                                                    <td >Data: <?= substr($itens->data_cadastro, 8, 2) . "/" . substr($itens->data_cadastro, 5, 2) . "/" . substr($itens->data_cadastro, 0, 4); ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td >Queixa principal: <?= $itens->laudo; ?></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <hr>
-                                    <? }
-                                    ?>
+                            </div> 
+                        </div> 
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Cirurgias anteriores</label>
+                                    <input type="text" name="cirurgias" id="cirurgias" value="<?= @$obj->_cirurgias; ?>" class="form-control" />
                                 </div>
+                            </div> 
+                        </div>
+                   
 
-                            </fieldset>
+                </div>
+                <div class="tab-pane fade" id="settings-pills">
+                    <div >
 
-                            <fieldset>
-                                <legend><b><font size="3" color="red">Historico de exames</font></b></legend>
-                                <div>
+
+                        <fieldset>
+                            <legend><b><font size="3" color="red">Historico de consultas</font></b></legend>
+                            <div>
+                                <? foreach ($historico as $item) {
+                                    ?>
                                     <table>
                                         <tbody>
-                                            <? foreach ($historicoexame as $item) {
-                                                ?>
-
-                                                <tr>
-                                                    <td >Data: <?= substr($item->data_cadastro, 8, 2) . "/" . substr($item->data_cadastro, 5, 2) . "/" . substr($item->data_cadastro, 0, 4); ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td >Medico: <?= $item->medico; ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td >Tipo: <?= $item->procedimento; ?></td>
-                                                </tr>
-                                                <tr>
+                                            <tr>
+                                                <td >Data: <?= substr($item->data_cadastro, 8, 2) . "/" . substr($item->data_cadastro, 5, 2) . "/" . substr($item->data_cadastro, 0, 4); ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td >Medico: <?= $item->medico; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td >Tipo: <?= $item->procedimento; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td >Queixa principal: <?= $item->texto; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Arquivos anexos:
                                                     <?
                                                     $this->load->helper('directory');
-                                                    $arquivo_pastaimagem = directory_map("/home/sisprod/projetos/clinica/upload/$item->exames_id/");
-//        $data['arquivo_pasta'] = directory_map("/home/vivi/projetos/clinica/upload/$exame_id/");
-                                                    if ($arquivo_pastaimagem != false) {
-                                                        sort($arquivo_pastaimagem);
-                                                    }
-                                                    $i = 0;
-                                                    if ($arquivo_pastaimagem != false) {
-                                                        foreach ($arquivo_pastaimagem as $value) {
-                                                            $i++;
-                                                        }
-                                                    }
-                                                    ?>
-                                                    <td >Imagens : <font size="2"><b> <?= $i ?></b>
-                                                        <?
-                                                        if ($arquivo_pastaimagem != false):
-                                                            foreach ($arquivo_pastaimagem as $value) {
-                                                                ?>
-                                                                <a onclick="javascript:window.open('<?= base_url() . "upload/" . $item->exames_id . "/" . $value ?> ', '_blank', 'toolbar=no,Location=no,menubar=no,width=900,height=650');"><img  width="100px" height="100px" src="<?= base_url() . "upload/" . $item->exames_id . "/" . $value ?>"></a>
-                                                                <?
+                                                    $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/consulta/$item->ambulatorio_laudo_id/");
+
+                                                    $w = 0;
+                                                    if ($arquivo_pasta != false):
+                                                        foreach ($arquivo_pasta as $value) :
+                                                            $w++;
+                                                            ?>
+
+                                                            <a onclick="javascript:window.open('<?= base_url() . "upload/consulta/" . $item->ambulatorio_laudo_id . "/" . $value ?> ', '_blank', 'toolbar=no,Location=no,menubar=no,width=900,height=650');"><img  width="50px" height="50px" src="<?= base_url() . "upload/consulta/" . $item->ambulatorio_laudo_id . "/" . $value ?>"></a>
+                                                            <?
+                                                            if ($w == 8) {
+                                                                
                                                             }
-                                                            $arquivo_pastaimagem = "";
-                                                        endif
-                                                        ?>
-                                                        <!--                <ul id="sortable">
-                
-                                                                        </ul>-->
-                                                    </td >
-                                                </tr>
-                                                <tr>
-                                                    <td >Laudo: <?= $item->texto; ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Arquivos anexos:
-                                                        <?
-                                                        $this->load->helper('directory');
-                                                        $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/consulta/$item->ambulatorio_laudo_id/");
-
-                                                        $w = 0;
-                                                        if ($arquivo_pasta != false):
-
-                                                            foreach ($arquivo_pasta as $value) :
-                                                                $w++;
-                                                                ?>
-
-                                                                <a onclick="javascript:window.open('<?= base_url() . "upload/consulta/" . $item->ambulatorio_laudo_id . "/" . $value ?> ', '_blank', 'toolbar=no,Location=no,menubar=no,width=900,height=650');"><img  width="50px" height="50px" src="<?= base_url() . "upload/consulta/" . $item->ambulatorio_laudo_id . "/" . $value ?>"></a>
-                                                                <?
-                                                                if ($w == 8) {
-                                                                    
-                                                                }
-                                                            endforeach;
-                                                            $arquivo_pasta = "";
-                                                        endif
-                                                        ?>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th style='width:10pt;border:solid windowtext 1.0pt;
-                                                        border-bottom:none;mso-border-top-alt:none;border-left:
-                                                        none;border-right:none;' colspan="10">&nbsp;</th>
-                                                </tr>
-
-                                            <? }
-                                            ?>
+                                                        endforeach;
+                                                        $arquivo_pasta = "";
+                                                    endif
+                                                    ?>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
-                                </div>
-
-                            </fieldset>
-                            <fieldset>
-                                <legend><b><font size="3" color="red">Digitaliza&ccedil;&otilde;es</font></b></legend>
-                                <div>
+                                    <hr>
+                                <? }
+                                ?>
+                            </div>
+                            <div>
+                                <? foreach ($historicoantigo as $itens) {
+                                    ?>
                                     <table>
                                         <tbody>
+                                            <tr>
+                                                <td >Data: <?= substr($itens->data_cadastro, 8, 2) . "/" . substr($itens->data_cadastro, 5, 2) . "/" . substr($itens->data_cadastro, 0, 4); ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td >Queixa principal: <?= $itens->laudo; ?></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <hr>
+                                <? }
+                                ?>
+                            </div>
+
+                        </fieldset>
+
+                        <fieldset>
+                            <legend><b><font size="3" color="red">Historico de exames</font></b></legend>
+                            <div>
+                                <table>
+                                    <tbody>
+                                        <? foreach ($historicoexame as $item) {
+                                            ?>
 
                                             <tr>
-                                                <td>
+                                                <td >Data: <?= substr($item->data_cadastro, 8, 2) . "/" . substr($item->data_cadastro, 5, 2) . "/" . substr($item->data_cadastro, 0, 4); ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td >Medico: <?= $item->medico; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td >Tipo: <?= $item->procedimento; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <?
+                                                $this->load->helper('directory');
+                                                $arquivo_pastaimagem = directory_map("/home/sisprod/projetos/clinica/upload/$item->exames_id/");
+//        $data['arquivo_pasta'] = directory_map("/home/vivi/projetos/clinica/upload/$exame_id/");
+                                                if ($arquivo_pastaimagem != false) {
+                                                    sort($arquivo_pastaimagem);
+                                                }
+                                                $i = 0;
+                                                if ($arquivo_pastaimagem != false) {
+                                                    foreach ($arquivo_pastaimagem as $value) {
+                                                        $i++;
+                                                    }
+                                                }
+                                                ?>
+                                                <td >Imagens : <font size="2"><b> <?= $i ?></b>
+                                                    <?
+                                                    if ($arquivo_pastaimagem != false):
+                                                        foreach ($arquivo_pastaimagem as $value) {
+                                                            ?>
+                                                            <a onclick="javascript:window.open('<?= base_url() . "upload/" . $item->exames_id . "/" . $value ?> ', '_blank', 'toolbar=no,Location=no,menubar=no,width=900,height=650');"><img  width="100px" height="100px" src="<?= base_url() . "upload/" . $item->exames_id . "/" . $value ?>"></a>
+                                                            <?
+                                                        }
+                                                        $arquivo_pastaimagem = "";
+                                                    endif
+                                                    ?>
+                                                    <!--                <ul id="sortable">
+            
+                                                                    </ul>-->
+                                                </td >
+                                            </tr>
+                                            <tr>
+                                                <td >Laudo: <?= $item->texto; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Arquivos anexos:
                                                     <?
                                                     $this->load->helper('directory');
-                                                    $arquivo_pasta = directory_map("./upload/paciente/$paciente_id/");
+                                                    $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/consulta/$item->ambulatorio_laudo_id/");
 
                                                     $w = 0;
                                                     if ($arquivo_pasta != false):
@@ -489,122 +464,165 @@
                                                             $w++;
                                                             ?>
 
-                                                        <td width="10px"><img  width="50px" height="50px" onclick="javascript:window.open('<?= base_url() . "upload/paciente/" . $paciente_id . "/" . $value ?>', '_blank', 'toolbar=no,Location=no,menubar=no,width=1200,height=600');" src="<?= base_url() . "upload/paciente/" . $paciente_id . "/" . $value ?>"><br><? echo substr($value, 0, 10) ?></td>
-                                                        <?
-                                                        if ($w == 8) {
-                                                            
-                                                        }
-                                                    endforeach;
-                                                    $arquivo_pasta = "";
-                                                endif
-                                                ?>
+                                                            <a onclick="javascript:window.open('<?= base_url() . "upload/consulta/" . $item->ambulatorio_laudo_id . "/" . $value ?> ', '_blank', 'toolbar=no,Location=no,menubar=no,width=900,height=650');"><img  width="50px" height="50px" src="<?= base_url() . "upload/consulta/" . $item->ambulatorio_laudo_id . "/" . $value ?>"></a>
+                                                            <?
+                                                            if ($w == 8) {
+                                                                
+                                                            }
+                                                        endforeach;
+                                                        $arquivo_pasta = "";
+                                                    endif
+                                                    ?>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <th style='width:10pt;border:solid windowtext 1.0pt;
+                                                    border-bottom:none;mso-border-top-alt:none;border-left:
+                                                    none;border-right:none;' colspan="10">&nbsp;</th>
+                                            </tr>
 
-
-
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </fieldset>
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /.panel-body -->
-        </div>
-        <div class="panel panel-default">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="alert alert-info">
-                        Salvar
-                    </div>
-                    <div class="panel-body">
-
-                        <div class="row">
-<!--                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>Médico Responsável</label>
-                                    <select name="medico" id="medico" class="form-control">
-                                        <? foreach ($operadores as $value) : ?>
-                                            <option value="<?= $value->operador_id; ?>"<?
-                                            if (@$obj->_medico_parecer1 == $value->operador_id):echo 'selected';
-                                            endif;
-                                            ?>><?= $value->nome; ?></option>
-                                                <? endforeach; ?>
-                                    </select>
-                                </div>  
-                            </div>-->
-<!--                            <div class="col-lg-2">
-                                <div class="form-group">
-                                    <label>Situa&ccedil;&atilde;o</label>
-                                    <select name="situacao" id="situacao" class="form-control">
-                                        <option value='DIGITANDO'<?
-                                        if (@$obj->_status == 'DIGITANDO'):echo 'selected';
-                                        endif;
-                                        ?> >DIGITANDO</option>
-                                        <option value='FINALIZADO' <?
-                                        if (@$obj->_status == 'FINALIZADO'):echo 'selected';
-                                        endif;
-                                        ?> >FINALIZADO</option>
-                                    </select>
-                                    <input type="hidden" name="status" id="status" value="<?= @$obj->_status; ?>" class="size2" />
-                                </div>  
-                            </div>-->
-<!--                            <div class="col-lg-1">
-                                <div class="form-group">
-                                    <label>Assinatura</label>
-                                    <?php
-                                    if (@$obj->_assinatura == "t") {
+                                        <? }
                                         ?>
-                                        <input class="checkbox" type="checkbox" name="assinatura" checked ="true" />
-                                        <?php
-                                    } else {
-                                        ?>
-                                        <input class="checkbox" type="checkbox" name="assinatura"  />
-                                        <?php
-                                    }
-                                    ?>
-                                </div>  
-                            </div>-->
-<!--                            <div class="col-lg-1">
-                                <div class="form-group">
-                                    <label>Rodapé</label>
-                                    <?php
-                                    if (@$obj->_rodape == "t") {
-                                        ?>
-                                        <input class="checkbox" type="checkbox" name="rodape" checked ="true" />
-                                        <?php
-                                    } else {
-                                        ?>
-                                        <input class="checkbox" type="checkbox" name="rodape"  />
-                                        <?php
-                                    }
-                                    ?>
-                                </div>  
-                            </div>-->
-
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-lg-1">
-                                <button class="btn btn-outline btn-success btn-sm" type="submit" name="btnEnviar"><i class="fa fa-floppy-o" aria-hidden="true"></i>
-                                    Salvar</button>
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="col-lg-1">
-                                <button class="btn btn-outline btn-danger btn-sm" type="reset" name="btnLimpar">Limpar</button>
+
+                        </fieldset>
+                        <fieldset>
+                            <legend><b><font size="3" color="red">Digitaliza&ccedil;&otilde;es</font></b></legend>
+                            <div>
+                                <table>
+                                    <tbody>
+
+                                        <tr>
+                                            <td>
+                                                <?
+                                                $this->load->helper('directory');
+                                                $arquivo_pasta = directory_map("./upload/paciente/$paciente_id/");
+
+                                                $w = 0;
+                                                if ($arquivo_pasta != false):
+
+                                                    foreach ($arquivo_pasta as $value) :
+                                                        $w++;
+                                                        ?>
+
+                                                    <td width="10px"><img  width="50px" height="50px" onclick="javascript:window.open('<?= base_url() . "upload/paciente/" . $paciente_id . "/" . $value ?>', '_blank', 'toolbar=no,Location=no,menubar=no,width=1200,height=600');" src="<?= base_url() . "upload/paciente/" . $paciente_id . "/" . $value ?>"><br><? echo substr($value, 0, 10) ?></td>
+                                                    <?
+                                                    if ($w == 8) {
+                                                        
+                                                    }
+                                                endforeach;
+                                                $arquivo_pasta = "";
+                                            endif
+                                            ?>
+                                            </td>
+                                        </tr>
+
+
+
+                                    </tbody>
+                                </table>
                             </div>
-                        </div>
+
+                        </fieldset>
+
 
                     </div>
                 </div>
             </div>
-
         </div>
-        <!-- /.panel -->
+        <!-- /.panel-body -->
+    </div>
+    <div class="panel panel-default">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="alert alert-info">
+                    Salvar
+                </div>
+                <div class="panel-body">
+
+                    <div class="row">
+                        <!--                            <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>Médico Responsável</label>
+                                                            <select name="medico" id="medico" class="form-control">
+                        <? foreach ($operadores as $value) : ?>
+                                                                        <option value="<?= $value->operador_id; ?>"<?
+                            if (@$obj->_medico_parecer1 == $value->operador_id):echo 'selected';
+                            endif;
+                            ?>><?= $value->nome; ?></option>
+                        <? endforeach; ?>
+                                                            </select>
+                                                        </div>  
+                                                    </div>-->
+                        <!--                            <div class="col-lg-2">
+                                                        <div class="form-group">
+                                                            <label>Situa&ccedil;&atilde;o</label>
+                                                            <select name="situacao" id="situacao" class="form-control">
+                                                                <option value='DIGITANDO'<?
+                        if (@$obj->_status == 'DIGITANDO'):echo 'selected';
+                        endif;
+                        ?> >DIGITANDO</option>
+                                                                <option value='FINALIZADO' <?
+                        if (@$obj->_status == 'FINALIZADO'):echo 'selected';
+                        endif;
+                        ?> >FINALIZADO</option>
+                                                            </select>
+                                                            <input type="hidden" name="status" id="status" value="<?= @$obj->_status; ?>" class="size2" />
+                                                        </div>  
+                                                    </div>-->
+                        <!--                            <div class="col-lg-1">
+                                                        <div class="form-group">
+                                                            <label>Assinatura</label>
+                        <?php
+                        if (@$obj->_assinatura == "t") {
+                            ?>
+                                                                    <input class="checkbox" type="checkbox" name="assinatura" checked ="true" />
+                            <?php
+                        } else {
+                            ?>
+                                                                    <input class="checkbox" type="checkbox" name="assinatura"  />
+                            <?php
+                        }
+                        ?>
+                                                        </div>  
+                                                    </div>-->
+                        <!--                            <div class="col-lg-1">
+                                                        <div class="form-group">
+                                                            <label>Rodapé</label>
+                        <?php
+                        if (@$obj->_rodape == "t") {
+                            ?>
+                                                                    <input class="checkbox" type="checkbox" name="rodape" checked ="true" />
+                            <?php
+                        } else {
+                            ?>
+                                                                    <input class="checkbox" type="checkbox" name="rodape"  />
+                            <?php
+                        }
+                        ?>
+                                                        </div>  
+                                                    </div>-->
+
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-1">
+                            <button class="btn btn-outline btn-success btn-sm" type="submit" name="btnEnviar"><i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                Salvar</button>
+                        </div>
+                        <div class="col-lg-1">
+                            <button class="btn btn-outline btn-danger btn-sm" type="reset" name="btnLimpar">Limpar</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.panel -->
 
 
 
@@ -612,7 +630,7 @@
 
 
 
-    </div> 
+</div> 
 </form>
 <!-- Final da DIV content -->
 <script src="<?= base_url() ?>bootstrap/vendor/jquery/jquery.min.js"></script>

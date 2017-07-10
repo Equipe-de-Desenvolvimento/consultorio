@@ -107,6 +107,15 @@ class Guia extends BaseController {
         $this->load->View('ambulatorio/aafala', $data);
     }
 
+//    function configurarimpressao() {
+////        $obj_modeloreceitaespecial = new modeloreceitaespecial_model($exame_modeloreceitaespecial_id);
+////        $data['obj'] = $obj_modeloreceitaespecial;
+//        $data['medicos'] = $this->operador_m->listarmedicos();
+//        $data['procedimentos'] = $this->procedimento->listarprocedimentos();
+////        $this->load->View('ambulatorio/modeloatestado-form', $data);
+//        $this->load->View('ambulatorio/modeloreceitaespecial-form', $data);
+//    }
+
     function editarfichaxml($paciente_id, $exames_id) {
         $data['exames_id'] = $exames_id;
         $data['paciente_id'] = $paciente_id;
@@ -702,6 +711,21 @@ class Guia extends BaseController {
         $data['procedimento'] = $this->procedimento->listarprocedimentos();
         redirect(base_url() . "ambulatorio/guia/novo/$data");
     }
+    
+    function gravarconfiguracaoimpressao() {
+        
+        $ambulatorio_guia_id = $this->guia->gravarconfiguracaoimpressao();
+//        if ($ambulatorio_guia_id == "-1") {
+//            $data['mensagem'] = 'Erro ao gravar a Sala. Opera&ccedil;&atilde;o cancelada.';
+//        } else {
+            $data['mensagem'] = array('Sucesso ao configurar impressão.', 'success');
+//        }
+        $this->session->set_flashdata('message', $data['mensagem']);
+//        $data['paciente_id'] = $paciente_id;
+//        $data['ambulatorio_guia_id'] = $ambulatorio_guia_id;
+//        $data['procedimento'] = $this->procedimento->listarprocedimentos();
+        redirect(base_url() . "home");
+    }
 
     function fecharcaixa() {
         $caixa = $this->guia->fecharcaixa();
@@ -1021,9 +1045,9 @@ class Guia extends BaseController {
         $paciente_id = $_POST['txtpaciente_id'];
         $ambulatorio_guia_id = $this->guia->editarexames($percentual);
         if ($ambulatorio_guia_id == "-1") {
-            $data['mensagem'] = Array( 'Erro ao ao editar atendimento. Operação cancelada.', 'error');
+            $data['mensagem'] = Array('Erro ao ao editar atendimento. Operação cancelada.', 'error');
         } else {
-            $data['mensagem'] =Array( 'Sucesso ao editar atendimento.', 'success');
+            $data['mensagem'] = Array('Sucesso ao editar atendimento.', 'success');
         }
         $this->session->set_flashdata('message', $data['mensagem']);
         redirect(base_url() . "ambulatorio/guia/pesquisar/$paciente_id");
@@ -1048,9 +1072,9 @@ class Guia extends BaseController {
         $paciente_id = $_POST['txtpaciente_id'];
         $ambulatorio_guia_id = $this->guia->valorexames();
         if ($ambulatorio_guia_id == "-1") {
-            $data['mensagem'] =Array( 'Erro ao editar dados. Operação Cancelada.', 'error');
+            $data['mensagem'] = Array('Erro ao editar dados. Operação Cancelada.', 'error');
         } else {
-            $data['mensagem'] =Array(  'Sucesso ao editar dados.', 'success');
+            $data['mensagem'] = Array('Sucesso ao editar dados.', 'success');
         }
         $this->session->set_flashdata('message', $data['mensagem']);
         redirect(base_url() . "ambulatorio/guia/pesquisar/$paciente_id");
@@ -2489,6 +2513,7 @@ class Guia extends BaseController {
         $data['exame'] = $this->guia->listarexame($exames_id);
         $data['exames'] = $this->guia->listarexamesguia($guia_id);
         $data['modelo'] = $this->modelodeclaracao->buscarmodelo($_POST['modelo']);
+        $data['impressao_tipo'] = $this->guia->listarconfiguracaoimpressao();
         $exames = $data['exames'];
         $valor_total = 0;
 
@@ -2497,11 +2522,11 @@ class Guia extends BaseController {
 
         $dataFuturo = date("Y-m-d");
         // 1 é a impressão com logo e rodapé pequenos
-        if ($data['empresa'][0]->impressao_declaracao == 1) {
+//        if ($data['empresa'][0]->impressao_declaracao == 1) {
             $this->load->View('ambulatorio/impressaodeclaracaopequena', $data);
-        } else {
-            $this->load->View('ambulatorio/impressaodeclaracao', $data);
-        }
+//        } else {
+//            $this->load->View('ambulatorio/impressaodeclaracao', $data);
+//        }
     }
 
     function impressaodeclaracaoguia($guia_id) {
@@ -2737,6 +2762,13 @@ class Guia extends BaseController {
     function guiaconvenio($guia_id) {
         $data['guia_id'] = $this->guia->guiaconvenio($guia_id);
         $this->load->View('ambulatorio/guiaconvenio-form', $data);
+    }
+
+    function configurarimpressao() {
+//        $data['guia_id'] = $this->guia->verificaodeclaracao();
+        $data['impressao'] = $this->guia->listarconfiguracaoimpressao();
+//        var_dump($data['impressao']); die;
+        $this->load->View('ambulatorio/configurarimpressao-form', $data);
     }
 
     function guiadeclaracao($guia_id) {

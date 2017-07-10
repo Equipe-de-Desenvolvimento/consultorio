@@ -2467,6 +2467,8 @@ class laudo_model extends Model {
                 $this->db->set('operador_finalizado', $operador_id);
             }
             $this->db->set('cabecalho', $_POST['cabecalho']);
+            $this->db->set('alergias', $_POST['alergias']);
+            $this->db->set('cirurgias', $_POST['cirurgias']);
             $this->db->set('situacao', 'FINALIZADO');
             $this->db->set('data_atualizacao', $horario);
             $this->db->set('operador_atualizacao', $operador_id);
@@ -2998,6 +3000,8 @@ class laudo_model extends Model {
                             agi.altura,
                             agi.pasistolica,
                             agi.padiastolica,
+                            ag.alergias,
+                            ag.cirurgias,
                             ag.superficie_corporea,
                             ag.ve_volume_telediastolico,
                             ag.ve_volume_telessistolico,
@@ -3098,6 +3102,8 @@ class laudo_model extends Model {
             $this->_cid2descricao = $return[0]->no_cid2;
             $this->_peso = $return[0]->peso;
             $this->_altura = $return[0]->altura;
+            $this->_alergias = $return[0]->alergias;
+            $this->_cirurgias = $return[0]->cirurgias;
             $this->_pasistolica = $return[0]->pasistolica;
             $this->_padiastolica = $return[0]->padiastolica;
             if ($return[0]->peso != 0 && $return[0]->altura != 0) {
