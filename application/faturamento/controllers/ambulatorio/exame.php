@@ -571,6 +571,7 @@ class Exame extends BaseController {
 
         $this->load->helper('directory');
 <<<<<<< HEAD
+<<<<<<< HEAD
         $data['arquivo_pasta'] = directory_map("./upload/$exame_id/");
         if ($data['arquivo_pasta'] != false) {
             sort($data['arquivo_pasta']);
@@ -2271,6 +2272,1708 @@ class Exame extends BaseController {
                 $zip->open("./upload/cr/$convenio/$value.zip", ZipArchive::CREATE);
                 $zip->addFile("./upload/cr/$convenio/$value", "$value");
 //           $deletarxml = "./upload/cr/$convenio/$value";
+=======
+        $data['arquivo_pasta'] = directory_map("/home/sisprod/projetos/clinica/upload/$exame_id/");
+        if ($data['arquivo_pasta'] != false) {
+            sort($data['arquivo_pasta']);
+        }
+        $data['arquivos_deletados'] = directory_map("/home/sisprod/projetos/clinica/uploadopm/$exame_id/");
+//        $data['arquivo_pasta'] = directory_map("/home/hamilton/projetos/clinica/upload/$exame_id/");
+        //$data['arquivos_deletados'] = directory_map("/home/hamilton/projetos/clinica/uploadopm/$exame_id/");
+        $data['exame_id'] = $exame_id;
+        $data['sala_id'] = $sala_id;
+        $this->loadView('ambulatorio/importacao-imagem', $data);
+    }
+
+    function anexarimagemmedico($exame_id, $sala_id) {
+
+        $this->load->helper('directory');
+        $data['arquivo_pasta'] = directory_map("/home/sisprod/projetos/clinica/upload/$exame_id/");
+//        $data['arquivo_pasta'] = directory_map("/home/hamilton/projetos/clinica/upload/$exame_id/");
+        if ($data['arquivo_pasta'] != false) {
+            sort($data['arquivo_pasta']);
+        }
+        $data['arquivos_deletados'] = directory_map("/home/sisprod/projetos/clinica/uploadopm/$exame_id/");
+//        $data['arquivos_deletados'] = directory_map("/home/hamilton/projetos/clinica/uploadopm/$exame_id/");
+        $data['exame_id'] = $exame_id;
+        $data['sala_id'] = $sala_id;
+        $this->load->View('ambulatorio/importacao-imagem2', $data);
+    }
+
+    function importarimagem() {
+        $exame_id = $_POST['exame_id'];
+        $sala_id = $_POST['sala_id'];
+//        $data = $_FILES['userfile'];
+//        var_dump($data);
+//        die;
+        if (!is_dir("./upload/$exame_id")) {
+            mkdir("./upload/$exame_id");
+            $destino = "./upload/$exame_id";
+            chmod($destino, 0777);
+        }
+
+        $config['upload_path'] = "/home/sisprod/projetos/clinica/upload/" . $exame_id . "/";
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size'] = '1000';
+        $config['overwrite'] = TRUE;
+        $config['encrypt_name'] = TRUE;
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload()) {
+            $error = array('error' => $this->upload->display_errors());
+        } else {
+            $error = null;
+            $data = array('upload_data' => $this->upload->data());
+        }
+        $data['exame_id'] = $exame_id;
+        $this->anexarimagem($exame_id, $sala_id);
+    }
+
+    function excluirimagemmedico($exame_id, $nome, $sala_id) {
+
+        if (!is_dir("./uploadopm/$exame_id")) {
+            mkdir("./uploadopm/$exame_id");
+            $pasta = "./uploadopm/$exame_id";
+            chmod($pasta, 0777);
+        }
+        $origem = "./upload/$exame_id/$nome";
+        $destino = "./uploadopm/$exame_id/$nome";
+        copy($origem, $destino);
+        unlink($origem);
+        redirect(base_url() . "ambulatorio/exame/anexarimagemmedico/$exame_id/$sala_id");
+    }
+
+    function excluirimagem($exame_id, $nome, $sala_id) {
+
+        if (!is_dir("./uploadopm/$exame_id")) {
+            mkdir("./uploadopm/$exame_id");
+            $pasta = "./uploadopm/$exame_id";
+            chmod($pasta, 0777);
+        }
+        $origem = "./upload/$exame_id/$nome";
+        $destino = "./uploadopm/$exame_id/$nome";
+        copy($origem, $destino);
+        unlink($origem);
+        redirect(base_url() . "ambulatorio/exame/anexarimagem/$exame_id/$sala_id");
+    }
+
+    function moverimagens($exame_id, $sala_id) {
+
+        //HUMANA
+        $this->load->helper('directory');
+        if ($sala_id == 1) {
+
+            //$arquivo_pasta = directory_map("/home/hamilton/teste/");
+            $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/ultrasom1/");
+            //$origem = "/home/hamilton/teste";
+            $origem = "/home/sisprod/projetos/clinica/upload/ultrasom1";
+            foreach ($arquivo_pasta as $value) {
+                $nova = substr($value, 11, 6);
+                if (!is_dir("/home/sisprod/projetos/clinica/upload/$exame_id")) {
+                    mkdir("/home/sisprod/projetos/clinica/upload/$exame_id");
+                    $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+                    chmod($destino, 0777);
+                }
+                $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+                $local = "$origem/$value";
+                copy($local, $destino);
+            }
+        }
+        if ($sala_id == 2) {
+
+            $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/ultrasom2/");
+            $origem = "/home/sisprod/projetos/clinica/upload/ultrasom2";
+            foreach ($arquivo_pasta as $value) {
+                $nova = substr($value, 11, 6);
+                if (!is_dir("/home/sisprod/projetos/clinica/upload/$exame_id")) {
+                    mkdir("/home/sisprod/projetos/clinica/upload/$exame_id");
+                    $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+                    chmod($destino, 0777);
+                }
+                $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+                $local = "$origem/$value";
+                copy($local, $destino);
+            }
+        }
+        if ($sala_id == 9) {
+
+            $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/ultrasom3/");
+            $origem = "/home/sisprod/projetos/clinica/upload/ultrasom3";
+            foreach ($arquivo_pasta as $value) {
+                $nova = substr($value, 8, 6);
+                if (!is_dir("/home/sisprod/projetos/clinica/upload/$exame_id")) {
+                    mkdir("/home/sisprod/projetos/clinica/upload/$exame_id");
+                    $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+                    chmod($destino, 0777);
+                }
+                $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+                $local = "$origem/$value";
+                copy($local, $destino);
+            }
+        }
+
+        delete_files($origem);
+
+        redirect(base_url() . "ambulatorio/exame/anexarimagem/$exame_id/$sala_id");
+
+//        CAGE/GASTROSUL
+//        
+//        $this->load->helper('directory');
+//        if ($sala_id == 1) {
+//
+//            //$arquivo_pasta = directory_map("/home/hamilton/teste/");
+//            $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/ultrasom1/");
+//            sort($arquivo_pasta);
+//            //$origem = "/home/hamilton/teste";
+//            $origem = "/home/sisprod/projetos/clinica/upload/ultrasom1";
+//            foreach ($arquivo_pasta as $value) {
+//                $i++;
+//                $nova = $i . ".jpg";
+//                if (!is_dir("/home/sisprod/projetos/clinica/upload/$exame_id")) {
+//                    mkdir("/home/sisprod/projetos/clinica/upload/$exame_id");
+//                    $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+//                    chmod($destino, 0777);
+//                }
+//                $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+//                $local = "$origem/$value";
+//                copy($local, $destino);
+//            }
+//        }
+//        if ($sala_id == 2) {
+//
+//            $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/ultrasom2/");
+//            sort($arquivo_pasta);
+//            $origem = "/home/sisprod/projetos/clinica/upload/ultrasom2";
+//            foreach ($arquivo_pasta as $value) {
+//                $i++;
+//                $nova = $i . ".jpg";
+//                if (!is_dir("/home/sisprod/projetos/clinica/upload/$exame_id")) {
+//                    mkdir("/home/sisprod/projetos/clinica/upload/$exame_id");
+//                    $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+//                    chmod($destino, 0777);
+//                }
+//                $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+//                $local = "$origem/$value";
+//                copy($local, $destino);
+//            }
+//        }
+//        if ($sala_id == 9) {
+//
+//            $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/ultrasom3/");
+//            sort($arquivo_pasta);
+//            $origem = "/home/sisprod/projetos/clinica/upload/ultrasom3";
+//            foreach ($arquivo_pasta as $value) {
+//                $i++;
+//                $nova = $i . ".jpg";
+//                if (!is_dir("/home/sisprod/projetos/clinica/upload/$exame_id")) {
+//                    mkdir("/home/sisprod/projetos/clinica/upload/$exame_id");
+//                    $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+//                    chmod($destino, 0777);
+//                }
+//                $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+//                $local = "$origem/$value";
+//                copy($local, $destino);
+//            }
+//        }
+//
+//        delete_files($origem);
+//
+//        redirect(base_url() . "ambulatorio/exame/anexarimagem/$exame_id/$sala_id");
+    }
+
+    function moverimagensmedico($exame_id, $sala_id) {
+        //HUMANA
+        //
+        
+        
+        $this->load->helper('directory');
+        if ($sala_id == 1) {
+
+            //$arquivo_pasta = directory_map("/home/hamilton/teste/");
+            $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/ultrasom1/");
+            //$origem = "/home/hamilton/teste";
+            $origem = "/home/sisprod/projetos/clinica/upload/ultrasom1";
+            foreach ($arquivo_pasta as $value) {
+
+                $nova = substr($value, 11, 6);
+
+                if (!is_dir("/home/sisprod/projetos/clinica/upload/$exame_id")) {
+                    mkdir("/home/sisprod/projetos/clinica/upload/$exame_id");
+                    $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+                    chmod($destino, 0777);
+                }
+                $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+                $local = "$origem/$value";
+                copy($local, $destino);
+            }
+        }
+        if ($sala_id == 2) {
+
+            $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/ultrasom2/");
+            $origem = "/home/sisprod/projetos/clinica/upload/ultrasom2";
+            foreach ($arquivo_pasta as $value) {
+
+                $nova = substr($value, 11, 6);
+
+                if (!is_dir("/home/sisprod/projetos/clinica/upload/$exame_id")) {
+                    mkdir("/home/sisprod/projetos/clinica/upload/$exame_id");
+                    $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+                    chmod($destino, 0777);
+                }
+                $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+                $local = "$origem/$value";
+                copy($local, $destino);
+            }
+        }
+        if ($sala_id == 9) {
+
+            $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/ultrasom3/");
+            $origem = "/home/sisprod/projetos/clinica/upload/ultrasom3";
+            foreach ($arquivo_pasta as $value) {
+
+                $nova = substr($value, 8, 6);
+
+                if (!is_dir("/home/sisprod/projetos/clinica/upload/$exame_id")) {
+                    mkdir("/home/sisprod/projetos/clinica/upload/$exame_id");
+                    $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+                    chmod($destino, 0777);
+                }
+                $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+                $local = "$origem/$value";
+                copy($local, $destino);
+            }
+        }
+
+        delete_files($origem);
+
+        redirect(base_url() . "ambulatorio/exame/anexarimagemmedico/$exame_id/$sala_id");
+
+//      CAGE/GASTROSUL
+//        
+//        $this->load->helper('directory');
+//        $i=0;
+//        if ($sala_id == 1) {
+//
+//            //$arquivo_pasta = directory_map("/home/hamilton/teste/");
+//            $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/ultrasom1/");
+//            sort($arquivo_pasta);
+//            //$origem = "/home/hamilton/teste";
+//            $origem = "/home/sisprod/projetos/clinica/upload/ultrasom1";
+//            foreach ($arquivo_pasta as $value) {
+//                $i++;
+//                $nova = $i . ".jpg";
+//
+//                if (!is_dir("/home/sisprod/projetos/clinica/upload/$exame_id")) {
+//                    mkdir("/home/sisprod/projetos/clinica/upload/$exame_id");
+//                    $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+//                    chmod($destino, 0777);
+//                }
+//                $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+//                $local = "$origem/$value";
+//                copy($local, $destino);
+//            }
+//        }
+//        if ($sala_id == 2) {
+//
+//            
+//            $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/ultrasom2/");
+//            sort($arquivo_pasta);
+//            $origem = "/home/sisprod/projetos/clinica/upload/ultrasom2";
+//            foreach ($arquivo_pasta as $value) {
+//
+//                $i++;
+//                $nova = $i . ".jpg";
+//
+//                if (!is_dir("/home/sisprod/projetos/clinica/upload/$exame_id")) {
+//                    mkdir("/home/sisprod/projetos/clinica/upload/$exame_id");
+//                    $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+//                    chmod($destino, 0777);
+//                }
+//                $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+//                $local = "$origem/$value";
+//                copy($local, $destino);
+//            }
+//        }
+//        if ($sala_id == 9) {
+//
+//            $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/ultrasom3/");
+//            sort($arquivo_pasta);
+//            $origem = "/home/sisprod/projetos/clinica/upload/ultrasom3";
+//            foreach ($arquivo_pasta as $value) {
+//
+//                $i++;
+//                $nova = $i . ".jpg";
+//
+//                if (!is_dir("/home/sisprod/projetos/clinica/upload/$exame_id")) {
+//                    mkdir("/home/sisprod/projetos/clinica/upload/$exame_id");
+//                    $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+//                    chmod($destino, 0777);
+//                }
+//                $destino = "/home/sisprod/projetos/clinica/upload/$exame_id/$nova";
+//                $local = "$origem/$value";
+//                copy($local, $destino);
+//            }
+//        }
+//
+//        delete_files($origem);
+//
+//        redirect(base_url() . "ambulatorio/exame/anexarimagemmedico/$exame_id/$sala_id");
+    }
+
+    function restaurarimagem($exame_id, $nome) {
+
+        $origem = "./uploadopm/$exame_id/$nome";
+        $destino = "./upload/$exame_id/$nome";
+        copy($origem, $destino);
+        unlink($origem);
+        redirect(base_url() . "ambulatorio/exame/anexarimagem/$exame_id");
+    }
+
+    function ordenarimagens($exame_id, $sala_id) {
+        $i = 1;
+        $imagens = $_POST['teste'];
+        foreach ($imagens as $value) {
+
+            $origem = "./upload/$exame_id/$value";
+            $destino = "./upload/$exame_id/$i$value";
+            copy($origem, $destino);
+            unlink($origem);
+            $i++;
+        }
+        redirect(base_url() . "ambulatorio/exame/anexarimagemmedico/$exame_id/$sala_id");
+    }
+
+    function restaurarimagemmedico($exame_id, $nome, $sala_id) {
+
+        $origem = "./uploadopm/$exame_id/$nome";
+        $destino = "./upload/$exame_id/$nome";
+        copy($origem, $destino);
+        unlink($origem);
+
+        redirect(base_url() . "ambulatorio/exame/anexarimagemmedico/$exame_id/$sala_id");
+    }
+
+    function gravarpaciente() {
+        $agenda_exame_id = $_POST['txtagenda_exames_id'];
+        $verificar = $this->exame->gravarpaciente($agenda_exame_id);
+        if ($verificar == "-1") {
+            $data['mensagem'] = 'Erro ao marcar o Exame. Opera&ccedil;&atilde;o cancelada.';
+        } else {
+            $data['mensagem'] = 'Sucesso ao marcar o Exame.';
+        }
+        $this->session->set_flashdata('message', $data['mensagem']);
+        redirect(base_url() . "ambulatorio/exame");
+    }
+
+    function listaragendaexame($agenda_exames_nome_id) {
+
+        $dia = date("d-m-Y");
+        $data['diainicio'] = $dia;
+        $data['agenda_exames_nome_id'] = $agenda_exames_nome_id;
+        $data['dia1'] = $this->exame->listarexameagenda($dia, $agenda_exames_nome_id);
+        $data['contadia1'] = $this->exame->contador($dia, $agenda_exames_nome_id);
+        $data2 = date('d-m-Y', strtotime("+1 days", strtotime($dia)));
+        $data['dia2'] = $this->exame->listarexameagenda($data2, $agenda_exames_nome_id);
+        $data['contadia2'] = $this->exame->contador($data2, $agenda_exames_nome_id);
+        $data3 = date('d-m-Y', strtotime("+2 days", strtotime($dia)));
+        $data['dia3'] = $this->exame->listarexameagenda($data3, $agenda_exames_nome_id);
+        $data['contadia3'] = $this->exame->contador($data3, $agenda_exames_nome_id);
+        $data4 = date('d-m-Y', strtotime("+3 days", strtotime($dia)));
+        $data['dia4'] = $this->exame->listarexameagenda($data4, $agenda_exames_nome_id);
+        $data['contadia4'] = $this->exame->contador($data4, $agenda_exames_nome_id);
+        $data5 = date('d-m-Y', strtotime("+4 days", strtotime($dia)));
+        $data['dia5'] = $this->exame->listarexameagenda($data5, $agenda_exames_nome_id);
+        $data['contadia5'] = $this->exame->contador($data5, $agenda_exames_nome_id);
+        $data6 = date('d-m-Y', strtotime("+5 days", strtotime($dia)));
+        $data['dia6'] = $this->exame->listarexameagenda($data6, $agenda_exames_nome_id);
+        $data['contadia6'] = $this->exame->contador($data6, $agenda_exames_nome_id);
+        $data7 = date('d-m-Y', strtotime("+6 days", strtotime($dia)));
+        $data['dia7'] = $this->exame->listarexameagenda($data7, $agenda_exames_nome_id);
+        $data['contadia7'] = $this->exame->contador($data7, $agenda_exames_nome_id);
+        if ($data['contadia1'] != '0') {
+            $data['repetidor'] = $data['dia1'];
+        } elseif ($data['contadia2'] != '0') {
+            $data['repetidor'] = $data['dia2'];
+        } elseif ($data['contadia3'] != '0') {
+            $data['repetidor'] = $data['dia3'];
+        } elseif ($data['contadia4'] != '0') {
+            $data['repetidor'] = $data['dia4'];
+        } elseif ($data['contadia5'] != '0') {
+            $data['repetidor'] = $data['dia5'];
+        } elseif ($data['contadia6'] != '0') {
+            $data['repetidor'] = $data['dia6'];
+        } elseif ($data['contadia7'] != '0') {
+            $data['repetidor'] = $data['dia7'];
+        }
+        $this->loadView('ambulatorio/exameagenda-lista', $data);
+
+//            $this->carregarView($data);
+    }
+
+    function esquerda($dia, $agenda_exames_nome_id) {
+
+        $data['diainicio'] = date('d-m-Y', strtotime("-7 days", strtotime($dia)));
+        $dia = date('d-m-Y', strtotime("-7 days", strtotime($dia)));
+        $data['agenda_exames_nome_id'] = $agenda_exames_nome_id;
+        $data['dia1'] = $this->exame->listarexameagenda($dia, $agenda_exames_nome_id);
+        $data['contadia1'] = $this->exame->contador($dia, $agenda_exames_nome_id);
+        $data2 = date('d-m-Y', strtotime("+1 days", strtotime($dia)));
+        $data['dia2'] = $this->exame->listarexameagenda($data2, $agenda_exames_nome_id);
+        $data['contadia2'] = $this->exame->contador($data2, $agenda_exames_nome_id);
+        $data3 = date('d-m-Y', strtotime("+2 days", strtotime($dia)));
+        $data['dia3'] = $this->exame->listarexameagenda($data3, $agenda_exames_nome_id);
+        $data['contadia3'] = $this->exame->contador($data3, $agenda_exames_nome_id);
+        $data4 = date('d-m-Y', strtotime("+3 days", strtotime($dia)));
+        $data['dia4'] = $this->exame->listarexameagenda($data4, $agenda_exames_nome_id);
+        $data['contadia4'] = $this->exame->contador($data4, $agenda_exames_nome_id);
+        $data5 = date('d-m-Y', strtotime("+4 days", strtotime($dia)));
+        $data['dia5'] = $this->exame->listarexameagenda($data5, $agenda_exames_nome_id);
+        $data['contadia5'] = $this->exame->contador($data5, $agenda_exames_nome_id);
+        $data6 = date('d-m-Y', strtotime("+5 days", strtotime($dia)));
+        $data['dia6'] = $this->exame->listarexameagenda($data6, $agenda_exames_nome_id);
+        $data['contadia6'] = $this->exame->contador($data6, $agenda_exames_nome_id);
+        $data7 = date('d-m-Y', strtotime("+6 days", strtotime($dia)));
+        $data['dia7'] = $this->exame->listarexameagenda($data7, $agenda_exames_nome_id);
+        $data['contadia7'] = $this->exame->contador($data7, $agenda_exames_nome_id);
+        if ($data['contadia1'] != '0') {
+            $data['repetidor'] = $data['dia1'];
+        } elseif ($data['contadia2'] != '0') {
+            $data['repetidor'] = $data['dia2'];
+        } elseif ($data['contadia3'] != '0') {
+            $data['repetidor'] = $data['dia3'];
+        } elseif ($data['contadia4'] != '0') {
+            $data['repetidor'] = $data['dia4'];
+        } elseif ($data['contadia5'] != '0') {
+            $data['repetidor'] = $data['dia5'];
+        } elseif ($data['contadia6'] != '0') {
+            $data['repetidor'] = $data['dia6'];
+        } elseif ($data['contadia7'] != '0') {
+            $data['repetidor'] = $data['dia7'];
+        }
+
+        $this->loadView('ambulatorio/exameagenda-lista', $data);
+    }
+
+    function direita($dia, $agenda_exames_nome_id) {
+
+        $data['diainicio'] = date('d-m-Y', strtotime("+7 days", strtotime($dia)));
+        $dia = date('d-m-Y', strtotime("+7 days", strtotime($dia)));
+        $data['agenda_exames_nome_id'] = $agenda_exames_nome_id;
+        $data['dia1'] = $this->exame->listarexameagenda($dia, $agenda_exames_nome_id);
+        $data['contadia1'] = $this->exame->contador($dia, $agenda_exames_nome_id);
+        $data2 = date('d-m-Y', strtotime("+1 days", strtotime($dia)));
+        $data['dia2'] = $this->exame->listarexameagenda($data2, $agenda_exames_nome_id);
+        $data['contadia2'] = $this->exame->contador($data2, $agenda_exames_nome_id);
+        $data3 = date('d-m-Y', strtotime("+2 days", strtotime($dia)));
+        $data['dia3'] = $this->exame->listarexameagenda($data3, $agenda_exames_nome_id);
+        $data['contadia3'] = $this->exame->contador($data3, $agenda_exames_nome_id);
+        $data4 = date('d-m-Y', strtotime("+3 days", strtotime($dia)));
+        $data['dia4'] = $this->exame->listarexameagenda($data4, $agenda_exames_nome_id);
+        $data['contadia4'] = $this->exame->contador($data4, $agenda_exames_nome_id);
+        $data5 = date('d-m-Y', strtotime("+4 days", strtotime($dia)));
+        $data['dia5'] = $this->exame->listarexameagenda($data5, $agenda_exames_nome_id);
+        $data['contadia5'] = $this->exame->contador($data5, $agenda_exames_nome_id);
+        $data6 = date('d-m-Y', strtotime("+5 days", strtotime($dia)));
+        $data['dia6'] = $this->exame->listarexameagenda($data6, $agenda_exames_nome_id);
+        $data['contadia6'] = $this->exame->contador($data6, $agenda_exames_nome_id);
+        $data7 = date('d-m-Y', strtotime("+6 days", strtotime($dia)));
+        $data['dia7'] = $this->exame->listarexameagenda($data7, $agenda_exames_nome_id);
+        $data['contadia7'] = $this->exame->contador($data7, $agenda_exames_nome_id);
+        if ($data['contadia1'] != '0') {
+            $data['repetidor'] = $data['dia1'];
+        } elseif ($data['contadia2'] != '0') {
+            $data['repetidor'] = $data['dia2'];
+        } elseif ($data['contadia3'] != '0') {
+            $data['repetidor'] = $data['dia3'];
+        } elseif ($data['contadia4'] != '0') {
+            $data['repetidor'] = $data['dia4'];
+        } elseif ($data['contadia5'] != '0') {
+            $data['repetidor'] = $data['dia5'];
+        } elseif ($data['contadia6'] != '0') {
+            $data['repetidor'] = $data['dia6'];
+        } elseif ($data['contadia7'] != '0') {
+            $data['repetidor'] = $data['dia7'];
+        }
+
+        $this->loadView('ambulatorio/exameagenda-lista', $data);
+    }
+
+    function carregarprocedimento($procedimento_tuss_id) {
+        $obj_procedimento = new procedimento_model($procedimento_tuss_id);
+        $data['obj'] = $obj_procedimento;
+        //$this->carregarView($data, 'giah/servidor-form');
+        $this->loadView('ambulatorio/procedimento-form', $data);
+    }
+
+    function novoagendaexame() {
+        $data['salas'] = $this->exame->listartodassalas();
+        $data['medico'] = $this->exame->listarmedico();
+        $data['agenda'] = $this->agenda->listaragenda();
+        $this->loadView('ambulatorio/exame-form', $data);
+    }
+
+    function novoagendaconsulta() {
+        $data['medico'] = $this->exame->listarmedico();
+        $data['agenda'] = $this->agenda->listaragenda();
+        $data['tipo'] = $this->tipoconsulta->listartodos();
+        $this->loadView('ambulatorio/consulta-form', $data);
+    }
+
+    function novoagendaespecializacao() {
+        $data['medico'] = $this->exame->listarmedico();
+        $data['agenda'] = $this->agenda->listaragenda();
+        $data['tipo'] = $this->agenda->listarespecialidades();
+        $this->loadView('ambulatorio/especializacao-form', $data);
+    }
+
+    function excluir($procedimento_tuss_id) {
+        if ($this->procedimento->excluir($procedimento_tuss_id)) {
+            $mensagem = 'Sucesso ao excluir o Procedimento';
+        } else {
+            $mensagem = 'Erro ao excluir o Procedimento. Opera&ccedil;&atilde;o cancelada.';
+        }
+
+        $this->session->set_flashdata('message', $mensagem);
+        redirect(base_url() . "ambulatorio/procedimento");
+    }
+
+    function gravarss() {
+        $procedimento_tuss_id = $this->procedimento->gravar();
+        if ($procedimento_tuss_id == "-1") {
+            $data['mensagem'] = 'Erro ao gravar o Procedimento. Opera&ccedil;&atilde;o cancelada.';
+        } else {
+            $data['mensagem'] = 'Sucesso ao gravar o Procedimento.';
+        }
+        $this->session->set_flashdata('message', $data['mensagem']);
+        redirect(base_url() . "ambulatorio/procedimento");
+    }
+
+    function gravar() {
+
+        $agenda_id = $_POST['txthorario'];
+        $sala_id = $_POST['txtsala'];
+        $medico_id = $_POST['txtmedico'];
+        $datainicial = str_replace("/", "-", $_POST['txtdatainicial']);
+        $datafinal = str_replace("/", "-", $_POST['txtdatafinal']);
+        $nome = $_POST['txtNome'];
+        $horarioagenda = $this->agenda->listarhorarioagenda($agenda_id);
+        $id = 0;
+
+        foreach ($horarioagenda as $item) {
+
+            $tempoconsulta = $item->tempoconsulta;
+            $qtdeconsulta = $item->qtdeconsulta;
+            $qtdeconsulta = (int) $qtdeconsulta;
+
+            if (($qtdeconsulta != 0) && ($item->intervaloinicio == "00:00:00")) {
+                $entrada = $item->horaentrada1;
+                $saida = $item->horasaida1;
+                $hora1 = explode(":", $entrada);
+                $hora2 = explode(":", $saida);
+                $acumulador1 = ($hora1[0] * 60) + $hora1[1];
+                $acumulador2 = ($hora2[0] * 60) + $hora2[1];
+                $resultado = $acumulador2 - $acumulador1;
+                $tempoconsulta = $resultado / $item->qtdeconsulta;
+                $tempoconsulta = (int) $tempoconsulta + 1;
+            }
+            if (($qtdeconsulta != 0) && ($item->intervaloinicio != "00:00:00")) {
+                $entrada = $item->horaentrada1;
+                $saida = $item->horasaida1;
+                $intervaloinicio = $item->intervaloinicio;
+                $intervalofim = $item->intervalofim;
+                $hora1 = explode(":", $entrada);
+                $hora2 = explode(":", $saida);
+                $horainicio = explode(":", $intervaloinicio);
+                $horafim = explode(":", $intervalofim);
+                $acumulador1 = ($hora1[0] * 60) + $hora1[1];
+                $acumulador2 = ($hora2[0] * 60) + $hora2[1];
+                $acumulador3 = ($horainicio[0] * 60) + $horainicio[1];
+                $acumulador4 = ($horafim[0] * 60) + $horafim[1];
+                $resultado = ($acumulador3 - $acumulador1) + ($acumulador2 - $acumulador4);
+                $tempoconsulta = $resultado / $item->qtdeconsulta;
+                $tempoconsulta = (int) $tempoconsulta + 1;
+            }
+
+            for ($index = $datainicial; strtotime($index) <= strtotime($datafinal); $index = date('d-m-Y', strtotime("+1 days", strtotime($index)))) {
+
+                $data = strftime("%A", strtotime($index));
+
+                switch ($data) {
+                    case"Sunday": $data = "Domingo";
+                        break;
+                    case"Monday": $data = "Segunda";
+                        break;
+                    case"Tuesday": $data = "Terça";
+                        break;
+                    case"Wednesday": $data = "Quarta";
+                        break;
+                    case"Thursday": $data = "Quinta";
+                        break;
+                    case"Friday": $data = "Sexta";
+                        break;
+                    case"Saturday": $data = "Sabado";
+                        break;
+                }
+                $i = 0;
+                $horaconsulta = 0;
+                $horaverifica = 0;
+                $horasaida = 0;
+                if ($data == substr($item->dia, 4)) {
+                    for ($horaindex = $item->horaentrada1; $horaindex <= $item->horasaida1; $horaindex = date('H:i:s', strtotime("+ $tempoconsulta minutes", strtotime($horaindex)))) {
+
+                        if ($item->intervaloinicio == "00:00:00") {
+                            if ($i == 0) {
+                                $horaconsulta = date('H:i:s', strtotime($item->horaentrada1));
+                                $horaverifica = date('H:i:s', strtotime("+ $tempoconsulta minutes", strtotime($item->horaentrada1)));
+                                $i = 1;
+                                if ($id == 0) {
+                                    $id = $this->exame->gravarnome($nome);
+                                }
+                                $this->exame->gravar($agenda_id, $horaconsulta, $horaverifica, $nome, $datainicial, $datafinal, $index, $sala_id, $id, $medico_id);
+                            }
+                            if (( $horaverifica < $item->horasaida1)) {
+                                $x = 1;
+                                $horaconsulta = $horaverifica;
+                                $horasaida = date('H:i:s', strtotime("+ $tempoconsulta minutes", strtotime($horaverifica)));
+                                $this->exame->gravar($agenda_id, $horaconsulta, $horasaida, $nome, $datainicial, $datafinal, $index, $sala_id, $id, $medico_id);
+                            }
+                            $horaverifica = date('H:i:s', strtotime("+ $tempoconsulta minutes", strtotime($horaverifica)));
+                        } else {
+                            if ($i == 0) {
+                                $horaconsulta = date('H:i:s', strtotime($item->horaentrada1));
+                                $horaverifica = date('H:i:s', strtotime("+ $tempoconsulta minutes", strtotime($item->horaentrada1)));
+                                $i = 1;
+                                if ($id == 0) {
+                                    $id = $this->exame->gravarnome($nome);
+                                }
+                                $this->exame->gravar($agenda_id, $horaconsulta, $horaverifica, $nome, $datainicial, $datafinal, $index, $sala_id, $id, $medico_id);
+                            }
+                            if ((($horaverifica < $item->intervaloinicio) || ($horaverifica >= $item->intervalofim)) && ( $horaverifica < $item->horasaida1)) {
+                                $x = 1;
+                                $horaconsulta = $horaverifica;
+                                $horasaida = date('H:i:s', strtotime("+ $tempoconsulta minutes", strtotime($horaverifica)));
+                                $this->exame->gravar($agenda_id, $horaconsulta, $horasaida, $nome, $datainicial, $datafinal, $index, $sala_id, $id, $medico_id);
+                            }
+                            $horaverifica = date('H:i:s', strtotime("+ $tempoconsulta minutes", strtotime($horaverifica)));
+                        }
+                    }
+                }
+            }
+        }
+
+        $data['mensagem'] = 'Sucesso ao gravar o Agenda.';
+
+        $this->session->set_flashdata('message', $data['mensagem']);
+        redirect(base_url() . "ambulatorio/exame");
+    }
+
+    function gravarconsulta() {
+        $agenda_id = $_POST['txthorario'];
+        $medico_id = $_POST['txtmedico'];
+        $datainicial = str_replace("/", "-", $_POST['txtdatainicial']);
+        $datafinal = str_replace("/", "-", $_POST['txtdatafinal']);
+        $nome = $_POST['txtNome'];
+        $horarioagenda = $this->agenda->listarhorarioagenda($agenda_id);
+        $id = 0;
+
+        foreach ($horarioagenda as $item) {
+
+            $tempoconsulta = $item->tempoconsulta;
+            $qtdeconsulta = $item->qtdeconsulta;
+            $qtdeconsulta = (int) $qtdeconsulta;
+
+            if (($qtdeconsulta != 0) && ($item->intervaloinicio == "00:00:00")) {
+                $entrada = $item->horaentrada1;
+                $saida = $item->horasaida1;
+                $hora1 = explode(":", $entrada);
+                $hora2 = explode(":", $saida);
+                $acumulador1 = ($hora1[0] * 60) + $hora1[1];
+                $acumulador2 = ($hora2[0] * 60) + $hora2[1];
+                $resultado = $acumulador2 - $acumulador1;
+                $tempoconsulta = $resultado / $item->qtdeconsulta;
+                $tempoconsulta = (int) $tempoconsulta + 1;
+            }
+            if (($qtdeconsulta != 0) && ($item->intervaloinicio != "00:00:00")) {
+                $entrada = $item->horaentrada1;
+                $saida = $item->horasaida1;
+                $intervaloinicio = $item->intervaloinicio;
+                $intervalofim = $item->intervalofim;
+                $hora1 = explode(":", $entrada);
+                $hora2 = explode(":", $saida);
+                $horainicio = explode(":", $intervaloinicio);
+                $horafim = explode(":", $intervalofim);
+                $acumulador1 = ($hora1[0] * 60) + $hora1[1];
+                $acumulador2 = ($hora2[0] * 60) + $hora2[1];
+                $acumulador3 = ($horainicio[0] * 60) + $horainicio[1];
+                $acumulador4 = ($horafim[0] * 60) + $horafim[1];
+                $resultado = ($acumulador3 - $acumulador1) + ($acumulador2 - $acumulador4);
+                $tempoconsulta = $resultado / $item->qtdeconsulta;
+                $tempoconsulta = (int) $tempoconsulta + 1;
+            }
+
+            for ($index = $datainicial; strtotime($index) <= strtotime($datafinal); $index = date('d-m-Y', strtotime("+1 days", strtotime($index)))) {
+
+                $data = strftime("%A", strtotime($index));
+
+                switch ($data) {
+                    case"Sunday": $data = "Domingo";
+                        break;
+                    case"Monday": $data = "Segunda";
+                        break;
+                    case"Tuesday": $data = "Terça";
+                        break;
+                    case"Wednesday": $data = "Quarta";
+                        break;
+                    case"Thursday": $data = "Quinta";
+                        break;
+                    case"Friday": $data = "Sexta";
+                        break;
+                    case"Saturday": $data = "Sabado";
+                        break;
+                }
+                $i = 0;
+                $horaconsulta = 0;
+                $horaverifica = 0;
+                $horasaida = 0;
+                if ($data == substr($item->dia, 4)) {
+                    for ($horaindex = $item->horaentrada1; $horaindex <= $item->horasaida1; $horaindex = date('H:i:s', strtotime("+ $tempoconsulta minutes", strtotime($horaindex)))) {
+
+                        if ($item->intervaloinicio == "00:00:00") {
+                            if ($i == 0) {
+                                $horaconsulta = date('H:i:s', strtotime($item->horaentrada1));
+                                $horaverifica = date('H:i:s', strtotime("+ $tempoconsulta minutes", strtotime($item->horaentrada1)));
+                                $i = 1;
+                                if ($id == 0) {
+                                    $id = $this->exame->gravarnome($nome);
+                                }
+                                $this->exame->gravarconsulta($agenda_id, $horaconsulta, $horaverifica, $nome, $datainicial, $datafinal, $index, $medico_id, $id);
+                            }
+                            if (( $horaverifica < $item->horasaida1)) {
+                                $x = 1;
+                                $horaconsulta = $horaverifica;
+                                $horasaida = date('H:i:s', strtotime("+ $tempoconsulta minutes", strtotime($horaverifica)));
+                                $this->exame->gravarconsulta($agenda_id, $horaconsulta, $horasaida, $nome, $datainicial, $datafinal, $index, $medico_id, $id);
+                            }
+                            $horaverifica = date('H:i:s', strtotime("+ $tempoconsulta minutes", strtotime($horaverifica)));
+                        } else {
+                            if ($i == 0) {
+                                $horaconsulta = date('H:i:s', strtotime($item->horaentrada1));
+                                $horaverifica = date('H:i:s', strtotime("+ $tempoconsulta minutes", strtotime($item->horaentrada1)));
+                                $i = 1;
+                                if ($id == 0) {
+                                    $id = $this->exame->gravarnome($nome);
+                                }
+                                $this->exame->gravarconsulta($agenda_id, $horaconsulta, $horaverifica, $nome, $datainicial, $datafinal, $index, $medico_id, $id);
+                            }
+                            if ((($horaverifica < $item->intervaloinicio) || ($horaverifica >= $item->intervalofim)) && ( $horaverifica < $item->horasaida1)) {
+                                $x = 1;
+                                $horaconsulta = $horaverifica;
+                                $horasaida = date('H:i:s', strtotime("+ $tempoconsulta minutes", strtotime($horaverifica)));
+                                $this->exame->gravarconsulta($agenda_id, $horaconsulta, $horasaida, $nome, $datainicial, $datafinal, $index, $medico_id, $id);
+                            }
+                            $horaverifica = date('H:i:s', strtotime("+ $tempoconsulta minutes", strtotime($horaverifica)));
+                        }
+                    }
+                }
+            }
+        }
+
+        $data['mensagem'] = 'Sucesso ao gravar o Agenda.';
+
+        $this->session->set_flashdata('message', $data['mensagem']);
+        redirect(base_url() . "ambulatorio/exame");
+    }
+
+    function gravarespecialidade() {
+        $agenda_id = $_POST['txthorario'];
+        $medico_id = $_POST['txtmedico'];
+        $datainicial = str_replace("/", "-", $_POST['txtdatainicial']);
+        $datafinal = str_replace("/", "-", $_POST['txtdatafinal']);
+        $nome = $_POST['txtNome'];
+        $horarioagenda = $this->agenda->listarhorarioagenda($agenda_id);
+        $id = 0;
+        
+        foreach ($horarioagenda as $item) {
+
+            $tempoconsulta = $item->tempoconsulta;
+            $qtdeconsulta = $item->qtdeconsulta;
+            $qtdeconsulta = (int) $qtdeconsulta;
+
+            if (($qtdeconsulta != 0) && ($item->intervaloinicio == "00:00:00")) {
+                $entrada = $item->horaentrada1;
+                $saida = $item->horasaida1;
+                $hora1 = explode(":", $entrada);
+                $hora2 = explode(":", $saida);
+                $acumulador1 = ($hora1[0] * 60) + $hora1[1];
+                $acumulador2 = ($hora2[0] * 60) + $hora2[1];
+                $resultado = $acumulador2 - $acumulador1;
+                $tempoconsulta = $resultado / $item->qtdeconsulta;
+                $tempoconsulta = (int) $tempoconsulta + 1;
+            }
+            if (($qtdeconsulta != 0) && ($item->intervaloinicio != "00:00:00")) {
+                $entrada = $item->horaentrada1;
+                $saida = $item->horasaida1;
+                $intervaloinicio = $item->intervaloinicio;
+                $intervalofim = $item->intervalofim;
+                $hora1 = explode(":", $entrada);
+                $hora2 = explode(":", $saida);
+                $horainicio = explode(":", $intervaloinicio);
+                $horafim = explode(":", $intervalofim);
+                $acumulador1 = ($hora1[0] * 60) + $hora1[1];
+                $acumulador2 = ($hora2[0] * 60) + $hora2[1];
+                $acumulador3 = ($horainicio[0] * 60) + $horainicio[1];
+                $acumulador4 = ($horafim[0] * 60) + $horafim[1];
+                $resultado = ($acumulador3 - $acumulador1) + ($acumulador2 - $acumulador4);
+                $tempoconsulta = $resultado / $item->qtdeconsulta;
+                $tempoconsulta = (int) $tempoconsulta + 1;
+            }
+
+            for ($index = $datainicial; strtotime($index) <= strtotime($datafinal); $index = date('d-m-Y', strtotime("+1 days", strtotime($index)))) {
+
+                $data = strftime("%A", strtotime($index));
+
+                switch ($data) {
+                    case"Sunday": $data = "Domingo";
+                        break;
+                    case"Monday": $data = "Segunda";
+                        break;
+                    case"Tuesday": $data = "Terça";
+                        break;
+                    case"Wednesday": $data = "Quarta";
+                        break;
+                    case"Thursday": $data = "Quinta";
+                        break;
+                    case"Friday": $data = "Sexta";
+                        break;
+                    case"Saturday": $data = "Sabado";
+                        break;
+                }
+                $i = 0;
+                $horaconsulta = 0;
+                $horaverifica = 0;
+                $horasaida = 0;
+                if ($data == substr($item->dia, 4)) {
+                    for ($horaindex = $item->horaentrada1; $horaindex <= $item->horasaida1; $horaindex = date('H:i:s', strtotime("+ $tempoconsulta minutes", strtotime($horaindex)))) {
+
+                        if ($item->intervaloinicio == "00:00:00") {
+                            if ($i == 0) {
+                                $horaconsulta = date('H:i:s', strtotime($item->horaentrada1));
+                                $horaverifica = date('H:i:s', strtotime("+ $tempoconsulta minutes", strtotime($item->horaentrada1)));
+                                $i = 1;
+                                if ($id == 0) {
+                                    $id = $this->exame->gravarnome($nome);
+                                }
+                                $this->exame->gravarespecialidade($agenda_id, $horaconsulta, $horaverifica, $nome, $datainicial, $datafinal, $index, $medico_id, $id);
+                            }
+                            if (( $horaverifica < $item->horasaida1)) {
+                                $x = 1;
+                                $horaconsulta = $horaverifica;
+                                $horasaida = date('H:i:s', strtotime("+ $tempoconsulta minutes", strtotime($horaverifica)));
+                                $this->exame->gravarespecialidade($agenda_id, $horaconsulta, $horasaida, $nome, $datainicial, $datafinal, $index, $medico_id, $id);
+                            }
+                            $horaverifica = date('H:i:s', strtotime("+ $tempoconsulta minutes", strtotime($horaverifica)));
+                        } else {
+                            if ($i == 0) {
+                                $horaconsulta = date('H:i:s', strtotime($item->horaentrada1));
+                                $horaverifica = date('H:i:s', strtotime("+ $tempoconsulta minutes", strtotime($item->horaentrada1)));
+                                $i = 1;
+                                if ($id == 0) {
+                                    $id = $this->exame->gravarnome($nome);
+                                }
+                                $this->exame->gravarespecialidade($agenda_id, $horaconsulta, $horaverifica, $nome, $datainicial, $datafinal, $index, $medico_id, $id);
+                            }
+                            if ((($horaverifica < $item->intervaloinicio) || ($horaverifica >= $item->intervalofim)) && ( $horaverifica < $item->horasaida1)) {
+                                $x = 1;
+                                $horaconsulta = $horaverifica;
+                                $horasaida = date('H:i:s', strtotime("+ $tempoconsulta minutes", strtotime($horaverifica)));
+                                $this->exame->gravarespecialidade($agenda_id, $horaconsulta, $horasaida, $nome, $datainicial, $datafinal, $index, $medico_id, $id);
+                            }
+                            $horaverifica = date('H:i:s', strtotime("+ $tempoconsulta minutes", strtotime($horaverifica)));
+                        }
+                    }
+                }
+            }
+        }
+        
+        $data['mensagem'] = 'Sucesso ao gravar a Agenda.';
+
+        $this->session->set_flashdata('message', $data['mensagem']);
+        redirect(base_url() . "ambulatorio/exame");
+    }
+
+    private function carregarView($data = null, $view = null) {
+        if (!isset($data)) {
+            $data['mensagem'] = '';
+        }
+
+        if ($this->utilitario->autorizar(2, $this->session->userdata('modulo')) == true) {
+            $this->load->view('header', $data);
+            if ($view != null) {
+                $this->load->view($view, $data);
+            } else {
+                $this->load->view('giah/servidor-lista', $data);
+            }
+        } else {
+            $data['mensagem'] = $this->mensagem->getMensagem('login005');
+            $this->load->view('header', $data);
+            $this->load->view('home');
+        }
+        $this->load->view('footer');
+    }
+
+    function gerarcr($agenda_exames_id) {
+        $exame = $this->exame->listararquivo($agenda_exames_id);
+        $titulo = "                                       " . $agenda_exames_id;
+        $comando = "CMD=CREATE";
+        $id = "PATID=" . $agenda_exames_id;
+        $paciente = "PATNAME=" . $exame[0]->paciente;
+        $sexo = "PATSEX=" . $exame[0]->sexo;
+        $banco = "PATBD=19480915";
+        $acc = "ACCNUM=" . $agenda_exames_id;
+        $procedimento = "STDDESC=" . $exame[0]->procedimento;
+        $modalidade = "MODALITY=CR";
+        $data = "STDDATE=" . str_replace("-", "", date("Y-m-d"));
+        $hora = "STDTIME=" . str_replace(":", "", date("H:i:s"));
+
+        if (!is_dir("/home/sisprod/projetos/clinica/cr/")) {
+            mkdir("/home/sisprod/projetos/clinica/cr/");
+        }
+        $nome = "/home/sisprod/projetos/clinica/cr/" . $agenda_exames_id . ".txt";
+        $fp = fopen($nome, "w+");
+        fwrite($fp, $titulo . "\n");
+        fwrite($fp, $comando . "\n");
+        fwrite($fp, $id . "\n");
+        fwrite($fp, $paciente . "\n");
+        fwrite($fp, $sexo . "\n");
+        fwrite($fp, $banco . "\n");
+        fwrite($fp, $acc . "\n");
+        fwrite($fp, $procedimento . "\n");
+        fwrite($fp, $modalidade . "\n");
+        fwrite($fp, $data . "\n");
+        fwrite($fp, $hora . "\n");
+        fclose($fp);
+    }
+
+    function gerarxml() {
+
+        $total = 0;
+        $listarpacienete = $this->exame->listarpacientesxmlfaturamento();
+        $listarexame = $this->exame->listargxmlfaturamento();
+        $listarexames = $this->exame->listarxmlfaturamentoexames();
+
+//        $listarexame = $this->exame->listargxmlfaturamento();
+//        foreach ($listarexame as $value) {
+//            $total = $total + $value->valor_total;
+//        }
+//        var_dump($total);
+//        die;
+        $horario = date("Y-m-d");
+        $empresa = $this->exame->listarcnpj();
+        $lote = $this->exame->listarlote();
+        $cnpjxml = $listarexame[0]->codigoidentificador;
+        $razao_socialxml = $empresa[0]->razao_socialxml;
+        $registroans = $listarexame[0]->registroans;
+        $cpfxml = $empresa[0]->cpfxml;
+        $cnpj = $empresa[0]->cnpj;
+        $cnes = $empresa[0]->cnes;
+        $convenio = $listarexame[0]->convenio;
+        $versao = $_POST['xml'];
+        $modelo = $_POST['modelo'];
+
+        if ($_POST['tipo'] != 0) {
+            $classificacao = $listarexame[0]->classificacao;
+        } else {
+            $classificacao = 'TODOS';
+        }
+        $datainicio = str_replace("/", "", $_POST['datainicio']);
+        $datafim = str_replace("/", "", $_POST['datafim']);
+        $nomearquivo = '035753bf836c231bedbc68a08daf4668';
+        $nomearquivoconsulta = 'e2eadfe09fd6750a184902545aa41771';
+        $origem = "/home/sisprod/projetos/clinica/upload/cr/" . $convenio;
+
+        if (!is_dir("/home/sisprod/projetos/clinica/upload/cr/" . $convenio)) {
+            mkdir("/home/sisprod/projetos/clinica/upload/cr/" . $convenio);
+            chmod($origem, 0777);
+        }
+        if ($_POST['apagar'] == 1) {
+            delete_files($origem);
+        }
+        $i = 0;
+        $b = $lote[0]->lote;
+        $j = $b - 53;
+        $zero = '0000000000000000';
+        $corpo = "";
+
+        if ($modelo == 'cpf') {
+            if ($listarexame[0]->grupo != 'CONSULTA') {
+
+                $cabecalho = "<?xml version='1.0' encoding='iso-8859-1'?>
+<ans:mensagemTISS xmlns='http://www.w3.org/2001/XMLSchema' xmlns:ans='http://www.ans.gov.br/padroes/tiss/schemas'>
+   <ans:cabecalho>
+      <ans:identificacaoTransacao>
+         <ans:tipoTransacao>ENVIO_LOTE_GUIAS</ans:tipoTransacao>
+         <ans:sequencialTransacao>". $j ."</ans:sequencialTransacao>
+         <ans:dataRegistroTransacao>" . $horario . "</ans:dataRegistroTransacao>
+         <ans:horaRegistroTransacao>18:40:50</ans:horaRegistroTransacao>
+      </ans:identificacaoTransacao>
+      <ans:origem>
+         <ans:identificacaoPrestador>
+            <ans:codigoPrestadorNaOperadora>" . $cnpjxml . "</ans:codigoPrestadorNaOperadora>
+         </ans:identificacaoPrestador>
+      </ans:origem>
+      <ans:destino>
+         <ans:registroANS>" . $registroans . "</ans:registroANS>
+      </ans:destino>
+      <ans:versaoPadrao>" . $versao . "</ans:versaoPadrao>
+   </ans:cabecalho>
+   <ans:prestadorParaOperadora>
+      <ans:loteGuias>
+         <ans:numeroLote>" . $b . "</ans:numeroLote>
+            <ans:guiasTISS>";
+                $contador = count($listarpacienete);
+                foreach ($listarpacienete as $value) {
+                    
+                    if ($value->guiaconvenio == '') {
+                        $guianumero = '0000000';
+                    } else {
+                        $guianumero = $value->guiaconvenio;
+                    }
+                    if ($value->convenionumero == '') {
+                        $numerodacarteira = '0000000';
+                    } else {
+                        $numerodacarteira = $value->convenionumero;
+                    }
+
+                    foreach ($listarexames as $item) {
+                        
+                        if ($value->paciente_id == $item->paciente_id && $value->ambulatorio_guia_id == $item->ambulatorio_guia_id) {
+                            $i++;
+                            $data_autorizacao = $this->exame->listarxmldataautorizacao($value->ambulatorio_guia_id);
+                            $dataautorizacao = substr($data_autorizacao[0]->data_cadastro, 0, 10);
+                            $dataValidadeSenha = date('Y-m-d', strtotime("+30 days", strtotime($dataautorizacao)));
+                            if ($item->medico == '') {
+                                $medico = 'ADMINISTRADOR';
+                            } else {
+                                $medico = $item->medico;
+                            }
+                            if ($item->conselho == '') {
+                                $conselho = '0000000';
+                            } else {
+                                $conselho = $item->conselho;
+                            }
+                            if ($item->medicosolicitante == '') {
+                                $medicosolicitante = $item->medico;
+                            } else {
+                                $medicosolicitante = $item->medicosolicitante;
+                            }
+                            if ($item->conselhosolicitante == '') {
+                                $conselhosolicitante = $item->conselho;
+                            } else {
+                                $conselhosolicitante = $item->conselhosolicitante;
+                            }
+
+                            $corpo = $corpo . "
+                                                      <ans:guiaSP-SADT>
+                      <ans:cabecalhoGuia>
+                        <ans:registroANS>" . $registroans . "</ans:registroANS>
+                     <ans:numeroGuiaPrestador>" . $value->ambulatorio_guia_id . "</ans:numeroGuiaPrestador>
+                     <ans:guiaPrincipal>1</ans:guiaPrincipal>
+                  </ans:cabecalhoGuia>
+                  <ans:dadosAutorizacao>
+                  <ans:numeroGuiaOperadora>" . $guianumero . "</ans:numeroGuiaOperadora>
+                  <ans:dataAutorizacao>" . substr($data_autorizacao[0]->data_cadastro, 0, 10) . "</ans:dataAutorizacao>
+                  <ans:senha>" . $item->autorizacao . "</ans:senha>
+                  <ans:dataValidadeSenha>" . $dataValidadeSenha . "</ans:dataValidadeSenha> 
+                  </ans:dadosAutorizacao>
+                  <ans:dadosBeneficiario>
+                     <ans:numeroCarteira>" . $numerodacarteira . "</ans:numeroCarteira>
+                         <ans:atendimentoRN>S</ans:atendimentoRN>
+                     <ans:nomeBeneficiario>" . $value->paciente . "</ans:nomeBeneficiario>
+                  </ans:dadosBeneficiario>
+                                                  <ans:dadosSolicitante>
+                     <ans:contratadoSolicitante>
+                           <ans:cpfContratado>" . $cpfxml . "</ans:cpfContratado>
+                        <ans:nomeContratado>" . $razao_socialxml . "</ans:nomeContratado>
+                     </ans:contratadoSolicitante>
+                     <ans:profissionalSolicitante>
+                        <ans:nomeProfissional>" . $medicosolicitante . "</ans:nomeProfissional>
+                        <ans:conselhoProfissional>6</ans:conselhoProfissional>
+                        <ans:numeroConselhoProfissional >" . $conselhosolicitante . "</ans:numeroConselhoProfissional >
+                            <ans:UF>23</ans:UF>
+                        <ans:CBOS>999999</ans:CBOS>
+                     </ans:profissionalSolicitante>
+                  </ans:dadosSolicitante>
+                  <ans:dadosSolicitacao>
+                     <ans:dataSolicitacao>" . substr($data_autorizacao[0]->data_cadastro, 0, 10) . "</ans:dataSolicitacao>
+                     <ans:caraterAtendimento>1</ans:caraterAtendimento>
+                     <ans:indicacaoClinica>I</ans:indicacaoClinica>
+                  </ans:dadosSolicitacao>
+                  <ans:dadosExecutante>
+                        <ans:contratadoExecutante>
+                        <ans:cpfContratado>" . $cpfxml . "</ans:cpfContratado>
+                     <ans:nomeContratado>" . $razao_socialxml . "</ans:nomeContratado>
+                     </ans:contratadoExecutante>
+                     <ans:CNES>" . $cnes . "</ans:CNES>
+                  </ans:dadosExecutante>
+                  <ans:dadosAtendimento>
+                  <ans:tipoAtendimento>04</ans:tipoAtendimento>
+                  <ans:indicacaoAcidente>0</ans:indicacaoAcidente>
+                  <ans:tipoConsulta>1</ans:tipoConsulta>
+                  <ans:motivoEncerramento>41</ans:motivoEncerramento>
+                  </ans:dadosAtendimento>
+                  <ans:procedimentosExecutados>
+                     <ans:procedimentoExecutado>
+                            <ans:dataExecucao>" . substr($data_autorizacao[0]->data_cadastro, 0, 10) . "</ans:dataExecucao>
+                            <ans:horaInicial>" . substr($data_autorizacao[0]->data_cadastro, 11, 8) . "</ans:horaInicial>
+                            <ans:horaFinal>" . substr($data_autorizacao[0]->data_cadastro, 11, 8) . "</ans:horaFinal>
+                            <ans:procedimento>
+                            <ans:codigoTabela>22</ans:codigoTabela>
+                           <ans:codigoProcedimento>" . $item->codigo . "</ans:codigoProcedimento>
+                           <ans:descricaoProcedimento >" . substr(utf8_decode($item->procedimento), 0, 60) . "</ans:descricaoProcedimento >
+                           </ans:procedimento>                        
+                    <ans:quantidadeExecutada>" . $item->quantidade . "</ans:quantidadeExecutada>
+                        <ans:reducaoAcrescimo>1.00</ans:reducaoAcrescimo>
+                        <ans:valorUnitario >" . $item->valor . "</ans:valorUnitario >
+                        <ans:valorTotal>" . $item->valor_total . "</ans:valorTotal>
+                        <ans:equipeSadt>
+                        <ans:codProfissional>
+                        <ans:codigoPrestadorNaOperadora>" . $cnpjxml . "</ans:codigoPrestadorNaOperadora>
+                        </ans:codProfissional>
+                        <ans:nomeProf>" . $medico . "</ans:nomeProf>
+                        <ans:conselho>1</ans:conselho>
+                        <ans:numeroConselhoProfissional>$conselho</ans:numeroConselhoProfissional>
+                        <ans:UF>23</ans:UF>
+                        <ans:CBOS>999999</ans:CBOS>
+                        </ans:equipeSadt>
+                  </ans:procedimentoExecutado>
+                  </ans:procedimentosExecutados>
+                  <ans:observacao>III</ans:observacao>
+                     <ans:valorTotal >
+                     <ans:valorProcedimentos >" . $item->valor_total . "</ans:valorProcedimentos >
+                     <ans:valorDiarias>0.00</ans:valorDiarias>
+                     <ans:valorTaxasAlugueis>0.00</ans:valorTaxasAlugueis>
+                     <ans:valorMateriais>0.00</ans:valorMateriais>
+                     <ans:valorMedicamentos>0.00</ans:valorMedicamentos>
+                     <ans:valorOPME>0.00</ans:valorOPME>
+                     <ans:valorGasesMedicinais>0.00</ans:valorGasesMedicinais>
+                     <ans:valorTotalGeral>" . $item->valor_total . "</ans:valorTotalGeral>
+                  </ans:valorTotal>
+                  </ans:guiaSP-SADT>";
+                        }
+                    }
+                    if ($i == 80) {
+                        $contador = $contador - $i;
+
+                        $i = 0;
+                        $rodape = "   </ans:guiasTISS>
+         
+      </ans:loteGuias>
+   </ans:prestadorParaOperadora>
+   <ans:epilogo>
+      <ans:hash>035753bf836c231bedbc68a08daf4668</ans:hash>
+   </ans:epilogo>
+</ans:mensagemTISS>";
+
+                        $nome = "/home/sisprod/projetos/clinica/upload/cr/" . $convenio . "/" . $zero . $b . "_" . $nomearquivo . ".xml";
+                        $xml = $cabecalho . $corpo . $rodape;
+                        $fp = fopen($nome, "w+");
+                        fwrite($fp, $xml . "\n");
+                        fclose($fp);
+                        $b++;
+                        $corpo = "";
+                        $rodape = "";
+                    }
+                    if ($contador < 80 && $contador == $i) {
+
+                        $i = 0;
+                        $rodape = "   </ans:guiasTISS>
+         
+      </ans:loteGuias>
+   </ans:prestadorParaOperadora>
+   <ans:epilogo>
+      <ans:hash>035753bf836c231bedbc68a08daf4668</ans:hash>
+   </ans:epilogo>
+</ans:mensagemTISS>";
+                        $nome = "/home/sisprod/projetos/clinica/upload/cr/" . $convenio . "/" . $zero . $b . "_" . $nomearquivo . ".xml";
+                        $xml = $cabecalho . $corpo . $rodape;
+                        $fp = fopen($nome, "w+");
+                        fwrite($fp, $xml . "\n");
+                        fclose($fp);
+                        $b++;
+                        $corpo = "";
+                        $rodape = "";
+                    }
+                }
+            } else {
+
+
+                $cabecalho = "<?xml version='1.0' encoding='iso-8859-1'?>
+<ans:mensagemTISS xmlns='http://www.w3.org/2001/XMLSchema' xmlns:ans='http://www.ans.gov.br/padroes/tiss/schemas'>
+   <ans:cabecalho>
+      <ans:identificacaoTransacao>
+         <ans:tipoTransacao>ENVIO_LOTE_GUIAS</ans:tipoTransacao>
+         <ans:sequencialTransacao>". $j ."</ans:sequencialTransacao>
+         <ans:dataRegistroTransacao>" . substr($listarexame[0]->data_autorizacao, 0, 10) . "</ans:dataRegistroTransacao>
+         <ans:horaRegistroTransacao>18:40:50</ans:horaRegistroTransacao>
+      </ans:identificacaoTransacao>
+      <ans:origem>
+         <ans:identificacaoPrestador>
+            <ans:codigoPrestadorNaOperadora>" . $cnpjxml . "</ans:codigoPrestadorNaOperadora>
+         </ans:identificacaoPrestador>
+      </ans:origem>
+      <ans:destino>
+         <ans:registroANS>" . $registroans . "</ans:registroANS>
+      </ans:destino>
+      <ans:versaoPadrao>" . $versao . "</ans:versaoPadrao>
+   </ans:cabecalho>
+   <ans:prestadorParaOperadora>
+      <ans:loteGuias>
+         <ans:numeroLote>" . $b . "</ans:numeroLote>
+            <ans:guiasTISS>";
+                $contador = count($listarexame);
+                foreach ($listarexame as $value) {
+                    
+                    if ($value->convenionumero == '') {
+                        $numerodacarteira = '0000000';
+                    } else {
+                        $numerodacarteira = $value->convenionumero;
+                    }
+                    if ($value->medico == '') {
+                        $medico = 'ADMINISTRADOR';
+                    } else {
+                        $medico = $value->medico;
+                    }
+                    if ($value->conselho == '') {
+                        $conselho = '0000000';
+                    } else {
+                        $conselho = $value->conselho;
+                    }
+                    if ($value->guiaconvenio == '') {
+                        $guianumero = '0000000';
+                    } else {
+                        $guianumero = $value->guiaconvenio;
+                    }
+                    $corpo = $corpo . "
+            <ans:guiaConsulta>
+                <ans:cabecalhoConsulta>
+                    <ans:registroANS>" . $registroans . "</ans:registroANS>
+                    <ans:numeroGuiaPrestador>" . $value->ambulatorio_guia_id . "</ans:numeroGuiaPrestador>
+                </ans:cabecalhoConsulta>
+                <ans:numeroGuiaOperadora>" . $guianumero . "</ans:numeroGuiaOperadora>
+                <ans:dadosBeneficiario>
+                    <ans:numeroCarteira>" . $numerodacarteira . "</ans:numeroCarteira>
+                    <ans:atendimentoRN>N</ans:atendimentoRN>
+                    <ans:nomeBeneficiario>" . $value->paciente . "</ans:nomeBeneficiario>
+                </ans:dadosBeneficiario>
+                <ans:contratadoExecutante>
+                    <ans:codigoPrestadorNaOperadora>" . $cpfxml . "</ans:codigoPrestadorNaOperadora>
+                    <ans:nomeContratado>" . $razao_socialxml . "</ans:nomeContratado>
+                    <ans:CNES>" . $cnes . "</ans:CNES>
+                </ans:contratadoExecutante>
+                <ans:profissionalExecutante>
+                    <ans:nomeProfissional>" . $medico . "</ans:nomeProfissional>
+                    <ans:conselhoProfissional>6</ans:conselhoProfissional>
+                    <ans:numeroConselhoProfissional>" . $conselho . "</ans:numeroConselhoProfissional>
+                    <ans:UF>15</ans:UF>
+                    <ans:CBOS>225120</ans:CBOS>
+                </ans:profissionalExecutante>
+                <ans:indicacaoAcidente>9</ans:indicacaoAcidente>
+                <ans:dadosAtendimento>
+                    <ans:dataAtendimento>" . substr($value->data_autorizacao, 0, 10) . "</ans:dataAtendimento>
+                    <ans:tipoConsulta>1</ans:tipoConsulta>
+                    <ans:procedimento>
+                        <ans:codigoTabela>22</ans:codigoTabela>
+                        <ans:codigoProcedimento>" . $value->codigo . "</ans:codigoProcedimento>
+                        <ans:valorProcedimento>" . $value->valor . "</ans:valorProcedimento>
+                    </ans:procedimento>
+                </ans:dadosAtendimento>
+            </ans:guiaConsulta>";
+                    if ($i == 80) {
+                        $contador = $contador - $i;
+                        $b++;
+                        $i = 0;
+                        $rodape = "</ans:guiasTISS>
+    </ans:loteGuias>
+</ans:prestadorParaOperadora>
+<ans:epilogo>
+<ans:hash>e2eadfe09fd6750a184902545aa41771</ans:hash>
+</ans:epilogo>
+</ans:mensagemTISS>";
+
+                        $nome = "/home/sisprod/projetos/clinica/upload/cr/" . $convenio . "/" . $zero . $b . "_" . $nomearquivoconsulta . ".xml";
+                        $xml = $cabecalho . $corpo . $rodape;
+                        $fp = fopen($nome, "w+");
+                        fwrite($fp, $xml . "\n");
+                        fclose($fp);
+                        $corpo = "";
+                        $rodape = "";
+                    }
+                    if ($contador < 80 && $contador == $i) {
+                        
+                        $i = 0;
+                        $rodape = "   </ans:guiasTISS>
+         
+       
+    </ans:loteGuias>
+</ans:prestadorParaOperadora>
+<ans:epilogo>
+<ans:hash>e2eadfe09fd6750a184902545aa41771</ans:hash>
+</ans:epilogo>
+</ans:mensagemTISS>";
+                        $nome = "/home/sisprod/projetos/clinica/upload/cr/" . $convenio . "/" . $zero . $b . "_" . $nomearquivoconsulta . ".xml";
+                        $xml = $cabecalho . $corpo . $rodape;
+                        $fp = fopen($nome, "w+");
+                        fwrite($fp, $xml . "\n");
+                        fclose($fp);
+                        $b++;
+                        $corpo = "";
+                        $rodape = "";
+                    }
+                }
+            }
+        } else {
+            if ($listarexame[0]->grupo != 'CONSULTA') {
+
+                $cabecalho = "<?xml version='1.0' encoding='iso-8859-1'?>
+<ans:mensagemTISS xmlns='http://www.w3.org/2001/XMLSchema' xmlns:ans='http://www.ans.gov.br/padroes/tiss/schemas'>
+   <ans:cabecalho>
+      <ans:identificacaoTransacao>
+         <ans:tipoTransacao>ENVIO_LOTE_GUIAS</ans:tipoTransacao>
+         <ans:sequencialTransacao>". $j ."</ans:sequencialTransacao>
+         <ans:dataRegistroTransacao>" . substr($listarexame[0]->data_autorizacao, 0, 10) . "</ans:dataRegistroTransacao>
+         <ans:horaRegistroTransacao>18:40:50</ans:horaRegistroTransacao>
+      </ans:identificacaoTransacao>
+      <ans:origem>
+         <ans:identificacaoPrestador>
+            <ans:codigoPrestadorNaOperadora>" . $cnpjxml . "</ans:codigoPrestadorNaOperadora>
+         </ans:identificacaoPrestador>
+      </ans:origem>
+      <ans:destino>
+         <ans:registroANS>" . $registroans . "</ans:registroANS>
+      </ans:destino>
+      <ans:versaoPadrao>" . $versao . "</ans:versaoPadrao>
+   </ans:cabecalho>
+   <ans:prestadorParaOperadora>
+      <ans:loteGuias>
+         <ans:numeroLote>" . $b . "</ans:numeroLote>
+            <ans:guiasTISS>";
+                $contador = count($listarpacienete);
+                foreach ($listarpacienete as $value) {
+                    if ($value->guiaconvenio == '') {
+                        $guianumero = '0000000';
+                    } else {
+                        $guianumero = $value->guiaconvenio;
+                    }
+                    if ($value->convenionumero == '') {
+                        $numerodacarteira = '0000000';
+                    } else {
+                        $numerodacarteira = $value->convenionumero;
+                    }
+
+                    foreach ($listarexames as $item) {
+                        if ($value->paciente_id == $item->paciente_id && $value->ambulatorio_guia_id == $item->ambulatorio_guia_id) {
+                            $i++;
+                            $data_autorizacao = $this->exame->listarxmldataautorizacao($value->ambulatorio_guia_id);
+                            $dataautorizacao = substr($data_autorizacao[0]->data_cadastro, 0, 10);
+                            $dataValidadeSenha = date('Y-m-d', strtotime("+30 days", strtotime($dataautorizacao)));
+                            if ($item->medico == '') {
+                                $medico = 'ADMINISTRADOR';
+                            } else {
+                                $medico = $item->medico;
+                            }
+                            if ($item->conselho == '') {
+                                $conselho = '0000000';
+                            } else {
+                                $conselho = $item->conselho;
+                            }
+                            if ($item->medicosolicitante == '') {
+                                $medicosolicitante = $item->medico;
+                            } else {
+                                $medicosolicitante = $item->medicosolicitante;
+                            }
+                            if ($item->conselhosolicitante == '') {
+                                $conselhosolicitante = $item->conselho;
+                            } else {
+                                $conselhosolicitante = $item->conselhosolicitante;
+                            }
+
+                            $corpo = $corpo . "
+                                                      <ans:guiaSP-SADT>
+                      <ans:cabecalhoGuia>
+                        <ans:registroANS>" . $registroans . "</ans:registroANS>
+                     <ans:numeroGuiaPrestador>" . $value->ambulatorio_guia_id . "</ans:numeroGuiaPrestador>
+                     <ans:guiaPrincipal>1</ans:guiaPrincipal>
+                  </ans:cabecalhoGuia>
+                  <ans:dadosAutorizacao>
+                  <ans:numeroGuiaOperadora>" . $guianumero . "</ans:numeroGuiaOperadora>
+                  <ans:dataAutorizacao>" . substr($data_autorizacao[0]->data_cadastro, 0, 10) . "</ans:dataAutorizacao>
+                  <ans:senha>" . $item->autorizacao . "</ans:senha>
+                  <ans:dataValidadeSenha>" . $dataValidadeSenha . "</ans:dataValidadeSenha> 
+                  </ans:dadosAutorizacao>
+                  <ans:dadosBeneficiario>
+                     <ans:numeroCarteira>" . $numerodacarteira . "</ans:numeroCarteira>
+                         <ans:atendimentoRN>S</ans:atendimentoRN>
+                     <ans:nomeBeneficiario>" . $value->paciente . "</ans:nomeBeneficiario>
+                  </ans:dadosBeneficiario>
+                                                  <ans:dadosSolicitante>
+                     <ans:contratadoSolicitante>
+                           <ans:cnpjContratado>" . $cnpj . "</ans:cnpjContratado>
+                        <ans:nomeContratado>" . $razao_socialxml . "</ans:nomeContratado>
+                     </ans:contratadoSolicitante>
+                     <ans:profissionalSolicitante>
+                        <ans:nomeProfissional>" . $medicosolicitante . "</ans:nomeProfissional>
+                        <ans:conselhoProfissional>6</ans:conselhoProfissional>
+                        <ans:numeroConselhoProfissional >" . $conselhosolicitante . "</ans:numeroConselhoProfissional >
+                            <ans:UF>23</ans:UF>
+                        <ans:CBOS>999999</ans:CBOS>
+                     </ans:profissionalSolicitante>
+                  </ans:dadosSolicitante>
+                  <ans:dadosSolicitacao>
+                     <ans:dataSolicitacao>" . substr($data_autorizacao[0]->data_cadastro, 0, 10) . "</ans:dataSolicitacao>
+                     <ans:caraterAtendimento>1</ans:caraterAtendimento>
+                     <ans:indicacaoClinica>I</ans:indicacaoClinica>
+                  </ans:dadosSolicitacao>
+                  <ans:dadosExecutante>
+                        <ans:contratadoExecutante>
+                        <ans:cnpjContratado>" . $cnpj . "</ans:cnpjContratado>
+                     <ans:nomeContratado>" . $razao_socialxml . "</ans:nomeContratado>
+                     </ans:contratadoExecutante>
+                     <ans:CNES>" . $cnes . "</ans:CNES>
+                  </ans:dadosExecutante>
+                  <ans:dadosAtendimento>
+                  <ans:tipoAtendimento>04</ans:tipoAtendimento>
+                  <ans:indicacaoAcidente>0</ans:indicacaoAcidente>
+                  <ans:tipoConsulta>1</ans:tipoConsulta>
+                  <ans:motivoEncerramento>41</ans:motivoEncerramento>
+                  </ans:dadosAtendimento>
+                  <ans:procedimentosExecutados>
+                     <ans:procedimentoExecutado>
+                            <ans:dataExecucao>" . substr($data_autorizacao[0]->data_cadastro, 0, 10) . "</ans:dataExecucao>
+                            <ans:horaInicial>" . substr($data_autorizacao[0]->data_cadastro, 11, 8) . "</ans:horaInicial>
+                            <ans:horaFinal>" . substr($data_autorizacao[0]->data_cadastro, 11, 8) . "</ans:horaFinal>
+                            <ans:procedimento>
+                            <ans:codigoTabela>22</ans:codigoTabela>
+                           <ans:codigoProcedimento>" . $item->codigo . "</ans:codigoProcedimento>
+                           <ans:descricaoProcedimento >" . substr(utf8_decode($item->procedimento), 0, 60) . "</ans:descricaoProcedimento >
+                           </ans:procedimento>                        
+                    <ans:quantidadeExecutada>" . $item->quantidade . "</ans:quantidadeExecutada>
+                        <ans:reducaoAcrescimo>1.00</ans:reducaoAcrescimo>
+                        <ans:valorUnitario >" . $item->valor . "</ans:valorUnitario >
+                        <ans:valorTotal>" . $item->valor_total . "</ans:valorTotal>
+                        <ans:equipeSadt>
+                        <ans:codProfissional>
+                        <ans:codigoPrestadorNaOperadora>" . $cnpjxml . "</ans:codigoPrestadorNaOperadora>
+                        </ans:codProfissional>
+                        <ans:nomeProf>" . $medico . "</ans:nomeProf>
+                        <ans:conselho>1</ans:conselho>
+                        <ans:numeroConselhoProfissional>$conselho</ans:numeroConselhoProfissional>
+                        <ans:UF>23</ans:UF>
+                        <ans:CBOS>999999</ans:CBOS>
+                        </ans:equipeSadt>
+                  </ans:procedimentoExecutado>
+                  </ans:procedimentosExecutados>
+                  <ans:observacao>III</ans:observacao>
+                     <ans:valorTotal >
+                     <ans:valorProcedimentos >" . $item->valor_total . "</ans:valorProcedimentos >
+                     <ans:valorDiarias>0.00</ans:valorDiarias>
+                     <ans:valorTaxasAlugueis>0.00</ans:valorTaxasAlugueis>
+                     <ans:valorMateriais>0.00</ans:valorMateriais>
+                     <ans:valorMedicamentos>0.00</ans:valorMedicamentos>
+                     <ans:valorOPME>0.00</ans:valorOPME>
+                     <ans:valorGasesMedicinais>0.00</ans:valorGasesMedicinais>
+                     <ans:valorTotalGeral>" . $item->valor_total . "</ans:valorTotalGeral>
+                  </ans:valorTotal>
+                  </ans:guiaSP-SADT>";
+                        }
+                    }
+                    if ($i == 80) {
+                        $contador = $contador - $i;
+
+                        $i = 0;
+                        $rodape = "   </ans:guiasTISS>
+         
+      </ans:loteGuias>
+   </ans:prestadorParaOperadora>
+   <ans:epilogo>
+      <ans:hash>035753bf836c231bedbc68a08daf4668</ans:hash>
+   </ans:epilogo>
+</ans:mensagemTISS>
+";
+
+                        $nome = "/home/sisprod/projetos/clinica/upload/cr/" . $convenio . "/" . $zero . $b . "_" . $nomearquivo . ".xml";
+                        $xml = $cabecalho . $corpo . $rodape;
+                        $fp = fopen($nome, "w+");
+                        fwrite($fp, $xml . "\n");
+                        fclose($fp);
+                        $b++;
+                        $corpo = "";
+                        $rodape = "";
+                    }
+                    if ($contador < 80 && $contador == $i) {
+                        var_dump($corpo);
+                        die;
+                        $i = 0;
+                        $rodape = "   </ans:guiasTISS>
+         
+      </ans:loteGuias>
+   </ans:prestadorParaOperadora>
+   <ans:epilogo>
+      <ans:hash>035753bf836c231bedbc68a08daf4668</ans:hash>
+   </ans:epilogo>
+</ans:mensagemTISS>
+";
+                        $nome = "/home/sisprod/projetos/clinica/upload/cr/" . $convenio . "/" . $zero . $b . "_" . $nomearquivo . ".xml";
+                        $xml = $cabecalho . $corpo . $rodape;
+                        $fp = fopen($nome, "w+");
+                        fwrite($fp, $xml . "\n");
+                        fclose($fp);
+                        $b++;
+                        $corpo = "";
+                        $rodape = "";
+                    }
+                }
+            } else {
+
+
+                $cabecalho = "<?xml version='1.0' encoding='iso-8859-1'?>
+<ans:mensagemTISS xmlns='http://www.w3.org/2001/XMLSchema' xmlns:ans='http://www.ans.gov.br/padroes/tiss/schemas'>
+   <ans:cabecalho>
+      <ans:identificacaoTransacao>
+         <ans:tipoTransacao>ENVIO_LOTE_GUIAS</ans:tipoTransacao>
+         <ans:sequencialTransacao>". $j ."</ans:sequencialTransacao>
+         <ans:dataRegistroTransacao>" . substr($listarexame[0]->data_autorizacao, 0, 10) . "</ans:dataRegistroTransacao>
+         <ans:horaRegistroTransacao>18:40:50</ans:horaRegistroTransacao>
+      </ans:identificacaoTransacao>
+      <ans:origem>
+         <ans:identificacaoPrestador>
+            <ans:codigoPrestadorNaOperadora>" . $cnpjxml . "</ans:codigoPrestadorNaOperadora>
+         </ans:identificacaoPrestador>
+      </ans:origem>
+      <ans:destino>
+         <ans:registroANS>" . $registroans . "</ans:registroANS>
+      </ans:destino>
+      <ans:versaoPadrao>" . $versao . "</ans:versaoPadrao>
+   </ans:cabecalho>
+   <ans:prestadorParaOperadora>
+      <ans:loteGuias>
+         <ans:numeroLote>" . $b . "</ans:numeroLote>
+            <ans:guiasTISS>";
+                $contador = count($listarexame);
+                foreach ($listarexame as $value) {
+                    $i++;
+                    if ($value->convenionumero == '') {
+                        $numerodacarteira = '0000000';
+                    } else {
+                        $numerodacarteira = $value->convenionumero;
+                    }
+                    if ($value->medico == '') {
+                        $medico = 'ADMINISTRADOR';
+                    } else {
+                        $medico = $value->medico;
+                    }
+                    if ($value->conselho == '') {
+                        $conselho = '0000000';
+                    } else {
+                        $conselho = $value->conselho;
+                    }
+                    if ($value->guiaconvenio == '') {
+                        $guianumero = '0000000';
+                    } else {
+                        $guianumero = $value->guiaconvenio;
+                    }
+                    $corpo = $corpo . "
+            <ans:guiaConsulta>
+                <ans:cabecalhoConsulta>
+                    <ans:registroANS>" . $registroans . "</ans:registroANS>
+                    <ans:numeroGuiaPrestador>" . $value->ambulatorio_guia_id . "</ans:numeroGuiaPrestador>
+                </ans:cabecalhoConsulta>
+                <ans:numeroGuiaOperadora>" . $guianumero . "</ans:numeroGuiaOperadora>
+                <ans:dadosBeneficiario>
+                    <ans:numeroCarteira>" . $numerodacarteira . "</ans:numeroCarteira>
+                    <ans:atendimentoRN>N</ans:atendimentoRN>
+                    <ans:nomeBeneficiario>" . $value->paciente . "</ans:nomeBeneficiario>
+                </ans:dadosBeneficiario>
+                <ans:contratadoExecutante>
+                    <ans:codigoPrestadorNaOperadora>" . $cnpjxml . "</ans:codigoPrestadorNaOperadora>
+                    <ans:nomeContratado>" . $razao_socialxml . "</ans:nomeContratado>
+                    <ans:CNES>" . $cnes . "</ans:CNES>
+                </ans:contratadoExecutante>
+                <ans:profissionalExecutante>
+                    <ans:nomeProfissional>" . $medico . "</ans:nomeProfissional>
+                    <ans:conselhoProfissional>6</ans:conselhoProfissional>
+                    <ans:numeroConselhoProfissional>" . $conselho . "</ans:numeroConselhoProfissional>
+                    <ans:UF>15</ans:UF>
+                    <ans:CBOS>225120</ans:CBOS>
+                </ans:profissionalExecutante>
+                <ans:indicacaoAcidente>9</ans:indicacaoAcidente>
+                <ans:dadosAtendimento>
+                    <ans:dataAtendimento>" . substr($value->data_autorizacao, 0, 10) . "</ans:dataAtendimento>
+                    <ans:tipoConsulta>1</ans:tipoConsulta>
+                    <ans:procedimento>
+                        <ans:codigoTabela>22</ans:codigoTabela>
+                        <ans:codigoProcedimento>" . $value->codigo . "</ans:codigoProcedimento>
+                        <ans:valorProcedimento>" . $value->valor . "</ans:valorProcedimento>
+                    </ans:procedimento>
+                </ans:dadosAtendimento>
+            </ans:guiaConsulta>";
+                    if ($i == 80) {
+                        $contador = $contador - $i;
+                        $i = 0;
+                        $rodape = "</ans:guiasTISS>
+    </ans:loteGuias>
+</ans:prestadorParaOperadora>
+<ans:epilogo>
+<ans:hash>e2eadfe09fd6750a184902545aa41771</ans:hash>
+</ans:epilogo>
+</ans:mensagemTISS>
+";
+
+                        $nome = "/home/sisprod/projetos/clinica/upload/cr/" . $convenio . "/" . $zero . $b . "_" . $nomearquivoconsulta . ".xml";
+                        $xml = $cabecalho . $corpo . $rodape;
+                        $fp = fopen($nome, "w+");
+                        fwrite($fp, $xml . "\n");
+                        fclose($fp);
+                        $b++;
+                        $corpo = "";
+                        $rodape = "";
+                    }
+                    if ($contador < 80 && $contador == $i) {
+                        $i = 0;
+                        $rodape = "   </ans:guiasTISS>
+         
+       
+    </ans:loteGuias>
+</ans:prestadorParaOperadora>
+<ans:epilogo>
+<ans:hash>e2eadfe09fd6750a184902545aa41771</ans:hash>
+</ans:epilogo>
+</ans:mensagemTISS>
+";
+                        $nome = "/home/sisprod/projetos/clinica/upload/cr/" . $convenio . "/" . $zero . $b . "_" . $nomearquivoconsulta . ".xml";
+                        $xml = $cabecalho . $corpo . $rodape;
+                        $fp = fopen($nome, "w+");
+                        fwrite($fp, $xml . "\n");
+                        fclose($fp);
+                        $b++;
+                        $corpo = "";
+                        $rodape = "";
+                    }
+                }
+            }
+        }
+        $this->exame->gravarlote($b);
+        $zip = new ZipArchive;
+        $this->load->helper('directory');
+        $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/cr/$convenio/");
+        if ($arquivo_pasta != false) {
+            foreach ($arquivo_pasta as $value) {
+                $deletar[] = "/home/sisprod/projetos/clinica/upload/cr/$convenio/$value";
+            }
+            foreach ($arquivo_pasta as $value) {
+                $zip->open("/home/sisprod/projetos/clinica/upload/cr/$convenio/$value.zip", ZipArchive::CREATE);
+                $zip->addFile("/home/sisprod/projetos/clinica/upload/cr/$convenio/$value", "$value");
+//           $deletarxml = "/home/sisprod/projetos/clinica/upload/cr/$convenio/$value";
+>>>>>>> origin/master
 =======
         $data['arquivo_pasta'] = directory_map("/home/sisprod/projetos/clinica/upload/$exame_id/");
         if ($data['arquivo_pasta'] != false) {

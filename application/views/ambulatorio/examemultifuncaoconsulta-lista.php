@@ -131,6 +131,7 @@
                             <thead>
                                 <tr>
                                     <th>Situação</th>
+<<<<<<< HEAD
                                     <th>H.Agenda</th>
                                     <th>H.Autorização</th>
                                     <th>Paciente</th>
@@ -391,6 +392,260 @@
                                             <td><?= $situacao ?></td>
                                             <td><?=date("H:i:s", strtotime($item->inicio))  ?></td>
                                             <td>&nbsp;</td>
+=======
+                                    <th>Horário</th>
+                                    <th>Paciente</th>
+                                    <th>Número</th>
+                                    <th>Convênio</th>
+                                    <th>Médico</th>
+                                    <th>Data</th>
+                                    <th class="text-center">Ações</th>
+                                </tr>
+                            </thead>
+
+
+                            <?php
+                            $url = $this->utilitario->build_query_params(current_url(), $_GET);
+                            $consulta = $this->exame->listarexamemultifuncaoconsulta($_GET);
+                            $total = $consulta->count_all_results();
+                            $limit = 50;
+                            isset($_GET['per_page']) ? $pagina = $_GET['per_page'] : $pagina = 0;
+                            $l = $this->exame->listarestatisticapacienteconsulta($_GET);
+                            $p = $this->exame->listarestatisticasempacienteconsulta($_GET);
+
+                            if ($total > 0) {
+                                ?>
+
+                                <?php
+                                $lista = $this->exame->listarexamemultifuncaoconsulta2($_GET)->limit($limit, $pagina)->get()->result();
+                                $estilo_linha = "tabela_content01";
+                                $paciente = "";
+                                foreach ($lista as $item) {
+                                    $dataFuturo = date("Y-m-d H:i:s");
+                                    $dataAtual = $item->data_atualizacao;
+
+                                    if ($item->celular != "") {
+                                        $telefone = $item->celular;
+                                    } elseif ($item->telefone != "") {
+                                        $telefone = $item->telefone;
+                                    } else {
+                                        $telefone = "";
+                                    }
+
+                                    $date_time = new DateTime($dataAtual);
+                                    $diff = $date_time->diff(new DateTime($dataFuturo));
+                                    $teste = $diff->format('%H:%I:%S');
+                                    ($estilo_linha == "tabela_content01") ? $estilo_linha = "tabela_content02" : $estilo_linha = "tabela_content01";
+
+                                    $faltou = false;
+                                    if ($item->paciente == "" && $item->bloqueado == 't') {
+                                        $situacao = "Bloqueado";
+                                        $paciente = "Bloqueado";
+                                        $verifica = 7;
+                                    } else {
+                                        $paciente = "";
+
+                                        if ($item->realizada == 't' && $item->situacaoexame == 'EXECUTANDO') {
+                                            $situacao = "Aguardando";
+                                            $verifica = 2;
+                                        } elseif ($item->realizada == 't' && $item->situacaolaudo == 'FINALIZADO') {
+                                            $situacao = "Finalizado";
+                                            $verifica = 4;
+                                        } elseif ($item->realizada == 't' && $item->situacaoexame == 'FINALIZADO') {
+                                            $situacao = "Atendendo";
+                                            $verifica = 5;
+                                        } elseif ($item->confirmado == 'f' && $item->paciente_id == null) {
+                                            $situacao = "Vago";
+                                            $verifica = 1;
+                                        } elseif ($item->confirmado == 'f' && $item->operador_atualizacao != null) {
+                                            $verifica = 6;
+                                            date_default_timezone_set('America/Fortaleza');
+                                            $data_atual = date('Y-m-d');
+                                            $hora_atual = date('H:i:s');
+                                            if ($item->data < $data_atual && $item->paciente_id != null) {
+                                                $situacao = "Faltou";
+                                                $faltou = true;
+                                            } elseif ($item->data < $data_atual && $item->paciente_id == null) {
+//                                                echo 'a';
+                                                $situacao = 'Vago';
+                                                $verifica = 1;
+                                            } else {
+//                                                echo 'a';
+                                                $situacao = "Agendado";
+                                            }
+                                        } else {
+                                            $situacao = "Aguardando";
+                                            $verifica = 3;
+                                        }
+                                    }
+                                    if ($item->paciente == "" && $item->bloqueado == 'f') {
+                                        $paciente = "vago";
+                                    }
+                                    $data = $item->data;
+                                    $dia = strftime("%A", strtotime($data));
+
+                                    switch ($dia) {
+                                        case"Sunday": $dia = "Domingo";
+                                            break;
+                                        case"Monday": $dia = "Segunda";
+                                            break;
+                                        case"Tuesday": $dia = "Terça";
+                                            break;
+                                        case"Wednesday": $dia = "Quarta";
+                                            break;
+                                        case"Thursday": $dia = "Quinta";
+                                            break;
+                                        case"Friday": $dia = "Sexta";
+                                            break;
+                                        case"Saturday": $dia = "Sabado";
+                                            break;
+                                    }
+                                    ?>
+
+                                    <? if ($verifica == 1) { ?>
+                                        <tr class="success2">
+                                            <td><?= $situacao ?></td>
+                                            <td><?= $item->inicio ?></td>
+                                            <td><?= $item->paciente ?></td>
+                                            <td><?= $item->celular ?></td>
+                                            <td><?= $item->convenio ?></td>
+                                            <td><?= substr($item->medicoagenda, 0, 15); ?></td>
+                                            <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
+
+                                            <td class="tabela_acoes" style="width: 150pt;">
+                                                <? if ($item->bloqueado == 'f') { ?>
+
+                                                    <a class="btn btn-success btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/bloquear/<?= $item->agenda_exames_id ?>/<?= $item->inicio; ?>');">Bloquear <i class="fa fa-lock" aria-hidden="true"></i>
+                                                    </a>
+                                                    <a class="btn btn-success btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarconsultatemp/<?= $item->agenda_exames_id ?>');">Agendar <i class="fa fa-calendar" aria-hidden="true"></i>
+
+                                                    </a>
+                                                <? } else { ?>
+                                                    <a class="btn btn-success btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/desbloquear/<?= $item->agenda_exames_id ?>/<?= $item->inicio; ?> ', 'toolbar=no,Location=no,menubar=no,width=500,height=200');">Desbloq.
+                                                    </a>
+                                                <? } ?>
+                                            </td>
+                                        </tr>  
+                                    <? } elseif ($verifica == 7) {
+                                        ?>
+                                        <tr class="success2">
+                                            <td><?= $situacao ?></td>
+                                            <td><?= $item->inicio ?></td>
+                                            <td><?= $item->paciente ?></td>
+                                            <td><?= $item->celular ?></td>
+                                            <td><?= $item->convenio ?></td>
+                                            <td><?= substr($item->medicoagenda, 0, 15); ?></td>
+                                            <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
+
+                                            <td class="tabela_acoes">
+
+                                                <a class="btn btn-success btn-sm desbloq" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/desbloquear/<?= $item->agenda_exames_id ?>/<?= $item->inicio; ?> ', 'toolbar=no,Location=no,menubar=no,width=500,height=200');">Desbloq. <i class="fa fa-unlock" aria-hidden="true"></i>
+                                                </a>
+
+                                            </td>
+                                        </tr>
+                                    <? } elseif ($verifica == 2) { ?>
+                                        <tr class="alert alert-aguardando">
+                                            <td><?= $situacao ?></td>
+                                            <td><?= $item->inicio ?></td>
+                                            <td><?= $item->paciente ?></td>
+                                            <td><?= $item->celular ?></td>
+                                            <td><?= $item->convenio ?></td>
+                                            <td><?= substr($item->medicoagenda, 0, 15); ?></td>
+                                            <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
+                                            <td class="tabela_acoes">
+                                                <? if ($perfil_id == 1 || $perfil_id == 4) { ?>
+
+                                                    <a class="btn btn-danger btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/guiacancelamento/<?= $item->agenda_exames_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');">Cancelar <i class="fa fa-times" aria-hidden="true"></i>
+
+                                                    </a>
+
+                                                <? } else { ?>
+                                                    <button class="btn btn-danger btn-sm" disabled="">Cancelar <i class="fa fa-times" aria-hidden="true"></i> </button> 
+                                                <? }
+                                                ?>
+                                                <a class="btn btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+
+                                    <? } elseif ($verifica == 3) { ?>
+                                        <tr class="info">
+                                            <td><?= $situacao ?></td>
+                                            <td><?= $item->inicio ?></td>
+                                            <td><?= $item->paciente ?></td>
+                                            <td><?= $item->celular ?></td>
+                                            <td><?= $item->convenio ?></td>
+                                            <td><?= substr($item->medicoagenda, 0, 15); ?></td>
+                                            <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
+                                            <td class="tabela_acoes">
+                                                <? if ($perfil_id == 1 || $perfil_id == 4) { ?>
+
+                                                    <a class="btn btn-danger btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/guiacancelamento/<?= $item->agenda_exames_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');">Cancelar <i class="fa fa-times" aria-hidden="true"></i>
+
+                                                    </a>
+
+                                                <? } else { ?>
+                                                    <button class="btn btn-danger btn-sm" disabled="">Cancelar <i class="fa fa-times" aria-hidden="true"></i> </button> 
+                                                <? }
+                                                ?>
+                                                <a class="btn  btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <? } elseif ($verifica == 4) { ?>
+                                        <tr class="finalizado">
+                                            <td><?= $situacao ?></td>
+                                            <td><?= $item->inicio ?></td>
+                                            <td><?= $item->paciente ?></td>
+                                             <td><?= $item->celular ?></td>
+                                             <td><?= $item->convenio ?></td>
+                                            <td><?= substr($item->medicoagenda, 0, 15); ?></td>
+                                            <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
+                                            <td class="tabela_acoes">
+                                                <? if ($perfil_id == 1 || $perfil_id == 4) { ?>
+
+                                                    <a class="btn btn-danger btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/guiacancelamento/<?= $item->agenda_exames_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');">Cancelar <i class="fa fa-times" aria-hidden="true"></i>
+
+                                                    </a>
+
+                                                <? } else { ?>
+                                                    <button disabled="" class="btn btn-danger btn-sm">Cancelar <i class="fa fa-times" aria-hidden="true"></i> </button> 
+                                                <? }
+                                                ?>
+                                                <a class="btn btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <? } elseif ($verifica == 5) { ?>
+                                        <tr class="atendendo">
+                                            <td><?= $situacao ?></td>
+                                            <td><?= $item->inicio ?></td>
+                                            <td><?= $item->paciente ?></td>
+                                             <td><?= $item->celular ?></td>
+                                             <td><?= $item->convenio ?></td>
+                                            <td><?= substr($item->medicoagenda, 0, 15); ?></td>
+                                            <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
+                                            <td class="tabela_acoes">
+                                                <a class="btn btn-danger btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/guiacancelamento/<?= $item->agenda_exames_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');">Cancelar
+                                                </a>
+                                                <a class="btn btn-primary btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarpacienteconsultatemp/<?= $item->paciente_id ?>/<?= $faltou; ?>');">Consultas <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                </a>
+
+                                            </td>
+                                        </tr>
+
+                                        <?
+                                    } elseif ($verifica == 6) {
+                                        if ($faltou) {
+                                            ?>
+                                            <tr class="alert alert-danger">
+                                            <? } else { ?>
+                                            <tr class="alert alert-agendado">    
+                                            <? } ?>
+                                            <td><?= $situacao ?></td>
+                                            <td><?= $item->inicio ?></td>
+>>>>>>> origin/master
                                             <td><?= $item->paciente ?> <? if ($item->encaixe == 't') { ?>
                                                     <span class="text-danger">(Encaixe)</span>
                                                 <? } ?></td>

@@ -108,7 +108,11 @@
 
                 foreach ($relatorio as $item) :
                     $p = $i + 1;
+<<<<<<< HEAD
                 if($item->grupo == 'MEDICAMENTO' || $item->grupo == 'MATERIAL'){
+=======
+                if($item->grupo == 'MEDICAMENTO'){
+>>>>>>> origin/master
                 $medicamento = $medicamento + $item->quantidade;
                 }
                     $i++;

@@ -282,6 +282,7 @@ class paciente_model extends BaseModel {
             $this->_descricaoconvenio = $return[0]->descricaoconvenio;
             $this->_convenionumero = $return[0]->convenionumero;
             $this->_data_emissao = $return[0]->data_emissao;
+<<<<<<< HEAD
             $this->_alergias = $return[0]->alergias;
             $this->_observacoes = $return[0]->observacoes;
             $this->_cirurgias = $return[0]->cirurgias;
@@ -363,6 +364,84 @@ class paciente_model extends BaseModel {
             }
             $this->db->set('cirurgias', $_POST['cirurgias']);
             $this->db->set('observacoes', $_POST['observacoes']);
+=======
+            $this->_indicacao = $return[0]->indicacao;
+        }
+    }
+
+    function listaTipoLogradouro() {
+
+        $this->db->select('tipo_logradouro_id, descricao');
+        $this->db->from('tb_tipo_logradouro');
+        $this->db->orderby('tipo_logradouro_id');
+        $return = $this->db->get();
+        return $return->result();
+    }
+
+    function listaconvenio() {
+
+        $this->db->select('convenio_id, nome as descricao');
+        $this->db->from('tb_convenio');
+        $this->db->where('ativo', 't');
+        $this->db->orderby('nome');
+        $return = $this->db->get();
+        return $return->result();
+    }
+
+    function listaindicacao() {
+
+        $this->db->select('paciente_indicacao_id, nome');
+        $this->db->from('tb_paciente_indicacao');
+        $this->db->where('ativo', 't');
+        $this->db->orderby('nome');
+        $return = $this->db->get();
+        return $return->result();
+    }
+
+    function listacadaindicacao($paciente_indicacao_id) {
+
+        $this->db->select('paciente_indicacao_id, nome');
+        $this->db->from('tb_paciente_indicacao');
+        $this->db->where('paciente_indicacao_id', $paciente_indicacao_id);
+        $return = $this->db->get();
+        return $return->result();
+    }
+
+    function gravar() {
+
+        try {
+            $this->db->set('nome', $_POST['nome']);
+            if ($_POST['cpf'] != '') {
+                $this->db->set('cpf', str_replace("-", "", str_replace(".", "", $_POST['cpf'])));
+            }
+            if ($_POST['nascimento'] != '') {
+                $this->db->set('nascimento', date("Y-m-d", strtotime( str_replace("/", "-", $_POST['nascimento']) ) ) );
+            }
+            if ($_POST['data_emissao'] != '') {
+                $this->db->set('data_emissao', $_POST['data_emissao']);
+            }
+
+            if ($_POST['convenio'] != '') {
+                $this->db->set('convenio_id', $_POST['convenio']);
+            }
+            $this->db->set('cns', $_POST['cns']);
+            if ($_POST['indicacao'] != '') {
+                $this->db->set('indicacao', $_POST['indicacao']);
+            }
+            if ($_POST['escolaridade'] != '') {
+                $this->db->set('escolaridade_id', $_POST['escolaridade']);
+            }
+            $this->db->set('rg', $_POST['rg']);
+            $this->db->set('uf_rg', $_POST['uf_rg']);
+            $this->db->set('titulo_eleitor', $_POST['titulo_eleitor']);
+            $this->db->set('sexo', $_POST['sexo']);
+            if ($_POST['raca_cor'] != '') {
+                $this->db->set('raca_cor', $_POST['raca_cor']);
+            }
+            if ($_POST['estado_civil_id'] != '') {
+                $this->db->set('estado_civil_id', $_POST['estado_civil_id']);
+            }
+>>>>>>> origin/master
             $this->db->set('nome_pai', $_POST['nome_pai']);
             $this->db->set('nome_mae', $_POST['nome_mae']);
             $this->db->set('celular', str_replace("(", "", str_replace(")", "", str_replace("-", "", $_POST['celular']))));

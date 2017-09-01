@@ -14,6 +14,7 @@ $desc=array (
 $up=-63;
 $ut=44;
 <<<<<<< HEAD
+<<<<<<< HEAD
 $ttffile='./system/plugins/mpdf_lib/ttfonts/DejaVuSansCondensed-BoldOblique.ttf';
 =======
 $ttffile='/home/sisprod/projetos/clinica/system/plugins/mpdf_lib/ttfonts/DejaVuSansCondensed-BoldOblique.ttf';
@@ -28,3 +29,16 @@ $panose=' 0 0 2 b 8 6 3 3 4 b 2 4';
 $haskerninfo=false;
 $unAGlyphs=false;
 ?>
+=======
+$ttffile='/home/sisprod/projetos/clinica/system/plugins/mpdf_lib/ttfonts/DejaVuSansCondensed-BoldOblique.ttf';
+$TTCfontID='0';
+$originalsize=493756;
+$sip=false;
+$smp=false;
+$BMPselected=true;
+$fontkey='dejavusanscondensedBI';
+$panose=' 0 0 2 b 8 6 3 3 4 b 2 4';
+$haskerninfo=false;
+$unAGlyphs=false;
+?>
+>>>>>>> origin/master

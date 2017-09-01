@@ -227,6 +227,7 @@
                                 if (preg_match('/\(/', @$obj->_telefone)) {
                                     $telefone = @$obj->_telefone;
                                 } else {
+<<<<<<< HEAD
                                     $telefone = "(" . substr(@$obj->_telefone, 0, 2) . ") " . substr(@$obj->_telefone, 2, strlen(@$obj->_telefone) - 2);
                                 }
                             } else {
@@ -491,6 +492,241 @@
                         <textarea class="form-control" name="observacoes"><?= @$obj->_observacoes; ?> </textarea>    
                         </div>
                         
+=======
+                                    $telefone = "(" . substr(@$obj->_telefone, 0, 2) . ")" . substr(@$obj->_telefone, 2, strlen(@$obj->_telefone) - 2);
+                                }
+                            } else {
+                                $telefone = '';
+                            }
+                            if (@$obj->_celular != '' && strlen(@$obj->_celular) > 3) {
+                                if (preg_match('/\(/', @$obj->_celular)) {
+                                    $celular = @$obj->_celular;
+                                } else {
+                                    $celular = "(" . substr(@$obj->_celular, 0, 2) . ")" . substr(@$obj->_celular, 2, strlen(@$obj->_celular) - 2);
+                                }
+                            } else {
+                                $celular = '';
+                            }
+                            ?>
+
+                            <input type="text" id="txtTelefone" class="form-control texto04" name="telefone"  value="<?= @$telefone; ?>" />
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Endere&ccedil;o</label>
+                            <input type="text" id="rua" class="form-control texto10" name="endereco" value="<?= @$obj->_endereco; ?>" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Bairro</label>
+
+
+                            <input type="text" id="bairro" class="form-control texto10" name="bairro" value="<?= @$obj->_bairro; ?>" />
+                        </div>
+                        <div class="form-group">
+                            <label>Celular*</label>
+                            <input type="text" id="txtCelular" class="form-control texto04" name="celular" value="<?= @$celular; ?>" required=""/>
+                        </div>
+
+
+                    </div>
+                    <div class="col-lg-3">
+
+                        <div class="form-group">
+                            <label>N&uacute;mero</label>
+
+
+                            <input type="text" id="txtNumero" class="form-control texto04" name="numero" value="<?= @$obj->_numero; ?>" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Município</label>
+
+
+                            <input type="hidden" id="txtCidadeID" class="texto_id" name="municipio_id" value="<?= @$obj->_cidade; ?>" readonly="true" />
+                            <input type="text" id="txtCidade" class="form-control texto04 eac-square" name="txtCidade" value="<?= @$obj->_cidade_nome; ?>" />
+                        </div>
+
+
+                    </div>
+                    <div class="col-lg-3">
+
+                        <div class="form-group">
+                            <label>Complemento</label>
+
+
+                            <input type="text" id="txtComplemento" class="form-control texto08" name="complemento" value="<?= @$obj->_complemento; ?>" />
+                        </div>
+
+                        
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+        <div class="panel panel-default ">
+            <div class="alert alert-info">
+                Dados Sociais
+            </div>
+            <div class="panel-body">
+                <div class="row">
+
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Plano de Saude</label>
+
+
+                            <select name="convenio" id="txtconvenio" class="form-control texto04" >
+                                <option value='' >Selecione</option>
+                                <?php
+                                $listaconvenio = $this->paciente->listaconvenio($_GET);
+                                foreach ($listaconvenio as $item) {
+                                    ?>
+
+                                    <option   value =<?php echo $item->convenio_id; ?> <?
+                                if (@$obj->_convenio == $item->convenio_id):echo 'selected';
+                                endif;
+                                    ?>><?php echo $item->descricao; ?></option>
+                                              <?php
+                                          }
+                                          ?> 
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Estado civil</label>
+
+
+                            <select name="estado_civil_id" id="txtEstadoCivil" class="form-control texto04" selected="<?= @$obj->_estado_civil; ?>">
+                                <option value=0 <?
+                                          if (@$obj->_estado_civil == 0):echo 'selected';
+                                          endif;
+                                          ?>>Selecione</option>
+                                <option value=1 <?
+                                if (@$obj->_estado_civil == 1):echo 'selected';
+                                endif;
+                                          ?>>Solteiro</option>
+                                <option value=2 <?
+                                if (@$obj->_estado_civil == 2):echo 'selected';
+                                endif;
+                                          ?>>Casado</option>
+                                <option value=3 <?
+                                if (@$obj->_estado_civil == 3):echo 'selected';
+                                endif;
+                                          ?>>Divorciado</option>
+                                <option value=4 <?
+                                if (@$obj->_estado_civil == 4):echo 'selected';
+                                endif;
+                                          ?>>Viuvo</option>
+                                <option value=5 <?
+                                if (@$obj->_estado_civil == 5):echo 'selected';
+                                endif;
+                                          ?>>Outros</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>N&uacute;mero da Carteirinha</label>
+
+
+                            <input type="text" id="txtconvenionumero" class="form-control texto08" name="convenionumero" value="<?= @$obj->_convenionumero; ?>" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Escolaridade</label>
+
+                            <select name="escolaridade" id="escolaridade" class="form-control texto04" selected="<?= @$obj->_escolaridade_id; ?>">
+                                <option value=0 <?
+                                if (@$obj->_escolaridade_id == 0):echo 'selected';
+                                endif;
+                                          ?>>Selecione</option>
+                                <option value=1 <?
+                                if (@$obj->_escolaridade_id == 1):echo 'selected';
+                                endif;
+                                          ?>>Fundamental-Incompleto </option>
+                                <option value=2 <?
+                                if (@$obj->_escolaridade_id == 2):echo 'selected';
+                                endif;
+                                          ?>>Fundamental-Completo</option>
+
+                                <option value=3 <?
+                                if (@$obj->_escolaridade_id == 3):echo 'selected';
+                                endif;
+                                          ?>>Médio 
+                                    -
+                                    Incompleto</option>
+                                <option value=4 <?
+                                if (@$obj->_escolaridade_id == 4):echo 'selected';
+                                endif;
+                                          ?>>Médio 
+                                    -
+                                    Completo
+                                </option>
+                                <option value=5 <?
+                                if (@$obj->_escolaridade_id == 5):echo 'selected';
+                                endif;
+                                          ?>>Superior 
+                                    -
+                                    Incompleto</option>
+                                <option value=6 <?
+                                if (@$obj->_escolaridade_id == 6):echo 'selected';
+                                endif;
+                                          ?>>Superior-Completo </option>
+
+
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Ocupa&ccedil;&atilde;o</label>
+                            <input type="hidden" id="txtcboID" class="texto_id" name="txtcboID" value="<?= @$obj->_cbo_ocupacao_id; ?>" readonly="true" />
+                            <input type="text" id="txtcbo" class="form-control texto08 eac-square" name="txtcbo" value="<?= @$obj->_cbo_nome; ?>" />
+                        </div>  
+
+                        <div class="form-group">
+                            <label>Ra&ccedil;a / Cor</label>
+
+
+                            <select name="raca_cor" id="txtRacaCor" class="form-control texto04">
+
+                                <option value=0  <?
+                                if (@$obj->_raca_cor == 0):echo 'selected';
+                                endif;
+                                          ?>>Selecione</option>
+                                <option value=1 <?
+                                if (@$obj->_raca_cor == 1):echo 'selected';
+                                endif;
+                                          ?>>Branca</option>
+                                <option value=2 <?
+                                if (@$obj->_raca_cor == 2):echo 'selected';
+                                endif;
+                                          ?>>Amarela</option>
+                                <option value=3 <?
+                                if (@$obj->_raca_cor == 3):echo 'selected';
+                                endif;
+                                          ?>>Preta</option>
+                                <option value=4 <?
+                                if (@$obj->_raca_cor == 4):echo 'selected';
+                                endif;
+                                          ?>>Parda</option>
+                                <option value=5 <?
+                                if (@$obj->_raca_cor == 5):echo 'selected';
+                                endif;
+                                          ?>>Ind&iacute;gena</option>
+                            </select>
+                        </div>
+>>>>>>> origin/master
                     </div>
 
 

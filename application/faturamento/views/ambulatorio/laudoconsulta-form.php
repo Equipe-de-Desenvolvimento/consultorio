@@ -245,6 +245,7 @@
                                                 <?
                                                 $this->load->helper('directory');
 <<<<<<< HEAD
+<<<<<<< HEAD
                                                 $arquivo_pasta = directory_map("./upload/consulta/$item->ambulatorio_laudo_id/");
 
                                                 $w = 0;
@@ -342,6 +343,105 @@
                                                 <?
                                                 $this->load->helper('directory');
                                                 $arquivo_pasta = directory_map("./upload/consulta/$item->ambulatorio_laudo_id/");
+=======
+                                                $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/consulta/$item->ambulatorio_laudo_id/");
+
+                                                $w = 0;
+                                                if ($arquivo_pasta != false):
+                                                    foreach ($arquivo_pasta as $value) :
+                                                        $w++;
+                                                        ?>
+
+                                                        <a onclick="javascript:window.open('<?= base_url() . "upload/consulta/" . $item->ambulatorio_laudo_id . "/" . $value ?> ', '_blank', 'toolbar=no,Location=no,menubar=no,width=900,height=650');"><img  width="50px" height="50px" src="<?= base_url() . "upload/consulta/" . $item->ambulatorio_laudo_id . "/" . $value ?>"></a>
+                                                        <?
+                                                        if ($w == 8) {
+                                                            
+                                                        }
+                                                    endforeach;
+                                                    $arquivo_pasta = "";
+                                                endif
+                                                ?>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <hr>
+                            <? }
+                            ?>
+                        </div>
+                        <div>
+                            <? foreach ($historicoantigo as $itens) {
+                                ?>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td >Queixa principal: <?= $itens->laudo; ?></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <hr>
+                            <? }
+                            ?>
+                        </div>
+
+                    </fieldset>
+                    <fieldset>
+                        <legend><b><font size="3" color="red">Historico de exames</font></b></legend>
+                        <div>
+                            <table>
+                                <tbody>
+                                    <? foreach ($historicoexame as $item) {
+                                        ?>
+
+                                        <tr>
+                                            <td >Data: <?= substr($item->data_cadastro, 8, 2) . "/" . substr($item->data_cadastro, 5, 2) . "/" . substr($item->data_cadastro, 0, 4); ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td >Medico: <?= $item->medico; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td >Tipo: <?= $item->procedimento; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <?
+                                            $this->load->helper('directory');
+                                            $arquivo_pastaimagem = directory_map("/home/sisprod/projetos/clinica/upload/$item->exames_id/");
+//        $data['arquivo_pasta'] = directory_map("/home/vivi/projetos/clinica/upload/$exame_id/");
+                                            if ($arquivo_pastaimagem != false) {
+                                                sort($arquivo_pastaimagem);
+                                            }
+                                            $i = 0;
+                                            if ($arquivo_pastaimagem != false) {
+                                                foreach ($arquivo_pastaimagem as $value) {
+                                                    $i++;
+                                                }
+                                            }
+                                            ?>
+                                            <td >Imagens : <font size="2"><b> <?= $i ?></b>
+                                                <?
+                                                if ($arquivo_pastaimagem != false):
+                                                    foreach ($arquivo_pastaimagem as $value) {
+                                                        ?>
+                                                        <a onclick="javascript:window.open('<?= base_url() . "upload/" . $item->exames_id . "/" . $value ?> ', '_blank', 'toolbar=no,Location=no,menubar=no,width=900,height=650');"><img  width="100px" height="100px" src="<?= base_url() . "upload/" . $item->exames_id . "/" . $value ?>"></a>
+                                                        <?
+                                                    }
+                                                    $arquivo_pastaimagem = "";
+                                                endif
+                                                ?>
+                                                <!--                <ul id="sortable">
+
+                                                                </ul>-->
+                                            </td >
+                                        </tr>
+                                        <tr>
+                                            <td >Laudo: <?= $item->texto; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Arquivos anexos:
+                                                <?
+                                                $this->load->helper('directory');
+                                                $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/consulta/$item->ambulatorio_laudo_id/");
+>>>>>>> origin/master
 =======
                                                 $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/consulta/$item->ambulatorio_laudo_id/");
 
