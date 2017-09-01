@@ -45,7 +45,11 @@ $db['default']['password'] = "123456";
 //$db['default']['username'] = "saude";
 //$db['default']['password'] = "saude";
 //$db['default']['database'] = "sgh";
+<<<<<<< HEAD
 $db['default']['database'] = "CE9485";
+=======
+$db['default']['database'] = "romulo9485";
+>>>>>>> origin/master
 $db['default']['dbdriver'] = "postgre";
 $db['default']['dbprefix'] = "ponto.";
 $db['default']['pconnect'] = TRUE;

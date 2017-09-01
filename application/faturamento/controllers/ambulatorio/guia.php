@@ -468,6 +468,7 @@ class Guia extends BaseController {
             $destino = "./upload/guia/$guia_id";
             chmod($destino, 0777);
         }
+<<<<<<< HEAD
 //        $data['arquivo_pasta'] = directory_map("./upload/$paciente_id/");
         $data['arquivo_pasta'] = directory_map("./upload/guia/$guia_id/");
         if ($data['arquivo_pasta'] != false) {
@@ -486,6 +487,26 @@ class Guia extends BaseController {
         }
 
         $config['upload_path'] = "./upload/guia/" . $guia_id . "/";
+=======
+//        $data['arquivo_pasta'] = directory_map("/home/sisprod/projetos/clinica/upload/$paciente_id/");
+        $data['arquivo_pasta'] = directory_map("/home/sisprod/projetos/clinica/upload/guia/$guia_id/");
+        if ($data['arquivo_pasta'] != false) {
+            sort($data['arquivo_pasta']);
+        }
+        $data['guia_id'] = $guia_id;
+        $this->loadView('ambulatorio/importacao-imagemguia', $data);
+    }
+
+    function importarimagem() {
+        $guia_id = $_POST['guia_id'];
+        if (!is_dir("./upload/guia/$guia_id")) {
+            mkdir("./upload/guia/$guia_id");
+            $destino = "./upload/guia/$guia_id";
+            chmod($destino, 0777);
+        }
+
+        $config['upload_path'] = "/home/sisprod/projetos/clinica/upload/guia/" . $guia_id . "/";
+>>>>>>> origin/master
         $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf|doc|docx|xls|xlsx|ppt';
         $config['max_size'] = '0';
         $config['overwrite'] = FALSE;

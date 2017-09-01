@@ -100,7 +100,11 @@
                                     $this->load->helper('directory');
                                     foreach ($convenios as $item) {
                                         foreach ($pacientes as $paciente) {
+<<<<<<< HEAD
                                             $arquivo_pasta = directory_map("./upload/laudo/$item->nome/$paciente->paciente_id/");
+=======
+                                            $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/laudo/$item->nome/$paciente->paciente_id/");
+>>>>>>> origin/master
                                             if ($arquivo_pasta != false) {
                                                 ?>
                                                  <tr><th width="900px" class="tabela_header"><? echo $paciente->nome; ?></th></tr>

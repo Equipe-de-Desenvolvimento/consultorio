@@ -2154,7 +2154,7 @@ class exametemp_model extends Model {
                     $paciente_id = $this->db->insert_id();
                 } else {
                     $paciente_id = $_POST['txtNomeid'];
-                    if ($_POST['nascimento'] != '') {
+			if ($_POST['nascimento'] != '') {
                         $this->db->set('nascimento', date("Y-m-d", strtotime(str_replace("/", "-", $_POST['nascimento']))));
                     }
                     $this->db->set('celular', $_POST['txtCelular']);
