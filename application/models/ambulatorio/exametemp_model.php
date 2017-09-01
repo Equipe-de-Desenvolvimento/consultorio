@@ -2154,7 +2154,9 @@ class exametemp_model extends Model {
                     $paciente_id = $this->db->insert_id();
                 } else {
                     $paciente_id = $_POST['txtNomeid'];
-
+                    if ($_POST['nascimento'] != '') {
+                        $this->db->set('nascimento', date("Y-m-d", strtotime(str_replace("/", "-", $_POST['nascimento']))));
+                    }
                     $this->db->set('celular', $_POST['txtCelular']);
                     $this->db->set('telefone', $_POST['txtTelefone']);
                     $this->db->set('nome', $_POST['txtNome']);
@@ -3271,7 +3273,7 @@ class exametemp_model extends Model {
 
 
                 $tipo = $this->verificaexamemedicamento($procedimento_tuss_id);
-                if (($tipo == 'EXAME' || $tipo == 'MEDICAMENTO') && $_POST['medico'][$i] == '') {
+                if (($tipo == 'EXAME' || $tipo == 'MEDICAMENTO' || $tipo == 'MATERIAL') && $_POST['medico'][$i] == '') {
                     return 2;
                 }
 

@@ -846,7 +846,7 @@ class Guia extends BaseController {
                 }
 //            $this->gerardicom($ambulatorio_guia);
                 $tipo = $this->guia->verificaexamemedicamento($_POST['procedimento1']);
-                if (($tipo == 'EXAME' || $tipo == 'MEDICAMENTO') && $medico_id == '') {
+                if (($tipo == 'EXAME' || $tipo == 'MEDICAMENTO' || $tipo == 'MATERIAL') && $medico_id == '') {
                     $data['mensagem'] = 'ERRO: Obrigatório preencher solicitante.';
                     $this->session->set_flashdata('message', $data['mensagem']);
                 } else {

@@ -227,7 +227,7 @@
                                 if (preg_match('/\(/', @$obj->_telefone)) {
                                     $telefone = @$obj->_telefone;
                                 } else {
-                                    $telefone = "(" . substr(@$obj->_telefone, 0, 2) . ")" . substr(@$obj->_telefone, 2, strlen(@$obj->_telefone) - 2);
+                                    $telefone = "(" . substr(@$obj->_telefone, 0, 2) . ") " . substr(@$obj->_telefone, 2, strlen(@$obj->_telefone) - 2);
                                 }
                             } else {
                                 $telefone = '';
@@ -236,7 +236,7 @@
                                 if (preg_match('/\(/', @$obj->_celular)) {
                                     $celular = @$obj->_celular;
                                 } else {
-                                    $celular = "(" . substr(@$obj->_celular, 0, 2) . ")" . substr(@$obj->_celular, 2, strlen(@$obj->_celular) - 2);
+                                    $celular = "(" . substr(@$obj->_celular, 0, 2) . ") " . substr(@$obj->_celular, 2, strlen(@$obj->_celular) - 2);
                                 }
                             } else {
                                 $celular = '';
@@ -460,6 +460,37 @@
                                           ?>>Ind&iacute;gena</option>
                             </select>
                         </div>
+                    </div>
+
+
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+        <div class="panel panel-default ">
+            <div class="alert alert-info">
+                Observações e Cirurgias Anteriores
+            </div>
+            <div class="panel-body">
+                <div class="row">
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                        <label>Cirurgias Anteriores</label>  
+                        <textarea class="form-control" name="cirurgias"> <?= @$obj->_cirurgias; ?></textarea>    
+                        </div>
+                        
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                        <label>Observações</label>  
+                        <textarea class="form-control" name="observacoes"><?= @$obj->_observacoes; ?> </textarea>    
+                        </div>
+                        
                     </div>
 
 

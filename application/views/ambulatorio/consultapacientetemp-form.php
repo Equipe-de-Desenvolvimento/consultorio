@@ -71,6 +71,13 @@
 
                     </div>
                 </div>
+                <div class="row">
+                <div class="col-lg-2">
+                    <a class="btn btn-outline btn-primary btn-sm" href="<?= base_url() ?>cadastros/pacientes/carregar/<?= @$obj->_paciente_id ?>" target="_blank">
+                        Editar
+                    </a> 
+                </div>
+                </div>
 
 
 
@@ -218,16 +225,16 @@
                                         <td class="<?php echo $estilo_linha; ?>"><?= $item->inicio; ?></td>
                                         <td class="<?php echo $estilo_linha; ?>"><?= $item->sala . "-" . $item->medico; ?></td>
                                         <td class="<?php echo $estilo_linha; ?>"><a  onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/alterarobservacao/<?= $item->agenda_exames_id ?>', '_blank', 'toolbar=no,Location=no,menubar=no,\n\
-                                                                                                                                                                                                                                        width=500,height=230');">=><?= $item->observacoes; ?></a></td>
+                                                                                                                                                                                                                                                width=500,height=230');">=><?= $item->observacoes; ?></a></td>
                                         <td class="tabela_acoes">
-                                        <? if (empty($faltou)) { ?>
+                                            <? if (empty($faltou)) { ?>
 
-                                            
-                                            <a class="btn btn-outline btn-danger btn-sm" onclick="javascript: return confirm('Deseja realmente excluir a consulta?');" href="<?= base_url() ?>ambulatorio/exametemp/excluirconsultatemp/<?= $item->agenda_exames_id; ?>/<?= @$obj->_paciente_id; ?>">
+
+                                                <a class="btn btn-outline btn-danger btn-sm" onclick="javascript: return confirm('Deseja realmente excluir a consulta?');" href="<?= base_url() ?>ambulatorio/exametemp/excluirconsultatemp/<?= $item->agenda_exames_id; ?>/<?= @$obj->_paciente_id; ?>">
                                                     Excluir</a>
 
-                                        <? } ?>
-                                        
+                                            <? } ?>
+
                                             <a class="btn btn-outline btn-info btn-sm"  href="<?= base_url() ?>ambulatorio/exametemp/reservarconsultatemp/<?= $item->agenda_exames_id; ?>/<?= @$obj->_paciente_id; ?>/<?= $item->medico_consulta_id; ?>/<?= $item->data; ?>">
                                                 Reservar</a></td>
 

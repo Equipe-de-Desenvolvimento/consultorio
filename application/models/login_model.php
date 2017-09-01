@@ -28,6 +28,7 @@ class login_model extends Model {
 
         $this->db->select('empresa_id,
                             nome,
+                            listadeespera,
                             internacao,
                             chat');
         $this->db->from('tb_empresa');
@@ -39,6 +40,7 @@ class login_model extends Model {
             $empresanome = $retorno[0]->nome;
             $internacao = $retorno[0]->internacao;
             $chat = $retorno[0]->chat;
+            $listadeespera = $retorno[0]->listadeespera;
         } else {
             $empresanome = "";
             $internacao = false;
@@ -66,6 +68,7 @@ class login_model extends Model {
                 'perfil_id' => $return[0]->perfil_id,
                 'perfil' => $return[0]->perfil,
                 'modulo' => $modulo,
+                'listadeespera' => $listadeespera,
                 'internacao' => $internacao,
                 'chat' => $chat,
                 'empresa_id' => $empresa,

@@ -1892,10 +1892,12 @@ class exame_model extends Model {
     function listarexamemultifuncaoconsulta2($args = array()) {
         $data = date("Y-m-d");
         $contador = count($args);
+        
         $empresa_id = $this->session->userdata('empresa_id');
         $this->db->select('ae.agenda_exames_id,
                             ae.agenda_exames_nome_id,
                             ae.data,
+                            ae.data_autorizacao,
                             ae.inicio,
                             ae.fim,
                             ae.ativo,
@@ -1942,7 +1944,14 @@ class exame_model extends Model {
         $this->db->join('tb_operador op', 'op.operador_id = ae.operador_atualizacao', 'left');
         $this->db->join('tb_operador tel', 'tel.operador_id = ae.operador_telefonema', 'left');
         $this->db->orderby('ae.data');
-        $this->db->orderby('ae.inicio');
+        $listadeespera = $this->session->userdata('listadeespera');
+        if($listadeespera == 't'){
+         $this->db->orderby('ae.data_autorizacao');  
+         $this->db->orderby('ae.inicio');    
+        }else{
+         $this->db->orderby('ae.inicio');      
+        }
+        
         if ($contador == 0) {
             $this->db->where('ae.data >=', $data);
         }
@@ -3090,7 +3099,14 @@ class exame_model extends Model {
         $this->db->where('ae.tipo !=', 'CIRURGICO');
         $this->db->where('ae.tipo !=', 'MAT/MED');
         $this->db->orderby('ae.data');
-        $this->db->orderby('ae.inicio');
+//        $this->db->orderby('ae.inicio');
+        $listadeespera = $this->session->userdata('listadeespera');
+        if($listadeespera == 't'){
+         $this->db->orderby('ae.data_autorizacao');  
+         $this->db->orderby('ae.inicio');    
+        }else{
+         $this->db->orderby('ae.inicio');      
+        }
         $this->db->orderby('al.situacao');
         $this->db->where('ae.cancelada', 'false');
 
@@ -4288,7 +4304,7 @@ class exame_model extends Model {
 //            var_dump($tipo);
 //            die;
 
-            if ($tipo == 'EXAME' || $tipo == 'MEDICAMENTO') {
+            if ($tipo == 'EXAME' || $tipo == 'MEDICAMENTO' || $tipo == 'MATERIAL') {
 
 //                $this->db->set('ativo', 'f');
 //                $this->db->where('exame_sala_id', $_POST['txtsalas']);

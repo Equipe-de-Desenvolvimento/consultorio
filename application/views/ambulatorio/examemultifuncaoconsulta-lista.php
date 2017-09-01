@@ -131,7 +131,8 @@
                             <thead>
                                 <tr>
                                     <th>Situação</th>
-                                    <th>Horário</th>
+                                    <th>H.Agenda</th>
+                                    <th>H.Autorização</th>
                                     <th>Paciente</th>
                                     <th>Número</th>
                                     <th>Convênio</th>
@@ -243,7 +244,8 @@
                                     <? if ($verifica == 1) { ?>
                                         <tr class="success2">
                                             <td><?= $situacao ?></td>
-                                            <td><?= $item->inicio ?></td>
+                                            <td><?=date("H:i:s", strtotime($item->inicio))?></td>
+                                            <td><?=date("H:i:s", strtotime($item->data_autorizacao))?></td>
                                             <td><?= $item->paciente ?></td>
                                             <td><?= $item->celular ?></td>
                                             <td><?= $item->convenio ?></td>
@@ -268,7 +270,8 @@
                                         ?>
                                         <tr class="success2">
                                             <td><?= $situacao ?></td>
-                                            <td><?= $item->inicio ?></td>
+                                            <td><?=date("H:i:s", strtotime($item->inicio))?></td>
+                                            <td><?=date("H:i:s", strtotime($item->data_autorizacao))?></td>
                                             <td><?= $item->paciente ?></td>
                                             <td><?= $item->celular ?></td>
                                             <td><?= $item->convenio ?></td>
@@ -285,7 +288,8 @@
                                     <? } elseif ($verifica == 2) { ?>
                                         <tr class="alert alert-aguardando">
                                             <td><?= $situacao ?></td>
-                                            <td><?= $item->inicio ?></td>
+                                            <td><?=date("H:i:s", strtotime($item->inicio))?></td>
+                                            <td><?=date("H:i:s", strtotime($item->data_autorizacao))?></td>
                                             <td><?= $item->paciente ?></td>
                                             <td><?= $item->celular ?></td>
                                             <td><?= $item->convenio ?></td>
@@ -310,7 +314,8 @@
                                     <? } elseif ($verifica == 3) { ?>
                                         <tr class="info">
                                             <td><?= $situacao ?></td>
-                                            <td><?= $item->inicio ?></td>
+                                            <td><?=date("H:i:s", strtotime($item->inicio))?></td>
+                                            <td><?=date("H:i:s", strtotime($item->data_autorizacao))?></td>
                                             <td><?= $item->paciente ?></td>
                                             <td><?= $item->celular ?></td>
                                             <td><?= $item->convenio ?></td>
@@ -334,7 +339,8 @@
                                     <? } elseif ($verifica == 4) { ?>
                                         <tr class="finalizado">
                                             <td><?= $situacao ?></td>
-                                            <td><?= $item->inicio ?></td>
+                                            <td><?=date("H:i:s", strtotime($item->inicio))?></td>
+                                            <td><?=date("H:i:s", strtotime($item->data_autorizacao))?></td>
                                             <td><?= $item->paciente ?></td>
                                              <td><?= $item->celular ?></td>
                                              <td><?= $item->convenio ?></td>
@@ -358,10 +364,11 @@
                                     <? } elseif ($verifica == 5) { ?>
                                         <tr class="atendendo">
                                             <td><?= $situacao ?></td>
-                                            <td><?= $item->inicio ?></td>
+                                            <td><?=date("H:i:s", strtotime($item->inicio))?></td>
+                                            <td><?=date("H:i:s", strtotime($item->data_autorizacao))?></td>
                                             <td><?= $item->paciente ?></td>
-                                             <td><?= $item->celular ?></td>
-                                             <td><?= $item->convenio ?></td>
+                                            <td><?= $item->celular ?></td>
+                                            <td><?= $item->convenio ?></td>
                                             <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
                                             <td class="tabela_acoes">
@@ -382,7 +389,8 @@
                                             <tr class="alert alert-agendado">    
                                             <? } ?>
                                             <td><?= $situacao ?></td>
-                                            <td><?= $item->inicio ?></td>
+                                            <td><?=date("H:i:s", strtotime($item->inicio))  ?></td>
+                                            <td>&nbsp;</td>
                                             <td><?= $item->paciente ?> <? if ($item->encaixe == 't') { ?>
                                                     <span class="text-danger">(Encaixe)</span>
                                                 <? } ?></td>

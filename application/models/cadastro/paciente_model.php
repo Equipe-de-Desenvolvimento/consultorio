@@ -282,6 +282,9 @@ class paciente_model extends BaseModel {
             $this->_descricaoconvenio = $return[0]->descricaoconvenio;
             $this->_convenionumero = $return[0]->convenionumero;
             $this->_data_emissao = $return[0]->data_emissao;
+            $this->_alergias = $return[0]->alergias;
+            $this->_observacoes = $return[0]->observacoes;
+            $this->_cirurgias = $return[0]->cirurgias;
             $this->_indicacao = $return[0]->indicacao;
         }
     }
@@ -358,6 +361,8 @@ class paciente_model extends BaseModel {
             if ($_POST['estado_civil_id'] != '') {
                 $this->db->set('estado_civil_id', $_POST['estado_civil_id']);
             }
+            $this->db->set('cirurgias', $_POST['cirurgias']);
+            $this->db->set('observacoes', $_POST['observacoes']);
             $this->db->set('nome_pai', $_POST['nome_pai']);
             $this->db->set('nome_mae', $_POST['nome_mae']);
             $this->db->set('celular', str_replace("(", "", str_replace(")", "", str_replace("-", "", $_POST['celular']))));
