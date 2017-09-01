@@ -47,7 +47,11 @@ $db['default']['password'] = "123456";
 //$db['default']['database'] = "sgh";
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 $db['default']['database'] = "CE9485";
+=======
+$db['default']['database'] = "romulo9485";
+>>>>>>> origin/master
 =======
 $db['default']['database'] = "romulo9485";
 >>>>>>> origin/master

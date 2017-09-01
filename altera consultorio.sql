@@ -34,4 +34,3 @@ ALTER TABLE ponto.tb_paciente ADD COLUMN alergias character varying(40000);
 ALTER TABLE ponto.tb_paciente ADD COLUMN cirurgias character varying(40000);
 ALTER TABLE ponto.tb_paciente ADD COLUMN observacoes character varying(40000);
 ALTER TABLE ponto.tb_empresa ADD COLUMN listadeespera boolean DEFAULT false;
-

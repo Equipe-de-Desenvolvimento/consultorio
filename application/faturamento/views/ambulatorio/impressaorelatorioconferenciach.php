@@ -92,6 +92,7 @@
                 foreach ($relatorio as $item) :
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                     if ($item->grupo == 'MEDICAMENTO' || $item->grupo == 'MATERIAL') {
 =======
                     if ($item->grupo == 'MEDICAMENTO') {
@@ -237,6 +238,150 @@
     });
 
 </script>
+=======
+                    if ($item->grupo == 'MEDICAMENTO') {
+                        $medicamento++;
+                    }
+                    $i++;
+                    if ($i == 1 || $item->convenio == $convenio) {
+                        $valortotal = $valortotal + $item->valor_total;
+                        $valor = $valor + $item->valor_total;
+                        $qtde++;
+                        $qtdetotal++;
+
+                        if ($i == 1) {
+                            ?>
+                            <tr>
+                                <td colspan="8"><font ><b>Convenio:&nbsp;<?= utf8_decode($item->convenio); ?></b></td>
+                            </tr>
+            <? } ?>
+                        <tr>
+
+            <? if ($paciente == $item->paciente) { ?>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+            <? } else { ?>
+                                <td><?= $item->guia_id; ?></td>
+                                <td><?= substr($item->data, 8, 2) . "/" . substr($item->data, 5, 2) . "/" . substr($item->data, 0, 4); ?></td>
+                                <td><?= utf8_decode($item->paciente); ?></td>
+                                <?
+                                $contadorpaciente++;
+                                $contadorpacientetotal++;
+                            }
+                            ?>
+                            <td><?= utf8_decode(substr($item->medico, 0, 20)); ?></td>
+                            <td><?= $item->autorizacao; ?></td>
+                            <td><?= utf8_decode($item->exame); ?></td>
+                            <td><?= $item->codigo; ?></td>
+                            <td><?= $item->quantidade; ?></td>
+                            <td><?= number_format($item->qtdech, 2, ',', '.') ?></td>
+                            <td><?= number_format($item->valorch, 2, ',', '.') ?></td>
+                            <td><?= number_format($item->valor_total, 2, ',', '.') ?></td>
+                        </tr>
+
+
+                        <?php
+                        $paciente = $item->paciente;
+                        $convenio = $item->convenio;
+                    } else {
+                        $convenio = $item->convenio;
+                        ?>
+                        <tr>
+                            <td width="200px;" align="Right" colspan="9"><b>Valor Previsto <?= number_format($valor, 2, ',', '.'); ?></b></td>
+                        </tr>
+                        <tr>
+                            <td width="2000px;" align="Right" colspan="9"><b>Nr. Pacientes: <?= $contadorpaciente; ?></b></td>
+                        </tr>
+                        <tr>
+                            <td width="140px;" align="Right" colspan="9"><b>Nr. Exa: <?= $qtde; ?></b></td>
+                        </tr>
+                        <?
+                        $paciente = "";
+                        $valor = 0;
+                        $qtde = 0;
+                        $contadorpaciente = 0;
+                        $valortotal = $valortotal + $item->valor_total;
+                        $valor = $valor + $item->valor_total;
+                        $qtde++;
+                        $qtdetotal++;
+                        ?>
+                        <tr>
+                            <td colspan="8"><font ><b>Convenio:&nbsp;<?= utf8_decode($item->convenio); ?></b></td>
+                        </tr>
+                        <tr>
+            <? if ($paciente == $item->paciente) { ?>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+            <? } else { ?>
+                                <td><?= $item->guia_id; ?></td>
+                                <td><?= substr($item->data, 8, 2) . "/" . substr($item->data, 5, 2) . "/" . substr($item->data, 0, 4); ?></td>
+                                <td><?= utf8_decode($item->paciente); ?></td>
+                                <?
+                                $contadorpaciente++;
+                                $contadorpacientetotal++;
+                            }
+                            ?>
+                            <td><?= utf8_decode(substr($item->medico, 0, 20)); ?></td>
+                            <td><?= $item->autorizacao; ?></td>
+                            <td><?= utf8_decode($item->exame); ?></td>
+                            <td><?= $item->codigo; ?></td>
+                            <td><?= $item->quantidade; ?></td>
+                            <td><?= number_format($item->valortotal, 2, ',', '.') ?></td>
+                            <td><?= number_format($item->valor_total, 2, ',', '.') ?></td>
+                        </tr>
+                        <?
+                        $paciente = $item->paciente;
+                    }
+                endforeach;
+                ?>
+                <tr>
+                    <td width="200px;" align="Right" colspan="9"><b>Valor Previsto <?= number_format($valor, 2, ',', '.'); ?></b></td>
+                </tr>
+                <tr>
+                    <td width="2000px;" align="Right" colspan="9"><b>Nr. Pacientes: <?= $contadorpaciente; ?></b></td>
+                </tr>
+                <tr>
+                    <td width="140px;" align="Right" colspan="9"><b>Nr. Exa: <?= $qtde; ?></b></td>
+                </tr>
+            </tbody>
+        </table>
+        <?
+        $qtdetotal = $qtdetotal - $medicamento;
+        ?>
+        <hr>
+        <table>
+            <tbody>
+                <tr>
+                    <td width="140px;" align="Right" >TOTAL GERAL</td>
+                    <td width="200px;" align="Right" >Nr. Pacienets: <?= $contadorpacientetotal; ?></td>
+                    <td width="140px;" align="Right" >Nr. Exa: <?= $qtdetotal; ?></td>
+                    <td width="200px;" align="Right">Total Geral: <?= number_format($valortotal, 2, ',', '.'); ?></td>
+                </tr>
+            </tbody>
+
+        </table>
+    <? } else {
+        ?>
+        <h4>N&atilde;o h&aacute; resultados para esta consulta.</h4>
+    <? }
+    ?>
+
+
+</div> <!-- Final da DIV content -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" href="<?php base_url() ?>css/jquery-ui-1.8.5.custom.css">
+<script type="text/javascript">
+
+
+
+    $(function () {
+        $("#accordion").accordion();
+    });
+
+</script>
+>>>>>>> origin/master
 =======
                     if ($item->grupo == 'MEDICAMENTO') {
                         $medicamento++;

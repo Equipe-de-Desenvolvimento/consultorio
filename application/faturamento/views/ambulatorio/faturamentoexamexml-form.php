@@ -129,7 +129,11 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         $arquivo_pasta = directory_map("./upload/cr/$value->nome/");
+=======
+                                        $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/cr/$value->nome/");
+>>>>>>> origin/master
 =======
                                         $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/cr/$value->nome/");
 >>>>>>> origin/master

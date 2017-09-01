@@ -17,7 +17,11 @@ if (!defined('BASEPATH'))
 //$config['base_url']	= "http://192.168.25.51/consultorio/";
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 $config['base_url']	= "http://192.168.25.35/consultorio/";
+=======
+$config['base_url']	= "http://192.168.25.97/consultorio/";
+>>>>>>> origin/master
 =======
 $config['base_url']	= "http://192.168.25.97/consultorio/";
 >>>>>>> origin/master

@@ -28,7 +28,6 @@ class login_model extends Model {
 
         $this->db->select('empresa_id,
                             nome,
-<<<<<<< HEAD
                             listadeespera,
                             internacao,
                             chat');
@@ -70,46 +69,6 @@ class login_model extends Model {
                 'perfil' => $return[0]->perfil,
                 'modulo' => $modulo,
                 'listadeespera' => $listadeespera,
-=======
-                            internacao,
-                            chat');
-        $this->db->from('tb_empresa');
-        $this->db->where('empresa_id', 1);
-        $retorno = $this->db->get()->result();
-        $empresa = 1;
-
-        if (count($retorno) > 0) {
-            $empresanome = $retorno[0]->nome;
-            $internacao = $retorno[0]->internacao;
-            $chat = $retorno[0]->chat;
-        } else {
-            $empresanome = "";
-            $internacao = false;
-        }
-
-        if (isset($return) && count($return) > 0) {
-
-            //marcando o usuario como 'online'
-            $horario = date("Y-m-d H:i:s");
-            $this->db->set('horario_login', $horario);
-            $this->db->set('online', 't');
-            $this->db->where('operador_id', $return[0]->operador_id);
-            $this->db->update('tb_operador');
-
-            $modulo[] = null;
-            foreach ($return as $value) {
-                if (isset($value->modulo_id)) {
-                    $modulo[] = $value->modulo_id;
-                }
-            }
-            $p = array(
-                'autenticado' => true,
-                'operador_id' => $return[0]->operador_id,
-                'login' => $usuario,
-                'perfil_id' => $return[0]->perfil_id,
-                'perfil' => $return[0]->perfil,
-                'modulo' => $modulo,
->>>>>>> origin/master
                 'internacao' => $internacao,
                 'chat' => $chat,
                 'empresa_id' => $empresa,

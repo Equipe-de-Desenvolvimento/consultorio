@@ -102,7 +102,11 @@
                                         foreach ($pacientes as $paciente) {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                                             $arquivo_pasta = directory_map("./upload/laudo/$item->nome/$paciente->paciente_id/");
+=======
+                                            $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/laudo/$item->nome/$paciente->paciente_id/");
+>>>>>>> origin/master
 =======
                                             $arquivo_pasta = directory_map("/home/sisprod/projetos/clinica/upload/laudo/$item->nome/$paciente->paciente_id/");
 >>>>>>> origin/master

@@ -15,6 +15,7 @@ $up=-63;
 $ut=44;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 $ttffile='./system/plugins/mpdf_lib/ttfonts/DejaVuSansMono-Bold.ttf';
 =======
 $ttffile='/home/sisprod/projetos/clinica/system/plugins/mpdf_lib/ttfonts/DejaVuSansMono-Bold.ttf';
@@ -29,6 +30,19 @@ $panose=' 0 0 2 b 7 9 3 6 4 2 2 4';
 $haskerninfo=false;
 $unAGlyphs=false;
 ?>
+=======
+$ttffile='/home/sisprod/projetos/clinica/system/plugins/mpdf_lib/ttfonts/DejaVuSansMono-Bold.ttf';
+$TTCfontID='0';
+$originalsize=302868;
+$sip=false;
+$smp=false;
+$BMPselected=true;
+$fontkey='dejavusansmonoB';
+$panose=' 0 0 2 b 7 9 3 6 4 2 2 4';
+$haskerninfo=false;
+$unAGlyphs=false;
+?>
+>>>>>>> origin/master
 =======
 $ttffile='/home/sisprod/projetos/clinica/system/plugins/mpdf_lib/ttfonts/DejaVuSansMono-Bold.ttf';
 $TTCfontID='0';
