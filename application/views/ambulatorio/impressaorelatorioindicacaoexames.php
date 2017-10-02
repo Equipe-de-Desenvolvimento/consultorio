@@ -117,7 +117,7 @@
     <? endforeach; ?>
             </tbody>
         </table>
-   <?if($_POST['grafico'] == '1' && $indicacao == '0' ){?>
+   <?if(@$_POST['grafico'] == '1' && $indicacao == '0' ){?>
         <div id="grafico" style="height: 300px;"></div>
     <?}?>
         

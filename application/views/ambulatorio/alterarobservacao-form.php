@@ -1,14 +1,26 @@
 <body bgcolor="#C0C0C0">
 <meta charset="UTF-8">
-<div class="content"> <!-- Inicio da DIV content -->
-        <h3 class="singular">Alterar Observacao</h3>
+
+    <div class="container-fluid"> <!-- Inicio da DIV content -->
+
+
+    <div class="panel panel-default">
+        <div class="alert alert-info">
+             <h3>Observação</h3>
+              <!--CSS PADRAO DO BOOTSTRAP COM ALGUMAS ALTERAÇÕES DO TEMA-->
+    <link href="<?= base_url() ?>bootstrap/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>bootstrap/vendor/metisMenu/metisMenu.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>bootstrap/dist/css/sb-admin-2.css" rel="stylesheet" />
+        </div> 
+        <div class="panel-body">
+       
         <div>
             <form name="form_horariostipo" id="form_horariostipo" action="<?= base_url() ?>ambulatorio/exame/observacaogravar/<?= $agenda_exame_id; ?>" method="post">
                 <fieldset>
                     
                 <dl class="dl_desconto_lista">
                     <dt>
-                    <label>Observacao</label>
+                    <label>Observação</label>
                     </dt>
                         <textarea type="text" name="txtobservacao" cols="55" class="texto12"><?= $observacao[0]->observacoes; ?></textarea>
 
@@ -16,7 +28,10 @@
                 </dl>    
 
                 <hr/>
-                <button type="submit" name="btnEnviar">OK</button>
+               <div class="row">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-outline btn-success btn-sm" name="btnEnviar"><i class="fa fa-floppy-o" aria-hidden="true"></i> Enviar</button>
+                    </div>
             </form>
             </fieldset>
         </div>

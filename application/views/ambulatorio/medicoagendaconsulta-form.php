@@ -20,7 +20,7 @@
 
 
                         <select name="txtacao" size="1" class="form-control" id="teste" required >
-                            <!--<option value="Bloquear">Bloquear</option>-->
+                            <option value="Bloquear">Bloquear</option>
                             <option value="Excluir">Excluir hor&aacute;rios</option>
                             <option value="Alterarmedico">Alterar medico</option>
 

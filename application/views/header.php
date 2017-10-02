@@ -224,6 +224,9 @@ function debug($object) {
                                                                 <li>
                                                                     <a href="<?= base_url() ?>ambulatorio/guia/relatoriomedicoconveniofinanceiro">Relatorio Produ&ccedil;&atilde;o M&eacute;dica</a>
                                                                 </li>
+                                                                <li>
+                                                                    <a href="<?= base_url() ?>ambulatorio/guia/relatorioindicacaoexames">Relatorio Recomendação</a>
+                                                                </li>
                                                                 
                                                             </ul>
                                                         </li>

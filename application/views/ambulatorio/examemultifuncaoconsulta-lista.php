@@ -106,7 +106,10 @@
                         width: 150pt;
                     }
                     .desbloq{
-                        width: 125pt;
+                        width: 135pt;
+                    }
+                    .bloq{
+                        width: 65pt;
                     }
 
                 </style>
@@ -131,13 +134,14 @@
                             <thead>
                                 <tr>
                                     <th>Situação</th>
+                                    <th colspan="3">Paciente</th>
+                                    <th>Data</th>
                                     <th>H.Agenda</th>
                                     <th>H.Autorização</th>
-                                    <th>Paciente</th>
-                                    <th>Número</th>
-                                    <th>Convênio</th>
                                     <th>Médico</th>
-                                    <th>Data</th>
+                                    <th>Convênio</th>
+                                    <th>Número</th>
+                                    <th>Observações</th>
                                     <th class="text-center">Ações</th>
                                 </tr>
                             </thead>
@@ -240,26 +244,26 @@
                                             break;
                                     }
                                     ?>
-
                                     <? if ($verifica == 1) { ?>
                                         <tr class="success2">
                                             <td><?= $situacao ?></td>
-                                            <td><?=date("H:i:s", strtotime($item->inicio))?></td>
-                                            <td><?=date("H:i:s", strtotime($item->data_autorizacao))?></td>
-                                            <td><?= $item->paciente ?></td>
-                                            <td><?= $item->celular ?></td>
-                                            <td><?= $item->convenio ?></td>
-                                            <td><?= substr($item->medicoagenda, 0, 15); ?></td>
+                                            <td colspan="3"><?= $item->paciente ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
-
-                                            <td class="tabela_acoes" style="width: 150pt;">
+                                            <td><?= date("H:i:s", strtotime($item->inicio)) ?></td>
+                                            <td><? //=date("H:i:s", strtotime($item->data_autorizacao))    ?></td>
+                                            <td><?= substr($item->medicoagenda, 0, 15); ?></td>
+                                            <td><?= $item->convenio ?></td>
+                                            <td><?= $item->celular ?></td>
+                                            <td><a onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/alterarobservacao/<?= $item->agenda_exames_id ?>', '_blank', 'toolbar=no,Location=no,menubar=no,\n\
+                                                                                                                                            width=550,height=330');">=><?= $item->observacoes; ?></a></td>
+                                            <td class="tabela_acoes" >
                                                 <? if ($item->bloqueado == 'f') { ?>
-
-                                                    <a class="btn btn-success btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/bloquear/<?= $item->agenda_exames_id ?>/<?= $item->inicio; ?>');">Bloquear <i class="fa fa-lock" aria-hidden="true"></i>
-                                                    </a>
-                                                    <a class="btn btn-success btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarconsultatemp/<?= $item->agenda_exames_id ?>');">Agendar <i class="fa fa-calendar" aria-hidden="true"></i>
-
-                                                    </a>
+                                                    <p>
+                                                        <a class="btn btn-success btn-sm bloq" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/bloquear/<?= $item->agenda_exames_id ?>/<?= $item->inicio; ?>');">Bloquear <i class="fa fa-lock" aria-hidden="true"></i>
+                                                        </a>
+                                                        <a class="btn btn-success btn-sm bloq" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exametemp/carregarconsultatemp/<?= $item->agenda_exames_id ?>');">Agendar <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                        </a>
+                                                    </p>
                                                 <? } else { ?>
                                                     <a class="btn btn-success btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/desbloquear/<?= $item->agenda_exames_id ?>/<?= $item->inicio; ?> ', 'toolbar=no,Location=no,menubar=no,width=500,height=200');">Desbloq.
                                                     </a>
@@ -270,14 +274,15 @@
                                         ?>
                                         <tr class="success2">
                                             <td><?= $situacao ?></td>
-                                            <td><?=date("H:i:s", strtotime($item->inicio))?></td>
-                                            <td><?=date("H:i:s", strtotime($item->data_autorizacao))?></td>
-                                            <td><?= $item->paciente ?></td>
-                                            <td><?= $item->celular ?></td>
-                                            <td><?= $item->convenio ?></td>
-                                            <td><?= substr($item->medicoagenda, 0, 15); ?></td>
+                                            <td colspan="3"><?= $item->paciente ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
-
+                                            <td><?= date("H:i:s", strtotime($item->inicio)) ?></td>
+                                            <td><?= date("H:i:s", strtotime($item->data_autorizacao)) ?></td>
+                                            <td><?= substr($item->medicoagenda, 0, 15); ?></td>
+                                            <td><?= $item->convenio ?></td>
+                                            <td><?= $item->celular ?></td>
+                                            <td ><a onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/alterarobservacao/<?= $item->agenda_exames_id ?>', '_blank', 'toolbar=no,Location=no,menubar=no,\n\
+                                                                                                                                            width=500,height=230');">=><?= $item->observacoes; ?></a></td>
                                             <td class="tabela_acoes">
 
                                                 <a class="btn btn-success btn-sm desbloq" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/desbloquear/<?= $item->agenda_exames_id ?>/<?= $item->inicio; ?> ', 'toolbar=no,Location=no,menubar=no,width=500,height=200');">Desbloq. <i class="fa fa-unlock" aria-hidden="true"></i>
@@ -288,13 +293,15 @@
                                     <? } elseif ($verifica == 2) { ?>
                                         <tr class="alert alert-aguardando">
                                             <td><?= $situacao ?></td>
-                                            <td><?=date("H:i:s", strtotime($item->inicio))?></td>
-                                            <td><?=date("H:i:s", strtotime($item->data_autorizacao))?></td>
-                                            <td><?= $item->paciente ?></td>
-                                            <td><?= $item->celular ?></td>
-                                            <td><?= $item->convenio ?></td>
-                                            <td><?= substr($item->medicoagenda, 0, 15); ?></td>
+                                            <td colspan="3"><?= $item->paciente ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
+                                            <td><?= date("H:i:s", strtotime($item->inicio)) ?></td>
+                                            <td><?= date("H:i:s", strtotime($item->data_autorizacao)) ?></td>
+                                            <td><?= substr($item->medicoagenda, 0, 15); ?></td>
+                                            <td><?= $item->convenio ?></td>
+                                            <td><?= $item->celular ?></td>
+                                            <td "><a onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/alterarobservacao/<?= $item->agenda_exames_id ?>', '_blank', 'toolbar=no,Location=no,menubar=no,\n\
+                                                                                                                                            width=500,height=230');">=><?= $item->observacoes; ?></a></td>
                                             <td class="tabela_acoes">
                                                 <? if ($perfil_id == 1 || $perfil_id == 4) { ?>
 
@@ -314,13 +321,15 @@
                                     <? } elseif ($verifica == 3) { ?>
                                         <tr class="info">
                                             <td><?= $situacao ?></td>
-                                            <td><?=date("H:i:s", strtotime($item->inicio))?></td>
-                                            <td><?=date("H:i:s", strtotime($item->data_autorizacao))?></td>
-                                            <td><?= $item->paciente ?></td>
-                                            <td><?= $item->celular ?></td>
-                                            <td><?= $item->convenio ?></td>
-                                            <td><?= substr($item->medicoagenda, 0, 15); ?></td>
+                                            <td colspan="3"><?= $item->paciente ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
+                                            <td><?= date("H:i:s", strtotime($item->inicio)) ?></td>
+                                            <td><?= date("H:i:s", strtotime($item->data_autorizacao)) ?></td>
+                                            <td><?= substr($item->medicoagenda, 0, 15); ?></td>
+                                            <td><?= $item->convenio ?></td>
+                                            <td><?= $item->celular ?></td>
+                                            <td "><a onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/alterarobservacao/<?= $item->agenda_exames_id ?>', '_blank', 'toolbar=no,Location=no,menubar=no,\n\
+                                                                                                                                            width=500,height=230');">=><?= $item->observacoes; ?></a></td>
                                             <td class="tabela_acoes">
                                                 <? if ($perfil_id == 1 || $perfil_id == 4) { ?>
 
@@ -339,13 +348,15 @@
                                     <? } elseif ($verifica == 4) { ?>
                                         <tr class="finalizado">
                                             <td><?= $situacao ?></td>
-                                            <td><?=date("H:i:s", strtotime($item->inicio))?></td>
-                                            <td><?=date("H:i:s", strtotime($item->data_autorizacao))?></td>
-                                            <td><?= $item->paciente ?></td>
-                                             <td><?= $item->celular ?></td>
-                                             <td><?= $item->convenio ?></td>
-                                            <td><?= substr($item->medicoagenda, 0, 15); ?></td>
+                                            <td colspan="3"><?= $item->paciente ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
+                                            <td><?= date("H:i:s", strtotime($item->inicio)) ?></td>
+                                            <td><?= date("H:i:s", strtotime($item->data_autorizacao)) ?></td>
+                                            <td><?= substr($item->medicoagenda, 0, 15); ?></td>
+                                            <td><?= $item->convenio ?></td>
+                                            <td><?= $item->celular ?></td>
+                                            <td "><a onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/alterarobservacao/<?= $item->agenda_exames_id ?>', '_blank', 'toolbar=no,Location=no,menubar=no,\n\
+                                                                                                                                            width=500,height=230');">=><?= $item->observacoes; ?></a></td>
                                             <td class="tabela_acoes">
                                                 <? if ($perfil_id == 1 || $perfil_id == 4) { ?>
 
@@ -364,13 +375,15 @@
                                     <? } elseif ($verifica == 5) { ?>
                                         <tr class="atendendo">
                                             <td><?= $situacao ?></td>
-                                            <td><?=date("H:i:s", strtotime($item->inicio))?></td>
-                                            <td><?=date("H:i:s", strtotime($item->data_autorizacao))?></td>
-                                            <td><?= $item->paciente ?></td>
-                                            <td><?= $item->celular ?></td>
-                                            <td><?= $item->convenio ?></td>
-                                            <td><?= substr($item->medicoagenda, 0, 15); ?></td>
+                                            <td colspan="3"><?= $item->paciente ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
+                                            <td><?= date("H:i:s", strtotime($item->inicio)) ?></td>
+                                            <td><?= date("H:i:s", strtotime($item->data_autorizacao)) ?></td>
+                                            <td><?= substr($item->medicoagenda, 0, 15); ?></td>
+                                            <td><?= $item->convenio ?></td>
+                                            <td><?= $item->celular ?></td>
+                                            <td ><a onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/alterarobservacao/<?= $item->agenda_exames_id ?>', '_blank', 'toolbar=no,Location=no,menubar=no,\n\
+                                                                                                                                            width=500,height=230');">=><?= $item->observacoes; ?></a></td>
                                             <td class="tabela_acoes">
                                                 <a class="btn btn-danger btn-sm" onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/guiacancelamento/<?= $item->agenda_exames_id ?>/<?= $item->paciente_id ?>/<?= $item->procedimento_tuss_id ?>');">Cancelar
                                                 </a>
@@ -389,15 +402,17 @@
                                             <tr class="alert alert-agendado">    
                                             <? } ?>
                                             <td><?= $situacao ?></td>
-                                            <td><?=date("H:i:s", strtotime($item->inicio))  ?></td>
-                                            <td>&nbsp;</td>
-                                            <td><?= $item->paciente ?> <? if ($item->encaixe == 't') { ?>
+                                            <td colspan="3"><?= $item->paciente ?> <? if ($item->encaixe == 't') { ?>
                                                     <span class="text-danger">(Encaixe)</span>
                                                 <? } ?></td>
-                                             <td><?= $item->celular ?></td>
-                                             <td><?= $item->convenio ?></td>
-                                            <td><?= substr($item->medicoagenda, 0, 15); ?></td>
                                             <td><?= date("d/m/Y", strtotime($item->data)) ?></td>
+                                            <td><?= date("H:i:s", strtotime($item->inicio)) ?></td>
+                                            <td>&nbsp;</td>
+                                            <td><?= substr($item->medicoagenda, 0, 15); ?></td>
+                                            <td><?= $item->convenio ?></td>
+                                            <td><?= $item->celular ?></td>
+                                            <td ><a onclick="javascript:window.open('<?= base_url() ?>ambulatorio/exame/alterarobservacao/<?= $item->agenda_exames_id ?>', '_blank', 'toolbar=no,Location=no,menubar=no,\n\
+                                                                                                                                            width=600,height=330');">=><?= $item->observacoes; ?></a></td>
                                             <td class="tabela_acoes text-center" style="width: 150pt;">
                                                 <? if (date("d/m/Y") == date("d/m/Y", strtotime($item->data))) { ?>
                                                     <a class="btn btn-info btn-sm" onclick="javascript:window.open('<?= base_url() ?>cadastros/pacientes/procedimentoautorizarconsulta/<?= $item->paciente_id ?>');">Autorizar <i class="fa fa-user-md" aria-hidden="true"></i>
@@ -423,13 +438,13 @@
                             }
                             ?>
                             <tr>
-                                <th class="tabela_footer  btn-info" colspan="9">
+                                <th class="tabela_footer  btn-info" colspan="12">
                                     <?php $this->utilitario->paginacao($url, $total, $pagina, $limit); ?>
 
                                 </th>
                             </tr>
                             <tr>
-                                <th class="tabela_footer  btn-info" colspan="9">
+                                <th class="tabela_footer  btn-info" colspan="12">
 
                                     Total de registros: <?php echo $total; ?>
                                 </th>
@@ -445,7 +460,18 @@
         </div>
     </div>
 
-
+    <?
+    if (@$_GET['data'] != '') {
+        $data = date("Y-m-d", strtotime(str_replace('/', '-', $_GET['data'])));
+    } else {
+        $data = date('Y-m-d');
+    }
+    if (@$_GET['nome'] != '') {
+        $nome = $_GET['nome'];
+    } else {
+        $nome = "";
+    }
+    ?>
 </div> <!-- Final da DIV page-wrapper -->
 <script type="text/javascript" src="<?= base_url() ?>js/jquery-ui-1.10.4.js" ></script>
 <script type="text/javascript">
@@ -537,6 +563,21 @@
                                                             right: 'today'
                                                         },
                                                         height: 500,
+                                                        dayRender: function (date, cell) {
+                                                            if ($('#data').val() == '') {
+                                                                var data_escolhida = moment(new Date()).format('YYYY-MM-DD');
+                                                            } else {
+                                                                var data_escolhida = $('#data').val();
+                                                            }
+
+                                                            var today = moment(new Date()).format('YYYY-MM-DD');
+                                                            var check = moment(date).format('YYYY-MM-DD');
+//            alert(data_escolhida);
+//            var today = $.fullCalendar.formatDate(new Date(), 'yyyy-MM-dd');
+                                                            if (data_escolhida == check && data_escolhida != today) {
+                                                                cell.css("background-color", "#BCD2EE");
+                                                            }
+                                                        },
                                                         dayClick: function (date) {
                                                             var data = date.format();
 
@@ -545,23 +586,15 @@
 
 
                                                         },
-//        eventDragStop: function (date, jsEvent, view) {
-////            alert(date.format());
-//        },
-//        navLinks: true,
                                                         showNonCurrentDates: false,
-//            weekends: false,
+                                                        defaultDate: '<?= $data ?>',
 
-//                navLinks: true, // can click day/week names to navigate views
-                                                        defaultDate: '<?= date('Y-m-d') ?>',
                                                         locale: 'pt-br',
                                                         editable: false,
                                                         eventLimit: true, // allow "more" link when too many events
                                                         schedulerLicenseKey: 'CC-Attribution-Commercial-NoDerivatives',
-//            events: '<?= base_url() ?>autocomplete/listarhorarioscalendario',
 
                                                         eventSources: [
-                                                            // your event source
 
                                                             {
                                                                 url: '<?= base_url() ?>autocomplete/listarhorarioscalendario',
@@ -573,11 +606,9 @@
                                                                 error: function () {
                                                                     alert('there was an error while fetching events!');
                                                                 }
-//                    color: 'yellow', // a non-ajax option
-//                    textColor: 'black' // a non-ajax option
+
                                                             }
 
-                                                            // any other sources...
 
                                                         ]
 

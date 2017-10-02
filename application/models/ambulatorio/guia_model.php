@@ -1908,6 +1908,15 @@ class guia_model extends Model {
         return $return->result();
     }
 
+    function listacadaindicacaoautocomplete() {
+
+        $this->db->select('pi.paciente_indicacao_id,
+            pi.nome as indicacao');
+        $this->db->from('tb_paciente_indicacao pi');
+        $return = $this->db->get();
+        return $return->result();
+    }
+
     function relatorioindicacaoexames() {
         $this->db->select('p.nome as paciente, ae.paciente_id,
             pi.nome as indicacao');
@@ -5619,9 +5628,7 @@ AND data <= '$data_fim'";
                 return -1;
             else
 //                $ambulatorio_guia_id = $this->db->insert_id();
-
-
-            return $ambulatorio_guia_id;
+                return $ambulatorio_guia_id;
         } catch (Exception $exc) {
             return -1;
         }
@@ -6000,8 +6007,7 @@ AND data <= '$data_fim'";
             if ($_POST['ajuste1'] != "0" || $_POST['ajuste2'] != "0" || $_POST['ajuste3'] != "0" || $_POST['ajuste4'] != "0") {
                 if ($_POST['valor1'] > $_POST['valorajuste1']) {
                     $desconto1 = $_POST['valor1'] - $_POST['valorajuste1'];
-                } 
-                else {
+                } else {
                     $desconto1 = $_POST['valorajuste1'] - $_POST['valor1'];
                 }
                 if ($_POST['valor2'] > $_POST['valorajuste2']) {
@@ -7709,6 +7715,16 @@ ORDER BY ae.agenda_exames_id)";
         $this->db->where('pc.procedimento_convenio_id', $procedimento);
         $return = $this->db->get()->result();
         return $tipo = $return[0]->tipo;
+    }
+
+    function gravarindicacao() {
+//        try {
+            /* inicia o mapeamento no banco */
+            $this->db->set('nome', $_POST['indicacaolabel']);
+            $this->db->insert('tb_paciente_indicacao');
+            $paciente_indicacao_id = $this->db->insert_id();
+            return $paciente_indicacao_id;
+//        }
     }
 
     function gravarconsulta($ambulatorio_guia_id, $percentual, $tipo) {

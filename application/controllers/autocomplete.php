@@ -1581,6 +1581,20 @@ class Autocomplete extends Controller {
         }
         echo json_encode($var);
     }
+    
+    function indicacao() {
+        if (isset($_GET['term'])) {
+            $result = $this->guia->listacadaindicacaoautocomplete($_GET['term']);
+        } else {
+            $result = $this->guia->listacadaindicacaoautocomplete();
+        }
+        foreach ($result as $item) {
+            $retorno['value'] = $item->indicacao;
+            $retorno['id'] = $item->paciente_indicacao_id;
+            $var[] = $retorno;
+        }
+        echo json_encode($var);
+    }
 
     function pacientes() {
         if (isset($_GET['term'])) {

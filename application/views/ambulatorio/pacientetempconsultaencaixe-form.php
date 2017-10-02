@@ -1,4 +1,5 @@
 <? $empresa_logada = $this->session->userdata('empresa_id'); ?>
+<?$operador_id = $this->session->userdata('operador_id');?>
 <div id="page-wrapper"> <!-- Inicio da DIV content -->
     <div class="row">
         <div class="col-lg-12">
@@ -33,7 +34,9 @@
                             <select name="medico" id="medico" class="form-control" required>
                                 <option value="" >Selecione</option>
                                 <? foreach ($medico as $item) : ?>
-                                    <option value="<?= $item->operador_id; ?>"><?= $item->nome; ?></option>
+                                    <option value="<?= $item->operador_id; ?>"<?if(@$operador_id == @$item->operador_id){
+                                        echo 'selected';
+                                    }?>><?= $item->nome; ?></option>
                                 <? endforeach; ?>
                             </select>
                         </div>

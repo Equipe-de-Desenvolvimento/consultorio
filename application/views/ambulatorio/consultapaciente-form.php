@@ -129,7 +129,7 @@
                         <tr>
                             <th class="tabela_header">Data</th>
                             <th class="tabela_header">Hora</th>
-                            <th class="tabela_header">Exame</th>
+                            <th class="tabela_header">Médico</th>
                             <th class="tabela_header">Observa&ccedil;&otilde;es</th>
                         </tr>
                     </thead>

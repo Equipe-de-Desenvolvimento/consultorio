@@ -198,25 +198,8 @@
 
                         </div>
                         <div class="form-group">
-                            <label>Indicação</label>
-
-                            <select name="indicacao" id="indicacao" class="form-control texto04" >
-                                <option value=''>Selecione</option>
-                                <?php
-                                $indicacao = $this->paciente->listaindicacao($_GET);
-                                foreach ($indicacao as $item) {
-                                    ?>
-                                    <option value="<?php echo $item->paciente_indicacao_id; ?>" 
-                                    <?
-                                    if (@$obj->_indicacao == $item->paciente_indicacao_id):echo 'selected';
-                                    endif;
-                                    ?>>
-                                            <?php echo $item->nome; ?>
-                                    </option>
-                                    <?php
-                                }
-                                ?> 
-                            </select>
+                            <label>Celular*</label>
+                            <input type="text" id="txtCelular" class="form-control texto04" name="celular" value="<?= @$celular; ?>" required=""/>
                         </div>
 
                         <div class="form-group">
@@ -261,10 +244,7 @@
 
                             <input type="text" id="bairro" class="form-control texto10" name="bairro" value="<?= @$obj->_bairro; ?>" />
                         </div>
-                        <div class="form-group">
-                            <label>Celular*</label>
-                            <input type="text" id="txtCelular" class="form-control texto04" name="celular" value="<?= @$celular; ?>" required=""/>
-                        </div>
+                        
 
 
                     </div>

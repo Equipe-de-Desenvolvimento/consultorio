@@ -224,17 +224,8 @@ if ($contador > 0) {
                         <div class="form-group">
                             <label>Recomendação</label>  
 
-                            <select name="indicacao" id="indicacao" class="form-control" >
-                                <option value='' >Selecione</option>
-                                <?php
-                                $indicacao = $this->paciente->listaindicacao($_GET);
-                                foreach ($indicacao as $item) {
-                                    ?>
-                                    <option value="<?php echo $item->paciente_indicacao_id; ?>"> <?php echo $item->nome; ?></option>
-                                    <?php
-                                }
-                                ?> 
-                            </select>
+                           <input type="hidden" name="indicacao" id="indicacao" class="form-control"/>
+                           <input type="text" name="indicacaolabel" id="indicacaolabel" class="form-control"/>
                         </div>
                     </div>
                 </div>
@@ -491,6 +482,35 @@ if ($contador > 0) {
                                                 };
 
                                                 $("#medico1").easyAutocomplete(solicitante);
+                                                // FINAL DO AUTOCOMPLETE NOVO. DEFINE AQUI O ID DO CAMPO ATRIBUIDO E A VARIVEL
+                                                
+                                                var indicacao = {
+                                                    url: "<?= base_url() ?>index.php?c=autocomplete&m=indicacao",
+                                                    getValue: "value",
+                                                    list: {
+                                                        onSelectItemEvent: function () {
+                                                            var value = $("#indicacaolabel").getSelectedItemData().id;
+                                                            $("#indicacao").val(value).trigger("change");
+                                                        },
+                                                        match: {
+                                                            enabled: true
+                                                        },
+                                                        showAnimation: {
+                                                            type: "fade", //normal|slide|fade
+                                                            time: 200,
+                                                            callback: function () {}
+                                                        },
+                                                        hideAnimation: {
+                                                            type: "slide", //normal|slide|fade
+                                                            time: 200,
+                                                            callback: function () {}
+                                                        },
+                                                        maxNumberOfElements: 20,
+                                                    },
+                                                    theme: "bootstrap"
+                                                };
+
+                                                $("#indicacaolabel").easyAutocomplete(indicacao);
                                                 // FINAL DO AUTOCOMPLETE NOVO. DEFINE AQUI O ID DO CAMPO ATRIBUIDO E A VARIVEL
 
 

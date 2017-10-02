@@ -34,3 +34,9 @@ ALTER TABLE ponto.tb_paciente ADD COLUMN alergias character varying(40000);
 ALTER TABLE ponto.tb_paciente ADD COLUMN cirurgias character varying(40000);
 ALTER TABLE ponto.tb_paciente ADD COLUMN observacoes character varying(40000);
 ALTER TABLE ponto.tb_empresa ADD COLUMN listadeespera boolean DEFAULT false;
+
+-- Dia 02/10/2017
+ALTER TABLE ponto.tb_agenda_exames ADD COLUMN indicacao integer;
+
+ALTER TABLE ponto.tb_agenda_exames ADD COLUMN valor_medico numeric(10,2);
+ALTER TABLE ponto.tb_agenda_exames ADD COLUMN percentual_medico boolean;

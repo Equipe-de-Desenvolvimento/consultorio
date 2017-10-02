@@ -892,7 +892,9 @@ class Guia extends BaseController {
         }
 //        var_dump($percentual); die;
         $paciente_id = $_POST['txtpaciente_id'];
-
+        if($_POST['indicacao'] == ''){
+            $_POST['indicacao'] = $this->guia->gravarindicacao($paciente_id);
+        }
         if ($_POST['procedimento1'] == '') {
 
             $data['mensagem'] = 'Insira os campos obrigatorios.';

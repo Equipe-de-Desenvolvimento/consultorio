@@ -1,63 +1,86 @@
-<div class="content"> <!-- Inicio da DIV content -->
-    <div id="accordion">
-        <h3><a href="#">Gerar relatorio Recomendação</a></h3>
-        <div>
-            <form method="post" action="<?= base_url() ?>ambulatorio/guia/gerarelatorioindicacaoexames">
-                <dl>
-                    <dt>
-                        <label>Data inicio</label>
-                    </dt>
-                    <dd>
-                        <input type="text" name="txtdata_inicio" id="txtdata_inicio" alt="date"/>
-                    </dd>
-                    <dt>
-                        <label>Data fim</label>
-                    </dt>
-                    <dd>
-                        <input type="text" name="txtdata_fim" id="txtdata_fim" alt="date"/>
-                    </dd>
-                    <dt>
-                        <label>Recomendação</label>
-                    </dt>
-                    <dd>
-                        <select name="indicacao" id="indicacao" class="size2">
+<div id="page-wrapper">
+
+    <div class="row">
+        <div class="col-lg-12"> 
+            <div class="alert alert-success ">
+                Gerar Relatorio Recomendação
+            </div>
+        </div>
+    </div>
+    <!--<h3><a href="#">Gerar relatorio Faturamento</a></h3>-->
+    <div class="panel panel-default">
+        <div class="alert alert-info ">
+            Dados da Pesquisa
+        </div>
+
+        <?
+        $empresa = $this->guia->listarempresas();
+        $medicos = $this->operador_m->listarmedicos();
+        $salas = $this->exame->listartodassalas();
+        $convenios = $this->convenio->listarconvenionaodinheiro();
+        $guia = "";
+        ?>
+        <div class="panel-body">
+
+            <form method="post" action="<?= base_url() ?>ambulatorio/guia/gerarelatorioindicacaoexames" target="_blank">
+                
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Data inicio</label>
+
+
+                            <input type="text" name="txtdata_inicio" id="txtdata_inicio" class="form-control" alt="date"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Data fim</label>
+
+
+                            <input type="text" name="txtdata_fim" id="txtdata_fim" class="form-control" alt="date"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Recomendação</label>
+
+
+                            <select name="indicacao" id="indicacao" class="form-control">
                             <option value="0">TODOS</option>
                             <? foreach ($indicacao as $value) : ?>
                                 <option value="<?= $value->paciente_indicacao_id; ?>" ><?php echo $value->nome; ?></option>
                             <? endforeach; ?>
                         </select>
-                    </dd>
-                    <dt>
-                        <label>Gráfico</label>
-                    </dt>
-                    <dd>
-                        <select name="grafico" id="indicacao" class="size2">
-                            <option value="0">NÃO</option>
-                            <option value="1">SIM</option>
-                        </select>
-                    </dd>
-                    <dt>
-                        <label>Empresa</label>
-                    </dt>
-                    <dd>
-                        <select name="empresa" id="empresa" class="size2">
-                            <? foreach ($empresa as $value) : ?>
-                                <option value="<?= $value->empresa_id; ?>" ><?php echo $value->nome; ?></option>
-                            <? endforeach; ?>
-                            <option value="0">TODOS</option>
-                        </select>
-                    </dd>
-                    <dt>
-                </dl>
-                <button type="submit" >Pesquisar</button>
-            </form>
+                        </div>
+                    </div>
+                </div>
 
+                <input type="hidden" name="empresa" value="0"/>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <p>
+                            <button type="submit" class="btn btn-outline btn-success btn-sm" name="btnEnviar"><i class="fa fa-search" aria-hidden="true"></i> Pesquisar</button>
+
+
+                        </p>
+                    </div>
+                </div>  
+
+
+
+            </form>
         </div>
     </div>
-
-
-</div> <!-- Final da DIV content -->
-<link rel="stylesheet" href="<?php base_url() ?>css/jquery-ui-1.8.5.custom.css">
+</div>
+<!-- Final da DIV content -->
+<!--<link rel="stylesheet" href="<?php base_url() ?>css/jquery-ui-1.8.5.custom.css">-->
+<script type="text/javascript" src="<?= base_url() ?>js/jquery-ui-1.10.4.js" ></script>
 <script type="text/javascript">
     $(function () {
         $("#txtdata_inicio").datepicker({
