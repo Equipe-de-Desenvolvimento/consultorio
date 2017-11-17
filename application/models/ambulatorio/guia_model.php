@@ -7740,10 +7740,28 @@ ORDER BY ae.agenda_exames_id)";
             $query = $this->db->get();
             $return = $query->result();
             $dinheiro = $return[0]->dinheiro;
+            
+            if ($_POST['indicacao'] != "") {
+                $this->db->select('mc.valor as valor_promotor, mc.percentual as percentual_promotor');
+                $this->db->from('tb_procedimento_percentual_promotor_convenio mc');
+                $this->db->join('tb_procedimento_percentual_promotor m', 'm.procedimento_percentual_promotor_id = mc.procedimento_percentual_promotor_id', 'left');
+                $this->db->where('m.procedimento_tuss_id', $_POST['procedimento1']);
+                $this->db->where('mc.promotor', $_POST['indicacao']);
+                $this->db->where('mc.ativo', 'true');
+//          $this->db->where('pc.ativo', 'true');
+//          $this->db->where('pt.ativo', 'true');
+                $return2 = $this->db->get()->result();
+            } else {
+                $return2 = array();
+            }
 
 
             $hora = date("H:i:s");
             $data = date("Y-m-d");
+            if (count($return2) > 0) {
+                $this->db->set('valor_promotor', $return2[0]->valor_promotor);
+                $this->db->set('percentual_promotor', $return2[0]->percentual_promotor);
+            }
             $this->db->set('valor_medico', $percentual[0]->perc_medico);
             $this->db->set('percentual_medico', $percentual[0]->percentual);
             $this->db->set('procedimento_tuss_id', $_POST['procedimento1']);

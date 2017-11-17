@@ -58,9 +58,9 @@ class Indicacao extends BaseController {
     function gravar() {
         $exame_indicacao_id = $this->indicacao->gravar();
         if ($exame_indicacao_id == "-1") {
-            $data['mensagem'] = 'Erro ao gravar a Indicacao. Opera&ccedil;&atilde;o cancelada.';
+            $data['mensagem'] = array('Erro ao gravar a Indicacao. Opera&ccedil;&atilde;o cancelada.', 'error');
         } else {
-            $data['mensagem'] = 'Sucesso ao gravar a Indicacao.';
+            $data['mensagem'] =array( 'Sucesso ao gravar a Indicacao.', 'success');
         }
         $this->session->set_flashdata('message', $data['mensagem']);
         redirect(base_url() . "ambulatorio/indicacao");

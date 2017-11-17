@@ -20,6 +20,7 @@ class Procedimentoplano extends BaseController {
         $this->load->model('ambulatorio/guia_model', 'guia');
         $this->load->model('cadastro/formapagamento_model', 'formapagamento');
         $this->load->model('cadastro/convenio_model', 'convenio');
+        $this->load->model('cadastro/paciente_model', 'paciente');
         $this->load->model('seguranca/operador_model', 'operador_m');
         $this->load->model('ponto/Competencia_model', 'competencia');
         $this->load->library('mensagem');
@@ -50,6 +51,87 @@ class Procedimentoplano extends BaseController {
     function procedimentopercentual($args = array()) {
 
         $this->loadView('ambulatorio/procedimentopercentualmedico-lista', $args);
+    }
+
+    function editarpromotorpercentual($procedimento_percentual_promotor_convenio_id, $dados) {
+        $data['busca'] = $this->procedimentoplano->buscarpromotorpercentual($procedimento_percentual_promotor_convenio_id);
+        $data['dados'] = $dados;
+        $data['procedimento_percentual_promotor_convenio_id'] = $procedimento_percentual_promotor_convenio_id;
+        $this->loadView("ambulatorio/promotorpercentual-editar", $data);
+    }
+
+    function procedimentopercentualpromotor($args = array()) {
+
+        $this->loadView('ambulatorio/procedimentopercentualpromotor-lista', $args);
+    }
+
+    function novoprocedimentopercentualpromotor() {
+        $data['convenio'] = $this->convenio->listardados();
+        $data['procedimento'] = $this->procedimentoplano->listarprocedimento();
+        $data['grupo'] = $this->procedimentoplano->listargrupo();
+        $data['medicos'] = $this->operador_m->listarmedicos();
+        $data['promotor'] = $this->paciente->listaindicacao();
+        //$this->carregarView($data, 'giah/servidor-form');
+        $this->loadView('ambulatorio/procedimentopercentualpromotor-form', $data);
+    }
+
+    function editarprocedimentopromotor($procedimento_percentual_promotor_id) {
+        $data['dados'] = $procedimento_percentual_promotor_id;
+        $this->loadView('ambulatorio/procedimentopercentualpromotor-editar', $data);
+    }
+
+    function novopromotor($procedimento_percentual_promotor_id) {
+        $data['dados'] = $this->procedimentoplano->novopromotor($procedimento_percentual_promotor_id);
+        $data['promotors'] = $this->paciente->listaindicacao();
+        $data['procedimento_percentual_promotor_id'] = $procedimento_percentual_promotor_id;
+        $this->loadView('ambulatorio/procedimentopercentualpromotornovo', $data);
+    }
+
+    function gravarnovopromotor($procedimento_percentual_promotor_id) {
+        $return = $this->procedimentoplano->gravarnovopromotor($procedimento_percentual_promotor_id);
+        if ($return == 1) {
+            $mensagem = array('Sucesso ao gravar o percentual', 'success');
+        }if ($return == 0) {
+            $mensagem = array('Erro ao gravar o percentual', 'error');
+        }if ($return == 2) {
+            $mensagem = array('Percentual já cadastrado', 'error');
+        }
+        $this->session->set_flashdata('message', $mensagem);
+        redirect(base_url() . "ambulatorio/procedimentoplano/editarprocedimentopromotor/$procedimento_percentual_promotor_id");
+    }
+
+    function gravarpercentualpromotor() {
+        $procedimentoplano_tuss_id = $this->procedimentoplano->gravarpercentualpromotor();
+        if ($procedimentoplano_tuss_id == "-1") {
+            $data['mensagem'] = array('Erro ao gravar o percentual. Operação Cancelada.', 'error');
+        } else {
+//            $data['mensagem'] = 'Sucesso ao gravar o Procedimentoplano.';
+            $data['mensagem'] = array('Sucesso ao gravar o percentual.', 'success');
+        }
+        $this->session->set_flashdata('message', $data['mensagem']);
+        redirect(base_url() . "ambulatorio/procedimentoplano/procedimentopercentualpromotor");
+    }
+
+    function excluirpromotorpercentual($procedimento_percentual_promotor_convenio_id, $dados) {
+        if ($this->procedimentoplano->excluirpromotorpercentual($procedimento_percentual_promotor_convenio_id)) {
+            $mensagem = array('Sucesso ao excluir o Percentual promotor', 'success');
+        } else {
+            $mensagem = array('Erro ao excluir o Percentual promotor. Opera&ccedil;&atilde;o cancelada.', 'error');
+        }
+
+        $this->session->set_flashdata('message', $mensagem);
+        redirect(base_url() . "ambulatorio/procedimentoplano/editarprocedimentopromotor/$dados");
+    }
+
+    function gravareditarpromotorpercentual($procedimento_percentual_promotor_convenio_id, $dados) {
+        if ($this->procedimentoplano->gravareditarpromotorpercentual($procedimento_percentual_promotor_convenio_id)) {
+            $mensagem = array('Sucesso ao editar o Percentual promotor', 'success');
+        } else {
+            $mensagem = array('Erro ao editar o Percentual promotor. Opera&ccedil;&atilde;o cancelada.', 'error');
+        }
+
+        $this->session->set_flashdata('message', $mensagem);
+        redirect(base_url() . "ambulatorio/procedimentoplano/editarprocedimentopromotor/$dados");
     }
 
     function agrupador($args = array()) {
@@ -102,7 +184,7 @@ class Procedimentoplano extends BaseController {
         redirect(base_url() . "ambulatorio/procedimentoplano/agrupador");
     }
 
-    function excluirprocedimentoagrupador($procedimento_agrupado_id , $agrupador_id) {
+    function excluirprocedimentoagrupador($procedimento_agrupado_id, $agrupador_id) {
         $this->procedimentoplano->excluirprocedimentoagrupador($procedimento_agrupado_id);
 //        $this->session->set_flashdata('message', $data['mensagem']);
         redirect(base_url() . "ambulatorio/procedimentoplano/agrupadoradicionar/$agrupador_id");

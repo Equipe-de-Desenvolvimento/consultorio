@@ -286,6 +286,9 @@ function debug($object) {
                                                                     <a href="<?= base_url() ?>ambulatorio/motivocancelamento">Motivo cancelamento</a>
                                                                 </li>
                                                                 <li>
+                                                                    <a href="<?= base_url() ?>ambulatorio/indicacao">Manter Indicação</a>
+                                                                </li>
+                                                                <li>
                                                                     <a href="<?= base_url() ?>ambulatorio/guia/configurarimpressao">Configurar Impressão</a>
                                                                 </li>
 <!--                                                                <li>
@@ -353,8 +356,12 @@ function debug($object) {
                                                                     <li>
                                                                         <a href="<?= base_url() ?>ambulatorio/procedimentoplano">Manter Procedimentos Convenio</a>
                                                                     </li>
+                                                                   
                                                                     <li>
                                                                         <a href="<?= base_url() ?>cadastros/convenio">Manter Convenio</a>
+                                                                    </li>
+                                                                     <li>
+                                                                        <a href="<?= base_url() ?>ambulatorio/procedimentoplano/procedimentopercentualpromotor">Manter Percentual Recomendação</a>
                                                                     </li>
 
                                                                 </ul>

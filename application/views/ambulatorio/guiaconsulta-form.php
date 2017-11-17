@@ -223,9 +223,18 @@ if ($contador > 0) {
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Recomendação</label>  
-
-                           <input type="hidden" name="indicacao" id="indicacao" class="form-control"/>
-                           <input type="text" name="indicacaolabel" id="indicacaolabel" class="form-control"/>
+                              <select name="indicacao" id="indicacao" class="form-control" >
+                                <option value='' >Selecione</option>
+                                <?php
+                                $indicacao = $this->paciente->listaindicacao($_GET);
+                                foreach ($indicacao as $item) {
+                                    ?>
+                                    <option value="<?php echo $item->paciente_indicacao_id; ?>"> <?php echo $item->nome; ?></option>
+                                    <?php
+                                }
+                                ?> 
+                            </select>
+                          
                         </div>
                     </div>
                 </div>
