@@ -103,3 +103,15 @@ ALTER TABLE ponto.tb_sigla
 
 
 ALTER TABLE ponto.tb_operador ADD COLUMN sigla_id integer;
+
+ALTER TABLE ponto.tb_empresa ADD COLUMN client_id text;
+ALTER TABLE ponto.tb_empresa ADD COLUMN client_secret text;
+ALTER TABLE ponto.tb_empresa ADD COLUMN client_sandbox boolean;
+ALTER TABLE ponto.tb_empresa ALTER COLUMN client_sandbox SET DEFAULT true;
+ALTER TABLE ponto.tb_empresa ADD COLUMN valor_consulta_app numeric(10,2);
+
+ALTER TABLE ponto.tb_agenda_exames ADD COLUMN gerencianet_id integer;
+ALTER TABLE ponto.tb_agenda_exames ADD COLUMN gerencianet_link text;
+
+ALTER TABLE ponto.tb_empresa ADD COLUMN guia_procedimento boolean;
+ALTER TABLE ponto.tb_empresa ALTER COLUMN guia_procedimento SET DEFAULT true;

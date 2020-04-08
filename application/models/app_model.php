@@ -1068,6 +1068,7 @@ class app_model extends Model {
         $this->db->orderby('a.data, a.inicio');
             //        $this->db->limit(250);
         $return = $this->db->get()->result();
+
         return $return;
         // } else {
             // return false;
@@ -1319,10 +1320,9 @@ class app_model extends Model {
     function listarguia($paciente_id) {
         $data = date("Y-m-d");
         $empresa_id = $this->session->userdata('empresa_id');
-        $this->db->select('ep.guia_procedimento');
+        $this->db->select('e.guia_procedimento');
         $this->db->from('tb_empresa e');
         $this->db->where('e.empresa_id', $empresa_id);
-        $this->db->join('tb_empresa_permissoes ep', 'ep.empresa_id = e.empresa_id', 'left');
         $this->db->orderby('e.empresa_id');
         $permissoes = $this->db->get()->result();
 

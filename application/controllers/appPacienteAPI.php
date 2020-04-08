@@ -555,12 +555,10 @@ class AppPacienteAPI extends Controller {
         header("Access-Control-Allow-Headers: content-type");
         $json_post = json_decode(file_get_contents("php://input"));
         $data = $json_post->data;
-        
+        $data = '2020-04-08';
         $result = $this->app->listarhorariosmedicosunicos($data);
         $contador = -1;
-        // echo '<pre>';
-        // var_dump($result); 
-        // die;
+
         foreach ($result as $key => $value) {
             $agenda_exames_idPG = $value->agenda_exames_id;
             $agenda_exames_idStr = str_replace('{', '', str_replace('}', '', $agenda_exames_idPG));
@@ -618,6 +616,7 @@ class AppPacienteAPI extends Controller {
         $paciente_id = $json_post->paciente_id;
         $agenda_exames_id = $json_post->agenda_exames_id;
         $procedimento_id = $this->app->listarprocedimentoconsultaparticular();
+
         $empresa_id = 1;
         $retorno = $this->app->gravarAgendamento($empresa_id, $paciente_id, $agenda_exames_id, $procedimento_id);
         $obj = new stdClass();
@@ -1098,7 +1097,6 @@ class AppPacienteAPI extends Controller {
         header('Access-Control-Allow-Origin: *');
         header("Access-Control-Allow-Headers: content-type");
         $empresa = $this->app->listarEmpresaGerenciaNet(1);  
-
         $clientId = $empresa[0]->client_id; // insira seu Client_Id, conforme o ambiente (Des ou Prod)
         $clientSecret = $empresa[0]->client_secret; // insira seu Client_Secret, conforme o ambiente (Des ou Prod)
         $valor = $empresa[0]->valor_consulta_app * 100; // insira seu Client_Secret, conforme o ambiente (Des ou Prod)
@@ -1107,7 +1105,6 @@ class AppPacienteAPI extends Controller {
         }else{
             $sandbox = true;
         }
-        
         $options = [
         'client_id' => $clientId,
         'client_secret' => $clientSecret,
@@ -1150,12 +1147,9 @@ class AppPacienteAPI extends Controller {
         set_time_limit(0); // Limite de tempo de execução: 2h. Deixe 0 (zero) para sem limite
         ignore_user_abort(true); // Não encerra o processamento em caso de perda de conexão
         $pagamento = $this->app->listarPagamentoAgendaExames();
-    
 
         $empresa = $this->app->listarEmpresaGerenciaNet(1);
-        // echo "<pre>";
-        // var_dump($pagamento);
-        // die;
+
 
         $client_id = $empresa[0]->client_id;
         $client_secret = $empresa[0]->client_secret;

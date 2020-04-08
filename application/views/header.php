@@ -390,6 +390,17 @@ function debug($object) {
                                                                 </ul>
 
                                                             </li>
+
+                                                            <li>
+                                                                <a href="#"><i class="fa fa-gear fa-fw"></i> Configuração <span class="fa arrow"></span></a>
+                                                                <ul class="nav nav-third-level">
+                                                                    <li>
+                                                                        <a href="<?= base_url() ?>cadastros/empresa/gerecianet">Manter Gerencia Net</a>
+                                                                    </li>
+
+                                                                </ul>
+
+                                                            </li>
                                                     </ul>
                                             </li>   
 
