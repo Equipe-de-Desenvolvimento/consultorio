@@ -82,3 +82,24 @@ CREATE TABLE ponto.tb_procedimento_percentual_promotor_convenio
   operador_atualizacao integer,
   CONSTRAINT tb_procedimento_percentual_promotor_convenio_pkey PRIMARY KEY (procedimento_percentual_promotor_convenio_id )
 );
+
+
+CREATE TABLE ponto.tb_sigla
+(
+  nome text,
+  sigla_id serial NOT NULL,
+  operador_cadastro integer,
+  data_cadastro timestamp without time zone,
+  operador_atualizacao integer,
+  data_atualizacao timestamp without time zone,
+  ativo boolean DEFAULT true,
+  CONSTRAINT tb_sigla_pkey PRIMARY KEY (sigla_id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE ponto.tb_sigla
+  OWNER TO postgres;
+
+
+ALTER TABLE ponto.tb_operador ADD COLUMN sigla_id integer;
