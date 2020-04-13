@@ -43,6 +43,7 @@ class paciente_model extends BaseModel {
     var $_cbo_ocupacao_id = null;
     var $_cbo_nome = null;
     var $_indicacao = null;
+    var $_senha_app = null;
 
     function Paciente_model($paciente_id = null) {
         parent::Model();
@@ -57,7 +58,7 @@ class paciente_model extends BaseModel {
         $this->db->from('tb_paciente');
         $this->db->where('nome', $_POST['nome']);
         $this->db->where('nascimento', date("Y-m-d", strtotime(str_replace("/", "-", $_POST['nascimento']))));
-        $this->db->where('nome_mae', $_POST['nome_mae']);
+        $this->db->where('nome_mae', @$_POST['nome_mae']);
         $this->db->where('ativo', 't');
         $return = $this->db->count_all_results();
         return $return;
@@ -286,6 +287,7 @@ class paciente_model extends BaseModel {
             $this->_observacoes = $return[0]->observacoes;
             $this->_cirurgias = $return[0]->cirurgias;
             $this->_indicacao = $return[0]->indicacao;
+            $this->_senha_app = $return[0]->senha_app;
         }
     }
 
@@ -331,20 +333,27 @@ class paciente_model extends BaseModel {
 
         try {
             $this->db->set('nome', $_POST['nome']);
-            if ($_POST['cpf'] != '') {
+            if (@$_POST['cpf'] != '') {
                 $this->db->set('cpf', str_replace("-", "", str_replace(".", "", $_POST['cpf'])));
             }
-            if ($_POST['nascimento'] != '') {
+            if (@$_POST['nascimento'] != '') {
                 $this->db->set('nascimento', date("Y-m-d", strtotime( str_replace("/", "-", $_POST['nascimento']) ) ) );
             }
-            if ($_POST['data_emissao'] != '') {
+            if (@$_POST['data_emissao'] != '') {
                 $this->db->set('data_emissao', $_POST['data_emissao']);
             }
 
             if ($_POST['convenio'] != '') {
                 $this->db->set('convenio_id', $_POST['convenio']);
             }
+
             $this->db->set('cns', $_POST['cns']);
+            
+
+            if ($_POST['senha_app'] != '') {
+                $this->db->set('senha_app', md5($_POST['senha_app']));
+            }
+
             if ($_POST['indicacao'] != '') {
                 $this->db->set('indicacao', $_POST['indicacao']);
             }

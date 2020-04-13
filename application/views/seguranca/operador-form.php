@@ -90,6 +90,10 @@
                             </div>
                         </div>
                     </div>
+                    <div>
+                    <label title="Link Reunião Zoom">Link Reunião Zoom</label> 
+                    <input type="text" name="link_reuniao" id="link_reuniao" value="<?= @$obj->_link_reuniao?>" class="texto08"  >
+                </div>
                 </div>
             </div>
             <div class="panel panel-default ">

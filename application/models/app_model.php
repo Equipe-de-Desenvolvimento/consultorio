@@ -940,6 +940,7 @@ class app_model extends Model {
         if(@$_GET['tipo_agenda'] != ''){
             $this->db->where("a.tipo_consulta_id", $_GET['tipo_agenda']);
         }
+        $this->db->where('o.link_reuniao !=', '');
         // $this->db->where('a.ativo', 'true');
         $this->db->where('a.paciente_id is null');
         $this->db->where('a.bloqueado', 'false');
@@ -1056,6 +1057,7 @@ class app_model extends Model {
         $this->db->where('a.ativo', 'true');
         $this->db->where('a.paciente_id is null');
         $this->db->where('a.bloqueado', 'false');
+        $this->db->where('o.link_reuniao !=', '');
         $this->db->where('a.data', $data);
         // $this->db->where('a.data <=', $horario_fim);
         // $this->db->where('a.empresa_id', $empresa_id);
@@ -1080,7 +1082,7 @@ class app_model extends Model {
                             ag.paciente_id,
                             ar.data_cadastro');
         $this->db->from('tb_ambulatorio_exame ar');
-
+        $this->db->join('tb_ambulatorio_laudo ag', 'ag.ambulatorio_laudo_id = ar.laudo_id', 'left');
         $this->db->where("ar.laudo_id", $ambulatorio_laudo_id);
         $return = $this->db->get();
         return $return->result();

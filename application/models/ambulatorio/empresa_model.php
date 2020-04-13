@@ -186,6 +186,119 @@ class empresa_model extends Model {
         }
     }
 
+    function carregarlistarpostsblog($posts_blog_id) {
+        $data = date("Y-m-d");
+        $empresa_id = $this->session->userdata('empresa_id');
+        $this->db->select('posts_blog_id, titulo, corpo_html, data_cadastro');
+        $this->db->from('tb_posts_blog e');
+        // $this->db->where('e.ativo', 't');
+        $this->db->where('posts_blog_id', $posts_blog_id);
+//        $this->db->where('data_criacao', $data);
+        $return = $this->db->get();
+        return $return->result();
+    }
+
+    function listarpostsblog() {
+        $data = date("Y-m-d");
+        $empresa_id = $this->session->userdata('empresa_id');
+        $this->db->select('posts_blog_id, titulo, corpo_html, data_cadastro');
+        $this->db->from('tb_posts_blog e');
+        $this->db->where('e.ativo', 't');
+//        $this->db->where('paciente_id', $paciente_id);
+//        $this->db->where('data_criacao', $data);
+        return $this->db;
+    }
+
+    function gravarpostsblog() {
+        try {
+//            var_dump($_POST['impressao_id']); die;
+            /* inicia o mapeamento no banco */
+            $empresa_id = $this->session->userdata('empresa_id');
+            $horario = date("Y-m-d H:i:s");
+            $operador_id = $this->session->userdata('operador_id');
+
+            
+            $this->db->set('titulo', $_POST['titulo']);
+            $this->db->set('corpo_html', $_POST['texto']);
+            // $this->db->set('empresa_id', $empresa_id);
+
+//            var_dump($_POST); die;
+            if (!$_POST['posts_blog_id'] > 0) {
+                
+                $this->db->set('data_cadastro', $horario);
+                $this->db->set('operador_cadastro', $operador_id);
+                $this->db->insert('tb_posts_blog');
+            } else {
+                $this->db->set('data_atualizacao', $horario);
+                $this->db->set('operador_atualizacao', $operador_id);
+                $this->db->where('posts_blog_id', $_POST['posts_blog_id']);
+                $this->db->update('tb_posts_blog');
+            }
+
+            $erro = $this->db->_error_message();
+            if (trim($erro) != "") // erro de banco
+                return -1;
+            else
+//                $ambulatorio_guia_id = $this->db->insert_id();
+                return true;
+        } catch (Exception $exc) {
+            return false;
+        }
+    }
+
+    function excluirpostsblog($post_id) {
+        try {
+//            var_dump($_POST['impressao_id']); die;
+            /* inicia o mapeamento no banco */
+            $empresa_id = $this->session->userdata('empresa_id');
+            $horario = date("Y-m-d H:i:s");
+            $operador_id = $this->session->userdata('operador_id');
+
+            
+            
+            $this->db->set('ativo', 'f');
+            $this->db->set('data_atualizacao', $horario);
+            $this->db->set('operador_atualizacao', $operador_id);
+            $this->db->where('posts_blog_id', $post_id);
+            $this->db->update('tb_posts_blog');
+            
+
+            $erro = $this->db->_error_message();
+            if (trim($erro) != "") // erro de banco
+                return -1;
+            else
+//                $ambulatorio_guia_id = $this->db->insert_id();
+                return true;
+        } catch (Exception $exc) {
+            return false;
+        }
+    }
+
+    function listarpesquisasatisfacao() {
+        $data = date("Y-m-d");
+        $empresa_id = $this->session->userdata('empresa_id');
+        $this->db->select('pp.paciente_pesquisa_satisfacao_id, pp.paciente_id, p.nome as paciente, pp.questionario, pp.data_cadastro');
+        $this->db->from('tb_paciente_pesquisa_satisfacao pp');
+        $this->db->join('tb_paciente p', 'p.paciente_id = pp.paciente_id', 'left');
+        $this->db->where('pp.ativo', 't');
+//        $this->db->where('paciente_id', $paciente_id);
+//        $this->db->where('data_criacao', $data);
+        return $this->db;
+    }
+
+    function detalhespesquisasatisfacao($pesquisa_id) {
+        $data = date("Y-m-d");
+        $empresa_id = $this->session->userdata('empresa_id');
+        $this->db->select('pp.paciente_pesquisa_satisfacao_id, pp.paciente_id, p.nome as paciente, pp.questionario, pp.data_cadastro');
+        $this->db->from('tb_paciente_pesquisa_satisfacao pp');
+        $this->db->join('tb_paciente p', 'p.paciente_id = pp.paciente_id', 'left');
+        $this->db->where('pp.paciente_pesquisa_satisfacao_id', $pesquisa_id);
+//        $this->db->where('paciente_id', $paciente_id);
+//        $this->db->where('data_criacao', $data);
+        $return = $this->db->get();
+        return $return->result();
+    }
+
     private function instanciar($empresa_id) {
 
         if ($empresa_id != 0) {

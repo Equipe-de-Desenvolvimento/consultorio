@@ -115,3 +115,91 @@ ALTER TABLE ponto.tb_agenda_exames ADD COLUMN gerencianet_link text;
 
 ALTER TABLE ponto.tb_empresa ADD COLUMN guia_procedimento boolean;
 ALTER TABLE ponto.tb_empresa ALTER COLUMN guia_procedimento SET DEFAULT true;
+
+-- 13/04/2020
+ALTER TABLE ponto.tb_paciente ADD COLUMN senha_app varchar(300);
+ALTER TABLE ponto.tb_paciente ADD COLUMN usuario_app varchar(100);
+ALTER TABLE ponto.tb_operador ADD COLUMN grupo_agenda text;
+
+CREATE TABLE ponto.tb_posts_blog
+(
+  posts_blog_id serial NOT NULL,
+  titulo character varying(200),
+  breve_descricao text,
+  thumbnail text,
+  corpo_html text,
+  ativo boolean DEFAULT true,
+  data_cadastro timestamp without time zone,
+  operador_cadastro integer,
+  data_atualizacao timestamp without time zone,
+  operador_atualizacao integer,
+  CONSTRAINT tb_posts_blog_pkey PRIMARY KEY (posts_blog_id)
+);
+
+CREATE TABLE ponto.tb_registro_dispositivo
+(
+  registro_dispositivo_id serial NOT NULL,
+  hash text,
+  medico_id integer,
+  data_cadastro timestamp without time zone,
+  operador_cadastro integer,
+  data_atualizacao timestamp without time zone,
+  operador_atualizacao integer,
+  ativo boolean DEFAULT true,
+  confirmado boolean DEFAULT true,
+  CONSTRAINT tb_registro_dispositivo_pkey PRIMARY KEY (registro_dispositivo_id)
+);
+
+ALTER TABLE ponto.tb_registro_dispositivo ADD COLUMN paciente_id integer;
+
+CREATE TABLE ponto.tb_paciente_risco_cirurgico
+(
+  paciente_risco_cirurgico_id serial NOT NULL,
+  paciente_id integer,
+  questionario text,
+  ativo boolean DEFAULT true,
+  data_cadastro timestamp without time zone,
+  operador_cadastro integer,
+  data_atualizacao timestamp without time zone,
+  operador_atualizacao integer,
+  CONSTRAINT tb_paciente_risco_cirurgico_pkey PRIMARY KEY (paciente_risco_cirurgico_id)
+);
+
+CREATE TABLE ponto.tb_paciente_pesquisa_satisfacao
+(
+  paciente_pesquisa_satisfacao_id serial NOT NULL,
+  paciente_id integer,
+  questionario text,
+  ativo boolean DEFAULT true,
+  data_cadastro timestamp without time zone,
+  operador_cadastro integer,
+  data_atualizacao timestamp without time zone,
+  operador_atualizacao integer,
+  CONSTRAINT tb_paciente_pesquisa_satisfacao_pkey PRIMARY KEY (paciente_pesquisa_satisfacao_id)
+);
+
+ALTER TABLE ponto.tb_operador ADD COLUMN link_reuniao text;
+
+CREATE TABLE ponto.tb_paciente_solicitar_agendamento
+(
+  paciente_solicitar_agendamento_id serial,
+  paciente_id integer,
+  data text,
+  hora text,
+  convenio_id integer,
+  procedimento_convenio_id integer,
+  ativo boolean DEFAULT true,
+  data_cadastro timestamp without time zone,
+  operador_cadastro integer,
+  data_atualizacao timestamp without time zone,
+  operador_atualizacao integer,
+  CONSTRAINT tb_paciente_solicitar_agendamento_pkey PRIMARY KEY (paciente_solicitar_agendamento_id)
+);
+
+ALTER TABLE ponto.tb_paciente_solicitar_agendamento ADD COLUMN confirmado boolean DEFAULT false;
+
+
+ALTER TABLE ponto.tb_paciente_solicitar_agendamento ADD COLUMN procedimento_text text;
+ALTER TABLE ponto.tb_paciente_solicitar_agendamento ADD COLUMN convenio_text text;
+
+ALTER TABLE ponto.tb_ambulatorio_receituario ADD COLUMN especial boolean DEFAULT false;

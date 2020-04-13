@@ -82,6 +82,12 @@
                             <input  placeholder="Email" type="text" id="txtCns" name="cns"  class="form-control texto04" value="<?= @$obj->_cns; ?>" />
                         </div>
 
+                        
+                        <div class="form-group">
+                            <label>Senha</label>
+                            <input type="password" id="senha_app" name="senha_app"  class="form-control texto04" value="<?= @$obj->_senha_app; ?>" />
+                        </div>
+
 
                     </div>
                     <div class="col-lg-3">

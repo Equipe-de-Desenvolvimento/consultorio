@@ -87,6 +87,28 @@ class login_model extends Model {
         $this->db->set('data_verificacao', $horario);
         $this->db->insert('tb_empresa_sms_verificacao');
     }
+    
+
+    function autenticarpacienteweb($usuario, $senha) {
+        // $horario = date("Y-m-d");
+        $this->db->select('p.paciente_id, p.nome, p.cpf, p.cns');
+        $this->db->from('tb_paciente p');
+        $this->db->where('p.cns', $usuario);
+        $this->db->where('p.senha_app', md5($senha));
+        $this->db->where('p.ativo', 't');
+        $return = $this->db->get()->result();
+
+        if(count($return) == 0 && is_int($usuario)){
+            $this->db->select('ae.agenda_exames_id, p.nome, p.cpf, p.cns');
+            $this->db->from('tb_agenda_exames ae');
+            $this->db->join('tb_paciente p', 'p.paciente_id = ae.paciente_id', 'left');
+            $this->db->where('ae.paciente_id', $usuario);
+            $this->db->where('p.ativo', 't');
+            $this->db->where('ae.agenda_exames_id', $senha);
+            $return = $this->db->get()->result();
+        }
+        return $return;
+    }
 
     function atualizandoagendadostabelasms($exames, $disponivel) {
         $empresa_id = $this->session->userdata('empresa_id');

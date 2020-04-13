@@ -493,6 +493,7 @@ class Operador_model extends BaseModel {
             $this->db->set('sexo', $_POST['sexo']);
             $this->db->set('carimbo', $_POST['carimbo']);
             $this->db->set('curriculo', $_POST['curriculo']);
+            $this->db->set('link_reuniao', @$_POST['link_reuniao']);
             if ($_POST['nascimento'] != '')
                 $this->db->set('nascimento', substr($_POST['nascimento'], 6, 4) . '-' . substr($_POST['nascimento'], 3, 2) . '-' . substr($_POST['nascimento'], 0, 2));
             else
@@ -884,6 +885,7 @@ class Operador_model extends BaseModel {
                                 o.classe,
                                 o.conta_id,
                                 o.curriculo,
+                                o.link_reuniao,
                                 o.tipo_id,
                                 o.ir,
                                 o.pis,
@@ -940,6 +942,7 @@ class Operador_model extends BaseModel {
             $this->_valor_base = $return[0]->valor_base;
             $this->_carimbo = $return[0]->carimbo;
             $this->_curriculo = $return[0]->curriculo;
+            $this->_link_reuniao = $return[0]->link_reuniao;
         }
     }
 

@@ -392,6 +392,14 @@ function debug($object) {
                                                             </li>
 
                                                             <li>
+                                                            <a href="#"><i class="fa fa-gear fa-fw"></i> Aplicativo <span class="fa arrow"></span></a>
+                                                            <ul class="nav nav-third-level">
+                                                                <li><a href="<?= base_url() ?>ambulatorio/empresa/listarpostsblog">Posts Blog</a></li>
+                                                                <li><a href="<?= base_url() ?>ambulatorio/empresa/listarpesquisaSatisfacao">Pesquisa Satisfação</a></li>
+                                                            </ul>
+                                                            </li>
+
+                                                            <li>
                                                                 <a href="#"><i class="fa fa-gear fa-fw"></i> Configuração <span class="fa arrow"></span></a>
                                                                 <ul class="nav nav-third-level">
                                                                     <li>

@@ -68,6 +68,8 @@ class laudo_model extends Model {
     var $_ao_diametro_raiz = null;
     var $_paciente_id = null;
     var $_ao_relacao_atrio_esquerdo_aorta = null;
+    var $_link_reuniao = null;
+    var $_medico_nome = null;
 
     function laudo_model($ambulatorio_laudo_id = null) {
         parent::Model();
@@ -3044,7 +3046,9 @@ class laudo_model extends Model {
                             age.guia_id,
                             co.nome as convenio,
                             ag.situacao as situacaolaudo,
-                            p.nome as paciente');
+                            p.nome as paciente,
+                            o2.nome as medico_nome,
+                            o2.link_reuniao');
             $this->db->from('tb_ambulatorio_laudo ag');
             $this->db->join('tb_paciente p', 'p.paciente_id = ag.paciente_id', 'left');
             $this->db->join('tb_paciente_indicacao pi', 'pi.paciente_indicacao_id = p.indicacao', 'left');
@@ -3059,6 +3063,7 @@ class laudo_model extends Model {
             $this->db->join('tb_cid c', 'c.co_cid = ag.cid', 'left');
             $this->db->join('tb_cid c2', 'c2.co_cid = ag.cid2', 'left');
             $this->db->join('tb_operador o', 'o.operador_id = age.medico_solicitante', 'left');
+            $this->db->join('tb_operador o2', 'o2.operador_id = ag.medico_parecer1', 'left');
             $this->db->where("ambulatorio_laudo_id", $ambulatorio_laudo_id);
             $query = $this->db->get();
             $return = $query->result();
@@ -3106,6 +3111,8 @@ class laudo_model extends Model {
             $this->_cirurgias = $return[0]->cirurgias;
             $this->_pasistolica = $return[0]->pasistolica;
             $this->_padiastolica = $return[0]->padiastolica;
+            $this->_link_reuniao = $return[0]->link_reuniao;
+            $this->_medico_nome = $return[0]->medico_nome;
             if ($return[0]->peso != 0 && $return[0]->altura != 0) {
                 $this->_superficie_corporea = sqrt(($return[0]->peso * $return[0]->altura) / 3600);
             } else {
