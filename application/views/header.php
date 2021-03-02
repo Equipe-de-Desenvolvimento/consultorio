@@ -474,7 +474,7 @@ function debug($object) {
                             DAI TEM LÁ UM ARRAY ONDE EU PASSO DUAS COISAS, UMA É A MENSAGEM QUE VAI APARECER E A OUTRA É SE É 'WARNING' 'ERROR' OU 'SUCCESS'-->
                             <?php
                             $this->load->library('utilitario');
-                            $mensagem = Utilitario::pmf_mensagem($this->session->flashdata('message'));
+                            @$mensagem = Utilitario::pmf_mensagem($this->session->flashdata('message'));
                             ?>
 
 

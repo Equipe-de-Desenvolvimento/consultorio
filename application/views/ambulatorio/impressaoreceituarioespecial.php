@@ -51,17 +51,17 @@ switch ($MES) {
                 <td colspan="3" style='vertical-align: bottom; font-family: serif; font-size: 8pt;'>Nome: <? echo $laudo[0]->medico; ?></td>
             </tr>
             <tr>
-                <td colspan="3" style='vertical-align: bottom; font-family: serif; font-size: 8pt;'>End: <span class="endereco_menor"><? echo $laudo[0]->endempresa; ?> <? echo $laudo[0]->numeroempresa . ' ' . $laudo[0]->bairroemp; ?></span></td>
+                <td colspan="3" style='vertical-align: bottom; font-family: serif; font-size: 8pt;'>End: <span class="endereco_menor"><? echo $laudo[0]->endoperador; ?> <? echo $laudo[0]->numerooperador . ' ' . $laudo[0]->bairrooperador; ?></span></td>
             </tr>
             <tr>
                 <td colspan="3" style='vertical-align: bottom; font-family: serif; font-size: 8pt;'>CRM:<? echo $laudo[0]->conselho; ?></td>
             </tr>
             <tr>
-                <td colspan="2" style='vertical-align: bottom; font-family: serif; font-size: 8pt;'>Munic&iacute;pio:&nbsp;<? echo $laudo[0]->cidade; ?></td>
-                <td style='vertical-align: bottom; font-family: serif; font-size: 8pt;'>UF: &nbsp;<? echo $laudo[0]->estado; ?></td>
+                <td colspan="2" style='vertical-align: bottom; font-family: serif; font-size: 8pt;'>Munic&iacute;pio:&nbsp;<? echo $laudo[0]->cidadeoperador; ?></td>
+                <td style='vertical-align: bottom; font-family: serif; font-size: 8pt;'>UF: &nbsp;<? echo $this->utilitario->codigo_uf($laudo[0]->codigo_ibge); ?></td>
             </tr>
             <tr>
-                <td colspan="3" style='vertical-align: bottom; font-family: serif; font-size: 8pt;'>Telefone:&nbsp; <? echo $laudo[0]->telempresa; ?> / <? echo $laudo[0]->celularempresa; ?></td>
+                <td colspan="3" style='vertical-align: bottom; font-family: serif; font-size: 8pt;'>Telefone:&nbsp; <? echo $laudo[0]->teloperador; ?> / <? echo $laudo[0]->celoperador; ?></td>
             </tr>
         </table>
     </div>
@@ -215,16 +215,16 @@ switch ($MES) {
                 <td colspan="3" style='vertical-align: bottom; font-family: serif; font-size: 8pt;'>Nome: <? echo $laudo[0]->medico; ?></td>
             </tr>
             <tr>
-                <td colspan="3" style='vertical-align: bottom; font-family: serif; font-size: 8pt;'>End: <span class="endereco_menor"><? echo $laudo[0]->endempresa; ?> <? echo $laudo[0]->numeroempresa . ' ' . $laudo[0]->bairroemp; ?></span></td>
+                <td colspan="3" style='vertical-align: bottom; font-family: serif; font-size: 8pt;'>End: <span class="endereco_menor"><? echo $laudo[0]->endoperador; ?> <? echo $laudo[0]->numerooperador . ' ' . $laudo[0]->bairrooperador; ?></span></td>
             <tr>
                 <td colspan="3" style='vertical-align: bottom; font-family: serif; font-size: 8pt;'>CRM:<? echo $laudo[0]->conselho; ?></td>
             </tr>
             <tr>
-                <td colspan="2" style='vertical-align: bottom; font-family: serif; font-size: 8pt;'>Munic&iacute;pio:&nbsp;<? echo $laudo[0]->cidade; ?></td>
-                <td style='vertical-align: bottom; font-family: serif; font-size: 8pt;'>UF: &nbsp;<? echo $laudo[0]->estado; ?></td>
+                <td colspan="2" style='vertical-align: bottom; font-family: serif; font-size: 8pt;'>Munic&iacute;pio:&nbsp;<? echo $laudo[0]->cidadeoperador; ?></td>
+                <td style='vertical-align: bottom; font-family: serif; font-size: 8pt;'>UF: &nbsp;<? echo $this->utilitario->codigo_uf($laudo[0]->codigo_ibge); ?></td>
             </tr>
             <tr>
-                <td colspan="3" style='vertical-align: bottom; font-family: serif; font-size: 8pt;'>Telefone:&nbsp; <? echo $laudo[0]->telempresa; ?> / <? echo $laudo[0]->celularempresa; ?></td>
+                <td colspan="3" style='vertical-align: bottom; font-family: serif; font-size: 8pt;'>Telefone:&nbsp;  <? echo $laudo[0]->teloperador; ?> / <? echo $laudo[0]->celoperador; ?></td>
             </tr>
         </table>
     </div>

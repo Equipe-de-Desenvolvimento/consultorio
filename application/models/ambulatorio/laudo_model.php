@@ -1676,7 +1676,15 @@ class laudo_model extends Model {
                             pc.convenio_id,
                             ar.assinatura,
                             ar.carimbo,
-                            o.carimbo as medico_carimbo');
+                            o.carimbo as medico_carimbo,
+                            o.bairro as bairrooperador,
+                            o.logradouro as endoperador,
+                            o.numero as numerooperador,
+                            mo.nome as cidadeoperador,
+                            mo.estado as estadooperador,
+                            mo.codigo_ibge,
+                            o.celular as celoperador,
+                            o.telefone as teloperador');
         $this->db->from('tb_ambulatorio_receituario_especial ar');
         $this->db->join('tb_ambulatorio_laudo ag', 'ag.ambulatorio_laudo_id = ar.laudo_id', 'left');
         $this->db->join('tb_paciente p', 'p.paciente_id = ag.paciente_id', 'left');
@@ -1690,6 +1698,7 @@ class laudo_model extends Model {
         $this->db->join('tb_empresa ep', 'ep.empresa_id = ae.empresa_id', 'left');
         $this->db->join('tb_municipio m', 'm.municipio_id = ep.municipio_id', 'left');
         $this->db->join('tb_municipio mp', 'mp.municipio_id = p.municipio_id', 'left');
+        $this->db->join('tb_municipio mo', 'mo.municipio_id = o.municipio_id', 'left');
         $this->db->where("ar.ambulatorio_receituario_especial_id", $ambulatorio_laudo_id);
         $return = $this->db->get();
         return $return->result();
